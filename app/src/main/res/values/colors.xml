@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#f4443b</color>
+    <color name="AppTheme_color">#f4443b</color>
+    <color name="AppTheme_Text_color">#fff</color>
+    <color name="AppTheme_color_dan">#f1635b</color>
+    <color name="white">#fff</color>
+    <color name="white_">#eee</color>
+    <color name="white__">#ddd</color>
+    <color name="white___">#aaa</color>
+    <color name="bule">#ea0263ff</color>
+    <color name="bule_">#ea0289ff</color>
+    <color name="bule__">#ea02c0ff</color>
+    <color name="bule___">#ea02eeff</color>
+    <color name="black">#000</color>
+    <color name="black_">#111</color>
+    <color name="black__">#222</color>
+    <color name="green">#0ff408</color>
+    <color name="green_">#6dd41e</color>
+    <color name="green__">#30b35e</color>
+    <color name="yellow">#f1da0a</color>
+    <color name="yellow_">#da9f14</color>
+    <color name="yellow__">#d1da25</color>
+
+
+    <color name="null_">#00000000</color>
+    <color name="null__">#11000000</color>
+    <color name="null__1">#22000000</color>
+    <color name="null__2">#33000000</color>
+    <color name="null__3">#44000000</color>
+    <color name="null__4">#55000000</color>
+    <color name="null__5">#66000000</color>
+    <color name="null__6">#77000000</color>
+    <color name="null__7">#88000000</color>
+    <color name="null__8">#99000000</color>
+    <color name="null__9">#aa000000</color>
+
+</resources>

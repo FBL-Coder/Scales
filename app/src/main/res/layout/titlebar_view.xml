@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_40"
+    android:background="@color/AppTheme_color">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_weight="3">
+
+            <ImageView
+                android:id="@+id/back_titlebar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
+                android:background="@drawable/top_back"
+                android:padding="@dimen/dp_5"
+                android:src="@mipmap/ic_keyboard_backspace_white_24dp" />
+
+            <TextView
+
+                android:id="@+id/title_titlebar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/AppTheme_Text_color"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/moor_titlebar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/top_back"
+                android:layout_margin="@dimen/dp_5"
+                android:src="@mipmap/ic_more_horiz_white_24dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/TitleBar_Net"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/AppTheme_Text_color"
+            android:text="网络已断开，请检查网络"
+            android:textSize="@dimen/sp_8"
+            android:gravity="center"
+            android:textColor="@color/AppTheme_color"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,462 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+MERGED from [com.ashokvarma.android:bottom-navigation-bar:2.0.4] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/bottom-navigation-bar-2.0.4.aar/cfe9683ee0987ebeed84fc8ccae25ee2/AndroidManifest.xml:2:1-13:12
+MERGED from [com.facebook.fresco:fresco:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/fresco-1.8.1.aar/396a0a757e3103901f64aeb145437d0f/AndroidManifest.xml:2:1-9:12
+MERGED from [com.githang:status-bar-compat:0.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/status-bar-compat-0.7.aar/5d5504cc17bce4e0bccf327e0440e517/AndroidManifest.xml:2:1-14:12
+MERGED from [com.apkfuns.logutils:library:1.6.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/library-1.6.0.aar/cd1a362cbb448ac6e92ad064e1d88ce4/AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.arimorty:floatingsearchview:2.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/floatingsearchview-2.1.1.aar/99978c982be9ec1371f40e12b8f5da26/AndroidManifest.xml:2:1-14:12
+MERGED from [com.android.support:cardview-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/9f7ad3cac88e787c7f401a172e48420f/AndroidManifest.xml:17:1-22:12
+MERGED from [q.rorbin:VerticalTabLayout:1.2.5] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/AndroidManifest.xml:2:1-13:12
+MERGED from [com.huxq17.xrefreshview:xrefreshview:3.6.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/xrefreshview-3.6.7.aar/7c8dd97477bfdf2e13a0dcd480f725e1/AndroidManifest.xml:2:1-12:12
+MERGED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:2:1-48:12
+MERGED from [com.contrarywind:Android-PickerView:4.1.6] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.LuckSiege.PictureSelector:ucrop:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/AndroidManifest.xml:2:1-12:12
+MERGED from [com.android.support:design:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/04b48877875fefb5cf3cec487ceb421e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/86133c120d9d4c0464aa102268404ba8/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.fresco:drawee:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/drawee-1.8.1.aar/d89e5a4399b3fbf926c022b8f2588089/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.8.1.aar/6ace719c8bf5abbd7159f293b38c00a0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.8.1.aar/59d56d371eefa0f3cd0575e22b6ce2c9/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:fbcore:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/fbcore-1.8.1.aar/8a1aede5a6ebd33af0a22e7b57cbdd62/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/soloader-0.3.0.aar/af80285d964309b736a91c9375af9ab1/AndroidManifest.xml:2:1-13:12
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/7e5644ad01d6aab0381f6fce58b338dd/AndroidManifest.xml:2:1-13:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/cf902a43d49bf4514a506ff84dc3afc6/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/8487d5e0858057042253f804c4a1b1e2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/fc76c59ab7116733c5a0ea51380ee0ed/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/3b3c27f1b83adc8d63579d5c1a94ee5d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/b543840ffc3a94132f4432084eb11639/AndroidManifest.xml:17:1-22:12
+MERGED from [com.bartoszlipinski:viewpropertyobjectanimator:1.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/viewpropertyobjectanimator-1.2.0.aar/05ac1e2f363b3f4cf73680c8c66e4cd4/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/b5877e79b4b7cc3dc896b3ed135690f6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/90f122335cd277ae20b9cdda22031ddb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/c168b2d3023098f370b80b3468c4e73e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/a7b351291de56abdad7cc7d1b4550391/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/949648a12852dec3c68eee81d1117add/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/44934851d4a7e6b491fe14c61ccff3e3/AndroidManifest.xml:17:1-22:12
+MERGED from [q.rorbin:badgeview:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/badgeview-1.1.2.aar/7e742edc485427cf6812dfefdeeda5b4/AndroidManifest.xml:2:1-13:12
+MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/rxandroid-2.0.1.aar/ba69894d5dbab737e7a3dcd94c794654/AndroidManifest.xml:15:1-21:12
+MERGED from [com.contrarywind:wheelview:4.0.8] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/wheelview-4.0.8.aar/8a86049b1c676a72eeb09a4b6943da39/AndroidManifest.xml:2:1-17:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/3c2d6d0616f4a7204827d4ac3c8d5e3d/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/4c1e7a6c2c1970379da3739f53f737c3/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/86b19559c0b8155f25a1421ff006613a/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/3e3d84e2baa36ec080cad283d135b2dc/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+	package
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:3:5-32
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:1-143:12
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:6:22-76
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:7:22-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:8:5-80
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:8:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:9:22-78
+uses-permission#android.permission.CALL_PHONE
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:10:5-69
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:10:22-66
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:11:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:12:5-79
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:12:22-76
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:13:5-71
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:13:22-68
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:14:5-75
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:14:22-72
+uses-permission#android.permission.CAMERA
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:15:5-65
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:15:22-62
+application
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:18:5-141:19
+MERGED from [com.ashokvarma.android:bottom-navigation-bar:2.0.4] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/bottom-navigation-bar-2.0.4.aar/cfe9683ee0987ebeed84fc8ccae25ee2/AndroidManifest.xml:11:5-47
+MERGED from [com.ashokvarma.android:bottom-navigation-bar:2.0.4] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/bottom-navigation-bar-2.0.4.aar/cfe9683ee0987ebeed84fc8ccae25ee2/AndroidManifest.xml:11:5-47
+MERGED from [com.githang:status-bar-compat:0.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/status-bar-compat-0.7.aar/5d5504cc17bce4e0bccf327e0440e517/AndroidManifest.xml:12:5-20
+MERGED from [com.githang:status-bar-compat:0.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/status-bar-compat-0.7.aar/5d5504cc17bce4e0bccf327e0440e517/AndroidManifest.xml:12:5-20
+MERGED from [com.github.arimorty:floatingsearchview:2.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/floatingsearchview-2.1.1.aar/99978c982be9ec1371f40e12b8f5da26/AndroidManifest.xml:12:5-20
+MERGED from [com.github.arimorty:floatingsearchview:2.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/floatingsearchview-2.1.1.aar/99978c982be9ec1371f40e12b8f5da26/AndroidManifest.xml:12:5-20
+MERGED from [q.rorbin:VerticalTabLayout:1.2.5] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/AndroidManifest.xml:11:5-20
+MERGED from [q.rorbin:VerticalTabLayout:1.2.5] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/AndroidManifest.xml:11:5-20
+MERGED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:11:5-46:19
+MERGED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:11:5-46:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/86133c120d9d4c0464aa102268404ba8/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/86133c120d9d4c0464aa102268404ba8/AndroidManifest.xml:9:5-20
+MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/soloader-0.3.0.aar/af80285d964309b736a91c9375af9ab1/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/soloader-0.3.0.aar/af80285d964309b736a91c9375af9ab1/AndroidManifest.xml:11:5-20
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/7e5644ad01d6aab0381f6fce58b338dd/AndroidManifest.xml:11:5-20
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/7e5644ad01d6aab0381f6fce58b338dd/AndroidManifest.xml:11:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/cf902a43d49bf4514a506ff84dc3afc6/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/cf902a43d49bf4514a506ff84dc3afc6/AndroidManifest.xml:9:5-20
+MERGED from [q.rorbin:badgeview:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/badgeview-1.1.2.aar/7e742edc485427cf6812dfefdeeda5b4/AndroidManifest.xml:11:5-20
+MERGED from [q.rorbin:badgeview:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/badgeview-1.1.2.aar/7e742edc485427cf6812dfefdeeda5b4/AndroidManifest.xml:11:5-20
+MERGED from [com.contrarywind:wheelview:4.0.8] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/wheelview-4.0.8.aar/8a86049b1c676a72eeb09a4b6943da39/AndroidManifest.xml:11:5-15:19
+MERGED from [com.contrarywind:wheelview:4.0.8] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/wheelview-4.0.8.aar/8a86049b1c676a72eeb09a4b6943da39/AndroidManifest.xml:11:5-15:19
+	android:supportsRtl
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:24:9-35
+	android:label
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:22:9-41
+	android:roundIcon
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:23:9-54
+	android:icon
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:21:9-43
+	android:allowBackup
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:20:9-35
+	android:theme
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:25:9-40
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:19:9-34
+activity#com.etsoft.scales.ui.activity.WelcomeActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:28:9-36:20
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:30:13-49
+	android:theme
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:31:13-45
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:29:13-73
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:32:13-35:29
+action#android.intent.action.MAIN
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:33:17-69
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:33:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:34:17-77
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:34:27-74
+activity#com.etsoft.scales.ui.activity.MainActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:39:9-43:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:42:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:43:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:41:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:40:13-70
+activity#com.etsoft.scales.ui.activity.LoginActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:46:9-50:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:49:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:50:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:48:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:47:13-71
+activity#com.etsoft.scales.ui.activity.RegisterActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:53:9-57:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:56:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:57:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:55:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:54:13-74
+activity#com.etsoft.scales.ui.activity.ForgetPassActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:59:9-63:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:62:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:63:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:61:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:60:13-76
+activity#com.etsoft.scales.ui.activity.EditPassActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:67:9-71:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:70:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:71:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:69:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:68:13-74
+activity#com.etsoft.scales.ui.activity.RecordNotificationActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:75:9-79:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:78:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:79:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:77:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:76:13-84
+activity#com.etsoft.scales.ui.activity.NotificationInfoActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:83:9-87:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:86:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:87:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:85:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:84:13-82
+activity#com.etsoft.scales.ui.activity.OutInfoActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:90:9-94:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:93:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:94:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:92:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:91:13-73
+activity#com.etsoft.scales.ui.activity.DevListActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:98:9-102:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:101:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:102:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:100:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:99:13-73
+activity#com.etsoft.scales.ui.activity.AddDevActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:105:9-109:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:108:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:109:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:107:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:106:13-72
+activity#com.etsoft.scales.ui.activity.InputInfoActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:112:9-116:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:115:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:116:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:114:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:113:13-75
+activity#com.etsoft.scales.ui.activity.InputRecordActivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:119:9-123:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:122:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:123:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:121:13-74
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:120:13-77
+activity#com.etsoft.scales.ui.activity.AddInputAvtivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:126:9-131:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:129:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:131:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:128:13-74
+	android:theme
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:130:13-62
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:127:13-74
+activity#com.etsoft.scales.ui.activity.AddOutAvtivity
+ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:133:9-138:75
+	android:screenOrientation
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:136:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:138:13-72
+	android:configChanges
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:135:13-74
+	android:theme
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:137:13-62
+	android:name
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml:134:13-72
+uses-sdk
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+MERGED from [com.ashokvarma.android:bottom-navigation-bar:2.0.4] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/bottom-navigation-bar-2.0.4.aar/cfe9683ee0987ebeed84fc8ccae25ee2/AndroidManifest.xml:7:5-9:41
+MERGED from [com.ashokvarma.android:bottom-navigation-bar:2.0.4] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/bottom-navigation-bar-2.0.4.aar/cfe9683ee0987ebeed84fc8ccae25ee2/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fresco:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/fresco-1.8.1.aar/396a0a757e3103901f64aeb145437d0f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/fresco-1.8.1.aar/396a0a757e3103901f64aeb145437d0f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.githang:status-bar-compat:0.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/status-bar-compat-0.7.aar/5d5504cc17bce4e0bccf327e0440e517/AndroidManifest.xml:8:5-10:41
+MERGED from [com.githang:status-bar-compat:0.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/status-bar-compat-0.7.aar/5d5504cc17bce4e0bccf327e0440e517/AndroidManifest.xml:8:5-10:41
+MERGED from [com.apkfuns.logutils:library:1.6.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/library-1.6.0.aar/cd1a362cbb448ac6e92ad064e1d88ce4/AndroidManifest.xml:7:5-9:41
+MERGED from [com.apkfuns.logutils:library:1.6.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/library-1.6.0.aar/cd1a362cbb448ac6e92ad064e1d88ce4/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.arimorty:floatingsearchview:2.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/floatingsearchview-2.1.1.aar/99978c982be9ec1371f40e12b8f5da26/AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.arimorty:floatingsearchview:2.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/floatingsearchview-2.1.1.aar/99978c982be9ec1371f40e12b8f5da26/AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:cardview-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/9f7ad3cac88e787c7f401a172e48420f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/9f7ad3cac88e787c7f401a172e48420f/AndroidManifest.xml:20:5-44
+MERGED from [q.rorbin:VerticalTabLayout:1.2.5] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/AndroidManifest.xml:7:5-9:41
+MERGED from [q.rorbin:VerticalTabLayout:1.2.5] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/AndroidManifest.xml:7:5-9:41
+MERGED from [com.huxq17.xrefreshview:xrefreshview:3.6.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/xrefreshview-3.6.7.aar/7c8dd97477bfdf2e13a0dcd480f725e1/AndroidManifest.xml:8:5-10:41
+MERGED from [com.huxq17.xrefreshview:xrefreshview:3.6.7] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/xrefreshview-3.6.7.aar/7c8dd97477bfdf2e13a0dcd480f725e1/AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:7:5-9:41
+MERGED from [com.contrarywind:Android-PickerView:4.1.6] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/AndroidManifest.xml:7:5-9:41
+MERGED from [com.contrarywind:Android-PickerView:4.1.6] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.LuckSiege.PictureSelector:ucrop:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.LuckSiege.PictureSelector:ucrop:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:design:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/04b48877875fefb5cf3cec487ceb421e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/04b48877875fefb5cf3cec487ceb421e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/86133c120d9d4c0464aa102268404ba8/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/86133c120d9d4c0464aa102268404ba8/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/drawee-1.8.1.aar/d89e5a4399b3fbf926c022b8f2588089/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/drawee-1.8.1.aar/d89e5a4399b3fbf926c022b8f2588089/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.8.1.aar/6ace719c8bf5abbd7159f293b38c00a0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.8.1.aar/6ace719c8bf5abbd7159f293b38c00a0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.8.1.aar/59d56d371eefa0f3cd0575e22b6ce2c9/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.8.1.aar/59d56d371eefa0f3cd0575e22b6ce2c9/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/fbcore-1.8.1.aar/8a1aede5a6ebd33af0a22e7b57cbdd62/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.8.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/fbcore-1.8.1.aar/8a1aede5a6ebd33af0a22e7b57cbdd62/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/soloader-0.3.0.aar/af80285d964309b736a91c9375af9ab1/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.3.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/soloader-0.3.0.aar/af80285d964309b736a91c9375af9ab1/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/7e5644ad01d6aab0381f6fce58b338dd/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.bumptech.glide:glide:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/glide-4.5.0.aar/7e5644ad01d6aab0381f6fce58b338dd/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/cf902a43d49bf4514a506ff84dc3afc6/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.5.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.5.0.aar/cf902a43d49bf4514a506ff84dc3afc6/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/8487d5e0858057042253f804c4a1b1e2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/8487d5e0858057042253f804c4a1b1e2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/fc76c59ab7116733c5a0ea51380ee0ed/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/fc76c59ab7116733c5a0ea51380ee0ed/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/3b3c27f1b83adc8d63579d5c1a94ee5d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/3b3c27f1b83adc8d63579d5c1a94ee5d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/b543840ffc3a94132f4432084eb11639/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/b543840ffc3a94132f4432084eb11639/AndroidManifest.xml:20:5-44
+MERGED from [com.bartoszlipinski:viewpropertyobjectanimator:1.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/viewpropertyobjectanimator-1.2.0.aar/05ac1e2f363b3f4cf73680c8c66e4cd4/AndroidManifest.xml:7:5-9:41
+MERGED from [com.bartoszlipinski:viewpropertyobjectanimator:1.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/viewpropertyobjectanimator-1.2.0.aar/05ac1e2f363b3f4cf73680c8c66e4cd4/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/b5877e79b4b7cc3dc896b3ed135690f6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/b5877e79b4b7cc3dc896b3ed135690f6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/90f122335cd277ae20b9cdda22031ddb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/90f122335cd277ae20b9cdda22031ddb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/c168b2d3023098f370b80b3468c4e73e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/c168b2d3023098f370b80b3468c4e73e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/a7b351291de56abdad7cc7d1b4550391/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/a7b351291de56abdad7cc7d1b4550391/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/949648a12852dec3c68eee81d1117add/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/949648a12852dec3c68eee81d1117add/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/44934851d4a7e6b491fe14c61ccff3e3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/44934851d4a7e6b491fe14c61ccff3e3/AndroidManifest.xml:20:5-44
+MERGED from [q.rorbin:badgeview:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/badgeview-1.1.2.aar/7e742edc485427cf6812dfefdeeda5b4/AndroidManifest.xml:7:5-9:41
+MERGED from [q.rorbin:badgeview:1.1.2] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/badgeview-1.1.2.aar/7e742edc485427cf6812dfefdeeda5b4/AndroidManifest.xml:7:5-9:41
+MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/rxandroid-2.0.1.aar/ba69894d5dbab737e7a3dcd94c794654/AndroidManifest.xml:19:5-43
+MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/rxandroid-2.0.1.aar/ba69894d5dbab737e7a3dcd94c794654/AndroidManifest.xml:19:5-43
+MERGED from [com.contrarywind:wheelview:4.0.8] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/wheelview-4.0.8.aar/8a86049b1c676a72eeb09a4b6943da39/AndroidManifest.xml:7:5-9:41
+MERGED from [com.contrarywind:wheelview:4.0.8] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/wheelview-4.0.8.aar/8a86049b1c676a72eeb09a4b6943da39/AndroidManifest.xml:7:5-9:41
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/3c2d6d0616f4a7204827d4ac3c8d5e3d/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/3c2d6d0616f4a7204827d4ac3c8d5e3d/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/4c1e7a6c2c1970379da3739f53f737c3/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/4c1e7a6c2c1970379da3739f53f737c3/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/86b19559c0b8155f25a1421ff006613a/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/86b19559c0b8155f25a1421ff006613a/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/3e3d84e2baa36ec080cad283d135b2dc/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/3e3d84e2baa36ec080cad283d135b2dc/AndroidManifest.xml:20:5-44
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+		ADDED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/fubolong/AS-WOEK/Scales/app/src/main/AndroidManifest.xml
+provider#com.luck.picture.lib.PictureFileProvider
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:12:9-20:20
+	android:grantUriPermissions
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:16:13-47
+	android:authorities
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:14:13-60
+	android:exported
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:13:13-68
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:17:13-19:54
+	android:resource
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:19:17-51
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:18:17-67
+activity#com.luck.picture.lib.PictureSelectorActivity
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:22:9-25:55
+	android:windowSoftInputMode
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:25:13-52
+	android:theme
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:24:13-50
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:23:13-72
+activity#com.luck.picture.lib.PicturePreviewActivity
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:26:9-28:53
+	android:theme
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:28:13-50
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:27:13-71
+activity#com.luck.picture.lib.PictureVideoPlayActivity
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:29:9-33:53
+	android:screenOrientation
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:32:13-47
+	android:configChanges
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:31:13-74
+	android:theme
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:33:13-50
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:30:13-73
+activity#com.luck.picture.lib.PictureExternalPreviewActivity
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:34:9-36:53
+	android:theme
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:36:13-50
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:35:13-79
+activity#com.yalantis.ucrop.UCropActivity
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:37:9-39:72
+	android:theme
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:39:13-69
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:38:13-60
+activity#com.yalantis.ucrop.PictureMultiCuttingActivity
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:40:9-42:72
+	android:theme
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:42:13-69
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:41:13-74
+activity#com.luck.picture.lib.PicturePlayAudioActivity
+ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:43:9-45:72
+	android:theme
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:45:13-69
+	android:name
+		ADDED from [com.github.LuckSiege.PictureSelector:picture_library:v2.2.0] /Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/AndroidManifest.xml:44:13-73

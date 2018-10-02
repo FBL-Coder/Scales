@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.etsoft.scales.view.TitleBar
+        android:id="@+id/DevList_TitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"/>
+
+    <GridView
+        android:id="@+id/DevList_GridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"/>
+
+</LinearLayout>
