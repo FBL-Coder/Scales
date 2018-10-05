@@ -11,7 +11,7 @@ import com.etsoft.scales.bean.RecordNotificationBean
 
 /**
  * Author：FBL  Time： 2018/7/23.
- * Mian 出库记录Adapter
+ * Mian 入库记录Adapter
  *
  */
 class InputRecordListViewAdapter(bean: InputRecordListBean) : BaseAdapter() {
@@ -28,13 +28,18 @@ class InputRecordListViewAdapter(bean: InputRecordListBean) : BaseAdapter() {
         var view = convertView
         var mViewHolder: ViewHolder
         if (view == null || view.tag == null) {
-            view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_inputmain, parent, false)
+            view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_inputrecord, parent, false)
             mViewHolder = ViewHolder(view!!)
             view.tag = mViewHolder
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.mInformation_Item1.text = mList[position].create_time
+        mViewHolder.Input_Record_Time.text = mList[position].create_time
+        mViewHolder.Input_Record_Staff.text = mList[position].servicePoint.admin_alias.toString()
+        mViewHolder.Input_Record_DanHao.text = mList[position].servicePoint.functionary
+        mViewHolder.Input_Record_State.text = mList[position].recyclingPrice.status.toString()
+        mViewHolder.Input_Record_Money.text = "￥"+mList[position].unit_price.toString()
+        mViewHolder.Input_Record_Type.text = mList[position].recyclingPrice.name.toString()
         return view!!
 
     }
@@ -54,11 +59,11 @@ class InputRecordListViewAdapter(bean: InputRecordListBean) : BaseAdapter() {
 
 
     class ViewHolder(view: View) {
-        val mInformation_Item1: TextView = view.findViewById(R.id.Information_Item_1)
-        val mInformation_Item2: TextView = view.findViewById(R.id.Information_Item_2)
-        val mInformation_Item3: TextView = view.findViewById(R.id.Information_Item_3)
-        val mInformation_Item4: TextView = view.findViewById(R.id.Information_Item_4)
-        val mInformation_Item5: TextView = view.findViewById(R.id.Information_Item_5)
-        val mInformation_Item6: TextView = view.findViewById(R.id.Information_Item_6)
+        val Input_Record_Time: TextView = view.findViewById(R.id.Input_Record_Time)
+        val Input_Record_Staff: TextView = view.findViewById(R.id.Input_Record_Staff)
+        val Input_Record_DanHao: TextView = view.findViewById(R.id.Input_Record_DanHao)
+        val Input_Record_State: TextView = view.findViewById(R.id.Input_Record_State)
+        val Input_Record_Money: TextView = view.findViewById(R.id.Input_Record_Money)
+        val Input_Record_Type: TextView = view.findViewById(R.id.Input_Record_Type)
     }
 }

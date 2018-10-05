@@ -119,7 +119,7 @@ class OutMainFragment : Fragment() {
             })
         }
 
-        Out_Record_ListView.adapter = Main_Out_ListViewAdapter(mOutList!!)
+        Out_Record_ListView.adapter = Main_Out_ListViewAdapter(mActivity!!,mOutList!!)
 
         Out_Record_ListView.setOnItemClickListener { parent, view, position, id ->
             startActivity(Intent(mActivity, OutInfoActivity::class.java).run {

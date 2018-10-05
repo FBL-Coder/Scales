@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Input_Record_Time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:background="@color/white__"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_20"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/Input_Record_Staff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_20"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dp_16"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_20">
+
+        <TextView
+            android:id="@+id/Input_Record_DanHao"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_30"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_20"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+
+        <TextView
+            android:id="@+id/Input_Record_State"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_5"
+            android:layout_weight="0.5"
+            android:background="@color/white___"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Input_Record_Money"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_chevron_right_white_24dp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/Input_Record_Type"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:gravity="center"
+        android:textSize="@dimen/sp_12" />
+
+
+</LinearLayout>

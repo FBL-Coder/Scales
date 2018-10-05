@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Out_Time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:background="@color/white__"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_20"
+        android:textStyle="bold"
+        android:text="2018-10-04 10：30" />
+
+
+    <TextView
+        android:id="@+id/Out_DanHao"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_20"
+        android:text="123123092737"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_20">
+
+        <TextView
+            android:id="@+id/Out_From"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="回收中心"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Out_State"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_5"
+            android:layout_weight="0.5"
+            android:background="@color/white___"
+            android:gravity="center"
+            android:text="已出库"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Out_To"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="资源利用中心"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/Out_Weight"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="139Kg"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_chevron_right_white_24dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_20">
+
+        <TextView
+            android:id="@+id/Out_Type_FeiBL"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="废玻璃"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Out_Type_FeiSL"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="废塑料"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Out_Type_FeiZ"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="废纸"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Out_Type_FeiT"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="废铁"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Out_Type_FeiM"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="废木"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Out_Type_FeiQT"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="其他"
+            android:textSize="@dimen/sp_12" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

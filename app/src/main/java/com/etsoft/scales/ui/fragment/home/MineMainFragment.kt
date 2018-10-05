@@ -11,6 +11,7 @@ import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.ui.activity.BaseActivity
 import com.etsoft.scales.ui.activity.MainActivity
 import com.etsoft.scales.ui.activity.RecordNotificationActivity
+import com.etsoft.scales.ui.activity.ServerStationActivity
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.fragment_mine_main.*
 
@@ -58,6 +59,11 @@ class MineMainFragment : Fragment() {
         Mine_Notification!!.setOnClickListener {
             //历史通知
             startActivity(Intent(mActivity, RecordNotificationActivity::class.java))
+        }
+
+        Mine_Server.setOnClickListener {
+            //服务站点
+            startActivity(Intent(mActivity, ServerStationActivity::class.java))
         }
         Mine_DevManager!!.setOnClickListener {
             //设备管理

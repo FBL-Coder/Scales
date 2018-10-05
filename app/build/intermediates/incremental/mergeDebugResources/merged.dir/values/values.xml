@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
+    <string-array name="cmd">
+        <item> detection model,1B 2B</item>
+        <item>horizontal tab,09</item>
+        <item>newline,0A</item>
+        <item>Print this store content,0D</item>
+        <item>initialize the printer,1B 40</item>
+        <item>Allow underline print,1C 2D 01</item>
+        <item>ban underline print,1C 2D 00</item>
+        <item>Allow bold print,1B 45 01</item>
+        <item>ban bold print,1B 45 00</item>
+        <item>Select the font: ASCII (12 * 24) characters (24 * 24),1B 4D 00</item>
+        <item>Select the font: ASCII (8 * 16) characters (16 * 16),1B 4D 01</item>
+        <item>characters correctly: no amplification,1D 21 00</item>
+        <item>2-fold character: Portrait zoom,1D 21 01</item>
+        <item>2 times the width of the character: horizontal zoom,1D 21 10</item>
+        <item>2 times the overall character amplification,1D 21 11</item>
+        <item>Left,1B 61 00</item>
+        <item>Align,1B 61 01</item>
+        <item>ranks right alignment,1B 61 02</item>
+        <item>page feed,0C</item>
+    </string-array>
+    <string-array name="language">
+        <item>15,CP936,[简体中文]</item>
+        <item>14,CP950,[繁体中文]</item>
+        <item>0,CP437,[美国，欧洲标准]</item>
+        <item>2,CP850,[多语言，西欧语 ]</item>
+        <item>3,CP860,[葡萄牙语]</item>
+        <item>4,CP863,[加拿大-法语 ]</item>
+        <item>5,CP865，[北欧 - 德语，日耳曼德语]</item>
+        <item>6,CP1252,[West Europe]</item>
+        <item>7,CP737,[Greek]</item>
+        <item>8,CP862,[Hebrew]</item>
+        <item>9,CP755,[East Europe]</item>
+        <item>10,Iran,[伊朗 ]</item>
+        <item>11,CP775,[波罗的海语]</item>
+        <item>12,CP932,[日文]</item>
+        <item>13,CP949,[韩文 ]</item>
+        <item>16,CP1252,</item>900
+        <item>17,CP866,[Cyrillice*2]</item>
+        <item>18,CP852,[Latin2]</item>
+        <item>19,CP858,[西欧语]</item>
+
+        <item>20,CP861,[冰岛语]</item>
+        <item>21,CP866,[斯拉夫语/俄语 ]</item>
+        <item>22,CP855,[斯拉夫语 保加利亚 ]</item>
+        <item>23,CP857,[土耳其语]</item>
+        <item>24,CP864,[阿拉伯语]</item>
+        <item>25,CP869,[希腊语(2)]</item>
+
+        <item>32,CP874,[泰文]</item>
+        <item>33,CP1250,[中欧 Latin-2]
+        </item>
+        <item>34,CP1251,[西里尔文 斯拉夫语 俄语 ]
+        </item>
+        <item>35,CP1252,[西欧(拉丁文 I)]
+        </item>
+        <item>36,CP1253,[希腊文]</item>
+        <item>37,CP1254,[土耳其文]
+        </item>
+        <item>38,CP1255,[希伯来文]
+        </item>
+        <item>39,CP1256,[阿拉伯文]
+        </item>
+        <item>40,P1257,[波罗的海文]
+        </item>
+        <item>41,CP1258,[越南]</item>
+    </string-array>
     <attr format="boolean" name="barrierAllowsGoneWidgets"/>
     <attr format="enum" name="barrierDirection">
         <enum name="left" value="0"/>
@@ -205,6 +272,7 @@
     <color name="color_f2">#F2F2F2</color>
     <color name="color_fa">#FAFAFA</color>
     <color name="color_orange">#E0FF6100</color>
+    <color name="contents_text">#ff000000</color>
     <color name="dark_gray">#787878</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_fab_shadow_end_color">@android:color/transparent</color>
@@ -221,13 +289,17 @@
     <color name="dim_foreground_material_light">#ff323232</color>
     <color name="divider">#F0F0F0</color>
     <color name="divider_color">#F0F0F0</color>
+    <color name="encode_view">#ffffffff</color>
     <color name="error_color_material">#F4511E</color>
+    <color name="finder_mask">#60000000</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
     <color name="gray_active_icon">#787878</color>
     <color name="green">#0ff408</color>
     <color name="green_">#6dd41e</color>
     <color name="green__">#30b35e</color>
+    <color name="help_button_view">#ffcccccc</color>
+    <color name="help_view">#ff404040</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_color">#808080</color>
@@ -274,6 +346,7 @@
     <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
     <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
     <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
+    <color name="possible_result_points">#c0ffff00</color>
     <color name="pressed_color">#E7E7E7</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
@@ -283,14 +356,30 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
+    <color name="red">#ffff0000</color>
+    <color name="result_image_border">#ffffffff</color>
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c000ff00</color>
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
     <color name="ripple_material_dark">#33ffffff</color>
     <color name="ripple_material_light">#1f000000</color>
+    <color name="sbc_header_text">#ff808080</color>
+    <color name="sbc_header_view">#ffffffff</color>
+    <color name="sbc_layout_view">#ffffffff</color>
+    <color name="sbc_list_item">#fffff0e0</color>
+    <color name="sbc_page_number_text">#ff000000</color>
+    <color name="sbc_snippet_text">#ff4b4b4b</color>
     <color name="search_input_background_color">#FFFFFF</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
     <color name="semi_transparent">#33000000</color>
+    <color name="share_text">#ff000000</color>
+    <color name="share_view">#ffffffff</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="status_view">#50000000</color>
     <color name="suggestion_item_pressed_color">#bbbbbb</color>
     <color name="suggestion_item_regular_color">#FAFAFA</color>
     <color name="suggestion_list_color">#FFFFFF</color>
@@ -319,6 +408,9 @@
     <color name="ucrop_color_widget_active">#FF6E40</color>
     <color name="ucrop_color_widget_background">#fff</color>
     <color name="ucrop_color_widget_text">#000</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
     <color name="white">#fff</color>
     <color name="white_">#eee</color>
     <color name="white__">#ddd</color>
@@ -863,6 +955,8 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="badge_corner_radius">13dp</dimen>
     <dimen name="badge_height_padding">1dp</dimen>
     <dimen name="badge_text_size">12sp</dimen>
@@ -1143,17 +1237,29 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
+    <item name="auto_focus" type="id"/>
+    <item name="decode" type="id"/>
+    <item name="decode_failed" type="id"/>
+    <item name="decode_succeeded" type="id"/>
+    <item name="encode_failed" type="id"/>
+    <item name="encode_succeeded" type="id"/>
     <item name="ghost_view" type="id"/>
     <item name="home" type="id"/>
     <item name="item_touch_helper_previous_elevation" type="id"/>
+    <item name="launch_product_query" type="id"/>
     <item name="line1" type="id"/>
     <item name="line3" type="id"/>
     <item name="parent_matrix" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
+    <item name="quit" type="id"/>
+    <item name="restart_preview" type="id"/>
+    <item name="return_scan_result" type="id"/>
     <item name="save_image_matrix" type="id"/>
     <item name="save_non_transition_alpha" type="id"/>
     <item name="save_scale_type" type="id"/>
+    <item name="search_book_contents_failed" type="id"/>
+    <item name="search_book_contents_succeeded" type="id"/>
     <item name="split_action_bar" type="id"/>
     <item name="tag_transition_group" type="id"/>
     <item name="text" type="id"/>
@@ -1210,22 +1316,52 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="action_reset_success">Reset success！</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_enter">Add enter key</string>
+    <string name="add_ringtone">Ringtone of scan success</string>
+    <string name="add_vibarate">vibration of scan success</string>
+    <string name="algin_left">Alignment-Left</string>
+    <string name="algin_middle">Alignment-Center</string>
+    <string name="algin_right">Alignment-Right</string>
+    <string name="all_amplify">magnification</string>
     <string name="app_name">智能云秤</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="auto_paper">label print</string>
+    <string name="auto_printer">auto print</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="cancle">取消</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
+    <string name="clear_up">Clear</string>
+    <string name="cmd">CMD</string>
+    <string name="continue_scan">Continuous scanning</string>
+    <string name="device_model">device model：</string>
+    <string name="font_one">Font one</string>
+    <string name="font_two">Font two</string>
     <string name="forgetPass">忘记密码</string>
+    <string name="format">FORMAT</string>
+    <string name="func_instruction">Function instruction</string>
+    <string name="func_setting">Function setting</string>
+    <string name="generate_barcode">Create Bar Code</string>
+    <string name="generate_qrCode">Create QR Code</string>
     <string name="gif_tag">动图</string>
+    <string name="h_amplify">longitudinal magnification</string>
+    <string name="hello_world">Hello world!</string>
     <string name="hint">提示</string>
     <string name="icon">icon</string>
     <string name="logout_message">是否退出登录？</string>
+    <string name="muti_thread_print">(Print)Multi Thread</string>
+    <string name="normal">Normal</string>
+    <string name="normal_font">Normal</string>
+    <string name="notLinkToCamera">can not link to camera</string>
+    <string name="open_scanning">Open scanner</string>
     <string name="password_toggle_content_description">Toggle password visibility</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
     <string name="phoneerror">手机号不合适</string>
+    <string name="pic_algin">Align（picture）</string>
     <string name="pickerview_cancel">取消</string>
     <string name="pickerview_day">日</string>
     <string name="pickerview_hours">时</string>
@@ -1272,15 +1408,45 @@
     <string name="picture_tape">录音</string>
     <string name="picture_video_toast">视频不可预览</string>
     <string name="picture_warning">暂无媒体文件！</string>
+    <string name="print_mode_not_exist">print templet not exist</string>
+    <string name="print_pic">Print picture</string>
+    <string name="print_pic_gray">Print picture(gray)</string>
+    <string name="print_pic_raster">Print picture(raster)</string>
+    <string name="print_text">Print text</string>
+    <string name="printerOne">Print template 1</string>
+    <string name="printerThree">Print template 3</string>
+    <string name="printerTwo">Print template 2</string>
+    <string name="printer_link_timeout">the printer link timeout, you can try it confirm whether install the right service apk or turn off the device and turn on again</string>
+    <string name="printer_unicode">Print Unicode</string>
+    <string name="printer_unicode_1E30">Print Unicode(1E30)</string>
+    <string name="product_check">Please check the right product</string>
+    <string name="put_the_tags">Please put the tags on the equipment behind</string>
+    <string name="recovery_factory_setting">Restore factory settings</string>
     <string name="register">注册账号</string>
+    <string name="scan_repeat_hint">Hint of scan repeat</string>
+    <string name="scan_test">Scan test</string>
+    <string name="scanning">Scan</string>
     <string name="search_menu_title">Search</string>
+    <string name="select_pic_print">Select Picture</string>
+    <string name="send">Send</string>
+    <string name="service_bind_fail">AIDL service bind fail</string>
+    <string name="service_bind_success">AIDL service bind success</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="super_printer">Super printer mode</string>
+    <string name="test_print_text">This my print text \nabcdefghijklmnopkrstuvwxyz1234567890\n</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="ucrop_error_input_data_is_absent">Both input and output Uri must be specified</string>
     <string name="ucrop_label_edit_photo">Edit Photo</string>
     <string name="ucrop_label_original">Original</string>
     <string name="ucrop_menu_crop">Crop</string>
     <string name="ucrop_mutate_exception_hint">Therefore, override color resource (ucrop_color_toolbar_widget) in your app to make it work on pre-L devices</string>
+    <string name="user_begin">user begin</string>
+    <string name="v_amplify">lateral magnification</string>
+    <string name="waiting">initialization...</string>
+    <string name="weburl">file:///android_asset/html/redeme.html</string>
+    <string name="without_get_device_model">Did not get device model</string>
+    <string name="word_algin">Align（text）</string>
+    <string name="word_to_pic">Text to image</string>
     <string name="xrefreshview_footer_hint_click">点击加载更多</string>
     <string name="xrefreshview_footer_hint_complete">已无更多数据</string>
     <string name="xrefreshview_footer_hint_fail">加载失败，请重试</string>
@@ -2981,6 +3147,22 @@
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 屏幕背景是否变暗 -->
         <item name="android:backgroundDimAmount">0.3</item>
+    </style>
+    <style name="dialogTheme" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimAmount">0.5</item>
     </style>
     <style mce_bogus="1" name="picker_view_scale_anim" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/pickerview_dialog_scale_in</item>

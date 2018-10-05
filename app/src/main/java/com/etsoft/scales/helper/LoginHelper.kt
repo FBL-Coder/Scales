@@ -38,7 +38,6 @@ class LoginHelper {
                             AppSharePreferenceMgr.put(SaveKey.USER_PASS, pass)
                             AppSharePreferenceMgr.put(SaveKey.ACCESS_TOKEN, MyApp.UserInfo!!.data.access_token)
                             AppSharePreferenceMgr.put(SaveKey.REFRESH_TOKEN, MyApp.UserInfo!!.data.refresh_token)
-
                             activity.startActivity(Intent(activity, MainActivity::class.java))
                         }
 

@@ -8,44 +8,44 @@ package q.rorbin.verticaltablayout;
 
 public final class R {
     public static final class attr {
-        public static final int indicator_color = 0x7f0300f1;
-        public static final int indicator_corners = 0x7f0300f2;
-        public static final int indicator_gravity = 0x7f0300f3;
-        public static final int indicator_width = 0x7f0300f4;
-        public static final int tab_height = 0x7f0301d6;
-        public static final int tab_margin = 0x7f0301d7;
-        public static final int tab_mode = 0x7f0301d8;
+        public static final int indicator_color = 0x7f0400f1;
+        public static final int indicator_corners = 0x7f0400f2;
+        public static final int indicator_gravity = 0x7f0400f3;
+        public static final int indicator_width = 0x7f0400f4;
+        public static final int tab_height = 0x7f0401d6;
+        public static final int tab_margin = 0x7f0401d7;
+        public static final int tab_mode = 0x7f0401d8;
     }
     public static final class color {
-        public static final int colorAccent = 0x7f050039;
-        public static final int colorPrimary = 0x7f05003a;
-        public static final int colorPrimaryDark = 0x7f05003b;
+        public static final int colorAccent = 0x7f060039;
+        public static final int colorPrimary = 0x7f06003a;
+        public static final int colorPrimaryDark = 0x7f06003b;
     }
     public static final class drawable {
-        public static final int man_01_none = 0x7f070085;
-        public static final int man_01_pressed = 0x7f070086;
-        public static final int man_02_none = 0x7f070087;
-        public static final int man_02_pressed = 0x7f070088;
-        public static final int man_03_none = 0x7f070089;
-        public static final int man_03_pressed = 0x7f07008a;
-        public static final int man_04_none = 0x7f07008b;
-        public static final int man_04_pressed = 0x7f07008c;
+        public static final int man_01_none = 0x7f08008b;
+        public static final int man_01_pressed = 0x7f08008c;
+        public static final int man_02_none = 0x7f08008d;
+        public static final int man_02_pressed = 0x7f08008e;
+        public static final int man_03_none = 0x7f08008f;
+        public static final int man_03_pressed = 0x7f080090;
+        public static final int man_04_none = 0x7f080091;
+        public static final int man_04_pressed = 0x7f080092;
     }
     public static final class id {
-        public static final int fill = 0x7f0800b1;
-        public static final int fixed = 0x7f0800ba;
-        public static final int left = 0x7f0800e2;
-        public static final int right = 0x7f080125;
-        public static final int scrollable = 0x7f080138;
+        public static final int fill = 0x7f090133;
+        public static final int fixed = 0x7f09013d;
+        public static final int left = 0x7f09016e;
+        public static final int right = 0x7f0901ce;
+        public static final int scrollable = 0x7f0901e3;
     }
     public static final class layout {
-        public static final int item_qtabview = 0x7f0a0045;
+        public static final int item_qtabview = 0x7f0b0061;
     }
     public static final class string {
-        public static final int app_name = 0x7f0e001e;
+        public static final int app_name = 0x7f0f0027;
     }
     public static final class styleable {
-        public static final int[] VerticalTabLayout = { 0x7f0300f1, 0x7f0300f2, 0x7f0300f3, 0x7f0300f4, 0x7f0301d6, 0x7f0301d7, 0x7f0301d8 };
+        public static final int[] VerticalTabLayout = { 0x7f0400f1, 0x7f0400f2, 0x7f0400f3, 0x7f0400f4, 0x7f0401d6, 0x7f0401d7, 0x7f0401d8 };
         public static final int VerticalTabLayout_indicator_color = 0;
         public static final int VerticalTabLayout_indicator_corners = 1;
         public static final int VerticalTabLayout_indicator_gravity = 2;

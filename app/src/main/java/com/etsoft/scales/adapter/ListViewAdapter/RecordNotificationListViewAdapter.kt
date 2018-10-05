@@ -27,13 +27,21 @@ class RecordNotificationListViewAdapter(bean: RecordNotificationBean) : BaseAdap
         var view = convertView
         var mViewHolder: ViewHolder
         if (view == null || view.tag == null) {
-            view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_inputmain, parent, false)
+            view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_notification_item, parent, false)
             mViewHolder = ViewHolder(view!!)
             view.tag = mViewHolder
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.mInformation_Item1.text = mList[position].uuid
+        mViewHolder.NotiFication_ID.text = mList[position].uuid.subSequence(mList[position].uuid.length - 4, mList[position].uuid.length)
+        mViewHolder.NotiFication_Admin.text = mList[position].admin_alias
+        mViewHolder.NotiFication_Title.text = mList[position].title
+        mViewHolder.NotiFication_Type.text = when (mList[position].type) {
+            1.0 -> "物价调整"
+            2.0 -> "其他"
+            else -> "未知"
+        }
+        mViewHolder.NotiFication_Time.text = mList[position].create_time
         return view!!
 
     }
@@ -53,11 +61,10 @@ class RecordNotificationListViewAdapter(bean: RecordNotificationBean) : BaseAdap
 
 
     class ViewHolder(view: View) {
-        val mInformation_Item1: TextView = view.findViewById(R.id.Information_Item_1)
-        val mInformation_Item2: TextView = view.findViewById(R.id.Information_Item_2)
-        val mInformation_Item3: TextView = view.findViewById(R.id.Information_Item_3)
-        val mInformation_Item4: TextView = view.findViewById(R.id.Information_Item_4)
-        val mInformation_Item5: TextView = view.findViewById(R.id.Information_Item_5)
-        val mInformation_Item6: TextView = view.findViewById(R.id.Information_Item_6)
+        val NotiFication_ID: TextView = view.findViewById(R.id.NotiFication_ID)
+        val NotiFication_Admin: TextView = view.findViewById(R.id.NotiFication_Admin)
+        val NotiFication_Title: TextView = view.findViewById(R.id.NotiFication_Title)
+        val NotiFication_Type: TextView = view.findViewById(R.id.NotiFication_Type)
+        val NotiFication_Time: TextView = view.findViewById(R.id.NotiFication_Time)
     }
 }

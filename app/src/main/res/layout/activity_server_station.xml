@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.etsoft.scales.view.TitleBar
+        android:id="@+id/ServerStation_TitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"/>
+
+
+    <com.andview.refreshview.XRefreshView
+        android:id="@+id/ServerStation_XRefreshView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/ServerStation_List"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/white_"
+            android:scrollbarThumbVertical="@color/AppTheme_color"
+            android:scrollbarSize="@dimen/dp_3"
+            android:dividerHeight="@dimen/dp_2"/>
+
+    </com.andview.refreshview.XRefreshView>
+
+</LinearLayout>

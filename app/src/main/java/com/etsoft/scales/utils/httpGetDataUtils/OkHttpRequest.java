@@ -170,6 +170,7 @@ public class OkHttpRequest {
      * @Description 异步请求
      */
     public static void doEnqueue(final Request request, final HttpCallback callback) {
+        if (request == null) return;
         getOkHttpClient().newCall(request).enqueue(new Callback() {
 
             @Override

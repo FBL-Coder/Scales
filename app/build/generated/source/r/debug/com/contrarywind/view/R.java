@@ -8,41 +8,41 @@ package com.contrarywind.view;
 
 public final class R {
     public static final class attr {
-        public static final int wheelview_dividerColor = 0x7f030218;
-        public static final int wheelview_gravity = 0x7f030219;
-        public static final int wheelview_lineSpacingMultiplier = 0x7f03021a;
-        public static final int wheelview_textColorCenter = 0x7f03021b;
-        public static final int wheelview_textColorOut = 0x7f03021c;
-        public static final int wheelview_textSize = 0x7f03021d;
+        public static final int wheelview_dividerColor = 0x7f040218;
+        public static final int wheelview_gravity = 0x7f040219;
+        public static final int wheelview_lineSpacingMultiplier = 0x7f04021a;
+        public static final int wheelview_textColorCenter = 0x7f04021b;
+        public static final int wheelview_textColorOut = 0x7f04021c;
+        public static final int wheelview_textSize = 0x7f04021d;
     }
     public static final class color {
-        public static final int pickerview_bgColor_default = 0x7f050081;
-        public static final int pickerview_bgColor_overlay = 0x7f050082;
-        public static final int pickerview_bg_topbar = 0x7f050083;
-        public static final int pickerview_timebtn_nor = 0x7f050084;
-        public static final int pickerview_timebtn_pre = 0x7f050085;
-        public static final int pickerview_topbar_title = 0x7f050086;
-        public static final int pickerview_wheelview_textcolor_center = 0x7f050087;
-        public static final int pickerview_wheelview_textcolor_divider = 0x7f050088;
-        public static final int pickerview_wheelview_textcolor_out = 0x7f050089;
+        public static final int pickerview_bgColor_default = 0x7f060086;
+        public static final int pickerview_bgColor_overlay = 0x7f060087;
+        public static final int pickerview_bg_topbar = 0x7f060088;
+        public static final int pickerview_timebtn_nor = 0x7f060089;
+        public static final int pickerview_timebtn_pre = 0x7f06008a;
+        public static final int pickerview_topbar_title = 0x7f06008b;
+        public static final int pickerview_wheelview_textcolor_center = 0x7f06008c;
+        public static final int pickerview_wheelview_textcolor_divider = 0x7f06008d;
+        public static final int pickerview_wheelview_textcolor_out = 0x7f06008e;
     }
     public static final class dimen {
-        public static final int pickerview_textsize = 0x7f060103;
-        public static final int pickerview_topbar_btn_textsize = 0x7f060104;
-        public static final int pickerview_topbar_height = 0x7f060105;
-        public static final int pickerview_topbar_padding = 0x7f060106;
-        public static final int pickerview_topbar_title_textsize = 0x7f060107;
+        public static final int pickerview_textsize = 0x7f070105;
+        public static final int pickerview_topbar_btn_textsize = 0x7f070106;
+        public static final int pickerview_topbar_height = 0x7f070107;
+        public static final int pickerview_topbar_padding = 0x7f070108;
+        public static final int pickerview_topbar_title_textsize = 0x7f070109;
     }
     public static final class id {
-        public static final int center = 0x7f08008a;
-        public static final int left = 0x7f0800e2;
-        public static final int right = 0x7f080125;
+        public static final int center = 0x7f0900f5;
+        public static final int left = 0x7f09016e;
+        public static final int right = 0x7f0901ce;
     }
     public static final class string {
-        public static final int app_name = 0x7f0e001e;
+        public static final int app_name = 0x7f0f0027;
     }
     public static final class styleable {
-        public static final int[] pickerview = { 0x7f030218, 0x7f030219, 0x7f03021a, 0x7f03021b, 0x7f03021c, 0x7f03021d };
+        public static final int[] pickerview = { 0x7f040218, 0x7f040219, 0x7f04021a, 0x7f04021b, 0x7f04021c, 0x7f04021d };
         public static final int pickerview_wheelview_dividerColor = 0;
         public static final int pickerview_wheelview_gravity = 1;
         public static final int pickerview_wheelview_lineSpacingMultiplier = 2;

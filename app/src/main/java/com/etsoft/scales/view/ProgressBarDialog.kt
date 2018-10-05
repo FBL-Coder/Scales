@@ -7,6 +7,9 @@ import android.support.annotation.NonNull
 import android.view.KeyEvent
 import android.widget.TextView
 import com.etsoft.scales.R
+import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.netWorkListener.AppNetworkMgr
+import com.etsoft.scales.utils.ToastUtil
 
 /**
  * Author：FBL  Time： 2018/7/20.
@@ -23,9 +26,14 @@ constructor(private val mContext: Context) {
     }
 
     fun show(text: String = "加载数据...") {
-        dialog.show()
-        val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
-        textView.text = text
+        val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
+        if (NETWORK == 0) {
+            ToastUtil.showText("请检查网络连接")
+        } else {
+            dialog.show()
+            val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
+            textView.text = text
+        }
     }
 
     fun show(text: String = "加载数据...", isClickHide: Boolean = true) {

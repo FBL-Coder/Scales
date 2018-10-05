@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:padding="10dp">
+   
+    <Button
+        android:id="@+id/btn_nfca" 
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="NFCA"
+        android:textSize="14sp"
+        android:layout_marginTop="48dp"/>
+    
+    <Button
+        android:id="@+id/btn_nfca_cmd" 
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="NFCA_CMD"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
+    
+
+</LinearLayout>

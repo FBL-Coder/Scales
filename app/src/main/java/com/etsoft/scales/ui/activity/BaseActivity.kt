@@ -24,7 +24,8 @@ import com.githang.statusbar.StatusBarCompat
 /**
  * Author：FBL  Time： 2018/7/20.
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
+//abstract class BaseActivity : AppCompatActivity() {
 
     var mLoadDialog: ProgressBarDialog? = null
 

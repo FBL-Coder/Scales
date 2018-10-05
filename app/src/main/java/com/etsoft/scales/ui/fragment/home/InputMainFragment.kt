@@ -24,8 +24,8 @@ import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
+import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
-import okhttp3.Call
 
 
 /**
@@ -72,7 +72,7 @@ class InputMainFragment : Fragment() {
                 if (type == 1)
                     showSelectDialog()
             }
-        },"回收列表")
+        }, "回收列表")
     }
 
     private fun initListView() {
@@ -128,7 +128,7 @@ class InputMainFragment : Fragment() {
     private fun initView() {
         Input_Main_TitleBar!!.back.visibility = View.GONE
         Input_Main_TitleBar!!.title.text = "入库"
-        Input_Main_TitleBar!!.moor.setImageResource(R.mipmap.ic_backup_white_24dp)
+        Input_Main_TitleBar!!.moor.setImageResource(R.mipmap.ic_cloud_upload_white_24dp)
         Input_Main_TitleBar!!.moor.setOnClickListener {
             MyDialog(mActivity!!)
                     .setMessage("是否上传至服务器？")
@@ -154,24 +154,49 @@ class InputMainFragment : Fragment() {
      * 上传入库数据到服务器
      */
     private fun UpToServer() {
-        var map = HashMap<String, String>().run {
-            put("userId", "")
-            put("servicePointId", "")
-            put("staffId", "")
-            put("weight", "")
-            put("recyclingPriceId", "")
+        var Data = ArrayList<Input_Main_List_Bean>()
+        Data.add(Input_Main_List_Bean().run {
+            id = "编号"
+            type = "类型"
+            weight = "重量"
+            unit = "单位"
+            price = "单位"
+            total = "总价"
             this
+        })
+        Data.addAll(mInputLiat)
+
+        mIzkcService.printerInit()
+        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("------------------")
+        for (i in Data.indices) {
+            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
+            var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
+            var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
+            var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
+            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
         }
+        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
 
-        OkHttpUtils.postAync(Ports.ADDINPUTBACK, MyApp.gson.toJson(map), object : MyHttpCallback(mActivity) {
-            override fun onSuccess(resultDesc: ResultDesc?) {
 
-            }
 
-            override fun onFailure(call: Call?, code: Int, message: String?) {
-
-            }
-        },"入库")
+//        var map = HashMap<String, String>().run {
+//            put("userId", "")
+//            put("servicePointId", "")
+//            put("staffId", "")
+//            put("weight", "")
+//            put("recyclingPriceId", "")
+//            this
+//        }
+//
+//        OkHttpUtils.postAync(Ports.ADDINPUTBACK, MyApp.gson.toJson(map), object : MyHttpCallback(mActivity) {
+//            override fun onSuccess(resultDesc: ResultDesc?) {
+//
+//            }
+//
+//            override fun onFailure(call: Call?, code: Int, message: String?) {
+//
+//            }
+//        }, "入库")
 
     }
 
@@ -208,4 +233,5 @@ class InputMainFragment : Fragment() {
             listid++
         }
     }
+
 }

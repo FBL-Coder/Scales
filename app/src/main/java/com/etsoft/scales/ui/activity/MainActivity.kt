@@ -5,18 +5,19 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.KeyEvent
+import android.widget.TextView
 import android.widget.Toast
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
+import com.etsoft.scales.R
 import com.etsoft.scales.app.MyApp
-import com.etsoft.scales.ui.fragment.home.OutMainFragment
+import com.etsoft.scales.netWorkListener.NetBroadcastReceiver
 import com.etsoft.scales.ui.fragment.home.InputMainFragment
 import com.etsoft.scales.ui.fragment.home.MineMainFragment
-import com.etsoft.scales.R
-import com.etsoft.scales.netWorkListener.NetBroadcastReceiver
+import com.etsoft.scales.ui.fragment.home.OutMainFragment
 import com.etsoft.scales.utils.PermissionsUtli
 import com.etsoft.scales.utils.ToastUtil
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_scales.*
 
 
 /**
@@ -43,7 +44,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_scales)
         initView()
         fragments = initFragment()
         ViewEvent()
@@ -65,7 +66,7 @@ class MainActivity : BaseActivity() {
         bt.replace(R.id.Main_GroupView, fragments!![0])
         bt.commit()
 
-        Main_BottomNavigationBar.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener {
+        Main_BottomNavigationBar!!.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener {
             override fun onTabSelected(position: Int) {
                 val Transaction = fm.beginTransaction()
                 if (fragments != null) {
@@ -92,13 +93,13 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initView() {
-
         Main_BottomNavigationBar
                 .addItem(BottomNavigationItem(R.mipmap.ic_speaker_notes_white_24dp, "入库"))
                 .addItem(BottomNavigationItem(R.mipmap.ic_settings_phone_white_24dp, "出库"))
                 .addItem(BottomNavigationItem(R.mipmap.ic_account_circle_white_24dp, "我的"))
                 .setActiveColor(R.color.white_)
                 .initialise()
+
     }
 
     private var mTimeExit = 0L

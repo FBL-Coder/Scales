@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<Button-->
+    <!--android:id="@+id/btnTurnOn"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:text="打开"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:textSize="14sp"/>-->
+    <Button
+        android:id="@+id/btn_getIdentifyInfo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="获取身份信息"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"/>
+    <!--<Button-->
+    <!--android:id="@+id/btnTurnOff"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:text="断开"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:textSize="14sp"/>-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_idInfo"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="身份信息"/>-->
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/identity_img">
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.00" >
+
+            <ImageView
+                android:id="@+id/img_header"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginRight="8dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/face" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="45dp"
+            android:layout_weight="0.07"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_sender_info"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.87"
+                android:text="请先连接身份证阅读器"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

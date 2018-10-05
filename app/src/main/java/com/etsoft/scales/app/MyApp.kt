@@ -14,12 +14,13 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import java.util.ArrayList
 import com.etsoft.scales.utils.gson.NullStringEmptyTypeAdapterFactory
+import com.smartdevice.aidltestdemo.ClientApplication
 
 
 /**
  * Author：FBL  Time： 2018/7/20.
  */
-open class MyApp : Application() {
+open class MyApp : ClientApplication() {
 
     var activities: ArrayList<Activity>? = null
 

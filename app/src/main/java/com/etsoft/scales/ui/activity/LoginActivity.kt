@@ -28,7 +28,6 @@ class LoginActivity : BaseActivity() {
     private fun initEvent() {
         Login_Enter.setOnClickListener {
             var id = Login_ID.text.toString()
-
             var pass = Login_Pass.text.toString()
 
             if (!Validator.isMobile(id) && pass.isEmpty()) {

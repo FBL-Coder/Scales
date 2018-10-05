@@ -137,7 +137,26 @@
             android:theme="@style/activity.Theme.Transparent"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
+        <!--服务站点列表-->
+        <activity
+            android:name="com.etsoft.scales.ui.activity.ServerStationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <!--服务站点列表-->
+        <activity
+            android:name="com.etsoft.scales.ui.activity.ServerStationInfoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
+
+        <service android:name="com.smartdevice.aidl.IZKCService">
+            <intent-filter>
+                <action android:name="com.zkc.aidl.all" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

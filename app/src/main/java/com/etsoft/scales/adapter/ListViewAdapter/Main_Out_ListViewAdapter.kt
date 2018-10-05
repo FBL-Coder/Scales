@@ -1,5 +1,7 @@
 package com.etsoft.scales.adapter.ListViewAdapter
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +15,9 @@ import com.etsoft.scales.bean.OutListBean
  * Mian 出库记录Adapter
  *
  */
-class Main_Out_ListViewAdapter(bean: OutListBean) : BaseAdapter() {
+class Main_Out_ListViewAdapter(context: Context, bean: OutListBean) : BaseAdapter() {
 
+    var mContext = context
     var mList = bean.data as ArrayList<OutListBean.DataBean>
 
     fun notifyDataSetChanged(bean: OutListBean) {
@@ -23,17 +26,33 @@ class Main_Out_ListViewAdapter(bean: OutListBean) : BaseAdapter() {
     }
 
 
+    @SuppressLint("NewApi", "SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
         var mViewHolder: ViewHolder
         if (view == null || view.tag == null) {
-            view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_inputmain, parent, false)
+            view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_outmain, parent, false)
             mViewHolder = ViewHolder(view!!)
             view.tag = mViewHolder
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.mInformation_Item1.text = mList[position].to_place
+        mViewHolder.mOutTime.text = mList[position].create_time
+        mViewHolder.mOutDanHao.text = mList[position].recycling_price_id.toString()
+        mViewHolder.mOutFrom.text = mList[position].staff_name
+        mViewHolder.mOutState.text = mList[position].staff_id.toString()
+        mViewHolder.mOutTo.text = mList[position].to_place
+        mViewHolder.mOutWeight.text = mList[position].weight.toString()+"Kg"
+        when (mList[position].recycling_price_id) {
+            1.0 -> {
+                mViewHolder.mOutTypeFeiT.background = mContext.getDrawable(R.color.white__)
+            }
+            2.0->{
+                mViewHolder.mOutTypeFeiZ.background = mContext.getDrawable(R.color.white__)
+            }
+
+        }
+
         return view!!
 
     }
@@ -53,11 +72,17 @@ class Main_Out_ListViewAdapter(bean: OutListBean) : BaseAdapter() {
 
 
     class ViewHolder(view: View) {
-        val mInformation_Item1: TextView = view.findViewById(R.id.Information_Item_1)
-        val mInformation_Item2: TextView = view.findViewById(R.id.Information_Item_2)
-        val mInformation_Item3: TextView = view.findViewById(R.id.Information_Item_3)
-        val mInformation_Item4: TextView = view.findViewById(R.id.Information_Item_4)
-        val mInformation_Item5: TextView = view.findViewById(R.id.Information_Item_5)
-        val mInformation_Item6: TextView = view.findViewById(R.id.Information_Item_6)
+        val mOutTime: TextView = view.findViewById(R.id.Out_Time)
+        val mOutDanHao: TextView = view.findViewById(R.id.Out_DanHao)
+        val mOutFrom: TextView = view.findViewById(R.id.Out_From)
+        val mOutState: TextView = view.findViewById(R.id.Out_State)
+        val mOutTo: TextView = view.findViewById(R.id.Out_To)
+        val mOutWeight: TextView = view.findViewById(R.id.Out_Weight)
+        val mOutTypeFeiBL: TextView = view.findViewById(R.id.Out_Type_FeiBL)
+        val mOutTypeFeiSL: TextView = view.findViewById(R.id.Out_Type_FeiSL)
+        val mOutTypeFeiZ: TextView = view.findViewById(R.id.Out_Type_FeiZ)
+        val mOutTypeFeiT: TextView = view.findViewById(R.id.Out_Type_FeiT)
+        val OutTypeFeiM: TextView = view.findViewById(R.id.Out_Type_FeiM)
+        val OutTypeFeiQT: TextView = view.findViewById(R.id.Out_Type_FeiQT)
     }
 }

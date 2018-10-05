@@ -39,12 +39,10 @@ class Ports {
         var ADDOUTBACK = port + "webapi/Outbound/insert"
         /**
          * 通知列表
+         * 带ID为详情
          */
         var NOTIFICATIONLIST = port + "webapi/Notice/list"
-        /**
-         * 通知详情
-         */
-        var NOTIFICATIONINFO = port + "webapi/Notice/info"
+
         /**
          * 服务站点
          */
@@ -58,6 +56,11 @@ class Ports {
          */
         var LOCATION_SERVER = port + "webapi/Servicepoint/positioning"
 
+        /**
+         * 服务站列表
+         * 带ID 为详情
+         * */
+        var SERVERLIST = port + "webapi/Servicepoint/list"
 
 
     }

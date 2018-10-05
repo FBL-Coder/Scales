@@ -17,7 +17,8 @@
 
             <ImageView
                 android:id="@+id/back_titlebar"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_50"
+                android:scaleType="center"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/top_back"
                 android:padding="@dimen/dp_5"
@@ -37,8 +38,9 @@
 
             <ImageView
                 android:id="@+id/moor_titlebar"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_40"
+                android:scaleType="center"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/top_back"

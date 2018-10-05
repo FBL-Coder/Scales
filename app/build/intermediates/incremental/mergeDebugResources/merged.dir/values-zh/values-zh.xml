@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="cmd">
+        <item>检测型号,1B 2B</item>
+        <item>水平制表,09</item>
+        <item>换行,0A</item>
+        <item>打印当前存储内容,0D</item>
+        <item>初始化打印机,1B 40</item>
+        <item>允许下划线打印,1C 2D 01</item>
+        <item>禁止下划线打印,1C 2D 00</item>
+        <item>允许粗体打印,1B 45 01</item>
+        <item>禁止粗体打印,1B 45 00</item>
+        <item>选择字体：ASCII(12*24) 汉字（24*24）,1B 4D 00</item>
+        <item>选择字体：ASCII(8*16)  汉字（16*16）,1B 4D 01</item>
+        <item>字符正常：  不放大,1D 21 00</item>
+        <item>字符2倍高：纵向放大,1D 21 01</item>
+        <item>字符2倍宽：横向放大,1D 21 10</item>
+        <item>字符2倍整体放大,1D 21 11</item>
+        <item>左对齐,1B 61 00</item>
+        <item>居中对齐,1B 61 01</item>
+        <item>居右对齐,1B 61 02</item>
+        <item>页进纸,0C</item>
+    </string-array>
+    <string name="action_reset_success">恢复出厂设置成功！</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_enter">数据末尾增加回车</string>
+    <string name="add_ringtone">扫描成功提示音</string>
+    <string name="add_vibarate">扫描成功振动</string>
+    <string name="algin_left">水平居左</string>
+    <string name="algin_middle">水平居中</string>
+    <string name="algin_right">水平居右</string>
+    <string name="all_amplify">整体放大</string>
+    <string name="app_name">智能云秤</string>
+    <string name="auto_paper">标签打印</string>
+    <string name="auto_printer">自动打印</string>
+    <string name="clear_up">清空</string>
+    <string name="cmd">指令</string>
+    <string name="continue_scan">连续扫描</string>
+    <string name="device_model">机器型号：</string>
+    <string name="font_one">字体一</string>
+    <string name="font_two">字体二</string>
+    <string name="format">格式</string>
+    <string name="func_instruction">功能说明</string>
+    <string name="func_setting">功能设置</string>
+    <string name="generate_barcode">生成条码</string>
+    <string name="generate_qrCode">生成二维码</string>
     <string name="gif_tag">动图</string>
+    <string name="h_amplify">纵向放大</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="muti_thread_print">打印（多线程）</string>
+    <string name="normal">正常</string>
+    <string name="normal_font">正常</string>
+    <string name="notLinkToCamera">无法连接到相机</string>
+    <string name="open_scanning">打开扫描</string>
+    <string name="pic_algin">对齐（图片）</string>
     <string name="picture_all_audio">所有音频</string>
     <string name="picture_audio">获取系统录音权限被拒绝</string>
     <string name="picture_audio_empty">你可以使用系统录音录制音频</string>
@@ -39,7 +91,37 @@
     <string name="picture_tape">录音</string>
     <string name="picture_video_toast">视频不可预览</string>
     <string name="picture_warning">暂无媒体文件！</string>
+    <string name="print_mode_not_exist">打印模板不存在</string>
+    <string name="print_pic">打印图片</string>
+    <string name="print_pic_gray">打印图片(灰度)</string>
+    <string name="print_pic_raster">打印图片(光栅)</string>
+    <string name="print_text">打印文字</string>
+    <string name="printerOne">打印模板一</string>
+    <string name="printerThree">打印模板三</string>
+    <string name="printerTwo">打印模板二</string>
+    <string name="printer_link_timeout">打印机连接超时，您可以检查是否安装了对应设备的服务程序，或着您可以尝试关机并重新开机。</string>
+    <string name="printer_unicode">打印Unicode</string>
+    <string name="printer_unicode_1E30">打印Unicode(1E30)</string>
+    <string name="product_check">请选择对应的产品：</string>
+    <string name="put_the_tags">Please put the tags on the equipment behind</string>
+    <string name="recovery_factory_setting">恢复出厂设置</string>
+    <string name="scan_repeat_hint">扫描重复提示</string>
+    <string name="scan_test">扫描测试</string>
+    <string name="scanning">扫描</string>
+    <string name="select_pic_print">选择打印图片</string>
+    <string name="send">发送</string>
+    <string name="service_bind_fail">服务绑定失败</string>
+    <string name="service_bind_success">服务绑定成功</string>
+    <string name="super_printer">超级打印模板</string>
+    <string name="test_print_text">这是我打印出来的文字\nabcdefghijklmnopkrstuvwxyz1234567890\n</string>
     <string name="ucrop_label_edit_photo">裁剪</string>
     <string name="ucrop_label_original">原始比例</string>
     <string name="ucrop_menu_crop">裁剪</string>
+    <string name="user_begin">开始使用</string>
+    <string name="v_amplify">横向放大</string>
+    <string name="waiting">正在连接打印机，请稍后...</string>
+    <string name="weburl">file:///android_asset/html/redeme.html</string>
+    <string name="without_get_device_model">暂未获取到机器型号</string>
+    <string name="word_algin">对齐（文字）</string>
+    <string name="word_to_pic">文字转图片</string>
 </resources>

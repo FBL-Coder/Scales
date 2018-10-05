@@ -33,7 +33,7 @@ class NotificationInfoActivity : BaseActivity() {
 
         id = intent.getStringExtra("id")!!
 
-        OkHttpUtils.getAsyn(Ports.NOTIFICATIONINFO, HashMap<String, String>().run { put("id", id);this }, object : MyHttpCallback(this) {
+        OkHttpUtils.getAsyn(Ports.NOTIFICATIONLIST, HashMap<String, String>().run { put("id", id);this }, object : MyHttpCallback(this) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
