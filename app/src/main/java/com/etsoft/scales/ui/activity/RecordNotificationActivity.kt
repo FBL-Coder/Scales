@@ -81,6 +81,7 @@ class RecordNotificationActivity : BaseActivity() {
                     Notification_Record_XRefreshView.startRefresh()
                     mListBean = null
                     page = 1
+                    Notification_Record_XRefreshView.setLoadComplete(false)
                     initdata()
                 }
 

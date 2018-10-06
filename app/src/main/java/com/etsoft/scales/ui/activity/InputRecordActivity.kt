@@ -84,6 +84,7 @@ class InputRecordActivity : BaseActivity() {
                     InputRecord_XRefreshView.startRefresh()
                     mListBean = null
                     page = 1
+                    InputRecord_XRefreshView.setLoadComplete(false)
                     initdata()
                 }
 

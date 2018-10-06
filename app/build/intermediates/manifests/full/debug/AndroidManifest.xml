@@ -168,6 +168,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+        <service android:name="com.amap.api.location.APSService" />
+
+        <!-- 高德定位 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="b48f2379ed9473e9dd834db19558143b" />
 
         <provider
             android:name="com.luck.picture.lib.PictureFileProvider"

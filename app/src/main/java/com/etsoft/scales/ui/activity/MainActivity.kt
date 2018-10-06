@@ -5,10 +5,10 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.KeyEvent
-import android.widget.TextView
 import android.widget.Toast
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
+import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.netWorkListener.NetBroadcastReceiver
@@ -17,7 +17,11 @@ import com.etsoft.scales.ui.fragment.home.MineMainFragment
 import com.etsoft.scales.ui.fragment.home.OutMainFragment
 import com.etsoft.scales.utils.PermissionsUtli
 import com.etsoft.scales.utils.ToastUtil
+import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
+import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import kotlinx.android.synthetic.main.activity_main_scales.*
+import java.util.*
+import kotlin.collections.HashMap
 
 
 /**
@@ -49,7 +53,9 @@ class MainActivity : BaseActivity() {
         fragments = initFragment()
         ViewEvent()
         PermissionsUtli.verifyStoragePermissions(this)
+        UpLocation()
     }
+
 
     private fun initFragment(): ArrayList<Fragment> {
         mInputMainFragment = InputMainFragment.initFragment(this@MainActivity)
@@ -134,4 +140,15 @@ class MainActivity : BaseActivity() {
     }
 
 
+    /**
+     * 上传经纬度获取附近站点
+     */
+    private fun UpLocation() {
+        var map = HashMap<String, String>().run {
+            put("lng", "${MyApp.mLocationInfo!!.longitude}")
+            put("lat", "${MyApp.mLocationInfo!!.latitude}")
+            this
+        }
+        OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this) {}, "上传定位")
+    }
 }

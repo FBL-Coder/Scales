@@ -101,6 +101,7 @@ class OutMainFragment : Fragment() {
                     super.onRefresh(isPullDown)
                     Out_XRefreshView.startRefresh()
                     page = 1
+                    Out_XRefreshView.setLoadComplete(false)
                     mOutList = null
                     initdata()
                 }

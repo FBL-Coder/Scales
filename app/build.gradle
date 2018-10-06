@@ -35,7 +35,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     api 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
     //底部菜单栏
     api 'com.facebook.fresco:fresco:1.8.1'
@@ -63,5 +62,9 @@ dependencies {
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
     //省市区、、联动筛选器
     api 'com.contrarywind:Android-PickerView:4.1.6'
+
+    api 'com.amap.api:location:latest.integration'
+    //高德定位
+
     implementation project(':PrinterDevice')
 }

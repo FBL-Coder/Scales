@@ -81,6 +81,7 @@ class ServerStationActivity : BaseActivity() {
                 override fun onRefresh(isPullDown: Boolean) {
                     super.onRefresh(isPullDown)
                     ServerStation_XRefreshView.startRefresh()
+                    ServerStation_XRefreshView.setLoadComplete(false)
                     mListBean = null
                     page = 1
                     initdata()
