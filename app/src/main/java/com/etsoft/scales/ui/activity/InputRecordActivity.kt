@@ -116,7 +116,7 @@ class InputRecordActivity : BaseActivity() {
         InputRecord_Titlebar.run {
             title.text = "入库记录"
             moor.setImageResource(R.mipmap.ic_add_white_24dp)
-            moor.visibility = View.GONE
+            moor.visibility = View.INVISIBLE
             back.setOnClickListener {
                 finish()
             }

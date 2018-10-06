@@ -15,9 +15,13 @@ import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+//import com.inuker.bluetooth.library.BluetoothClient
 import com.smartdevice.aidltestdemo.ClientApplication
 import okhttp3.OkHttpClient
 import java.util.*
+import android.bluetooth.BluetoothAdapter
+
+
 
 
 /**
@@ -69,6 +73,11 @@ open class MyApp : ClientApplication() {
                 mLocationClient!!.startLocation()
             }).start()
         }
+
+        /**
+         * mBluetoothAdapter
+         */
+        var mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
     }
 

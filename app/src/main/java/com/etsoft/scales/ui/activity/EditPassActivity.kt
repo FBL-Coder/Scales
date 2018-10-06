@@ -23,7 +23,7 @@ class EditPassActivity : BaseActivity() {
         EditPass_Titlebar.run {
             title.text = "修改密码"
             back.setOnClickListener { finish() }
-            moor.visibility = View.GONE
+            moor.visibility = View.INVISIBLE
         }
 
         EditPass_OK.setOnClickListener {

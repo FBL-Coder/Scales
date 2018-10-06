@@ -44,7 +44,7 @@ class RegisterActivity : BaseActivity() {
         Register_Titlebar.run {
             title.text = getString(R.string.register)
             back.setOnClickListener { finish() }
-            moor.visibility = View.GONE
+            moor.visibility = View.INVISIBLE
         }
     }
 

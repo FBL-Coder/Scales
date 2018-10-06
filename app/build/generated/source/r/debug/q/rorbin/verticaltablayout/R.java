@@ -32,14 +32,14 @@ public final class R {
         public static final int man_04_pressed = 0x7f080092;
     }
     public static final class id {
-        public static final int fill = 0x7f090133;
-        public static final int fixed = 0x7f09013d;
-        public static final int left = 0x7f09016e;
-        public static final int right = 0x7f0901ce;
-        public static final int scrollable = 0x7f0901e3;
+        public static final int fill = 0x7f090135;
+        public static final int fixed = 0x7f09013f;
+        public static final int left = 0x7f090170;
+        public static final int right = 0x7f0901d0;
+        public static final int scrollable = 0x7f0901e5;
     }
     public static final class layout {
-        public static final int item_qtabview = 0x7f0b0061;
+        public static final int item_qtabview = 0x7f0b0062;
     }
     public static final class string {
         public static final int app_name = 0x7f0f0027;

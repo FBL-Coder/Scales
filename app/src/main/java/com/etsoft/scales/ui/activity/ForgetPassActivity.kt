@@ -31,7 +31,7 @@ class ForgetPassActivity : BaseActivity() {
         ForGet_Titlebar.run {
             title.text = getString(R.string.forgetPass)
             back.setOnClickListener { finish() }
-            moor.visibility = View.GONE
+            moor.visibility = View.INVISIBLE
         }
 
 

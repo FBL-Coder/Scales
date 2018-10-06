@@ -33,7 +33,7 @@ class InputInfoActivity : BaseActivity() {
         DoctorInfo_TitleBar.run {
             title.text = "入库详情"
             back.setOnClickListener { finish() }
-            moor.visibility = View.GONE
+            moor.visibility = View.INVISIBLE
         }
     }
 }

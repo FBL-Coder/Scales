@@ -34,7 +34,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
     api 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
     //底部菜单栏
     api 'com.facebook.fresco:fresco:1.8.1'
@@ -43,7 +43,7 @@ dependencies {
     //json解析
     api 'com.squareup.okhttp3:okhttp:3.5.0'
     //状态栏样式
-    api 'com.githang:status-bar-compat:latest.integration'
+//    api 'com.githang:status-bar-compat:latest.integration'
     //log工具
     api 'com.apkfuns.logutils:library:1.6.0'
     //轮播
@@ -53,7 +53,6 @@ dependencies {
     //搜索框
     api 'com.github.arimorty:floatingsearchview:2.1.1'
     implementation 'com.android.support:design:27.1.1'
-    implementation 'com.squareup.okhttp:okhttp:2.0.0'
     //竖向标签栏
     api 'q.rorbin:VerticalTabLayout:1.2.5'
     //上拉下拉
@@ -65,6 +64,5 @@ dependencies {
 
     api 'com.amap.api:location:latest.integration'
     //高德定位
-
     implementation project(':PrinterDevice')
 }

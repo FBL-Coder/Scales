@@ -19,7 +19,7 @@ import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.UtilHelpers
 import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
-import com.githang.statusbar.StatusBarCompat
+//import com.githang.statusbar.StatusBarCompat
 
 /**
  * Author：FBL  Time： 2018/7/20.
@@ -33,7 +33,7 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
         super.onCreate(savedInstanceState)
         try {
             MyApp.mApplication!!.setActivities(this)
-            StatusBarCompat.setStatusBarColor(this, resources.getColor(R.color.AppTheme_color))
+//            StatusBarCompat.setStatusBarColor(this, resources.getColor(R.color.AppTheme_color))
             initDialog()
         } catch (e: Exception) {
             LogUtils.d("数据异常--->$e")

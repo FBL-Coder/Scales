@@ -115,7 +115,7 @@ class ServerStationActivity : BaseActivity() {
         ServerStation_TitleBar.run {
             back.setOnClickListener { finish() }
             title.text = "服务站点列表"
-            moor.visibility = View.GONE
+            moor.visibility = View.INVISIBLE
         }
     }
 }

@@ -69,6 +69,7 @@ public class LoggerInterceptor implements Interceptor {
         if (response == null || !response.isSuccessful()) {
             return;
         }
+
         ResponseBody responseBody = response.body();
         long contentLength = responseBody.contentLength();
         BufferedSource source = responseBody.source();
@@ -85,6 +86,8 @@ public class LoggerInterceptor implements Interceptor {
         }
         if (contentLength != 0) {
             String result = buffer.clone().readString(charset);
+            if (response.request().tag() != null)
+                LogUtils.i("请求TAG--: " + response.request().tag());
             LogUtils.i("请求返回数据Response: " + result);
         }
     }

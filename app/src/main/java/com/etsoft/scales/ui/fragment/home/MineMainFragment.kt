@@ -80,8 +80,8 @@ class MineMainFragment : Fragment() {
     }
 
     private fun initView() {
-        Mine_TitleBar!!.back.visibility = View.GONE
+        Mine_TitleBar!!.back.visibility = View.INVISIBLE
         Mine_TitleBar!!.title.text = "我的"
-        Mine_TitleBar!!.moor.visibility = View.GONE
+        Mine_TitleBar!!.moor.visibility = View.INVISIBLE
     }
 }

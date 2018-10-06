@@ -10,10 +10,15 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!--蓝牙权限-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
 
     <application
@@ -152,6 +157,7 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
 
+        <!--打印机服务-->
         <service android:name="com.smartdevice.aidl.IZKCService">
             <intent-filter>
                 <action android:name="com.zkc.aidl.all" />
@@ -160,8 +166,9 @@
         </service>
 
 
-        <service android:name="com.amap.api.location.APSService" />
 
+        <!--定位服务-->
+        <service android:name="com.amap.api.location.APSService" />
 
         <!--高德定位-->
         <meta-data

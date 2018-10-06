@@ -126,7 +126,7 @@ class InputMainFragment : Fragment() {
 
 
     private fun initView() {
-        Input_Main_TitleBar!!.back.visibility = View.GONE
+        Input_Main_TitleBar!!.back.visibility = View.INVISIBLE
         Input_Main_TitleBar!!.title.text = "入库"
         Input_Main_TitleBar!!.moor.setImageResource(R.mipmap.ic_cloud_upload_white_24dp)
         Input_Main_TitleBar!!.moor.setOnClickListener {

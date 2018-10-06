@@ -31,7 +31,7 @@ class OutInfoActivity : BaseActivity() {
     private fun initView() {
         OutInfo_TitleBar.run {
             title.text = "出库详情"
-            moor.visibility = View.GONE
+            moor.visibility = View.INVISIBLE
             back.setOnClickListener {
                 finish()
             }

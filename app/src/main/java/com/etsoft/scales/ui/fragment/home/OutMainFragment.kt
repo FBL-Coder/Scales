@@ -135,7 +135,7 @@ class OutMainFragment : Fragment() {
      */
     private fun initView() {
         Out_Record_TitleBar!!.run {
-            back.visibility = View.GONE
+            back.visibility = View.INVISIBLE
             title.text = "出库记录"
             moor.setImageResource(R.mipmap.ic_add_white_24dp)
             moor.setOnClickListener {
