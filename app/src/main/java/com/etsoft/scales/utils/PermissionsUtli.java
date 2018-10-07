@@ -23,7 +23,7 @@ public class PermissionsUtli {
             Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.CAMERA,
-            Manifest.permission.CALL_PHONE
+            Manifest.permission.CALL_PHONE,
     };
 
     public static void verifyStoragePermissions(Activity activity) {

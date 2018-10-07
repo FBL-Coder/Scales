@@ -14,9 +14,11 @@ import kotlinx.android.synthetic.main.activity_out_info.*
  */
 
 class OutInfoActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_out_info)
+
+    override fun setView(): Int {
+        return R.layout.activity_out_info
+    }
+    override fun onCreate() {
         initView()
         initData()
     }

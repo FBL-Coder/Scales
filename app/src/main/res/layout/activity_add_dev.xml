@@ -22,7 +22,7 @@
         android:textSize="@dimen/sp_16" />
 
     <ListView
-        android:id="@+id/Main_AddDev_TJ"
+        android:id="@+id/Main_AddDev_Connect"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:padding="@dimen/dp_5"

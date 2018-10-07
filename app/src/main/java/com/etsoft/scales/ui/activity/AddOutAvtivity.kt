@@ -16,9 +16,11 @@ import okhttp3.Call
  */
 class AddOutAvtivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_out)
+    override fun setView(): Int {
+        return R.layout.activity_add_out
+    }
+
+    override fun onCreate() {
         initData()
     }
 

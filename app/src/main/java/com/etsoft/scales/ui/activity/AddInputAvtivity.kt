@@ -14,9 +14,11 @@ import kotlinx.android.synthetic.main.activity_add_input.*
  */
 class AddInputAvtivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_input)
+    override fun setView(): Int {
+        return R.layout.activity_add_input
+    }
+
+    override fun onCreate() {
         initData()
     }
 

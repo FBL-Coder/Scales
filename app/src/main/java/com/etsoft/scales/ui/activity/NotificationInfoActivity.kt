@@ -18,9 +18,13 @@ import okhttp3.Call
 class NotificationInfoActivity : BaseActivity() {
 
     var id = "1"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notification_info)
+
+
+    override fun setView(): Int {
+        return R.layout.activity_notification_info
+    }
+
+    override fun onCreate() {
         initView()
         mLoadDialog!!.show()
         initData()
@@ -45,7 +49,7 @@ class NotificationInfoActivity : BaseActivity() {
                 mLoadDialog!!.hide()
                 Notification_Info_content.text = "$code++$message"
             }
-        },"通知详情")
+        }, "通知详情")
     }
 
     private fun initView() {

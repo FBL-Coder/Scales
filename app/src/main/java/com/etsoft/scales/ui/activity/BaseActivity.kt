@@ -4,7 +4,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.Settings
+import android.support.annotation.LayoutRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
@@ -19,6 +21,7 @@ import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.UtilHelpers
 import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
+
 //import com.githang.statusbar.StatusBarCompat
 
 /**
@@ -29,16 +32,25 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
 
     var mLoadDialog: ProgressBarDialog? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (setView() != null && setView() != 0)
+            setContentView(setView()!!)
         try {
             MyApp.mApplication!!.setActivities(this)
 //            StatusBarCompat.setStatusBarColor(this, resources.getColor(R.color.AppTheme_color))
             initDialog()
+
+            onCreate()
         } catch (e: Exception) {
-            LogUtils.d("数据异常--->$e")
+            LogUtils.e("数据异常--->$e")
         }
     }
+
+
+    abstract fun setView(): Int?
+
+    abstract fun onCreate()
 
     fun initDialog() {
         mLoadDialog = ProgressBarDialog(this)

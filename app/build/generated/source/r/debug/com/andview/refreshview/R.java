@@ -25,19 +25,19 @@ public final class R {
         public static final int xrefreshview_arrow = 0x7f0800d8;
     }
     public static final class id {
-        public static final int item_touch_helper_previous_elevation = 0x7f090162;
-        public static final int left_images = 0x7f090174;
-        public static final int right_text = 0x7f0901d3;
-        public static final int xrefreshview_footer_click_textview = 0x7f090274;
-        public static final int xrefreshview_footer_content = 0x7f090275;
-        public static final int xrefreshview_footer_hint_textview = 0x7f090276;
-        public static final int xrefreshview_footer_progressbar = 0x7f090277;
-        public static final int xrefreshview_header_arrow = 0x7f090278;
-        public static final int xrefreshview_header_hint_textview = 0x7f090279;
-        public static final int xrefreshview_header_ok = 0x7f09027a;
-        public static final int xrefreshview_header_progressbar = 0x7f09027b;
-        public static final int xrefreshview_header_text = 0x7f09027c;
-        public static final int xrefreshview_header_time = 0x7f09027d;
+        public static final int item_touch_helper_previous_elevation = 0x7f090163;
+        public static final int left_images = 0x7f090175;
+        public static final int right_text = 0x7f0901d4;
+        public static final int xrefreshview_footer_click_textview = 0x7f090275;
+        public static final int xrefreshview_footer_content = 0x7f090276;
+        public static final int xrefreshview_footer_hint_textview = 0x7f090277;
+        public static final int xrefreshview_footer_progressbar = 0x7f090278;
+        public static final int xrefreshview_header_arrow = 0x7f090279;
+        public static final int xrefreshview_header_hint_textview = 0x7f09027a;
+        public static final int xrefreshview_header_ok = 0x7f09027b;
+        public static final int xrefreshview_header_progressbar = 0x7f09027c;
+        public static final int xrefreshview_header_text = 0x7f09027d;
+        public static final int xrefreshview_header_time = 0x7f09027e;
     }
     public static final class layout {
         public static final int xrefreshview_footer = 0x7f0b00a0;

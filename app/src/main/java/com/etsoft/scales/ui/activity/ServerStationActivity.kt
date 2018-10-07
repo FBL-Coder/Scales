@@ -28,9 +28,12 @@ class ServerStationActivity : BaseActivity() {
     private var Maxpage = 1
     private var page = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_server_station)
+
+    override fun setView(): Int {
+        return R.layout.activity_server_station
+    }
+
+    override fun onCreate() {
         initView()
         mLoadDialog!!.show()
         initdata()

@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.KeyEvent
 import android.widget.Toast
+import com.apkfuns.logutils.LogUtils
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.app.MyApp.Companion.mLocationInfo
 import com.etsoft.scales.netWorkListener.NetBroadcastReceiver
 import com.etsoft.scales.ui.fragment.home.InputMainFragment
 import com.etsoft.scales.ui.fragment.home.MineMainFragment
@@ -45,10 +47,11 @@ class MainActivity : BaseActivity() {
         registerReceiver(mBroadcastReceiver, mIntentFilter)
     }
 
+    override fun setView(): Int {
+        return R.layout.activity_main_scales
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_scales)
+    override fun onCreate() {
         initView()
         fragments = initFragment()
         ViewEvent()
@@ -144,11 +147,20 @@ class MainActivity : BaseActivity() {
      * 上传经纬度获取附近站点
      */
     private fun UpLocation() {
-        var map = HashMap<String, String>().run {
-            put("lng", "${MyApp.mLocationInfo!!.longitude}")
-            put("lat", "${MyApp.mLocationInfo!!.latitude}")
-            this
-        }
-        OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this) {}, "上传定位")
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                if (mLocationInfo != null) {
+                    var map = HashMap<String, String>().run {
+                        put("lng", "${mLocationInfo!!.longitude}")
+                        put("lat", "${mLocationInfo!!.latitude}")
+                        this
+                    }
+                    OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this@MainActivity) {}, "上传定位")
+                    cancel()
+                } else
+                    LogUtils.e("经纬度数据为空")
+            }
+        }, 0, 5000)
+
     }
 }

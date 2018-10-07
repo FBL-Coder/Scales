@@ -75,7 +75,7 @@ class MineMainFragment : Fragment() {
         }
         Mine_Logout!!.setOnClickListener {
             //退出
-            System.exit(0)
+           mActivity!!.finish()
         }
     }
 

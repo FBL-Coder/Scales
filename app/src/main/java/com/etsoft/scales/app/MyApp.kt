@@ -20,8 +20,7 @@ import com.smartdevice.aidltestdemo.ClientApplication
 import okhttp3.OkHttpClient
 import java.util.*
 import android.bluetooth.BluetoothAdapter
-
-
+import android.bluetooth.BluetoothSocket
 
 
 /**
@@ -77,7 +76,12 @@ open class MyApp : ClientApplication() {
         /**
          * mBluetoothAdapter
          */
-        var mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        var mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()!!
+
+        /**
+         * 蓝牙接受数据的Socket
+         */
+        var mBluetoothSocket: BluetoothSocket? = null
 
     }
 
@@ -100,9 +104,7 @@ open class MyApp : ClientApplication() {
                     mLocationInfo = it
                 } else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                    LogUtils.e("AmapError", "location Error, ErrCode:"
-                            + it.errorCode + ", errInfo:"
-                            + it.errorInfo);
+                    LogUtils.e("AmapError", "location Error, ErrCode:" + it.errorCode + ", errInfo:" + it.errorInfo);
                 }
             }
         }

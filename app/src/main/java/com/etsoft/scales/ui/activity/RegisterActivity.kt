@@ -13,9 +13,11 @@ import kotlinx.android.synthetic.main.activity_register.*
  */
 class RegisterActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+    override fun setView(): Int {
+        return R.layout.activity_register
+    }
+
+    override fun onCreate() {
         initView()
         initEvent()
     }

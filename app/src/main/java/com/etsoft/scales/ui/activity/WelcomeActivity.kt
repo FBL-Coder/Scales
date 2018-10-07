@@ -11,10 +11,13 @@ import android.view.WindowManager
  */
 class WelcomeActivity : BaseActivity() {
 
+    override fun setView(): Int? {
+        return 0
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    override fun onCreate() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)// 隐藏标题
-        super.onCreate(savedInstanceState)
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)// 设置全屏

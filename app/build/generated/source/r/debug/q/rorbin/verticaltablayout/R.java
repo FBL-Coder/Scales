@@ -32,11 +32,11 @@ public final class R {
         public static final int man_04_pressed = 0x7f080092;
     }
     public static final class id {
-        public static final int fill = 0x7f090135;
-        public static final int fixed = 0x7f09013f;
-        public static final int left = 0x7f090170;
-        public static final int right = 0x7f0901d0;
-        public static final int scrollable = 0x7f0901e5;
+        public static final int fill = 0x7f090136;
+        public static final int fixed = 0x7f090140;
+        public static final int left = 0x7f090171;
+        public static final int right = 0x7f0901d1;
+        public static final int scrollable = 0x7f0901e6;
     }
     public static final class layout {
         public static final int item_qtabview = 0x7f0b0062;

@@ -11,10 +11,11 @@ import kotlinx.android.synthetic.main.activity_forget.*
  * 忘记密码
  */
 class ForgetPassActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_forget)
+    override fun setView(): Int {
+        return R.layout.activity_forget
+    }
+    override fun onCreate() {
 
         initView()
 

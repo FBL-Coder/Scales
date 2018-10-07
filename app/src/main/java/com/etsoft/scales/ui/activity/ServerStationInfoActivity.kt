@@ -17,9 +17,12 @@ import okhttp3.Call
 class ServerStationInfoActivity : BaseActivity() {
 
     var id = "1"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_serverstation_info)
+
+
+    override fun setView(): Int {
+        return R.layout.activity_serverstation_info
+    }
+    override fun onCreate() {
         initView()
         initData()
     }

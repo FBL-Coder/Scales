@@ -2,29 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dp_5"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:padding="@dimen/dp_5">
 
-
-    <TextView
-        android:id="@+id/Text1"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_10"
-        android:textColor="@color/black"
-        android:text="Mac:asdasdasdsdsdsa"
-        android:textSize="@dimen/dp_16"/>
+        android:layout_weight="3"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/Text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_20"
-        android:text="asdasdasdsdsdsa"
-        android:textSize="@dimen/sp_14"/>
+        <TextView
+            android:id="@+id/Text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="Mac:asdasdasdsdsdsa"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16" />
+
+
+        <TextView
+            android:id="@+id/Text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="asdasdasdsdsdsa"
+            android:textSize="@dimen/sp_14" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="@dimen/dp_0"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/dp_5"
+        android:elevation="@dimen/dp_8"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:textColor="@color/AppTheme_Text_color"
+        android:background="@color/AppTheme_color"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

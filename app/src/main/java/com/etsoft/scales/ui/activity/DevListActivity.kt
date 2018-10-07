@@ -14,10 +14,11 @@ import kotlinx.android.synthetic.main.activity_dev_list.*
 
 class DevListActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dev_list)
+    override fun setView(): Int {
+        return R.layout.activity_dev_list
+    }
 
+    override fun onCreate() {
         initView()
         initGridView()
     }

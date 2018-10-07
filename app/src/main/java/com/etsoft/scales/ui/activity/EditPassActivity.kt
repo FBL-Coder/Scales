@@ -12,10 +12,11 @@ import kotlinx.android.synthetic.main.activity_editpass.*
  */
 class EditPassActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_editpass)
+    override fun setView(): Int {
+        return R.layout.activity_editpass
+    }
 
+    override fun onCreate() {
         initView()
     }
 

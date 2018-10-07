@@ -28,9 +28,11 @@ class InputRecordActivity : BaseActivity() {
     private var Maxpage = 1
     private var page = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_input_record)
+    override fun setView(): Int {
+        return R.layout.activity_input_record
+    }
+
+    override fun onCreate() {
         initView()
         mLoadDialog!!.show()
         initdata()
@@ -67,7 +69,7 @@ class InputRecordActivity : BaseActivity() {
                 InputRecord_XRefreshView.stopLoadMore()
                 ToastUtil.showText(message)
             }
-        },"入库列表")
+        }, "入库列表")
     }
 
     /**

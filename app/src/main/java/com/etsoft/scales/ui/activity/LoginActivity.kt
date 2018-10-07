@@ -18,10 +18,12 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 class LoginActivity : BaseActivity() {
 
+    override fun setView(): Int {
+        return R.layout.activity_login
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
+    override fun onCreate() {
         initEvent()
     }
 
@@ -33,7 +35,7 @@ class LoginActivity : BaseActivity() {
             if (!Validator.isMobile(id) && pass.isEmpty()) {
                 ToastUtil.showText("账号密码不合适")
             }
-            mLoadDialog!!.show("正在登陆……")
+            mLoadDialog!!.show(arrayOf("正在登陆","登陆超时"))
             LoginHelper.login(this, id, pass)
 
         }
