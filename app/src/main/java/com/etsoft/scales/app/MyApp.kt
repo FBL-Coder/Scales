@@ -2,6 +2,7 @@ package com.etsoft.scales.app
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -20,13 +21,16 @@ import com.smartdevice.aidltestdemo.ClientApplication
 import okhttp3.OkHttpClient
 import java.util.*
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
+import java.util.concurrent.TimeUnit
 
 
 /**
  * Author：FBL  Time： 2018/7/20.
  */
 open class MyApp : ClientApplication() {
+//open class MyApp : Application() {
 
     var activities: ArrayList<Activity>? = null
     var gson = Gson()
@@ -50,7 +54,7 @@ open class MyApp : ClientApplication() {
         /**
          * OkhttpClirnt
          */
-        var mclient = OkHttpClient().newBuilder().addInterceptor(LoggerInterceptor()).build()
+        var mclient = OkHttpClient().newBuilder().addInterceptor(LoggerInterceptor()).connectTimeout(10000,TimeUnit.SECONDS).build()
 
 
         /**
@@ -76,12 +80,22 @@ open class MyApp : ClientApplication() {
         /**
          * mBluetoothAdapter
          */
-        var mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()!!
+        var mBluetoothAdapter: BluetoothAdapter? = null
 
         /**
          * 蓝牙接受数据的Socket
          */
         var mBluetoothSocket: BluetoothSocket? = null
+
+        /**
+         * 蓝牙接受的设备
+         */
+        var mBluetoothDevice: BluetoothDevice? = null
+
+        /**
+         * 蓝牙数据是否可用
+         */
+        var mBluetoothDataIsEnable: Boolean = false
 
     }
 
@@ -104,7 +118,7 @@ open class MyApp : ClientApplication() {
                     mLocationInfo = it
                 } else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                    LogUtils.e("AmapError", "location Error, ErrCode:" + it.errorCode + ", errInfo:" + it.errorInfo);
+                    LogUtils.e("AmapError" + "location Error, ErrCode:" + it.errorCode + ", errInfo:" + it.errorInfo);
                 }
             }
         }

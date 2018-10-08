@@ -9,26 +9,127 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40" />
 
+
+    <RelativeLayout
+        android:id="@+id/ConnectDevice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/ConnectTit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dp_5"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_5"
+            android:text="已连接设备"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ConnectTit"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_5">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="设备名称:"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="MAC地址;"
+                    android:textSize="@dimen/sp_10" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/DevName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="BTD_YH"
+                    android:textColor="@color/AppTheme_color"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/DevMAC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="12:12:12:12:12:12"
+                    android:textColor="@color/AppTheme_color"
+                    android:textSize="@dimen/sp_12" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/ConnectClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ConnectTit"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_5"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:background="@color/AppTheme_color"
+            android:elevation="@dimen/dp_8"
+            android:text="断开连接"
+            android:textColor="@color/AppTheme_Text_color" />
+
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white_"
         android:gravity="center_vertical"
-        android:paddingBottom="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_5"
         android:text="已添加数据"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_14" />
 
     <ListView
         android:id="@+id/Main_AddDev_Connect"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:padding="@dimen/dp_5"
-        android:dividerHeight="@dimen/dp_5"
+        android:layout_weight="0.8"
         android:divider="@color/white__"
-        android:layout_weight="1" />
+        android:dividerHeight="@dimen/dp_2"
+        android:padding="@dimen/dp_5" />
 
 
     <TextView
@@ -36,38 +137,21 @@
         android:layout_height="wrap_content"
         android:background="@color/white_"
         android:gravity="center_vertical"
-        android:paddingBottom="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_5"
         android:text="搜索设备"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_14" />
 
     <ListView
         android:id="@+id/Main_AddDev_SS"
         android:layout_width="match_parent"
-        android:divider="@color/white__"
-        android:dividerHeight="@dimen/dp_5"
         android:layout_height="@dimen/dp_0"
-        android:padding="@dimen/dp_5"
-        android:layout_weight="1" />
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="@color/white_"
-        android:layout_height="@dimen/dp_40">
-
-        <android.support.v7.widget.AppCompatImageButton
-            android:id="@+id/Main_AddDev_Booth_SS"
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
-            android:padding="@dimen/dp_8"
-            android:scaleType="centerCrop"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/ic_bluetooth_searching_light_blue_500_24dp"/>
-
-    </RelativeLayout>
+        android:layout_weight="1"
+        android:divider="@color/white__"
+        android:dividerHeight="@dimen/dp_2"
+        android:padding="@dimen/dp_5" />
 
 
 </LinearLayout>

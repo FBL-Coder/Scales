@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
@@ -13,7 +14,7 @@
         android:id="@+id/Input_Main_Record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_"
+        android:background="@color/white__"
         android:paddingBottom="@dimen/dp_5"
         android:paddingTop="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
@@ -39,7 +40,7 @@
         android:id="@+id/Main_Add_Dev"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_"
+        android:background="@color/white__"
         android:drawableRight="@mipmap/ic_chevron_right_white_24dp"
         android:paddingBottom="@dimen/dp_5"
         android:paddingRight="@dimen/dp_10"

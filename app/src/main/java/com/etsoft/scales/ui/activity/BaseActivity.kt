@@ -38,12 +38,11 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
             setContentView(setView()!!)
         try {
             MyApp.mApplication!!.setActivities(this)
-//            StatusBarCompat.setStatusBarColor(this, resources.getColor(R.color.AppTheme_color))
             initDialog()
-
             onCreate()
         } catch (e: Exception) {
-            LogUtils.e("数据异常--->$e")
+//            LogUtils.e("数据异常--->$e")
+            e.printStackTrace()
         }
     }
 

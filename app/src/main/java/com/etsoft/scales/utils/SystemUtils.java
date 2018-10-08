@@ -14,14 +14,12 @@ import static android.Manifest.permission.CALL_PHONE;
  * 系统功能工具
  */
 public class SystemUtils {
-    public static void callPhone(Activity activity){
+    public static void callPhone(Activity activity) {
         permissionIsOk(activity, CALL_PHONE);
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:$phoneNum"));
         activity.startActivity(intent);
     }
-
-
 
 
     public static void permissionIsOk(Activity activity, String permission) {
@@ -33,15 +31,17 @@ public class SystemUtils {
         }
     }
 
-    public static final String bytesToHexString(byte[] bArray) {
-        StringBuffer sb = new StringBuffer(bArray.length);
-        String sTemp;
-        for (int i = 0; i < bArray.length; i++) {
-            sTemp = Integer.toHexString(0xFF & bArray[i]);
-            if (sTemp.length() < 2)
-                sb.append(0);
-            sb.append(sTemp.toUpperCase());
+    public static String convertHexToString(String hex) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder temp = new StringBuilder();      //49204c6f7665204a617661 split into two characters 49, 20, 4c...
+        for (int i = 0; i < hex.length() - 1; i += 2) {          //grab the hex in pairs
+            String output = hex.substring(i, (i + 2));          //convert hex to decimal
+            int decimal = Integer.parseInt(output, 16);          //convert the decimal to character
+            sb.append((char) decimal);
+            temp.append(decimal);
         }
         return sb.toString();
     }
+
+
 }

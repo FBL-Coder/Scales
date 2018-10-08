@@ -6,8 +6,15 @@ package com.etsoft.scales
 class BlueBoothState {
     companion object {
 
+        //蓝牙打开
+        const val BULECONNECT_OPEN = 1000
+
+        //蓝牙关闭
+        const val BULECONNECT_CLOSE = 2000
+
         //蓝牙连接成功
         const val BULECONNECT_SUCCESS = 200
+
         //蓝牙连接失败
         const val BULECONNECT_FAILED = -100
 
@@ -17,8 +24,12 @@ class BlueBoothState {
         //蓝牙断开连接异常
         const val BLUE_CONNECT_CLOSE_ERROR = 212
 
-        //蓝牙收到收据
-        const val BLUE_OBTAINDATA_SUCCESS = 300
+        //蓝牙读取数据
+        const val BLUE_READDATA_SUCCESS = 300
+
+        //蓝牙处理数据
+        const val BLUE_DISPOSEDATA_SUCCESS = 3000
+
         //蓝牙收到收据
         const val BLUE_OBTAINDATA_ERROR = 300
 

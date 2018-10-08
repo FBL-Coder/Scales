@@ -236,10 +236,6 @@
         "source": "/Users/fubolong/AS-WOEK/Scales/app/src/main/res/layout/activity_out_info.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_02_none.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_02_none.png"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_https_white_24dp.png.flat",
         "source": "/Users/fubolong/AS-WOEK/Scales/app/src/main/res/mipmap-hdpi/ic_https_white_24dp.png"
     },
@@ -444,10 +440,6 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/res/layout/ucrop_layout_scale_wheel.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_04_none.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_04_none.png"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_abc_seekbar_tick_mark_material.xml.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable/abc_seekbar_tick_mark_material.xml"
     },
@@ -528,10 +520,6 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-xhdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_item_qtabview.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/layout/item_qtabview.xml"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_menu_setting.png.flat",
         "source": "/Users/fubolong/AS-WOEK/Scales/PrintDevice/build/intermediates/packaged_res/debug/drawable/menu_setting.png"
     },
@@ -548,20 +536,12 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/bottom-navigation-bar-2.0.5.aar/2a90ef709de187dd30493ac8d7ef873b/res/layout/shifting_bottom_navigation_item.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/anim_pickerview_dialog_scale_in.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/anim/pickerview_dialog_scale_in.xml"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-xxxhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_identity_img.png.flat",
         "source": "/Users/fubolong/AS-WOEK/Scales/PrintDevice/build/intermediates/packaged_res/debug/drawable/identity_img.png"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_bluetooth_searching_light_blue_500_24dp.png.flat",
-        "source": "/Users/fubolong/AS-WOEK/Scales/app/src/main/res/mipmap-hdpi/ic_bluetooth_searching_light_blue_500_24dp.png"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_light.xml.flat",
@@ -860,12 +840,12 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
+        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_icon_audio.png.flat",
@@ -998,10 +978,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-mdpi-v4/abc_ic_star_black_36dp.png"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_03_pressed.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_03_pressed.png"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
@@ -1142,10 +1118,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-xxxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_04_pressed.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_04_pressed.png"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_ucrop_view.xml.flat",
@@ -1344,10 +1316,6 @@
         "source": "/Users/fubolong/AS-WOEK/Scales/PrintDevice/build/intermediates/packaged_res/debug/layout/activity_printer2.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_bluetooth_connected_white_24dp.png.flat",
-        "source": "/Users/fubolong/AS-WOEK/Scales/app/src/main/res/mipmap-hdpi/ic_bluetooth_connected_white_24dp.png"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_audio_placeholder.xml.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/res/drawable/audio_placeholder.xml"
     },
@@ -1532,10 +1500,6 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable/abc_textfield_search_material.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/anim_pickerview_dialog_scale_out.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/anim/pickerview_dialog_scale_out.xml"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
@@ -1578,10 +1542,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/color_abc_tint_seek_thumb.xml.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/color/abc_tint_seek_thumb.xml"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_pickerview_time.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/layout/pickerview_time.xml"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_next.png.flat",
@@ -1652,16 +1612,8 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/res/drawable-hdpi-v4/ucrop_ic_reset.png"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_01_none.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_01_none.png"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_pickerview_options.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/layout/pickerview_options.xml"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_dark.xml.flat",
@@ -1754,10 +1706,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_ucrop_ic_done.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/res/drawable-hdpi-v4/ucrop_ic_done.png"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_layout_basepickerview.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/layout/layout_basepickerview.xml"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout-large-v4_activity_psam2.xml.flat",
@@ -2208,6 +2156,10 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/res/drawable-mdpi-v4/ucrop_ic_reset.png"
     },
     {
+        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_bluetooth_audio_white_36dp.png.flat",
+        "source": "/Users/fubolong/AS-WOEK/Scales/app/src/main/res/mipmap-hdpi/ic_bluetooth_audio_white_36dp.png"
+    },
+    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_activity_nfca_cmd.xml.flat",
         "source": "/Users/fubolong/AS-WOEK/Scales/PrintDevice/build/intermediates/packaged_res/debug/layout/activity_nfca_cmd.xml"
     },
@@ -2236,10 +2188,6 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/res/layout/picture_alert_dialog.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/anim_pickerview_slide_out_bottom.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/anim/pickerview_slide_out_bottom.xml"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl_light.png"
     },
@@ -2254,10 +2202,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_abc_action_bar_up_container.xml.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/layout/abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_03_none.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_03_none.png"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_picture_warning.png.flat",
@@ -2364,10 +2308,6 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/04b48877875fefb5cf3cec487ceb421e/res/drawable-xxhdpi-v4/design_ic_visibility_off.png"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_01_pressed.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_01_pressed.png"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_supervisor_account_white_24dp.png.flat",
         "source": "/Users/fubolong/AS-WOEK/Scales/app/src/main/res/mipmap-hdpi/ic_supervisor_account_white_24dp.png"
     },
@@ -2390,10 +2330,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_48dp.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-mdpi-v4/abc_ic_star_black_48dp.png"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_man_02_pressed.png.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/VerticalTabLayout-1.2.5.aar/8d67afa0fece049664a36373d8ebb96b/res/drawable-hdpi-v4/man_02_pressed.png"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_design_navigation_menu_item.xml.flat",
@@ -2624,12 +2560,12 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/picture_library-v2.2.0.aar/d37d194cd2f25d8d8e83a9c663d7f015/res/layout/picture_activity_external_preview.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_fj.jpg.flat",
-        "source": "/Users/fubolong/AS-WOEK/Scales/PrintDevice/build/intermediates/packaged_res/debug/drawable/fj.jpg"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_abc_screen_toolbar.xml.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_fj.jpg.flat",
+        "source": "/Users/fubolong/AS-WOEK/Scales/PrintDevice/build/intermediates/packaged_res/debug/drawable/fj.jpg"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
@@ -2828,10 +2764,6 @@
         "source": "/Users/fubolong/AS-WOEK/Scales/app/src/main/res/layout/adapter_listview_notification_item.xml"
     },
     {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable_selector_pickerview_btn.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/drawable/selector_pickerview_btn.xml"
-    },
-    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_title_material.xml.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/layout/abc_alert_dialog_title_material.xml"
     },
@@ -2898,10 +2830,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_include_pickerview_topbar.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/layout/include_pickerview_topbar.xml"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
@@ -3062,10 +2990,6 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/layout_overflow_action_item_layout.xml.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/floatingsearchview-2.1.1.aar/99978c982be9ec1371f40e12b8f5da26/res/layout/overflow_action_item_layout.xml"
-    },
-    {
-        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/anim_pickerview_slide_in_bottom.xml.flat",
-        "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/Android-PickerView-4.1.6.aar/7b32eccc0ac4bca2256d09bb8fb0913b/res/anim/pickerview_slide_in_bottom.xml"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_def.png.flat",

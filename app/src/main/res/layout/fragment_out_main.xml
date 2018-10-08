@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
@@ -13,14 +14,15 @@
         android:id="@+id/Out_XRefreshView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ListView
             android:id="@+id/Out_Record_ListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/white_"
-            android:scrollbarThumbVertical="@color/AppTheme_color"
+            android:dividerHeight="@dimen/dp_2"
             android:scrollbarSize="@dimen/dp_3"
-            android:dividerHeight="@dimen/dp_2"/>
+            android:scrollbarThumbVertical="@color/AppTheme_color" />
     </com.andview.refreshview.XRefreshView>
 
 

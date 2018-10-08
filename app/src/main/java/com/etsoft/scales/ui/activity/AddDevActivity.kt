@@ -1,10 +1,8 @@
 package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothSocket
-import android.content.IntentFilter
-import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.View
@@ -14,13 +12,15 @@ import com.etsoft.scales.R
 import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.adapter.ListViewAdapter.BluetoothListAdapter
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothAdapter
+import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
+import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
 import com.etsoft.scales.bean.BlueBoothDevicesBean
-import com.etsoft.scales.receiver.BlueSSReceiver
-import com.etsoft.scales.receiver.BluetoothReceiver
+import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.utils.ClsUtils
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_add_dev.*
+import kotlinx.android.synthetic.main.titlebar_view.*
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -53,16 +53,11 @@ class AddDevActivity : BaseActivity() {
     /**
      * 已配对设备集合
      */
-    private val mBlue_Ok_List = ArrayList<BlueBoothDevicesBean>()
-    /**
-     * 请求配对 BluetoothReceiver
-     */
-    private var pairingReceiver: BluetoothReceiver? = null
+    private var mBlue_Ok_List = ArrayList<BlueBoothDevicesBean>()
     /**
      * 搜索 BluetoothReceiver
      */
-    private var seekReceiver: BlueSSReceiver? = null
-
+    private var mBlueBoothReceiver: BlueBoothReceiver? = null
 
     override fun setView(): Int? {
         return R.layout.activity_add_dev
@@ -80,34 +75,41 @@ class AddDevActivity : BaseActivity() {
     private fun initView() {
         Main_AddDev_TitleBar.run {
             title.text = "添加设备"
-            moor.visibility = View.INVISIBLE
+            moor.setImageResource(R.mipmap.ic_bluetooth_audio_white_36dp)
+            moor.setOnClickListener {
+                if (mBluetoothAdapter == null || !mBluetoothAdapter!!.isEnabled) {
+                    ToastUtil.showText("请打开蓝牙")
+                    return@setOnClickListener
+                }
+                //搜索蓝牙设备
+                startDiscovery()
+            }
             back.setOnClickListener {
                 finish()
             }
         }
 
+        //检测蓝牙是否连接
+        if (mBluetoothSocket != null && mBluetoothSocket!!.isConnected) showConnectView()
+
         //检测蓝牙是否打开
-        BlueUtils.isBlueOpen(this)
+        if (BlueUtils.isBlueOpen(this)) startDiscovery()
 
-        Main_AddDev_Booth_SS.setOnClickListener {
-            //搜索蓝牙设备
-            startDiscovery()
+
+        mBlueBoothReceiver = BlueUtils.registerSeekReceiver(this, mHandler!!)
+    }
+
+    /**
+     * 显示已连接的设备
+     */
+    private fun showConnectView() {
+        ConnectDevice.visibility = View.VISIBLE
+        DevName.text = mBluetoothDevice!!.name
+        DevMAC.text = mBluetoothDevice!!.address
+        ConnectClose.setOnClickListener {
+            mLoadDialog!!.show(arrayOf("正在断开", "断开超时"))
+            BlueUtils.disConnect(mHandler!!)
         }
-
-        //注册设备被发现时的广播
-        val filter = IntentFilter("android.bluetooth.device.action.FOUND")
-        filter.addAction("android.bluetooth.adapter.action.DISCOVERY_FINISHED")
-        filter.priority = 1000
-        seekReceiver = BlueSSReceiver(mHandler!!)
-        registerReceiver(seekReceiver, filter)
-
-        //注册设备配对时的广播
-        val filter1 = IntentFilter("android.bluetooth.device.action.PAIRING_REQUEST")
-        filter1.addAction("android.bluetooth.device.action.FOUND")
-        filter1.priority = 1000
-        pairingReceiver = BluetoothReceiver(mHandler!!)
-        registerReceiver(pairingReceiver, filter1)
-
     }
 
 
@@ -115,11 +117,13 @@ class AddDevActivity : BaseActivity() {
      * 开始搜索设备
      */
     private fun startDiscovery() {
+        moor_wiating.visibility = View.VISIBLE
+        Main_AddDev_TitleBar.moor.visibility = View.GONE
         mList_SS.clear()
         mBlue_Ok_List.clear()
-        Main_AddDev_Booth_SS.isClickable = false
-        Main_AddDev_Booth_SS.setImageResource(R.mipmap.ic_bluetooth_connected_white_24dp)
-        mBluetoothAdapter.startDiscovery()
+        mBlue_OK_Adapter?.notifyDataSetChanged(mBlue_Ok_List)
+        mBlue_SS_Adapter?.notifyDataSetChanged(mList_SS)
+        mBluetoothAdapter?.startDiscovery()
         LogUtils.i("开始搜索")
     }
 
@@ -131,6 +135,10 @@ class AddDevActivity : BaseActivity() {
     private fun PairingBlue() {
         if (mBlue_SS_Adapter != null)
             mBlue_SS_Adapter!!.setOnConnectClick { view, position ->
+                if (mBluetoothAdapter == null || !mBluetoothAdapter!!.isEnabled) {
+                    ToastUtil.showText("请打开蓝牙")
+                    return@setOnConnectClick
+                }
                 mLoadDialog!!.show(arrayOf("正在配对", "配对超时"))
                 ClsUtils.createBond(mList_SS[position].mDevice.javaClass, mList_SS[position].mDevice)
             }
@@ -140,21 +148,22 @@ class AddDevActivity : BaseActivity() {
      * 已配对蓝牙列表点击事件
      * 连接设备
      */
+    @SuppressLint(value = "NewApi")
     private fun ConnectBlue() {
         if (mBlue_OK_Adapter != null)
 
             mBlue_OK_Adapter!!.setOnConnectClick { view, position ->
 
-                if (mBlue_Ok_List[position].isConnect) {
-                    mLoadDialog!!.show(arrayOf("正在断开", "断开超时"))
-                    BlueUtils.disConnect(mHandler!!, position)
-                } else {
-                    //创建连接
-                    mLoadDialog!!.show(arrayOf("正在连接", "连接超时"))
-                    BlueUtils.connectBlue(mHandler!!, mBlue_Ok_List, position)
-                    LogUtils.e("连接蓝牙设备MAC: ${mBlue_Ok_List[position].mDevice.address} \n" +
-                            "UUID:${mBlue_Ok_List[position].mDevice.uuids}")
+                if (mBluetoothAdapter == null || !mBluetoothAdapter!!.isEnabled) {
+                    ToastUtil.showText("请打开蓝牙")
+                    return@setOnConnectClick
                 }
+                //创建连接
+                mLoadDialog!!.show(arrayOf("正在连接", "连接超时"))
+                mBluetoothAdapter!!.cancelDiscovery()
+                BlueUtils.connectBlue(mHandler!!, mBlue_Ok_List, position)
+                LogUtils.e("连接蓝牙设备MAC: ${mBlue_Ok_List[position].mDevice.address} \n" +
+                        "UUID:${mBlue_Ok_List[position].mDevice.uuids}")
             }
     }
 
@@ -170,56 +179,65 @@ class AddDevActivity : BaseActivity() {
             if (activity != null) {
 
                 when (msg.what) {
-                    BlueBoothState.BLUE_PAIRING_SUCCESS -> {
+                    BlueBoothState.BULECONNECT_OPEN -> {//蓝牙打开成功
+                        activity.startDiscovery()
+                    }
+                    BlueBoothState.BULECONNECT_CLOSE -> {//蓝牙关闭
+                        mBluetoothDataIsEnable = false
+                        mBluetoothSocket = null
+                    }
+                    BlueBoothState.BLUE_PAIRING_SUCCESS -> {//配对成功
                         activity.mLoadDialog!!.hide()
                         activity.startDiscovery()
                     }
-                    BlueBoothState.BLUE_PAIRING_FAILED -> {
+                    BlueBoothState.BLUE_PAIRING_FAILED -> {//配对失败
                         activity.mLoadDialog!!.hide()
                         ToastUtil.showText("配对失败")
                     }
-                    BlueBoothState.BLUE_PAIRING_DEV_EROOR -> {
+                    BlueBoothState.BLUE_PAIRING_DEV_EROOR -> {//不是目标设备
                         activity.mLoadDialog!!.hide()
                         ToastUtil.showText("不是目标设备")
                     }
-                    BlueBoothState.BLUE_OBTAINDATA_SUCCESS -> {
-//                        ToastUtil.showText("收到蓝牙数据" + msg.obj)
-                    }
-
-                    BlueBoothState.BLUE_OBTAINDATA_ERROR -> {
+//                    BlueBoothState.BLUE_OBTAINDATA_SUCCESS -> {//接受数据
+//                        //  ToastUtil.showText("收到蓝牙数据" + msg.obj)
+//                    }
+                    BlueBoothState.BLUE_OBTAINDATA_ERROR -> {//数据解析异常
                         ToastUtil.showText("蓝牙数据解析异常")
                     }
-                    BlueBoothState.BULECONNECT_SUCCESS -> {
-                        // 连接成功
+                    BlueBoothState.BULECONNECT_SUCCESS -> { // 连接成功
                         activity.mLoadDialog!!.hide()
-                        activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
-                        //启动数据监听
-                        mBluetoothSocket = msg.obj as BluetoothSocket
-                        BlueUtils.disposeBlueData(this, mBluetoothSocket!!)
-                    }
 
-                    BlueBoothState.BLUE_CONNECT_CLOSE -> {
+                        activity.showConnectView()
+                        for (i in activity.mBlue_Ok_List.indices) {
+                            if (activity.mBlue_Ok_List[i].MAC == mBluetoothDevice!!.address)
+                                activity.mBlue_Ok_List!!.removeAt(i)
+                        }
+                        activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
+                        mBluetoothDataIsEnable = true
+                    }
+                    BlueBoothState.BLUE_CONNECT_CLOSE -> {//断开连接
                         //断开连接
                         activity.mLoadDialog!!.hide()
-                        activity.mBlue_Ok_List[msg.arg1 as Int].isConnect = false
-                        activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
+                        activity.ConnectDevice.visibility = View.GONE
+                        mBluetoothDataIsEnable = false
                     }
-                    BlueBoothState.BLUE_CONNECT_CLOSE_ERROR -> {
+                    BlueBoothState.BLUE_CONNECT_CLOSE_ERROR -> {//断开异常
                         //断开连接异常
                         activity.mLoadDialog!!.hide()
                         ToastUtil.showText("断开连接异常")
                     }
-                    BlueBoothState.BULECONNECT_FAILED -> {
+                    BlueBoothState.BULECONNECT_FAILED -> {//连接失败
                         //连接失败
                         activity.mLoadDialog!!.hide()
                         ToastUtil.showText("连接失败")
                     }
-                    BlueBoothState.BLUE_SEEK_STOP -> {
-                        activity.Main_AddDev_Booth_SS.isClickable = true
-                        activity.Main_AddDev_Booth_SS.setImageResource(R.mipmap.ic_bluetooth_searching_light_blue_500_24dp)
+                    BlueBoothState.BLUE_SEEK_STOP -> {//停止搜索
+                        activity.moor_wiating.visibility = View.GONE
+                        activity.Main_AddDev_TitleBar.moor.visibility = View.VISIBLE
                     }
 
-                    BlueBoothState.BLUE_SEEK_PAIRING -> {
+                    BlueBoothState.BLUE_SEEK_PAIRING -> {//搜索到的已配对设备
+                        //已配对设备
                         var device = msg.obj as BluetoothDevice
                         var blue_OK_Bean = BlueBoothDevicesBean()
                         blue_OK_Bean.mDevice = device
@@ -235,7 +253,8 @@ class AddDevActivity : BaseActivity() {
                         activity.ConnectBlue()
                     }
 
-                    BlueBoothState.BLUE_SEEK_UNPAIRING -> {
+                    BlueBoothState.BLUE_SEEK_UNPAIRING -> {//搜索到的未配对设备
+                        //未配对设备
                         var device = msg.obj as BluetoothDevice
                         var Bean = BlueBoothDevicesBean()
                         Bean.mDevice = device
@@ -257,10 +276,6 @@ class AddDevActivity : BaseActivity() {
 
     public override fun onDestroy() {
         super.onDestroy()
-        //解除注册
-        unregisterReceiver(seekReceiver)
-        unregisterReceiver(pairingReceiver)
-        LogUtils.i("解除注册")
+        BlueUtils.unRegisterReceiver(this, mBlueBoothReceiver!!)
     }
-
 }

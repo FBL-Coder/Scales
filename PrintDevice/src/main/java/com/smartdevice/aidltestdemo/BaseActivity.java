@@ -74,7 +74,7 @@ public class BaseActivity extends AppCompatActivity {
         public void onServiceDisconnected(ComponentName name) {
             Log.e("client", "onServiceDisconnected");
             mIzkcService = null;
-            Toast.makeText(BaseActivity.this, getString(R.string.service_bind_fail), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(BaseActivity.this, getString(R.string.service_bind_fail), Toast.LENGTH_SHORT).show();
             //发送消息绑定失败 send message to notify bind fail
             sendEmptyMessage(MessageType.BaiscMessage.SEVICE_BIND_FAIL);
         }
@@ -85,7 +85,7 @@ public class BaseActivity extends AppCompatActivity {
             mIzkcService = IZKCService.Stub.asInterface(service);
             if (mIzkcService != null) {
                 try {
-                    Toast.makeText(BaseActivity.this, getString(R.string.service_bind_success), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BaseActivity.this, getString(R.string.service_bind_success), Toast.LENGTH_SHORT).show();
                     //获取产品型号 get product model
                     DEVICE_MODEL = mIzkcService.getDeviceModel();
                     //设置当前模块 set current function module

@@ -121,11 +121,11 @@ public class OkHttpRequest {
      */
     public static Request builderRequest(HttpMethodType methodType, String url, Map<String, String> params, String json, String tag) {
 
-        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
-        if (NETWORK == 0) {
-            ToastUtil.showText("请检查网络连接");
-            return null;
-        }
+//        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
+//        if (NETWORK == 0) {
+//            ToastUtil.showText("请检查网络连接");
+//            return null;
+//        }
 
         Request.Builder builder = new Request.Builder()
                 .url(url);

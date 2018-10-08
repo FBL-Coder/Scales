@@ -69,9 +69,7 @@ public class BluetoothListAdapter extends BaseAdapter {
         holder.tvName.setText("MAC：" + arrayList.get(position).MAC);
         holder.tvAddress.setText("Name：" + arrayList.get(position).Name);
         if (mType == AddDevActivity.LIST_CONNECT) {
-            if (arrayList.get(position).isConnect)
-                holder.button.setText("断开");
-            else holder.button.setText("连接");
+            holder.button.setText("连接");
         } else
             holder.button.setText("配对");
         holder.button.setOnClickListener(new View.OnClickListener() {

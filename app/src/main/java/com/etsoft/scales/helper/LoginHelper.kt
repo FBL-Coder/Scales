@@ -43,7 +43,10 @@ class LoginHelper {
 
                         override fun onFailure(call: Call, code: Int, message: String?) {
                             activity.mLoadDialog!!.hide()
-                            ToastUtil.showText("登陆失败，请重新登录")
+                            if (code == -1) {
+                                ToastUtil.showText("请检查网络连接")
+                            } else
+                                ToastUtil.showText("登陆失败，请重新登录")
                         }
                     }, "登陆")
 
