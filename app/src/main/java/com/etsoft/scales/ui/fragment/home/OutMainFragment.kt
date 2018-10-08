@@ -120,7 +120,7 @@ class OutMainFragment : Fragment() {
             })
         }
 
-        Out_Record_ListView.adapter = Main_Out_ListViewAdapter(mActivity!!,mOutList!!)
+        Out_Record_ListView.adapter = Main_Out_ListViewAdapter(mActivity!!, mOutList!!)
 
         Out_Record_ListView.setOnItemClickListener { parent, view, position, id ->
             startActivity(Intent(mActivity, OutInfoActivity::class.java).run {
@@ -129,18 +129,16 @@ class OutMainFragment : Fragment() {
         }
     }
 
-
     /**
      * 初始化TitleBar
      */
     private fun initView() {
-        Out_Record_TitleBar!!.run {
-            back.visibility = View.INVISIBLE
-            title.text = "出库记录"
-            moor.setImageResource(R.mipmap.ic_add_white_24dp)
-            moor.setOnClickListener {
-                startActivity(Intent(mActivity!!, AddOutAvtivity::class.java))
-            }
+        back_titlebar.visibility = View.INVISIBLE
+        title_titlebar.text = "出库记录"
+        moor_titlebar.setImageResource(R.mipmap.ic_add_white_24dp)
+        moor_titlebar.setOnClickListener {
+            startActivity(Intent(mActivity!!, AddOutAvtivity::class.java))
         }
     }
+
 }

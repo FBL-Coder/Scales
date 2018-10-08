@@ -1,8 +1,11 @@
 package com.etsoft.scales.app
 
+//import com.inuker.bluetooth.library.BluetoothClient
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -16,13 +19,9 @@ import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-//import com.inuker.bluetooth.library.BluetoothClient
 import com.smartdevice.aidltestdemo.ClientApplication
 import okhttp3.OkHttpClient
 import java.util.*
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothSocket
 import java.util.concurrent.TimeUnit
 
 
