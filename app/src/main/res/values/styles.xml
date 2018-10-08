@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/AppTheme_color</item>
+        <item name="colorPrimary">@color/app_color</item>
         <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -25,9 +25,9 @@
     <style name="picture.QQ.style" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <!--标题栏背景色-->
-        <item name="colorPrimary">@color/AppTheme_color</item>
+        <item name="colorPrimary">@color/app_color</item>
         <!--状态栏背景色-->
-        <item name="colorPrimaryDark">@color/AppTheme_color</item>
+        <item name="colorPrimaryDark">@color/app_color</item>
         <!--是否改变图片列表界面状态栏字体颜色为黑色-->
         <item name="picture.statusFontColor">false</item>
         <!--返回键图标-->
@@ -49,21 +49,21 @@
         <!--图片列表底部背景色-->
         <item name="picture.bottom.bg">@color/color_fa</item>
         <!--图片列表预览文字颜色-->
-        <item name="picture.preview.textColor">@color/AppTheme_color</item>
+        <item name="picture.preview.textColor">@color/app_color</item>
         <!--图片列表已完成文字颜色-->
-        <item name="picture.complete.textColor">@color/AppTheme_color</item>
+        <item name="picture.complete.textColor">@color/app_color</item>
         <!--图片已选数量圆点背景色-->
         <item name="picture.num.style">@drawable/shpae_num_oval_blue</item>
         <!--预览界面标题文字颜色-->
         <item name="picture.ac_preview.title.textColor">@color/white</item>
         <!--预览界面已完成文字颜色-->
-        <item name="picture.ac_preview.complete.textColor">@color/AppTheme_color</item>
+        <item name="picture.ac_preview.complete.textColor">@color/app_color</item>
         <!--预览界面标题栏背景色-->
-        <item name="picture.ac_preview.title.bg">@color/AppTheme_color</item>
+        <item name="picture.ac_preview.title.bg">@color/app_color</item>
         <!--预览界面底部背景色-->
         <item name="picture.ac_preview.bottom.bg">@color/color_fa</item>
         <!--预览界面状态栏颜色-->
-        <item name="picture.status.color">@color/AppTheme_color</item>
+        <item name="picture.status.color">@color/app_color</item>
         <!--预览界面返回箭头-->
         <item name="picture.preview.leftBack.icon">@drawable/picture_back</item>
         <!--是否改变预览界面状态栏字体颜色为黑色-->

@@ -43,8 +43,8 @@
         android:elevation="@dimen/dp_8"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:textColor="@color/AppTheme_Text_color"
-        android:background="@color/AppTheme_color"
+        android:textColor="@color/app_text_color"
+        android:background="@color/app_color"
         android:layout_height="match_parent" />
 
 </LinearLayout>

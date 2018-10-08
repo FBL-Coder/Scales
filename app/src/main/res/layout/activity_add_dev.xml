@@ -74,7 +74,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="BTD_YH"
-                    android:textColor="@color/AppTheme_color"
+                    android:textColor="@color/app_color"
                     android:textSize="@dimen/sp_12"
                     android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="12:12:12:12:12:12"
-                    android:textColor="@color/AppTheme_color"
+                    android:textColor="@color/app_color"
                     android:textSize="@dimen/sp_12" />
 
 
@@ -103,10 +103,10 @@
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_5"
             android:foreground="?android:attr/selectableItemBackground"
-            android:background="@color/AppTheme_color"
+            android:background="@color/app_color"
             android:elevation="@dimen/dp_8"
             android:text="断开连接"
-            android:textColor="@color/AppTheme_Text_color" />
+            android:textColor="@color/app_text_color" />
 
     </RelativeLayout>
 

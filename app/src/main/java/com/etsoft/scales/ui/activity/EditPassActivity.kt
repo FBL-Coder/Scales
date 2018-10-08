@@ -37,7 +37,7 @@ class EditPassActivity : BaseActivity() {
 
 
             it.snack("点击提交") {
-                action("关闭", resources.getColor(R.color.AppTheme_color)) {}
+                action("关闭", resources.getColor(R.color.app_color)) {}
             }
         }
     }

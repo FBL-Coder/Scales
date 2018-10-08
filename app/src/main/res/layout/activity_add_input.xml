@@ -27,7 +27,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_2"
-            android:background="@color/AppTheme_color" />
+            android:background="@color/app_color" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -197,7 +197,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="取消"
                 android:layout_marginRight="@dimen/dp_20"
-                android:textColor="@color/AppTheme_color"
+                android:textColor="@color/app_color"
                 android:textSize="@dimen/dp_16"
                 android:textStyle="bold" />
 
@@ -209,11 +209,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:background="@color/AppTheme_color"
+                android:background="@color/app_color"
                 android:elevation="@dimen/dp_10"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="提交"
-                android:textColor="@color/AppTheme_Text_color"
+                android:textColor="@color/app_text_color"
                 android:textSize="@dimen/dp_16"
                 android:textStyle="bold" />
 

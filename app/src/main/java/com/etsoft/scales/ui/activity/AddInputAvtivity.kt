@@ -1,11 +1,9 @@
 package com.etsoft.scales.ui.activity
 
 import android.app.Activity
-import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.BlueBoothState
+import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.R
 import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.Server.BlueUtils.Companion.isReadData

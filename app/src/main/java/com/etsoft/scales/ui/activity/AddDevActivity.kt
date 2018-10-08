@@ -1,13 +1,12 @@
 package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.os.Handler
 import android.os.Message
 import android.view.View
 import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.BlueBoothState
+import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.R
 import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.adapter.ListViewAdapter.BluetoothListAdapter

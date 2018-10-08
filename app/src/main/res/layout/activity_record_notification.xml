@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/white_"
-            android:scrollbarThumbVertical="@color/AppTheme_color"
+            android:scrollbarThumbVertical="@color/app_color"
             android:scrollbarSize="@dimen/dp_3"
             android:dividerHeight="@dimen/dp_2"/>
 

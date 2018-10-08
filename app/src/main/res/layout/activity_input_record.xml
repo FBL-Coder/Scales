@@ -22,7 +22,7 @@
             android:divider="@color/white_"
             android:dividerHeight="@dimen/dp_2"
             android:scrollbarSize="@dimen/dp_3"
-            android:scrollbarThumbVertical="@color/AppTheme_color" />
+            android:scrollbarThumbVertical="@color/app_color" />
     </com.andview.refreshview.XRefreshView>
 
 

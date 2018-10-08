@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.BlueBoothState
+import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
 import com.etsoft.scales.utils.ClsUtils

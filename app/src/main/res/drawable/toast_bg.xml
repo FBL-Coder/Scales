@@ -7,5 +7,5 @@
             android:dashGap表示之间隔开的距离 -->
     <stroke
         android:width="1.5dp"
-        android:color="@color/AppTheme_color" /> <!-- 描边 -->
+        android:color="@color/app_color" /> <!-- 描边 -->
 </shape>

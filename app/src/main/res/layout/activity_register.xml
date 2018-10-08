@@ -38,7 +38,7 @@
                     android:layout_height="@dimen/dp_30"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_5"
-                    android:background="@color/AppTheme_color_dan">
+                    android:background="@color/app_color_dan">
 
                     <ImageView
                         android:layout_width="@dimen/dp_0"
@@ -54,7 +54,7 @@
                         android:layout_weight="3"
                         android:gravity="center"
                         android:text="手机号"
-                        android:textColor="@color/AppTheme_Text_color"
+                        android:textColor="@color/app_text_color"
                         android:textSize="@dimen/dp_12" />
                 </LinearLayout>
 
@@ -67,8 +67,8 @@
                     android:lines="1"
                     android:maxLength="11"
                     android:paddingLeft="@dimen/dp_90"
-                    android:textColor="@color/AppTheme_color"
-                    android:textColorHint="@color/AppTheme_color_dan"
+                    android:textColor="@color/app_color"
+                    android:textColorHint="@color/app_color_dan"
                     android:textSize="@dimen/sp_20" />
 
 
@@ -83,7 +83,7 @@
                     android:layout_height="@dimen/dp_30"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_5"
-                    android:background="@color/AppTheme_color_dan">
+                    android:background="@color/app_color_dan">
 
                     <ImageView
                         android:layout_width="@dimen/dp_0"
@@ -99,7 +99,7 @@
                         android:layout_weight="3"
                         android:gravity="center"
                         android:text="验证码"
-                        android:textColor="@color/AppTheme_Text_color"
+                        android:textColor="@color/app_text_color"
                         android:textSize="@dimen/dp_12" />
                 </LinearLayout>
 
@@ -113,8 +113,8 @@
                     android:maxLength="8"
                     android:paddingLeft="@dimen/dp_90"
                     android:paddingRight="@dimen/dp_90"
-                    android:textColor="@color/AppTheme_color"
-                    android:textColorHint="@color/AppTheme_color_dan"
+                    android:textColor="@color/app_color"
+                    android:textColorHint="@color/app_color_dan"
                     android:textSize="@dimen/sp_20" />
 
                 <android.support.v7.widget.AppCompatButton
@@ -125,9 +125,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp_5"
-                    android:background="@color/AppTheme_color"
+                    android:background="@color/app_color"
                     android:gravity="center"
-                    android:textColor="@color/AppTheme_Text_color"
+                    android:textColor="@color/app_text_color"
                     android:text="获取验证码"
                     android:textSize="@dimen/sp_12" />
 
@@ -143,7 +143,7 @@
                     android:layout_height="@dimen/dp_30"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_5"
-                    android:background="@color/AppTheme_color_dan">
+                    android:background="@color/app_color_dan">
 
                     <ImageView
                         android:layout_width="@dimen/dp_0"
@@ -159,7 +159,7 @@
                         android:layout_weight="3"
                         android:gravity="center"
                         android:text="设置密码"
-                        android:textColor="@color/AppTheme_Text_color"
+                        android:textColor="@color/app_text_color"
                         android:textSize="@dimen/dp_12" />
                 </LinearLayout>
 
@@ -171,8 +171,8 @@
                     android:lines="1"
                     android:maxLength="16"
                     android:paddingLeft="@dimen/dp_90"
-                    android:textColor="@color/AppTheme_color"
-                    android:textColorHint="@color/AppTheme_color_dan"
+                    android:textColor="@color/app_color"
+                    android:textColorHint="@color/app_color_dan"
                     android:textSize="@dimen/sp_20" />
 
 
@@ -190,12 +190,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_30"
-                android:background="@color/AppTheme_color"
+                android:background="@color/app_color"
                 android:gravity="center"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:text="注册"
-                android:textColor="@color/AppTheme_Text_color"
+                android:textColor="@color/app_text_color"
                 android:textSize="@dimen/sp_20" />
 
         </LinearLayout>

@@ -55,13 +55,13 @@ class MyDialog : AlertDialog.Builder {
             gravity = Gravity.CENTER or Gravity.LEFT
             textSize = 20f
             setPadding(20, 20, 20, 20)
-            paint.color = R.color.AppTheme_color
+            paint.color = R.color.app_color
             paint.isFakeBoldText = true
             this
         }
 
         val view = View(context)
-        view.background = context.resources.getDrawable(R.color.AppTheme_color)
+        view.background = context.resources.getDrawable(R.color.app_color)
         view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 5)
 
         val linearLayout = LinearLayout(context)

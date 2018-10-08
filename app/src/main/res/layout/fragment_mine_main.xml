@@ -6,7 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-
     <com.etsoft.scales.view.TitleBar
         android:id="@+id/Mine_TitleBar"
         android:layout_width="match_parent"
@@ -48,7 +47,7 @@
         android:background="@color/white_"
         android:scrollbarSize="@dimen/dp_3"
         android:scrollbarStyle="outsideOverlay"
-        android:scrollbarThumbVertical="@color/AppTheme_color">
+        android:scrollbarThumbVertical="@color/app_color">
 
 
         <LinearLayout

@@ -6,8 +6,8 @@ import android.bluetooth.BluetoothSocket
 import android.content.IntentFilter
 import android.os.Handler
 import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.BlueBoothState
-import com.etsoft.scales.BlueBoothState.Companion.BLUE_CONNECT_CLOSE_ERROR
+import com.etsoft.scales.utils.BlueBoothState
+import com.etsoft.scales.utils.BlueBoothState.Companion.BLUE_CONNECT_CLOSE_ERROR
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothAdapter
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
