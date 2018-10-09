@@ -50,7 +50,6 @@ class InputRecordActivity : BaseActivity() {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
-
                 InputRecord_XRefreshView.stopRefresh()
                 InputRecord_XRefreshView.stopLoadMore()
                 var list = MyApp.gson.fromJson(resultDesc!!.result, InputRecordListBean::class.java)
@@ -64,7 +63,7 @@ class InputRecordActivity : BaseActivity() {
                 initListView()
             }
 
-            override fun onFailure(call: Call, code: Int, message: String?) {
+            override fun onFailure( code: Int, message: String?) {
                 mLoadDialog!!.hide()
                 InputRecord_XRefreshView.stopRefresh()
                 InputRecord_XRefreshView.stopLoadMore()

@@ -8,11 +8,12 @@ package com.etsoft.scales.utils.httpGetDataUtils;
 public class ResultDesc {
 
     private int code = -1;//返回码
-    private String reason;//返回说明
+    private String message;//返回说明
     private String result;//返回数据
 
-    public ResultDesc(int error_code, String reason, String result) {
-        this.reason = reason;
+    public ResultDesc(int code, String message, String result) {
+        this.code = code;
+        this.message = message;
         this.result = result;
     }
 
@@ -24,12 +25,12 @@ public class ResultDesc {
         this.code = code;
     }
 
-    public String getReason() {
-        return reason;
+    public String getMessage() {
+        return message;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setMessage(String reason) {
+        this.message = reason;
     }
 
     public String getResult() {

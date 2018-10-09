@@ -22,9 +22,9 @@ class NoteHelper {
                 override fun onSuccess(resultDesc: ResultDesc?) {
                 }
 
-                override fun onFailure(call: Call?, code: Int, message: String?) {
+                override fun onFailure(code: Int, message: String?) {
                 }
-            },"短信验证")
+            }, "短信验证")
 
         }
 

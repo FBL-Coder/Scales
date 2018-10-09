@@ -33,7 +33,7 @@ class RegisterHelper {
                     AppSharePreferenceMgr.put(SaveKey.USER_PASS, pass)
                 }
 
-                override fun onFailure(call: Call, code: Int, message: String?) {
+                override fun onFailure( code: Int, message: String?) {
                 }
             },"注册")
 

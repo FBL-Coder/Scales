@@ -56,19 +56,19 @@ class RecordNotificationActivity : BaseActivity() {
                     var pages = mListBean!!.count / linit
                     Maxpage = Math.ceil(pages.toDouble()).toInt()
                 } else {
-                    LogUtils.e("获取数据失败:"+"code="+list.code+"  msg="+list.msg)
+                    LogUtils.e("获取数据失败:" + "code=" + list.code + "  msg=" + list.msg)
                 }
                 initListView()
             }
 
-            override fun onFailure(call: Call, code: Int, message: String?) {
+            override fun onFailure(code: Int, message: String?) {
                 mLoadDialog!!.hide()
                 Notification_Record_XRefreshView.stopRefresh()
                 Notification_Record_XRefreshView.stopLoadMore()
                 LogUtils.e("获取数据失败:code=$code  msg=$message")
                 ToastUtil.showText(message)
             }
-        },"列表数据")
+        }, "列表数据")
     }
 
     /**

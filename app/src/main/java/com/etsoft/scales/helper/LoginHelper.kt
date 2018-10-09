@@ -39,14 +39,12 @@ class LoginHelper {
                             AppSharePreferenceMgr.put(SaveKey.ACCESS_TOKEN, MyApp.UserInfo!!.data.access_token)
                             AppSharePreferenceMgr.put(SaveKey.REFRESH_TOKEN, MyApp.UserInfo!!.data.refresh_token)
                             activity.startActivity(Intent(activity, MainActivity::class.java))
+
                         }
 
-                        override fun onFailure(call: Call, code: Int, message: String?) {
+                        override fun onFailure(code: Int, message: String?) {
                             activity.mLoadDialog!!.hide()
-                            if (code == -1) {
-                                ToastUtil.showText("请检查网络连接")
-                            } else
-                                ToastUtil.showText("登陆失败，请重新登录")
+                            ToastUtil.showText(message)
                         }
                     }, "登陆")
 

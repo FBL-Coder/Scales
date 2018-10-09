@@ -164,20 +164,14 @@ class MainActivity : BaseActivity() {
                     }
                     OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this@MainActivity) {
                         override fun onSuccess(resultDesc: ResultDesc?) {
-                            super.onSuccess(resultDesc)
-                            try {
-                                var StationInfo = MyApp.gson.fromJson<ServerStationInfoBean>(resultDesc!!.result, resultDesc::class.java)
-                                if (StationInfo.code == 0) {
+                                try {
+                                    var StationInfo = MyApp.gson.fromJson<ServerStationInfoBean>(resultDesc!!.result, resultDesc::class.java)
                                     MyApp.ServerStationInfo = StationInfo
-                                } else {
-                                    StationInfo == null
+                                } catch (e: Exception) {
+                                    LogUtils.e("根据经纬度获取站点错误=$e")
                                 }
-                            } catch (e: Exception) {
-                                LogUtils.e("根据经纬度获取站点错误=$e")
-                            }
                         }
-
-                        override fun onFailure(call: Call?, code: Int, message: String?) {
+                        override fun onFailure( code: Int, message: String?) {
                             LogUtils.e("根据经纬度获取站点错误,code = $code , msg = $message")
                         }
                     }, "上传定位")

@@ -67,8 +67,13 @@ class OutMainFragment : Fragment() {
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mActivity!!.mLoadDialog!!.hide()
                 MyApp.mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
-                if (type == 1)
-                    showSelectDialog()
+                if (MyApp.mRecycleListBean!!.code == 0 && MyApp.mRecycleListBean!!.data != null)
+                    if (type == 1)
+                        showSelectDialog()
+            }
+
+            override fun onFailure(code: Int, message: String?) {
+                ToastUtil.showText(message)
             }
         }, "回收列表")
     }
@@ -84,6 +89,10 @@ class OutMainFragment : Fragment() {
             ToastUtil.showText("数据获取失败,请稍后再试!")
             mActivity!!.mLoadDialog!!.show()
             getRecycleData(1)
+        }
+        if (MyApp.mRecycleListBean!!.code == 0 && MyApp.mRecycleListBean!!.data == null) {
+            ToastUtil.showText("暂无了回收物")
+            return
         }
         for (i in MyApp.mRecycleListBean!!.data.indices) {
             names.add(MyApp.mRecycleListBean!!.data[i].name)
@@ -118,17 +127,13 @@ class OutMainFragment : Fragment() {
                 Out_XRefreshView.stopRefresh()
                 Out_XRefreshView.stopLoadMore()
                 var list = MyApp.gson.fromJson(resultDesc!!.result, OutListBean::class.java)
-                if (list!!.code == 0) {
-                    if (mOutList == null) mOutList = list else mOutList!!.data.addAll(list.data)
-                    var pages = list!!.count / linit
-                    this@OutMainFragment.Maxpage = Math.ceil(pages.toDouble()).toInt()
-                } else {
-                    LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")
-                }
+                if (mOutList == null) mOutList = list else mOutList!!.data.addAll(list.data)
+                val pages = list!!.count / linit
+                this@OutMainFragment.Maxpage = Math.ceil(pages.toDouble()).toInt()
                 initListView()
             }
 
-            override fun onFailure(call: Call, code: Int, message: String?) {
+            override fun onFailure(code: Int, message: String?) {
                 mActivity!!.mLoadDialog!!.hide()
                 Out_XRefreshView.stopRefresh()
                 Out_XRefreshView.stopLoadMore()
@@ -199,15 +204,13 @@ class OutMainFragment : Fragment() {
 
                 override fun onSuccess(resultDesc: ResultDesc?) {
                     mActivity!!.mLoadDialog!!.hide()
-                    if (resultDesc!!.getcode() == 0) {
-                        ToastUtil.showText("新增成功")
-                    }
+                    ToastUtil.showText("新增成功")
                 }
 
-                override fun onFailure(call: Call?, code: Int, message: String?) {
+                override fun onFailure(code: Int, message: String?) {
                     mActivity!!.mLoadDialog!!.hide()
                     LogUtils.e("新增出库失败  code = $code, msg = $message")
-                    ToastUtil.showText("新增失败")
+                    ToastUtil.showText(message)
                 }
             }, "新增出库")
 

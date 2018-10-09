@@ -26,7 +26,6 @@ class OutInfoActivity : BaseActivity() {
     private fun initData() {
 
         var content = intent.getSerializableExtra("content") as OutListBean.DataBean
-        OutInfo_Content.text = MyApp.gson.toJson(content)
         LogUtils.i(MyApp.gson.toJson(content))
     }
 

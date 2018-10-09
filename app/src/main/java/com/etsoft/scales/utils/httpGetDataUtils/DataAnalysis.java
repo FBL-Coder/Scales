@@ -67,13 +67,13 @@ public class DataAnalysis {
         try {
             JSONObject jsonObject = new JSONObject(result);
             //返回码
-            int error_code = jsonObject.getInt(reason_code);
+            int code = jsonObject.getInt(reason_code);
             //返回说明
-            String reason = jsonObject.getString(reason_message);
+            String message = jsonObject.getString(reason_message);
             //返回数据
             String resultData = result;
 
-            resultDesc = dataRestructuring(error_code, reason, resultData);
+            resultDesc = dataRestructuring(code, message, resultData);
         } catch (JSONException e) {
             resultDesc = dataRestructuring(-1, "数据返回异常", result + "");
         }
@@ -82,13 +82,13 @@ public class DataAnalysis {
     }
 
     /**
-     * @param error_code 返回码
-     * @param reason     返回说明
+     * @param code 返回码
+     * @param message     返回说明
      * @param result     返回数据
      * @Description 数据重组
      */
-    private static ResultDesc dataRestructuring(int error_code, String reason, String result) {
-        ResultDesc resultDesc = new ResultDesc(error_code, reason, result);
+    private static ResultDesc dataRestructuring(int code, String message, String result) {
+        ResultDesc resultDesc = new ResultDesc(code, message, result);
         return resultDesc;
     }
 }

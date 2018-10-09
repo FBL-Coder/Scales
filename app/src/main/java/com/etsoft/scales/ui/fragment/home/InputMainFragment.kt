@@ -71,7 +71,12 @@ class InputMainFragment : Fragment() {
                 if (type == 1)
                     showSelectDialog()
             }
+
+            override fun onFailure(code: Int, message: String?) {
+                ToastUtil.showText(message)
+            }
         }, "回收列表")
+
     }
 
     private fun initListView() {
@@ -194,7 +199,7 @@ class InputMainFragment : Fragment() {
 
             }
 
-            override fun onFailure(call: Call?, code: Int, message: String?) {
+            override fun onFailure(code: Int, message: String?) {
 
             }
         }, "入库")

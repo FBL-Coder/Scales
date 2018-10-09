@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
@@ -22,6 +23,7 @@ class ServerStationInfoActivity : BaseActivity() {
     override fun setView(): Int {
         return R.layout.activity_serverstation_info
     }
+
     override fun onCreate() {
         initView()
         initData()
@@ -42,11 +44,12 @@ class ServerStationInfoActivity : BaseActivity() {
             }
 
             @SuppressLint("SetTextI18n")
-            override fun onFailure(call: Call?, code: Int, message: String?) {
+            override fun onFailure(code: Int, message: String?) {
                 mLoadDialog!!.hide()
                 ServerTation_Info_content.text = "$code++$message"
+                ToastUtil.showText(message)
             }
-        },"站点详情")
+        }, "站点详情")
     }
 
     private fun initView() {

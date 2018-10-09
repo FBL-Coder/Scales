@@ -179,7 +179,7 @@ public class OkHttpRequest {
                     if (response.isSuccessful()) {
                         OkHttpUtils.sendSuccessResultCallback(DataAnalysis.getReturnData(response.body().string()), callback);
                     } else {
-                        OkHttpUtils.sendFailResultCallback(call, request.url().toString(), response.code(), response.message(), callback);
+                        OkHttpUtils.sendFailResultCallback(call, request.url().toString(), response.code(), response.body().string(), callback);
                     }
                 } catch (Exception e) {
                     OkHttpUtils.sendFailResultCallback(call, request.url().toString(), -1, e.getMessage(), callback);

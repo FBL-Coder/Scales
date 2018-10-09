@@ -64,7 +64,7 @@ class ServerStationActivity : BaseActivity() {
                 initListView()
             }
 
-            override fun onFailure(call: Call, code: Int, message: String?) {
+            override fun onFailure( code: Int, message: String?) {
                 mLoadDialog!!.hide()
                 ServerStation_XRefreshView.stopRefresh()
                 ServerStation_XRefreshView.stopLoadMore()

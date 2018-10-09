@@ -58,7 +58,7 @@ public class OkHttpUtils {
         mPlatform.execute(new Runnable() {
             @Override
             public void run() {
-                callback.onFailure(call, code, "URL = " + url + "; 错误信息 = " + message);
+                callback.onFailure(code, "URL = " + url + "; 错误信息 = " + message);
             }
         });
     }

@@ -24,7 +24,7 @@ public class MyHttpCallback extends HttpCallback {
     }
 
     @Override
-    public void onFailure(Call call, int code, String message) {
+    public void onFailure(int code, String message) {
     }
 
     @Override
