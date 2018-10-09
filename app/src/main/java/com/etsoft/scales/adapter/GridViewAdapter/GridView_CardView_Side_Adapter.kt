@@ -1,12 +1,12 @@
 package com.etsoft.scales.adapter.GridViewAdapter
 
 import android.graphics.Color
-import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.etsoft.scales.bean.CareFragment_Bean
 import com.etsoft.scales.R
@@ -29,7 +29,7 @@ class GridView_CardView_Side_Adapter(list: ArrayList<CareFragment_Bean>) : BaseA
             mViewHolder = (view.tag as ViewHolder?)!!
         }
 
-        mViewHolder.mCard_CardView.setCardBackgroundColor(Color.parseColor(mList[position].color))
+        mViewHolder.mCard_CardView.setBackgroundColor(Color.parseColor(mList[position].color))
         mViewHolder.mImageView.setImageResource(mList[position].image!!)
         mViewHolder.mTextView.text = mList[position].tite!!
 
@@ -51,7 +51,7 @@ class GridView_CardView_Side_Adapter(list: ArrayList<CareFragment_Bean>) : BaseA
 
 
     class ViewHolder(view: View) {
-        val mCard_CardView: CardView = view.findViewById(R.id.Card_CardView)
+        val mCard_CardView: RelativeLayout = view.findViewById(R.id.Card_CardView)
         val mImageView: ImageView = view.findViewById(R.id.Card_Iv)
         val mTextView: TextView = view.findViewById(R.id.Card_Tv)
     }

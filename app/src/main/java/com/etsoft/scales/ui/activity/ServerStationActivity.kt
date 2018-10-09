@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.andview.refreshview.XRefreshView
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.adapter.ListViewAdapter.ServerStationListViewAdapter
@@ -58,7 +59,7 @@ class ServerStationActivity : BaseActivity() {
                     var pages = mListBean!!.count / linit
                     Maxpage = Math.ceil(pages.toDouble()).toInt()
                 } else {
-                    ToastUtil.showText(list.msg)
+                    LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")
                 }
                 initListView()
             }

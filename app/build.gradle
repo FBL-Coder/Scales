@@ -26,7 +26,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
@@ -39,9 +39,6 @@ dependencies {
     api 'com.squareup.okhttp3:okhttp:3.5.0'
     //log工具
     api 'com.apkfuns.logutils:library:1.6.0'
-    //卡片布局
-    api 'com.android.support:cardview-v7:27.1.1'
-    api 'com.android.support:design:27.1.1'
     //上拉下拉
     api 'com.huxq17.xrefreshview:xrefreshview:3.6.7'
     //多媒体筛选器

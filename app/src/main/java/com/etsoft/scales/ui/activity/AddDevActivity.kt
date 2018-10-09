@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.R
 import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.adapter.ListViewAdapter.BluetoothListAdapter
@@ -16,6 +15,7 @@ import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
 import com.etsoft.scales.bean.BlueBoothDevicesBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
+import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.ClsUtils
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_add_dev.*
@@ -74,7 +74,7 @@ class AddDevActivity : BaseActivity() {
     private fun initView() {
         Main_AddDev_TitleBar.run {
             title.text = "添加设备"
-            moor.setImageResource(R.mipmap.ic_bluetooth_audio_white_36dp)
+            moor.setImageResource(R.drawable.ic_bluetooth_connected_black_24dp)
             moor.setOnClickListener {
                 if (mBluetoothAdapter == null || !mBluetoothAdapter!!.isEnabled) {
                     ToastUtil.showText("请打开蓝牙")
@@ -106,7 +106,7 @@ class AddDevActivity : BaseActivity() {
         DevName.text = mBluetoothDevice!!.name
         DevMAC.text = mBluetoothDevice!!.address
         ConnectClose.setOnClickListener {
-            mLoadDialog!!.show(arrayOf("正在断开", "断开超时"))
+            mLoadDialog!!.show(arrayOf("正在断开", "断开超时"), false)
             BlueUtils.disConnect(mHandler!!)
         }
     }
@@ -138,7 +138,7 @@ class AddDevActivity : BaseActivity() {
                     ToastUtil.showText("请打开蓝牙")
                     return@setOnConnectClick
                 }
-                mLoadDialog!!.show(arrayOf("正在配对", "配对超时"))
+                mLoadDialog!!.show(arrayOf("正在配对", "配对超时"), false)
                 ClsUtils.createBond(mList_SS[position].mDevice.javaClass, mList_SS[position].mDevice)
             }
     }
@@ -158,7 +158,7 @@ class AddDevActivity : BaseActivity() {
                     return@setOnConnectClick
                 }
                 //创建连接
-                mLoadDialog!!.show(arrayOf("正在连接", "连接超时"))
+                mLoadDialog!!.show(arrayOf("正在连接", "连接超时"), false)
                 mBluetoothAdapter!!.cancelDiscovery()
                 BlueUtils.connectBlue(mHandler!!, mBlue_Ok_List, position)
                 LogUtils.e("连接蓝牙设备MAC: ${mBlue_Ok_List[position].mDevice.address} \n" +
@@ -197,25 +197,26 @@ class AddDevActivity : BaseActivity() {
                         activity.mLoadDialog!!.hide()
                         ToastUtil.showText("不是目标设备")
                     }
-//                    BlueBoothState.BLUE_OBTAINDATA_SUCCESS -> {//接受数据
-//                        //  ToastUtil.showText("收到蓝牙数据" + msg.obj)
-//                    }
                     BlueBoothState.BLUE_OBTAINDATA_ERROR -> {//数据解析异常
                         ToastUtil.showText("蓝牙数据解析异常")
                     }
                     BlueBoothState.BULECONNECT_SUCCESS -> { // 连接成功
+                        ToastUtil.showText("蓝牙已连接")
                         activity.mLoadDialog!!.hide()
-
                         activity.showConnectView()
-                        for (i in activity.mBlue_Ok_List.indices) {
-                            if (activity.mBlue_Ok_List[i].MAC == mBluetoothDevice!!.address)
-                                activity.mBlue_Ok_List!!.removeAt(i)
+                        if (activity.mBlue_Ok_List.size == 1)
+                            activity.mBlue_Ok_List.removeAt(0)
+                        else {
+                            for (i in activity.mBlue_Ok_List.indices) {
+                                if (activity.mBlue_Ok_List[i].MAC == mBluetoothDevice!!.address)
+                                    activity.mBlue_Ok_List!!.removeAt(i)
+                            }
                         }
                         activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
                         mBluetoothDataIsEnable = true
                     }
                     BlueBoothState.BLUE_CONNECT_CLOSE -> {//断开连接
-                        //断开连接
+                        ToastUtil.showText("蓝牙已断开")
                         activity.mLoadDialog!!.hide()
                         activity.ConnectDevice.visibility = View.GONE
                         mBluetoothDataIsEnable = false
@@ -237,36 +238,40 @@ class AddDevActivity : BaseActivity() {
 
                     BlueBoothState.BLUE_SEEK_PAIRING -> {//搜索到的已配对设备
                         //已配对设备
-                        var device = msg.obj as BluetoothDevice
-                        var blue_OK_Bean = BlueBoothDevicesBean()
-                        blue_OK_Bean.mDevice = device
-                        blue_OK_Bean.Name = device.name
-                        blue_OK_Bean.MAC = device.address
-                        activity.mBlue_Ok_List.add(blue_OK_Bean)
-                        if (activity.mBlue_OK_Adapter == null) {
-                            activity.mBlue_OK_Adapter = BluetoothListAdapter(activity, activity.mBlue_Ok_List, AddDevActivity.LIST_CONNECT)
-                            activity.Main_AddDev_Connect.adapter = activity.mBlue_OK_Adapter
-                        } else {
-                            activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
+                        if (msg.obj != null) {
+                            var device = msg.obj as BluetoothDevice
+                            var blue_OK_Bean = BlueBoothDevicesBean()
+                            blue_OK_Bean.mDevice = device
+                            blue_OK_Bean.Name = device.name
+                            blue_OK_Bean.MAC = device.address
+                            activity.mBlue_Ok_List.add(blue_OK_Bean)
+                            if (activity.mBlue_OK_Adapter == null) {
+                                activity.mBlue_OK_Adapter = BluetoothListAdapter(activity, activity.mBlue_Ok_List, AddDevActivity.LIST_CONNECT)
+                                activity.Main_AddDev_Connect.adapter = activity.mBlue_OK_Adapter
+                            } else {
+                                activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
+                            }
+                            activity.ConnectBlue()
                         }
-                        activity.ConnectBlue()
                     }
 
                     BlueBoothState.BLUE_SEEK_UNPAIRING -> {//搜索到的未配对设备
                         //未配对设备
-                        var device = msg.obj as BluetoothDevice
-                        var Bean = BlueBoothDevicesBean()
-                        Bean.mDevice = device
-                        Bean.MAC = device.address
-                        Bean.Name = device.name
-                        activity.mList_SS.add(Bean)
-                        if (activity.mBlue_SS_Adapter == null) {
-                            activity.mBlue_SS_Adapter = BluetoothListAdapter(activity, activity.mList_SS, AddDevActivity.LIST_PAIRING)
-                            activity.Main_AddDev_SS.adapter = activity.mBlue_SS_Adapter
-                        } else {
-                            activity.mBlue_SS_Adapter!!.notifyDataSetChanged(activity.mList_SS)
+                        if (msg.obj != null) {
+                            var device = msg.obj as BluetoothDevice
+                            var Bean = BlueBoothDevicesBean()
+                            Bean.mDevice = device
+                            Bean.MAC = device.address
+                            Bean.Name = device.name
+                            activity.mList_SS.add(Bean)
+                            if (activity.mBlue_SS_Adapter == null) {
+                                activity.mBlue_SS_Adapter = BluetoothListAdapter(activity, activity.mList_SS, AddDevActivity.LIST_PAIRING)
+                                activity.Main_AddDev_SS.adapter = activity.mBlue_SS_Adapter
+                            } else {
+                                activity.mBlue_SS_Adapter!!.notifyDataSetChanged(activity.mList_SS)
+                            }
+                            activity.PairingBlue()
                         }
-                        activity.PairingBlue()
                     }
                 }
             }

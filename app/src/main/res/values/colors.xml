@@ -3,8 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#f4443b</color>
-    <color name="app_color">#f4443b</color>
-    <color name="app_text_color">#fff</color>
+    <color name="dialog_line">#555555</color>
+    <color name="app_color">#fff</color>
+    <!--<color name="app_color">#f4443b</color>-->
+    <color name="app_text_color">#000</color>
     <color name="app_color_dan">#f1635b</color>
     <color name="white">#fff</color>
     <color name="white_">#eee</color>

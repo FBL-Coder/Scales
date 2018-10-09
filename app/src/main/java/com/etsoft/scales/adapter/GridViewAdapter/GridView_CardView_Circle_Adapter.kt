@@ -1,15 +1,16 @@
 package com.etsoft.scales.adapter.GridViewAdapter
 
 import android.graphics.Color
-import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.etsoft.scales.bean.CareFragment_Bean
 import com.etsoft.scales.R
+import com.etsoft.scales.bean.RecycleListBean
 
 /**
  * Author：FBL  Time： 2018/7/23.
@@ -29,7 +30,7 @@ class GridView_CardView_Circle_Adapter(list: ArrayList<CareFragment_Bean>) : Bas
             mViewHolder = (view.tag as ViewHolder?)!!
         }
         mViewHolder.run {
-            mCard_CardView.setCardBackgroundColor(Color.parseColor(mList[position].color))
+            mCard_CardView.setBackgroundColor(Color.parseColor(mList[position].color))
             mImageView.setImageResource(mList[position].image!!)
             mTextView.text = mList[position].tite!!
         }
@@ -51,7 +52,7 @@ class GridView_CardView_Circle_Adapter(list: ArrayList<CareFragment_Bean>) : Bas
 
 
     class ViewHolder(view: View) {
-        val mCard_CardView: CardView = view.findViewById(R.id.Card_CardView)
+        val mCard_CardView = view.findViewById<RelativeLayout>(R.id.Card_CardView)
         val mImageView: ImageView = view.findViewById(R.id.Card_Iv)
         val mTextView: TextView = view.findViewById(R.id.Card_Tv)
     }

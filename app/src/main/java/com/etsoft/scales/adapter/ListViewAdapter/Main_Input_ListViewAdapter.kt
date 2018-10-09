@@ -63,7 +63,7 @@ class Main_Input_ListViewAdapter(list: ArrayList<Input_Main_List_Bean>) : BaseAd
                 mViewHolder.mInformation_Item6.text = mList[position].total
             } else {
                 mViewHolder.mInformation_Item5.text = "￥${mList[position].price}"
-                mViewHolder.mInformation_Item6.text = "￥${mList[position].total}"
+                mViewHolder.mInformation_Item6.text = "${mList[position].total}"
                 mViewHolder.mInformation_Item6.setTextColor(Color.BLACK)
             }
             return view!!

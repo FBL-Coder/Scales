@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/null__8"
-    android:paddingBottom="@dimen/dp_150"
-    android:paddingLeft="@dimen/dp_40"
-    android:paddingRight="@dimen/dp_40"
-    android:paddingTop="@dimen/dp_40">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="#eee"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
         android:orientation="vertical">
 
 
@@ -27,7 +27,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_2"
-            android:background="@color/app_color" />
+            android:background="@color/dialog_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -181,42 +181,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
-            android:paddingTop="@dimen/dp_15"
+            android:orientation="horizontal"
             android:paddingBottom="@dimen/dp_15"
             android:paddingLeft="@dimen/dp_30"
             android:paddingRight="@dimen/dp_30"
-            android:orientation="horizontal">
+            android:paddingTop="@dimen/dp_15">
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/Add_Input_Cancle"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/white__"
-                android:elevation="@dimen/dp_10"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="取消"
                 android:layout_marginRight="@dimen/dp_20"
+                android:layout_weight="1"
+                android:background="@drawable/butont_clicked"
+                android:elevation="@dimen/dp_10"
+                android:text="取消"
                 android:textColor="@color/app_color"
                 android:textSize="@dimen/dp_16"
                 android:textStyle="bold" />
-
 
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/Add_Input_Ok"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:background="@color/app_color"
+                android:layout_weight="1"
+                android:background="@drawable/butont_clicked"
                 android:elevation="@dimen/dp_10"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="提交"
+                android:text="添加"
                 android:textColor="@color/app_text_color"
                 android:textSize="@dimen/dp_16"
                 android:textStyle="bold" />
-
 
         </LinearLayout>
 

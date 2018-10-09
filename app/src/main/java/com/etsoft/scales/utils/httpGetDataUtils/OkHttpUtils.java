@@ -1,7 +1,6 @@
 package com.etsoft.scales.utils.httpGetDataUtils;
 
 import android.graphics.Bitmap;
-import android.nfc.Tag;
 
 import com.apkfuns.logutils.LogUtils;
 import com.etsoft.scales.utils.ToastUtil;

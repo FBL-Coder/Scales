@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="@color/white"
     android:padding="@dimen/dp_5">
 
     <LinearLayout
@@ -41,10 +42,9 @@
         android:layout_weight="1"
         android:layout_margin="@dimen/dp_5"
         android:elevation="@dimen/dp_8"
-        android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:textColor="@color/app_text_color"
-        android:background="@color/app_color"
+        android:background="@drawable/butont_clicked"
         android:layout_height="match_parent" />
 
 </LinearLayout>

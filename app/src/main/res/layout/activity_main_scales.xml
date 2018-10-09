@@ -11,11 +11,6 @@
         android:layout_height="@dimen/dp_0"
         android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/Main_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/Main_BottomNavigationBar"
         android:layout_width="match_parent"

@@ -1,9 +1,9 @@
 package com.etsoft.scales.ui.activity
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
@@ -33,11 +33,7 @@ class AddOutAvtivity : BaseActivity() {
             var id = Add_Out_ID.text.toString()
             var weight = Add_Out_Weight.text.toString()
             if (toPlace.isEmpty() || id.isEmpty() || weight.isEmpty()) {
-                Add_Out_Ok.snack("请输入信息", Snackbar.LENGTH_SHORT) {
-                    setAction("关闭") {
-                        dismiss()
-                    }
-                }
+                ToastUtil.showText("请输入信息")
                 return@setOnClickListener
             }
             var map = HashMap<String, String>().run {

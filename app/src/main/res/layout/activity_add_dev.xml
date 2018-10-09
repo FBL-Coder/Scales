@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_"
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
@@ -20,7 +21,7 @@
             android:id="@+id/ConnectTit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white_"
+            android:background="@color/white__"
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/dp_5"
             android:paddingLeft="@dimen/dp_10"
@@ -74,7 +75,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="BTD_YH"
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/sp_12"
                     android:textStyle="bold" />
 
@@ -85,7 +86,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="12:12:12:12:12:12"
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/sp_12" />
 
 
@@ -102,8 +103,7 @@
             android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_5"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:background="@color/app_color"
+            android:background="@drawable/top_back"
             android:elevation="@dimen/dp_8"
             android:text="断开连接"
             android:textColor="@color/app_text_color" />
@@ -113,7 +113,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_"
+        android:background="@color/white__"
         android:gravity="center_vertical"
         android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
@@ -135,7 +135,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_"
+        android:background="@color/white__"
         android:gravity="center_vertical"
         android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"

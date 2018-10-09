@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/white_"
+
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
@@ -30,32 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:layout_weight="2"
-        android:divider="@color/white_"
+        android:padding="@dimen/dp_10"
+        android:divider="@color/white___"
         android:scrollbarThumbVertical="@color/app_color"
         android:scrollbarSize="@dimen/dp_3"
         android:dividerHeight="@dimen/dp_2"/>
 
-
-    <TextView
-        android:id="@+id/Main_Add_Dev"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white__"
-        android:drawableRight="@mipmap/ic_chevron_right_white_24dp"
-        android:paddingBottom="@dimen/dp_5"
-        android:paddingRight="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:paddingTop="@dimen/dp_5"
-        android:text="一键添加电子秤数据"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_16" />
-
-    <GridView
-        android:id="@+id/Main_GridView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0"
-        android:layout_margin="@dimen/dp_5"
-        android:layout_weight="1"
-        android:numColumns="3" />
 </LinearLayout>

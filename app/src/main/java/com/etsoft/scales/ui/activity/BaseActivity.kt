@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.provider.Settings
 import android.support.annotation.LayoutRes
-import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
@@ -37,13 +36,17 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
         if (setView() != null && setView() != 0)
             setContentView(setView()!!)
         try {
-            MyApp.mApplication!!.setActivities(this)
             initDialog()
             onCreate()
         } catch (e: Exception) {
 //            LogUtils.e("数据异常--->$e")
             e.printStackTrace()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        MyApp.mApplication!!.setActivities(this)
     }
 
 
@@ -120,24 +123,8 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
     }
 
 
-    companion object {
-
-        inline fun View.snack(message: String, length: Int = Snackbar.LENGTH_LONG, f: Snackbar.() -> Unit) {
-            val snack = Snackbar.make(this, message, length)
-            snack.f()
-            snack.show()
-        }
-
-        fun Snackbar.action(action: String, color: Int? = null, listener: (View) -> Unit) {
-            setAction(action, listener)
-            color?.let { setActionTextColor(color) }
-        }
-    }
-
-
     override fun onDestroy() {
         mLoadDialog!!.destroyDialog()
         super.onDestroy()
     }
-
 }

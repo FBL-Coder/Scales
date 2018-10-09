@@ -3,6 +3,7 @@ package com.etsoft.scales.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import com.andview.refreshview.XRefreshView
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.adapter.ListViewAdapter.RecordNotificationListViewAdapter
@@ -55,7 +56,7 @@ class RecordNotificationActivity : BaseActivity() {
                     var pages = mListBean!!.count / linit
                     Maxpage = Math.ceil(pages.toDouble()).toInt()
                 } else {
-                    ToastUtil.showText(list.msg)
+                    LogUtils.e("获取数据失败:"+"code="+list.code+"  msg="+list.msg)
                 }
                 initListView()
             }
@@ -64,6 +65,7 @@ class RecordNotificationActivity : BaseActivity() {
                 mLoadDialog!!.hide()
                 Notification_Record_XRefreshView.stopRefresh()
                 Notification_Record_XRefreshView.stopLoadMore()
+                LogUtils.e("获取数据失败:code=$code  msg=$message")
                 ToastUtil.showText(message)
             }
         },"列表数据")
@@ -115,7 +117,7 @@ class RecordNotificationActivity : BaseActivity() {
         Notification_Record_TitleBar.run {
             back.setOnClickListener { finish() }
             title.text = "历史通知"
-            moor.setImageResource(R.mipmap.ic_add_white_24dp).run {
+            moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp).run {
                 setOnClickListener {
                     ToastUtil.showText("点击添加")
                 }

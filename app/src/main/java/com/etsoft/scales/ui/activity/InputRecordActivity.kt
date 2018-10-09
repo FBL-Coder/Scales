@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.andview.refreshview.XRefreshView
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.adapter.ListViewAdapter.InputRecordListViewAdapter
@@ -58,7 +59,7 @@ class InputRecordActivity : BaseActivity() {
                     var pages = mListBean!!.count / linit
                     Maxpage = Math.ceil(pages.toDouble()).toInt()
                 } else {
-                    ToastUtil.showText(list.msg)
+                    LogUtils.e("获取数据失败:"+"code="+list.code+"  msg="+list.msg)
                 }
                 initListView()
             }
@@ -67,6 +68,7 @@ class InputRecordActivity : BaseActivity() {
                 mLoadDialog!!.hide()
                 InputRecord_XRefreshView.stopRefresh()
                 InputRecord_XRefreshView.stopLoadMore()
+                LogUtils.e("获取数据失败:code=$code  msg=$message")
                 ToastUtil.showText(message)
             }
         }, "入库列表")
@@ -117,7 +119,7 @@ class InputRecordActivity : BaseActivity() {
     private fun initView() {
         InputRecord_Titlebar.run {
             title.text = "入库记录"
-            moor.setImageResource(R.mipmap.ic_add_white_24dp)
+            moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
             moor.visibility = View.INVISIBLE
             back.setOnClickListener {
                 finish()

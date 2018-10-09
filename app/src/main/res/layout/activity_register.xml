@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white_"
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
@@ -121,7 +122,6 @@
                     android:id="@+id/Register_Note_Get"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_30"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp_5"
@@ -192,7 +192,6 @@
                 android:layout_marginTop="@dimen/dp_30"
                 android:background="@color/app_color"
                 android:gravity="center"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:text="注册"
                 android:textColor="@color/app_text_color"

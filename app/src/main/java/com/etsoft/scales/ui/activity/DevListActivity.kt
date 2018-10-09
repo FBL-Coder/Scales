@@ -40,7 +40,7 @@ class DevListActivity : BaseActivity() {
         DevList_TitleBar.run {
             title.text = "设备列表"
             back.setOnClickListener { finish() }
-            moor.setImageResource(R.mipmap.ic_add_white_24dp)
+            moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
             moor.setOnClickListener {
                 startActivity(Intent(this@DevListActivity, AddDevActivity::class.java))
 

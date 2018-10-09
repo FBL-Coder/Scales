@@ -3,14 +3,9 @@ package com.etsoft.scales.utils.httpGetDataUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.nfc.Tag;
 
-import com.etsoft.scales.Ports;
 import com.etsoft.scales.SaveKey;
-import com.etsoft.scales.app.MyApp;
-import com.etsoft.scales.netWorkListener.AppNetworkMgr;
 import com.etsoft.scales.utils.AppSharePreferenceMgr;
-import com.etsoft.scales.utils.ToastUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;

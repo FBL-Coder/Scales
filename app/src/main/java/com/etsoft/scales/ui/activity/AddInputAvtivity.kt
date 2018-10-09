@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Handler
 import android.os.Message
@@ -13,6 +14,7 @@ import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_add_input.*
 import java.lang.ref.WeakReference
+import java.text.DecimalFormat
 
 /**
  * Author：FBL  Time： 2018/9/30.
@@ -22,6 +24,7 @@ class AddInputAvtivity : BaseActivity() {
 
 
     private var mHandler: MyHandler? = null
+    private var position = 0
 
     override fun setView(): Int {
         return R.layout.activity_add_input
@@ -39,28 +42,33 @@ class AddInputAvtivity : BaseActivity() {
 
     private fun initData() {
 
-        var position = intent.getIntExtra("position", 0)
+        position = intent.getIntExtra("position", 0)
 
         Add_Input_Type.text = MyApp.mRecycleListBean!!.data[position].name
-        Add_Input_KG.text = "56.56"
+        Add_Input_KG.text = "0.00"
         Add_Input_DanWei.text = MyApp.mRecycleListBean!!.data[position].unit
-        Add_Input_DanJia.text = "￥${MyApp.mRecycleListBean!!.data[position].price}"
-        Add_Input_ZongJia.text = "￥${MyApp.mRecycleListBean!!.data[position].price * 56.56}"
-
+        Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean!!.data[position].price}"
+        Add_Input_ZongJia.text = "￥ 0.00"
 
 
         Add_Input_Cancle.setOnClickListener { finish() }
 
         Add_Input_Ok.setOnClickListener {
-            ToastUtil.showText("正在提交")
+            val weight_tv = Add_Input_KG.text.toString()
+            if (weight_tv == "0.00") {
+                ToastUtil.showText("该物品重量为:0.00kg,不可添加")
+                return@setOnClickListener
+            }
+            val zongjia_tv = Add_Input_ZongJia.text.toString()
+            ToastUtil.showText("正在添加")
             setResult(Activity.RESULT_OK, intent
                     .run {
                         putExtra("data", Input_Main_List_Bean().run {
                             type = MyApp.mRecycleListBean!!.data[position].name
-                            weight = "56.56"
+                            weight = weight_tv
                             price = MyApp.mRecycleListBean!!.data[position].price.toString()
                             unit = MyApp.mRecycleListBean!!.data[position].unit
-                            total = (MyApp.mRecycleListBean!!.data[position].price * 56.56).toString()
+                            total = zongjia_tv
                             this
                         })
                         this
@@ -73,20 +81,26 @@ class AddInputAvtivity : BaseActivity() {
     /**
      * Handler 静态内部类，防止内存泄漏
      */
-    private class MyHandler(activity: BaseActivity) : Handler() {
-        private var activityWeakReference: WeakReference<BaseActivity> = WeakReference<BaseActivity>(activity)
+    @SuppressLint("SetTextI18n")
+    private class MyHandler(activity: AddInputAvtivity) : Handler() {
+        private var activityWeakReference: WeakReference<AddInputAvtivity> = WeakReference<AddInputAvtivity>(activity)
         override fun handleMessage(msg: Message) {
             val activity = activityWeakReference.get()
             if (activity != null) {
                 when (msg.what) {
                     BlueBoothState.BLUE_READDATA_SUCCESS -> {
-                        BlueUtils.disposeData(this, msg.obj as ByteArray)
+                        if (msg.obj != null)
+                            BlueUtils.disposeData(this, msg.obj as ByteArray)
                     }
                     BlueBoothState.BLUE_OBTAINDATA_ERROR -> {
                         ToastUtil.showText("蓝牙数据出错,请稍后在试")
                     }
                     BlueBoothState.BLUE_DISPOSEDATA_SUCCESS -> {
-                        activity.Add_Input_KG.text = msg.obj as String
+                        if (msg.obj != null) {
+                            val mWeight = msg.obj as String
+                            activity.Add_Input_KG.text = mWeight
+                            activity.Add_Input_ZongJia.text = "￥${DecimalFormat("0.00").format(MyApp.mRecycleListBean!!.data[activity.position].price * mWeight.toDouble())}"
+                        }
                     }
                 }
 

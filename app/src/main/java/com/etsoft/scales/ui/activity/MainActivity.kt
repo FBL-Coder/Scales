@@ -103,10 +103,10 @@ class MainActivity : BaseActivity() {
 
     private fun initView() {
         Main_BottomNavigationBar
-                .addItem(BottomNavigationItem(R.mipmap.ic_speaker_notes_white_24dp, "入库"))
-                .addItem(BottomNavigationItem(R.mipmap.ic_settings_phone_white_24dp, "出库"))
-                .addItem(BottomNavigationItem(R.mipmap.ic_account_circle_white_24dp, "我的"))
-                .setActiveColor(R.color.white_)
+                .addItem(BottomNavigationItem(R.drawable.ic_input_black_24dp, "入库"))
+                .addItem(BottomNavigationItem(R.drawable.ic_zoom_out_map_black_24dp, "出库"))
+                .addItem(BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "我的"))
+                .setActiveColor(R.color.black)
                 .initialise()
 
     }

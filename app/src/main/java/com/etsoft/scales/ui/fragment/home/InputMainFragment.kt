@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
-import com.etsoft.scales.adapter.GridViewAdapter.GridView_CardView_Side_Adapter
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
@@ -45,7 +44,6 @@ class InputMainFragment : Fragment() {
 
     private var listid = 0
     private var mInputLiat = ArrayList<Input_Main_List_Bean>()
-    private var mGridView_CardView_Adapter: GridView_CardView_Side_Adapter? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -117,37 +115,33 @@ class InputMainFragment : Fragment() {
             add(CareFragment_Bean(R.mipmap.ic_favorite_white_48dp, "#8ee5ee", "电子秤1"))
             this
         }
-        mGridView_CardView_Adapter = GridView_CardView_Side_Adapter(list!!)
-        Main_GridView!!.adapter = mGridView_CardView_Adapter
-        Main_GridView!!.setOnItemClickListener { _, _, position, _ ->
-            ToastUtil.showText("设备点击")
-        }
     }
 
-
     private fun initView() {
-        Input_Main_TitleBar!!.back.visibility = View.INVISIBLE
-        Input_Main_TitleBar!!.title.text = "入库"
-        Input_Main_TitleBar!!.moor.setImageResource(R.mipmap.ic_cloud_upload_white_24dp)
-        Input_Main_TitleBar!!.moor.setOnClickListener {
-            MyDialog(mActivity!!)
-                    .setMessage("是否上传至服务器？")
-                    .setNegativeButton("取消") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    .setPositiveButton("上传") { dialog, which ->
-                        UpToServer()
-                        dialog.dismiss()
-                    }.create().show()
+        Input_Main_TitleBar!!.run {
+            title.text = "入库"
+            moor.setImageResource(R.drawable.ic_print_black_24dp)
+            moor.setOnClickListener {
+                MyDialog(mActivity!!)
+                        .setMessage("是否要打印票据？")
+                        .setNegativeButton("取消") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .setPositiveButton("打印") { dialog, which ->
+                            UpToServer()
+                            dialog.dismiss()
+                        }.create().show()
+            }
+            back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+            back.setOnClickListener {
+                startActivity(Intent(mActivity, AddDevActivity::class.java))
+            }
         }
 
         Input_Main_Record!!.setOnClickListener {
             startActivity(Intent(mActivity, InputRecordActivity::class.java))
         }
 
-        Main_Add_Dev!!.setOnClickListener {
-            startActivity(Intent(mActivity, DevListActivity::class.java))
-        }
     }
 
     /**
@@ -176,7 +170,6 @@ class InputMainFragment : Fragment() {
             com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
         }
         com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
-
 
 
 //        var map = HashMap<String, String>().run {
@@ -215,12 +208,14 @@ class InputMainFragment : Fragment() {
         MyDialog(mActivity!!)
                 .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
                     position = which
-                }).setNegativeButton("确定") { dialog, which ->
+                }).setPositiveButton("确定") { dialog, which ->
                     dialog.dismiss()
                     startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
                         putExtra("position", position)
                         this
                     }, Activity.RESULT_FIRST_USER)
+                }.setNegativeButton("取消") { dialog, which ->
+                    dialog.dismiss()
                 }.create().show()
     }
 

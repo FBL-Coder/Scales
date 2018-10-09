@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/null__7">
+    android:background="@color/null__8">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +10,7 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/dp_40"
         android:layout_marginRight="@dimen/dp_40"
-        android:background="@color/white"
+        android:background="#eee"
         android:orientation="vertical">
 
 
@@ -26,7 +26,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_2"
-            android:background="@color/app_color" />
+            android:background="@color/dialog_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,9 +121,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_20"
                 android:layout_weight="1"
-                android:background="@color/white__"
+                android:background="@drawable/butont_clicked"
                 android:elevation="@dimen/dp_10"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:text="取消"
                 android:textColor="@color/app_color"
                 android:textSize="@dimen/dp_16"
@@ -136,9 +135,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_weight="1"
-                android:background="@color/app_color"
+                android:background="@drawable/butont_clicked"
                 android:elevation="@dimen/dp_10"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:text="提交"
                 android:textColor="@color/app_text_color"
                 android:textSize="@dimen/dp_16"

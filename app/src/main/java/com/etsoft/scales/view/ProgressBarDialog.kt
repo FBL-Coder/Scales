@@ -31,24 +31,27 @@ constructor(private val mContext: Context) {
         dialog.create()
     }
 
-    fun show(text: Array<String> = arrayOf("正在加载", "加载失败")) {
+    fun show(text: Array<String> = arrayOf("正在加载", "加载失败"), isClickHide: Boolean = true) {
         val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
-        var page = 0
         dialog.show()
         isShow = true
         val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
         textView.text = text[0]
+        dialogTimer(text[1])
+    }
 
-         Timer().schedule(object : TimerTask() {
+    private fun dialogTimer(text: String) {
+        var page1 = 0
+        Timer().schedule(object : TimerTask() {
             override fun run() {
-                LogUtils.i("Dialog显示时长--page:$page")
-                if (page == 8) {
+                LogUtils.i("Dialog显示时长--page:$page1")
+                if (page1 == 8) {
                     if (dialog.isShowing) {
                         dialog.dismiss()
                         cancel()
                     }
                     Looper.prepare()
-                    ToastUtil.showText(text[1])
+                    ToastUtil.showText(text)
                     Looper.loop()
                 } else {
                     if (!isShow) {
@@ -56,9 +59,17 @@ constructor(private val mContext: Context) {
                         LogUtils.i("dialog正常diss--isShow:$isShow")
                     }
                 }
-                page++
+                page1++
             }
         }, 0, 1000)
+    }
+
+
+    fun show(text: String = "加载数据...") {
+        dialog.show()
+        val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
+        textView.text = text
+        dialogTimer(text)
     }
 
     fun show(text: String = "加载数据...", isClickHide: Boolean = true) {
@@ -66,6 +77,7 @@ constructor(private val mContext: Context) {
         dialog.show()
         val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
         textView.text = text
+        dialogTimer(text)
     }
 
     fun hide() {

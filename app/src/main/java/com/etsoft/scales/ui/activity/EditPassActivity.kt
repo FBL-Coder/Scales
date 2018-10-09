@@ -34,11 +34,8 @@ class EditPassActivity : BaseActivity() {
                 ToastUtil.showText("请输入新密码")
                 return@setOnClickListener
             }
+            ToastUtil.showText("点击提交")
 
-
-            it.snack("点击提交") {
-                action("关闭", resources.getColor(R.color.app_color)) {}
-            }
         }
     }
 }

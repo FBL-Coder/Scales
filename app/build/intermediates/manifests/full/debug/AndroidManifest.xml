@@ -35,7 +35,6 @@
 
     <application
         android:name="com.etsoft.scales.app.MyApp"
-        android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -57,16 +56,11 @@
         </activity>
 
         <!-- 首页 -->
-        <activity
-            android:name="com.etsoft.scales.ui.activity.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name="com.etsoft.scales.ui.activity.MainActivity" />
 
         <!-- 登陆 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.LoginActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
@@ -74,83 +68,64 @@
         <!-- 注册账号 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.RegisterActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <!-- 忘记密码 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.ForgetPassActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- 我的>修改密码 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.EditPassActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- 历史通知 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.RecordNotificationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:screenOrientation="portrait" />
 
         <!-- 通知详情 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.NotificationInfoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:screenOrientation="portrait" />
 
         <!-- 出库详情 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.OutInfoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:screenOrientation="portrait" />
 
         <!-- 设备列表 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.DevListActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-
+            android:screenOrientation="portrait" />
         <!-- 添加设备 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.AddDevActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- 入库想详情 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.InputInfoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:screenOrientation="portrait" />
 
         <!-- 入库记录 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.InputRecordActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:screenOrientation="portrait" />
 
         <!-- 添加入库 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.AddInputAvtivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/activity.Theme.Transparent"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <!-- 添加出库 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.AddOutAvtivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/activity.Theme.Transparent"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
@@ -158,15 +133,11 @@
         <!-- 服务站点列表 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.ServerStationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:screenOrientation="portrait" />
         <!-- 服务站点列表 -->
         <activity
             android:name="com.etsoft.scales.ui.activity.ServerStationInfoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:screenOrientation="portrait" />
 
         <!-- 打印机服务 -->
         <service android:name="com.smartdevice.aidl.IZKCService" >

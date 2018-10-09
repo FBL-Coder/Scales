@@ -4,30 +4,13 @@
             "outputFile": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/63c5da6d6fb38c914599ecc2d48b4cc8/res/values-v24/values-v24.xml",
+                    "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/e7230126e274d6449ac42374cd080463/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
                         "startOffsets": "55,212",
                         "endColumns": "156,134",
                         "endOffsets": "207,342"
-                    }
-                },
-                {
-                    "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/949648a12852dec3c68eee81d1117add/res/values-v24/values-v24.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,121,182,248",
-                        "endColumns": "65,60,65,66",
-                        "endOffsets": "116,177,243,310"
-                    },
-                    "to": {
-                        "startLines": "4,5,6,7",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "347,413,474,540",
-                        "endColumns": "65,60,65,66",
-                        "endOffsets": "408,469,535,602"
                     }
                 }
             ]

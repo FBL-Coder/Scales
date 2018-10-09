@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.andview.refreshview.XRefreshView
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SortType
@@ -74,7 +75,7 @@ class OutMainFragment : Fragment() {
                     var pages = list!!.count / linit
                     this@OutMainFragment.Maxpage = Math.ceil(pages.toDouble()).toInt()
                 } else {
-                    ToastUtil.showText(list.msg)
+                    LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")
                 }
                 initListView()
             }
@@ -83,6 +84,7 @@ class OutMainFragment : Fragment() {
                 mActivity!!.mLoadDialog!!.hide()
                 Out_XRefreshView.stopRefresh()
                 Out_XRefreshView.stopLoadMore()
+                LogUtils.e("获取数据失败:code=$code  msg=$message")
                 ToastUtil.showText(message)
             }
         }, "出库数据")
@@ -133,10 +135,10 @@ class OutMainFragment : Fragment() {
      * 初始化TitleBar
      */
     private fun initView() {
-        back_titlebar.visibility = View.INVISIBLE
-        title_titlebar.text = "出库记录"
-        moor_titlebar.setImageResource(R.mipmap.ic_add_white_24dp)
-        moor_titlebar.setOnClickListener {
+        Main_Out_TitleBar.back.visibility = View.GONE
+        Main_Out_TitleBar.title.text = "出库记录"
+        Main_Out_TitleBar.moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
+        Main_Out_TitleBar.moor.setOnClickListener {
             startActivity(Intent(mActivity!!, AddOutAvtivity::class.java))
         }
     }

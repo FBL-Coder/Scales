@@ -45,24 +45,25 @@ class MyDialog : AlertDialog.Builder {
     }
 
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "NewApi")
     private fun initTitleView(context: Context, title: String): View {
         if (tv === null) {
             tv = TextView(context)
         }
         tv?.run {
+            background = context.getDrawable(R.color.white_)
             text = title
             gravity = Gravity.CENTER or Gravity.LEFT
             textSize = 20f
             setPadding(20, 20, 20, 20)
-            paint.color = R.color.app_color
+            paint.color = R.color.black
             paint.isFakeBoldText = true
             this
         }
 
         val view = View(context)
-        view.background = context.resources.getDrawable(R.color.app_color)
-        view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 5)
+        view.background = context.resources.getDrawable(R.color.black)
+        view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 3)
 
         val linearLayout = LinearLayout(context)
         linearLayout.orientation = LinearLayout.VERTICAL

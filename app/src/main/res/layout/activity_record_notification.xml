@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_"
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
         android:id="@+id/Notification_Record_TitleBar"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_10"
         android:layout_height="@dimen/dp_40" />
 
     <com.andview.refreshview.XRefreshView
@@ -17,7 +19,8 @@
             android:id="@+id/Notification_Record_List"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/white_"
+            android:divider="@color/white___"
+            android:background="@color/white_"
             android:scrollbarThumbVertical="@color/app_color"
             android:scrollbarSize="@dimen/dp_3"
             android:dividerHeight="@dimen/dp_2"/>
