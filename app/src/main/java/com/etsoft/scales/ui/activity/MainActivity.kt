@@ -12,7 +12,9 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.app.MyApp.Companion.ServerStationInfo
 import com.etsoft.scales.app.MyApp.Companion.mLocationInfo
+import com.etsoft.scales.bean.ServerStationInfoBean
 import com.etsoft.scales.netWorkListener.NetBroadcastReceiver
 import com.etsoft.scales.ui.fragment.home.InputMainFragment
 import com.etsoft.scales.ui.fragment.home.MineMainFragment
@@ -21,7 +23,9 @@ import com.etsoft.scales.utils.PermissionsUtli
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
+import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import kotlinx.android.synthetic.main.activity_main_scales.*
+import okhttp3.Call
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -37,6 +41,7 @@ class MainActivity : BaseActivity() {
     private var fragments: ArrayList<Fragment>? = null
     private var fm = supportFragmentManager
     private var mInputMainFragment: InputMainFragment? = null
+    private var mOutMainFragment: OutMainFragment? = null
 
     override fun onResume() {
         super.onResume()
@@ -62,9 +67,10 @@ class MainActivity : BaseActivity() {
 
     private fun initFragment(): ArrayList<Fragment> {
         mInputMainFragment = InputMainFragment.initFragment(this@MainActivity)
+        mOutMainFragment = OutMainFragment.initFragment(this@MainActivity)
         return ArrayList<Fragment>().run {
             add(mInputMainFragment!!)
-            add(OutMainFragment.initFragment(this@MainActivity))
+            add(mOutMainFragment!!)
             add(MineMainFragment.initFragment(this@MainActivity))
             this
         }
@@ -140,6 +146,7 @@ class MainActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         mInputMainFragment!!.onActivityResult(requestCode, resultCode, data)
+        mOutMainFragment!!.onActivityResult(requestCode, resultCode, data)
     }
 
 
@@ -155,7 +162,25 @@ class MainActivity : BaseActivity() {
                         put("lat", "${mLocationInfo!!.latitude}")
                         this
                     }
-                    OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this@MainActivity) {}, "上传定位")
+                    OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this@MainActivity) {
+                        override fun onSuccess(resultDesc: ResultDesc?) {
+                            super.onSuccess(resultDesc)
+                            try {
+                                var StationInfo = MyApp.gson.fromJson<ServerStationInfoBean>(resultDesc!!.result, resultDesc::class.java)
+                                if (StationInfo.code == 0) {
+                                    MyApp.ServerStationInfo = StationInfo
+                                } else {
+                                    StationInfo == null
+                                }
+                            } catch (e: Exception) {
+                                LogUtils.e("根据经纬度获取站点错误=$e")
+                            }
+                        }
+
+                        override fun onFailure(call: Call?, code: Int, message: String?) {
+                            LogUtils.e("根据经纬度获取站点错误,code = $code , msg = $message")
+                        }
+                    }, "上传定位")
                     cancel()
                 } else
                     LogUtils.e("经纬度数据为空")

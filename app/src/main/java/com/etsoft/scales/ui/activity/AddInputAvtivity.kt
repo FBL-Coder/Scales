@@ -45,7 +45,7 @@ class AddInputAvtivity : BaseActivity() {
         position = intent.getIntExtra("position", 0)
 
         Add_Input_Type.text = MyApp.mRecycleListBean!!.data[position].name
-        Add_Input_KG.text = "0.00"
+        Add_Input_KG.setText("0.00")
         Add_Input_DanWei.text = MyApp.mRecycleListBean!!.data[position].unit
         Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean!!.data[position].price}"
         Add_Input_ZongJia.text = "￥ 0.00"
@@ -61,7 +61,7 @@ class AddInputAvtivity : BaseActivity() {
             }
             val zongjia_tv = Add_Input_ZongJia.text.toString()
             ToastUtil.showText("正在添加")
-            setResult(Activity.RESULT_OK, intent
+            setResult(101, intent
                     .run {
                         putExtra("data", Input_Main_List_Bean().run {
                             type = MyApp.mRecycleListBean!!.data[position].name
@@ -69,6 +69,7 @@ class AddInputAvtivity : BaseActivity() {
                             price = MyApp.mRecycleListBean!!.data[position].price.toString()
                             unit = MyApp.mRecycleListBean!!.data[position].unit
                             total = zongjia_tv
+                            typeid = position.toString()
                             this
                         })
                         this
@@ -98,7 +99,7 @@ class AddInputAvtivity : BaseActivity() {
                     BlueBoothState.BLUE_DISPOSEDATA_SUCCESS -> {
                         if (msg.obj != null) {
                             val mWeight = msg.obj as String
-                            activity.Add_Input_KG.text = mWeight
+                            activity.Add_Input_KG.setText(mWeight)
                             activity.Add_Input_ZongJia.text = "￥${DecimalFormat("0.00").format(MyApp.mRecycleListBean!!.data[activity.position].price * mWeight.toDouble())}"
                         }
                     }

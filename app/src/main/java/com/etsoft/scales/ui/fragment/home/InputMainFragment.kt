@@ -25,6 +25,7 @@ import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
+import okhttp3.Call
 
 
 /**
@@ -148,6 +149,12 @@ class InputMainFragment : Fragment() {
      * 上传入库数据到服务器
      */
     private fun UpToServer() {
+
+        if (MyApp.ServerStationInfo == null || MyApp.ServerStationInfo!!.data == null) {
+            ToastUtil.showText("请先选择服务站点")
+            return
+        }
+
         var Data = ArrayList<Input_Main_List_Bean>()
         Data.add(Input_Main_List_Bean().run {
             id = "编号"
@@ -172,24 +179,25 @@ class InputMainFragment : Fragment() {
         com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
 
 
-//        var map = HashMap<String, String>().run {
-//            put("userId", "")
-//            put("servicePointId", "")
-//            put("staffId", "")
-//            put("weight", "")
-//            put("recyclingPriceId", "")
-//            this
-//        }
-//
-//        OkHttpUtils.postAync(Ports.ADDINPUTBACK, MyApp.gson.toJson(map), object : MyHttpCallback(mActivity) {
-//            override fun onSuccess(resultDesc: ResultDesc?) {
-//
-//            }
-//
-//            override fun onFailure(call: Call?, code: Int, message: String?) {
-//
-//            }
-//        }, "入库")
+        mInputLiat
+        var map = HashMap<String, String>().run {
+            put("userId", "")
+            put("servicePointId", MyApp.ServerStationInfo?.data!!.id.toString())
+            put("staffId", MyApp.UserInfo!!.data.id.toString())
+            put("weight", mInputLiat[0].weight)
+            put("recyclingPriceId", mInputLiat[0].typeid)
+            this
+        }
+
+        OkHttpUtils.postAsyn(Ports.ADDINPUTBACK, MyApp.gson.toJson(map), object : MyHttpCallback(mActivity) {
+            override fun onSuccess(resultDesc: ResultDesc?) {
+
+            }
+
+            override fun onFailure(call: Call?, code: Int, message: String?) {
+
+            }
+        }, "入库")
 
     }
 
@@ -200,7 +208,9 @@ class InputMainFragment : Fragment() {
         var names = ArrayList<String>()
         var position = 0
         if (mRecycleListBean == null) {
-
+            ToastUtil.showText("数据获取失败,请稍后再试!")
+            mActivity!!.mLoadDialog!!.show()
+            getRecycleData(1)
         }
         for (i in mRecycleListBean!!.data.indices) {
             names.add(mRecycleListBean!!.data[i].name)
@@ -220,7 +230,7 @@ class InputMainFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (data != null) {
+        if (resultCode == 101 && data != null) {
             var bean = data.getSerializableExtra("data") as Input_Main_List_Bean
             bean.id = listid.toString()
             mInputLiat.add(bean)

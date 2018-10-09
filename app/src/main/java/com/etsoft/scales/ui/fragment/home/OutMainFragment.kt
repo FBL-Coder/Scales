@@ -1,11 +1,14 @@
 package com.etsoft.scales.ui.fragment.home
 
+import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
@@ -13,15 +16,16 @@ import com.etsoft.scales.R
 import com.etsoft.scales.SortType
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Out_ListViewAdapter
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.bean.OutListBean
-import com.etsoft.scales.ui.activity.AddOutAvtivity
-import com.etsoft.scales.ui.activity.BaseActivity
-import com.etsoft.scales.ui.activity.MainActivity
-import com.etsoft.scales.ui.activity.OutInfoActivity
+import com.etsoft.scales.bean.Out_Main_Bean
+import com.etsoft.scales.bean.RecycleListBean
+import com.etsoft.scales.ui.activity.*
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
+import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.fragment_out_main.*
 import okhttp3.Call
 
@@ -52,6 +56,50 @@ class OutMainFragment : Fragment() {
         initView()
         mActivity!!.mLoadDialog!!.show()
         initdata(page)
+    }
+
+
+    /**
+     * 获取回收物信息
+     */
+    private fun getRecycleData(type: Int) {
+        OkHttpUtils.getAsyn(Ports.RECYCLELIST, object : MyHttpCallback(mActivity) {
+            override fun onSuccess(resultDesc: ResultDesc?) {
+                mActivity!!.mLoadDialog!!.hide()
+                MyApp.mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
+                if (type == 1)
+                    showSelectDialog()
+            }
+        }, "回收列表")
+    }
+
+
+    /**
+     * 回收物选择框
+     */
+    private fun showSelectDialog() {
+        var names = ArrayList<String>()
+        var position = 0
+        if (MyApp.mRecycleListBean == null) {
+            ToastUtil.showText("数据获取失败,请稍后再试!")
+            mActivity!!.mLoadDialog!!.show()
+            getRecycleData(1)
+        }
+        for (i in MyApp.mRecycleListBean!!.data.indices) {
+            names.add(MyApp.mRecycleListBean!!.data[i].name)
+        }
+        MyDialog(mActivity!!)
+                .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
+                    position = which
+                }).setPositiveButton("确定") { dialog, which ->
+                    dialog.dismiss()
+                    startActivityForResult(Intent(mActivity, AddOutAvtivity::class.java).run {
+                        putExtra("position", position)
+                        this
+                    }, Activity.RESULT_FIRST_USER)
+                }.setNegativeButton("取消") { dialog, which ->
+                    dialog.dismiss()
+                }.create().show()
     }
 
     /**
@@ -139,7 +187,30 @@ class OutMainFragment : Fragment() {
         Main_Out_TitleBar.title.text = "出库记录"
         Main_Out_TitleBar.moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
         Main_Out_TitleBar.moor.setOnClickListener {
-            startActivity(Intent(mActivity!!, AddOutAvtivity::class.java))
+            showSelectDialog()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == 100 && data != null) {
+            var bean = data.getSerializableExtra("data") as Out_Main_Bean
+            mActivity!!.mLoadDialog!!.show()
+            OkHttpUtils.postAsyn(Ports.ADDOUTBACK, MyApp.gson.toJson(bean), object : MyHttpCallback(mActivity) {
+
+                override fun onSuccess(resultDesc: ResultDesc?) {
+                    mActivity!!.mLoadDialog!!.hide()
+                    if (resultDesc!!.getcode() == 0) {
+                        ToastUtil.showText("新增成功")
+                    }
+                }
+
+                override fun onFailure(call: Call?, code: Int, message: String?) {
+                    mActivity!!.mLoadDialog!!.hide()
+                    LogUtils.e("新增出库失败  code = $code, msg = $message")
+                    ToastUtil.showText("新增失败")
+                }
+            }, "新增出库")
+
         }
     }
 

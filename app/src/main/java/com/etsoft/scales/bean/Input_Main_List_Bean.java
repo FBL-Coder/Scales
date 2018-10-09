@@ -10,7 +10,9 @@ public class Input_Main_List_Bean implements Serializable {
     public String id = "";
     public String type = "";
     public String weight = "";
-    public  String unit = "";
+    public String unit = "";
     public String price = "";
     public String total = "";
+    public String typeid = "";
+
 }

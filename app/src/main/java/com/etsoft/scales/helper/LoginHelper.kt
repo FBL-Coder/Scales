@@ -28,7 +28,7 @@ class LoginHelper {
             params["password"] = pass
             var jsonstr = Gson().toJson(params)
 
-            OkHttpUtils.postAync(Ports.LOGIN, jsonstr,
+            OkHttpUtils.postAsyn(Ports.LOGIN, jsonstr,
                     object : MyHttpCallback(activity) {
                         override fun onSuccess(resultDesc: ResultDesc?) {
                             super.onSuccess(resultDesc)

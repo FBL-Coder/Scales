@@ -12,6 +12,8 @@ import com.amap.api.location.AMapLocationClientOption
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.bean.LoginBean
 import com.etsoft.scales.bean.RecycleListBean
+import com.etsoft.scales.bean.ServerStationBean
+import com.etsoft.scales.bean.ServerStationInfoBean
 import com.etsoft.scales.utils.Density
 import com.etsoft.scales.utils.gson.NullStringEmptyTypeAdapterFactory
 import com.etsoft.scales.utils.httpGetDataUtils.LoggerInterceptor
@@ -41,6 +43,12 @@ open class MyApp : ClientApplication() {
          * 用户登录信息
          */
         var UserInfo: LoginBean? = null
+
+        /**
+         * 用户根据定位返回的服务站信息
+         */
+        var ServerStationInfo: ServerStationInfoBean? = null
+
         /**
          * gson NULL适配器
          */

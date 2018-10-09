@@ -20,6 +20,7 @@ import com.etsoft.scales.utils.ClsUtils
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_add_dev.*
 import kotlinx.android.synthetic.main.titlebar_view.*
+import java.lang.Exception
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -132,6 +133,10 @@ class AddDevActivity : BaseActivity() {
      * 配对设备
      */
     private fun PairingBlue() {
+        if (mBluetoothDataIsEnable){
+            ToastUtil.showText("蓝牙为连接状态,不可配对其他设备")
+            return
+        }
         if (mBlue_SS_Adapter != null)
             mBlue_SS_Adapter!!.setOnConnectClick { view, position ->
                 if (mBluetoothAdapter == null || !mBluetoothAdapter!!.isEnabled) {
@@ -155,6 +160,10 @@ class AddDevActivity : BaseActivity() {
 
                 if (mBluetoothAdapter == null || !mBluetoothAdapter!!.isEnabled) {
                     ToastUtil.showText("请打开蓝牙")
+                    return@setOnConnectClick
+                }
+                if (mBluetoothDataIsEnable){
+                    ToastUtil.showText("蓝牙为连接状态,不可配对其他设备")
                     return@setOnConnectClick
                 }
                 //创建连接
@@ -204,15 +213,19 @@ class AddDevActivity : BaseActivity() {
                         ToastUtil.showText("蓝牙已连接")
                         activity.mLoadDialog!!.hide()
                         activity.showConnectView()
-                        if (activity.mBlue_Ok_List.size == 1)
-                            activity.mBlue_Ok_List.removeAt(0)
-                        else {
-                            for (i in activity.mBlue_Ok_List.indices) {
-                                if (activity.mBlue_Ok_List[i].MAC == mBluetoothDevice!!.address)
-                                    activity.mBlue_Ok_List!!.removeAt(i)
+                        try {
+                            if (activity.mBlue_Ok_List.size == 1)
+                                activity.mBlue_Ok_List.removeAt(0)
+                            else {
+                                for (i in activity.mBlue_Ok_List.indices) {
+                                    if (activity.mBlue_Ok_List[i].MAC == mBluetoothDevice!!.address)
+                                        activity.mBlue_Ok_List!!.removeAt(i)
+                                }
                             }
+                            activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
+                        }catch (e:Exception){
+                            mBluetoothAdapter!!.startDiscovery()
                         }
-                        activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
                         mBluetoothDataIsEnable = true
                     }
                     BlueBoothState.BLUE_CONNECT_CLOSE -> {//断开连接

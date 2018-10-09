@@ -2,24 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/null__8">
+    android:background="@color/null__8"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#eee"
         android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/dp_40"
         android:layout_marginRight="@dimen/dp_40"
-        android:background="#eee"
         android:orientation="vertical">
 
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dp_10"
+            android:layout_height="@dimen/dp_40"
+            android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
-            android:text="新增出库信息"
+            android:text="出库信息"
             android:textColor="@color/black"
             android:textSize="@dimen/dp_16" />
 
@@ -30,81 +31,125 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_20"
-            android:paddingRight="@dimen/dp_20">
+            android:paddingLeft="@dimen/dp_30"
+            android:paddingRight="@dimen/dp_30">
 
             <TextView
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="出库运往点"
-                android:textSize="@dimen/sp_14" />
+                android:gravity="center|left"
+                android:text="类型：" />
 
-            <com.etsoft.scales.view.MyEditText
-                android:id="@+id/Add_Out_ToPlace"
+
+            <TextView
+                android:id="@+id/Add_Out_Type"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="XXXXX"
-                android:textSize="@dimen/sp_14" />
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|right"
+                android:text="废铁"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_16" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_20"
-            android:paddingRight="@dimen/dp_20">
+            android:paddingLeft="@dimen/dp_30"
+            android:paddingRight="@dimen/dp_30">
 
             <TextView
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="回收物ID"
-                android:textSize="@dimen/sp_14" />
+                android:gravity="center|left"
+                android:text="重量：" />
 
-            <com.etsoft.scales.view.MyEditText
-                android:id="@+id/Add_Out_ID"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="123"
-                android:textSize="@dimen/sp_14" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_20"
-            android:paddingRight="@dimen/dp_20">
-
-            <TextView
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="回收物重量"
-                android:textSize="@dimen/sp_14" />
 
             <com.etsoft.scales.view.MyEditText
                 android:id="@+id/Add_Out_Weight"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="1234kg"
-                android:textSize="@dimen/sp_14" />
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/white_"
+                android:gravity="center|right"
+                android:hint="0.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_16" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_30"
+            android:paddingRight="@dimen/dp_30">
+
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="单位：" />
+
+
+            <TextView
+                android:id="@+id/Add_Out_Uuit"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|right"
+                android:text="kg"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_16" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_30"
+            android:paddingRight="@dimen/dp_30">
+
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="运往点：" />
+
+
+            <com.etsoft.scales.view.MyEditText
+                android:id="@+id/Add_Out_ToPlace"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/white_"
+                android:gravity="center|right"
+                android:hint="XXXX"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_16" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/black" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,7 +161,7 @@
             android:paddingTop="@dimen/dp_15">
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/Add_Out_Cancle"
+                android:id="@+id/Add_Input_Cancle"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_20"
@@ -130,19 +175,22 @@
 
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/Add_Out_Ok"
+                android:id="@+id/Add_Input_Ok"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_weight="1"
                 android:background="@drawable/butont_clicked"
                 android:elevation="@dimen/dp_10"
-                android:text="提交"
+                android:text="添加"
                 android:textColor="@color/app_text_color"
                 android:textSize="@dimen/dp_16"
                 android:textStyle="bold" />
 
-
         </LinearLayout>
+
+
     </LinearLayout>
+
+
 </RelativeLayout>

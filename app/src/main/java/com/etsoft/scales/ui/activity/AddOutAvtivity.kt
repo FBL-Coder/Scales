@@ -1,14 +1,19 @@
 package com.etsoft.scales.ui.activity
 
-import android.os.Bundle
-import com.etsoft.scales.Ports
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.os.Handler
+import android.os.Message
 import com.etsoft.scales.R
+import com.etsoft.scales.Server.BlueUtils
+import com.etsoft.scales.Server.BlueUtils.Companion.isReadData
+import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
+import com.etsoft.scales.bean.Out_Main_Bean
+import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.ToastUtil
-import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
-import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
-import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import kotlinx.android.synthetic.main.activity_add_out.*
-import okhttp3.Call
+import java.lang.ref.WeakReference
 
 /**
  * Author：FBL  Time： 2018/9/30.
@@ -16,43 +21,86 @@ import okhttp3.Call
  */
 class AddOutAvtivity : BaseActivity() {
 
+
+    private var mHandler: MyHandler? = null
+    private var position = 0
+
     override fun setView(): Int {
         return R.layout.activity_add_out
     }
 
     override fun onCreate() {
+        mHandler = MyHandler(this)
+        //启动数据监听
+        if (mBluetoothDataIsEnable) {
+            isReadData = true
+            BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
+        }
         initData()
     }
 
     private fun initData() {
-        Add_Out_Cancle.setOnClickListener { finish() }
 
-        Add_Out_Ok.setOnClickListener {
+        position = intent.getIntExtra("position", 0)
 
-            var toPlace = Add_Out_ToPlace.text.toString()
-            var id = Add_Out_ID.text.toString()
-            var weight = Add_Out_Weight.text.toString()
-            if (toPlace.isEmpty() || id.isEmpty() || weight.isEmpty()) {
-                ToastUtil.showText("请输入信息")
+        Add_Out_Type.text = MyApp.mRecycleListBean!!.data[position].name
+        Add_Out_Weight
+        Add_Out_Uuit.text = MyApp.mRecycleListBean!!.data[position].unit
+        Add_Out_ToPlace
+
+        Add_Input_Cancle.setOnClickListener { finish() }
+
+        Add_Input_Ok.setOnClickListener {
+            val Weight = Add_Out_Weight.text.toString()
+            val ToPlace = Add_Out_ToPlace.text.toString()
+            if (Weight == "0.00") {
+                ToastUtil.showText("该物品重量为:0.00kg,不可添加")
                 return@setOnClickListener
             }
-            var map = HashMap<String, String>().run {
-                put("toPlace", toPlace)
-                put("id", id)
-                put("weight", weight)
-                this
-            }
-            OkHttpUtils.postAsyn(Ports.ADDOUTBACK, map, object : MyHttpCallback(this) {
-
-                override fun onSuccess(resultDesc: ResultDesc?) {
-
-                }
-
-                override fun onFailure(call: Call?, code: Int, message: String?) {
-
-                }
-            },"添加出库")
+            setResult(100, intent
+                    .run {
+                        putExtra("data", Out_Main_Bean().run {
+                            recyclingPriceId = MyApp.mRecycleListBean!!.data[position].id.toString()
+                            weight = Weight
+                            toPlace = ToPlace
+                            this
+                        })
+                        this
+                    })
             finish()
         }
+    }
+
+    /**
+     * Handler 静态内部类，防止内存泄漏
+     */
+    @SuppressLint("SetTextI18n")
+    private class MyHandler(activity: AddOutAvtivity) : Handler() {
+        private var activityWeakReference: WeakReference<AddOutAvtivity> = WeakReference<AddOutAvtivity>(activity)
+        override fun handleMessage(msg: Message) {
+            val activity = activityWeakReference.get()
+            if (activity != null) {
+                when (msg.what) {
+                    BlueBoothState.BLUE_READDATA_SUCCESS -> {
+                        if (msg.obj != null)
+                            BlueUtils.disposeData(this, msg.obj as ByteArray)
+                    }
+                    BlueBoothState.BLUE_OBTAINDATA_ERROR -> {
+                        ToastUtil.showText("蓝牙数据出错,请稍后在试")
+                    }
+                    BlueBoothState.BLUE_DISPOSEDATA_SUCCESS -> {
+                        if (msg.obj != null) {
+                            val mWeight = msg.obj as String
+                            activity.Add_Out_Weight.setText(mWeight)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onStop() {
+        isReadData = false
+        super.onStop()
     }
 }

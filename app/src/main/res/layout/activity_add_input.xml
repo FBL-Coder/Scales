@@ -17,7 +17,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_30"
+            android:layout_height="@dimen/dp_40"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
             android:text="回收物信息"
@@ -31,15 +31,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_30"
             android:paddingRight="@dimen/dp_30">
 
             <TextView
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="类型：" />
@@ -48,7 +48,7 @@
             <TextView
                 android:id="@+id/Add_Input_Type"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center|right"
                 android:text="废铁"
@@ -59,7 +59,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_30"
@@ -67,19 +67,20 @@
 
             <TextView
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="重量：" />
 
 
-            <TextView
+            <com.etsoft.scales.view.MyEditText
                 android:id="@+id/Add_Input_KG"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white_"
                 android:layout_weight="2"
                 android:gravity="center|right"
-                android:text="28.98Kg"
+                android:hint="0.00"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_16" />
 
@@ -87,7 +88,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_30"
@@ -95,7 +96,7 @@
 
             <TextView
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="单位：" />
@@ -104,7 +105,7 @@
             <TextView
                 android:id="@+id/Add_Input_DanWei"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center|right"
                 android:text="kg"
@@ -115,7 +116,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_30"
@@ -123,7 +124,7 @@
 
             <TextView
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="单价：" />
@@ -132,7 +133,7 @@
             <TextView
                 android:id="@+id/Add_Input_DanJia"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center|right"
                 android:text="￥4.56"
@@ -173,7 +174,7 @@
                 android:gravity="center|right"
                 android:text="￥4.56"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dp_16" />
+                android:textSize="@dimen/sp_18" />
 
         </LinearLayout>
 

@@ -185,7 +185,7 @@ public class OkHttpUtils {
      * @param callback 请求回调
      * @Description POST提交JSON数据
      */
-    public static void postAync(String url, String json, HttpCallback callback,String tag) {
+    public static void postAsyn(String url, String json, HttpCallback callback,String tag) {
         Request request = OkHttpRequest.builderRequest(OkHttpRequest.HttpMethodType.POST, url, null, json, tag);
 
         OkHttpRequest.doEnqueue(request, callback);

@@ -33,6 +33,7 @@ constructor(private val mContext: Context) {
 
     fun show(text: Array<String> = arrayOf("正在加载", "加载失败"), isClickHide: Boolean = true) {
         val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
+        dialog.setCancelable(isClickHide)
         dialog.show()
         isShow = true
         val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
@@ -69,7 +70,7 @@ constructor(private val mContext: Context) {
         dialog.show()
         val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
         textView.text = text
-        dialogTimer(text)
+        dialogTimer("加载失败")
     }
 
     fun show(text: String = "加载数据...", isClickHide: Boolean = true) {
@@ -77,7 +78,7 @@ constructor(private val mContext: Context) {
         dialog.show()
         val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
         textView.text = text
-        dialogTimer(text)
+        dialogTimer("加载失败")
     }
 
     fun hide() {
