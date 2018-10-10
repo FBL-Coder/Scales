@@ -121,10 +121,23 @@
         <activity
             android:name="com.etsoft.scales.ui.activity.ServerStationActivity"
             android:screenOrientation="portrait" />
-        <!--服务站点列表-->
+
+        <!--服务站点详情-->
         <activity
             android:name="com.etsoft.scales.ui.activity.ServerStationInfoActivity"
             android:screenOrientation="portrait" />
+
+        <!--客户注册-->
+        <activity
+            android:name="com.etsoft.scales.ui.activity.RegisterUserActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <!--客户查询-->
+        <activity
+            android:name="com.etsoft.scales.ui.activity.UserQueryActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!--打印机服务-->
         <service android:name="com.smartdevice.aidl.IZKCService">

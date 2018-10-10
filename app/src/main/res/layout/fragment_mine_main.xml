@@ -206,7 +206,7 @@
 
 
             <LinearLayout
-                android:id="@+id/Mine_DevManager"
+                android:id="@+id/RegisterUser"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_15"
@@ -227,7 +227,7 @@
                     android:layout_weight="11"
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/dp_20"
-                    android:text="设备管理"
+                    android:text="客户注册"
                     android:textSize="@dimen/dp_14" />
 
                 <ImageView
@@ -244,7 +244,7 @@
 
 
             <LinearLayout
-                android:id="@+id/Mine_Setting"
+                android:id="@+id/User_Query"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_15"
@@ -265,7 +265,7 @@
                     android:layout_weight="11"
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/dp_20"
-                    android:text="设置"
+                    android:text="客户查询"
                     android:textSize="@dimen/dp_14" />
 
                 <ImageView

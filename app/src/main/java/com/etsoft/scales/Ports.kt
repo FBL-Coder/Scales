@@ -67,6 +67,16 @@ class Ports {
          * */
         var SERVERLISTINFO = port + "webapi/Servicepoint/info"
 
+        /**
+         * 客户注册
+         * */
+        var REISTERUSER = port + "webapi/User/insertApi"
+
+        /**
+         * 用户查询
+         * */
+        var USERQUERY = port + "webapi/User/getInfoByPhoneApi"
+
 
     }
 }

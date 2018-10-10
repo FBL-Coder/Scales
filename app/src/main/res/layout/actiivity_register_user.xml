@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white__"
+    android:orientation="vertical">
+
+    <com.etsoft.scales.view.TitleBar
+        android:id="@+id/RegisterUser_TitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_10" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="姓名:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_Name"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="性别:" />
+
+                <RadioGroup
+                    android:id="@+id/RegisterUser_Sax"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
+                        />
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/man"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="男" />
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/women"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="女" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:gravity="center"
+                    android:text="卡号:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_CardID"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:inputType="phone"
+                    android:text="手机号:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_Phone"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="县/区:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_District"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:lines="1"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="乡/镇:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_Towns"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:text="街道:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_Street"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="社区:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_Community"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:lines="1"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="小区:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_Plot"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:lines="1"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="楼号:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_BuildingNo"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@color/white_"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:drawableLeft="@drawable/ic_star_red_500_24dp"
+                    android:gravity="center"
+                    android:text="门号:" />
+
+                <com.etsoft.scales.view.MyEditText
+                    android:id="@+id/RegisterUser_DoorNo"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

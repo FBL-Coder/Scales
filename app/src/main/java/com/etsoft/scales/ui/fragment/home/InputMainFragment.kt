@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
+import com.etsoft.scales.view.MyEditText
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
 
@@ -131,13 +133,22 @@ class InputMainFragment : Fragment() {
             title.text = "入库"
             moor.setImageResource(R.drawable.ic_print_black_24dp)
             moor.setOnClickListener {
+                val edit = MyEditText(mActivity)
+                edit.hint = "请输入手机号"
+                edit.inputType = InputType.TYPE_CLASS_PHONE
                 MyDialog(mActivity!!)
-                        .setMessage("是否要打印票据？")
+                        .setMessage("打印票据需要输入用户手机号!")
+                        .setView(edit)
                         .setNegativeButton("取消") { dialog, which ->
                             dialog.dismiss()
                         }
                         .setPositiveButton("打印") { dialog, which ->
-                            UpToServer()
+                            val phone = edit.text.toString()
+                            if (phone == "") {
+                                ToastUtil.showText("请输入用户手机号")
+                                return@setPositiveButton
+                            }
+                            UpToServer(phone)
                             dialog.dismiss()
                         }.create().show()
             }
@@ -156,28 +167,16 @@ class InputMainFragment : Fragment() {
     /**
      * 上传入库数据到服务器
      */
-    private fun UpToServer() {
+    private fun UpToServer(userphone: String) {
         val ServerStation_Id = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1)
         if (ServerStation_Id == -1) {
             ToastUtil.showText("请先选择服务站点")
             return
         }
-        mIzkcService.printerInit()
         mActivity!!.mLoadDialog!!.show(arrayOf("正在打印", "打印超时"))
-        var Data = ArrayList<Input_Main_List_Bean>()
-        Data.add(Input_Main_List_Bean().run {
-            id = "编号"
-            type = "类型"
-            weight = "重量"
-            unit = "单位"
-            price = "单位"
-            total = "总价"
-            this
-        })
-        Data.addAll(mInputLiat)
 
         var UpBean = AppInputBean()
-        UpBean.phone = ""
+        UpBean.phone = userphone
         UpBean.servicePointId = ServerStation_Id.toString()
         UpBean.staffId = MyApp.UserInfo!!.data.id.toString()
 
@@ -192,15 +191,32 @@ class InputMainFragment : Fragment() {
 
         OkHttpUtils.postAsyn(Ports.ADDINPUTBACK, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
             override fun onSuccess(resultDesc: ResultDesc?) {
-                com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("--------------------------")
-                for (i in Data.indices) {
-                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
-                    var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
-                    var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
-                    var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
-                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
+                try {
+                    var Data = ArrayList<Input_Main_List_Bean>()
+                    Data.add(Input_Main_List_Bean().run {
+                        id = "编号"
+                        type = "类型"
+                        weight = "重量"
+                        unit = "单位"
+                        price = "单位"
+                        total = "总价"
+                        this
+                    })
+                    Data.addAll(mInputLiat)
+                    mIzkcService.printerInit()
+                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("--------------------------")
+                    for (i in Data.indices) {
+                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
+                        var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
+                        var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
+                        var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
+                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
+                    }
+                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
+
+                } catch (e: Exception) {
+                    ToastUtil.showText("打印机发生错误")
                 }
-                com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
             }
 
             override fun onFailure(code: Int, message: String?) {
@@ -223,7 +239,7 @@ class InputMainFragment : Fragment() {
         for (i in mRecycleListBean!!.data.indices) {
             names.add(mRecycleListBean!!.data[i].name)
         }
-        MyDialog(mActivity!!)
+        MyDialog(mActivity!!).setTitle("选择回收物")
                 .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
                     position = which
                 }).setPositiveButton("确定") { dialog, which ->

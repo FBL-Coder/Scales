@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.app.MyApp
-import com.etsoft.scales.ui.activity.BaseActivity
-import com.etsoft.scales.ui.activity.MainActivity
-import com.etsoft.scales.ui.activity.RecordNotificationActivity
-import com.etsoft.scales.ui.activity.ServerStationActivity
+import com.etsoft.scales.ui.activity.*
 import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.fragment_mine_main.*
@@ -72,13 +69,13 @@ class MineMainFragment : Fragment() {
             //服务站点
             startActivity(Intent(mActivity, ServerStationActivity::class.java))
         }
-        Mine_DevManager!!.setOnClickListener {
-            //设备管理
-            ToastUtil.showText("设备管理")
+        RegisterUser!!.setOnClickListener {
+            //注册用户
+            startActivity(Intent(mActivity, RegisterUserActivity::class.java))
         }
-        Mine_Setting!!.setOnClickListener {
-            //设置
-            ToastUtil.showText("设置")
+        User_Query!!.setOnClickListener {
+            //客户查询
+            startActivity(Intent(mActivity, UserQueryActivity::class.java))
         }
         Mine_Logout!!.setOnClickListener {
             //退出
