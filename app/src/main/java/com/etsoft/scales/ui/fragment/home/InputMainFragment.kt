@@ -124,6 +124,10 @@ class InputMainFragment : Fragment() {
             title.text = "入库"
             moor.setImageResource(R.drawable.ic_print_black_24dp)
             moor.setOnClickListener {
+                if (mInputLiat == null || mInputLiat.size == 0){
+                    ToastUtil.showText("没有数据,请添加记录")
+                    return@setOnClickListener
+                }
                 val edit = MyEditText(mActivity)
                 edit.hint = "请输入手机号"
                 edit.inputType = InputType.TYPE_CLASS_PHONE
@@ -195,7 +199,7 @@ class InputMainFragment : Fragment() {
         }
         UpBean.recyclings = lingsBeanList
 
-        OkHttpUtils.postAsyn(Ports.ADDINPUTBACK, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
+        OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mActivity!!.mLoadDialog!!.hide()
                 if (resultDesc!!.getcode() != 0) {

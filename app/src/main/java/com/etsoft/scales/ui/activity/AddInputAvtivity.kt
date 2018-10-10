@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
+import android.text.Editable
+import android.text.TextWatcher
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.Server.BlueUtils
@@ -15,6 +17,7 @@ import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.view.MyDialog
+import io.reactivex.internal.operators.observable.ObservableJoin
 import kotlinx.android.synthetic.main.activity_add_input.*
 import java.lang.ref.WeakReference
 import java.text.DecimalFormat
@@ -24,7 +27,6 @@ import java.text.DecimalFormat
  * 添加入库数据
  */
 class AddInputAvtivity : BaseActivity() {
-
 
     private var mHandler: MyHandler? = null
     private var position = 0
@@ -51,10 +53,10 @@ class AddInputAvtivity : BaseActivity() {
         Add_Input_KG.setText("0")
         Add_Input_DanWei.text = MyApp.mRecycleListBean!!.data[position].unit
         Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean!!.data[position].price}"
-        Add_Input_ZongJia.text = "￥ 0.00"
 
         Input_ServerStation.setOnClickListener {
-            MyDialog(this).setMessage("是否重新选择服务站?")
+            val text = if (AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1) == -1) "是否前往选择服务站?" else "是否重新选择服务站?"
+            MyDialog(this).setMessage(text)
                     .setNegativeButton("取消") { dialog, which ->
                         dialog.dismiss()
                     }.setPositiveButton("选择") { dialog, which ->
@@ -68,11 +70,10 @@ class AddInputAvtivity : BaseActivity() {
 
         Add_Input_Ok.setOnClickListener {
             val weight_tv = Add_Input_KG.text.toString()
-            if (weight_tv == "0.00"||weight_tv == "0") {
+            if (weight_tv == "0.00" || weight_tv == "0") {
                 ToastUtil.showText("该物品重量为:0.00kg,不可添加")
                 return@setOnClickListener
             }
-            val zongjia_tv = Add_Input_ZongJia.text.toString()
             setResult(101, intent
                     .run {
                         putExtra("data", Input_Main_List_Bean().run {
@@ -80,7 +81,7 @@ class AddInputAvtivity : BaseActivity() {
                             weight = weight_tv
                             price = MyApp.mRecycleListBean!!.data[position].price.toString()
                             unit = MyApp.mRecycleListBean!!.data[position].unit
-                            total = zongjia_tv
+                            total = "￥${DecimalFormat("0.00").format(MyApp.mRecycleListBean!!.data[position].price * weight_tv.toDouble())}"
                             typeid = MyApp.mRecycleListBean!!.data[position].id.toString()
                             this
                         })
@@ -88,7 +89,6 @@ class AddInputAvtivity : BaseActivity() {
                     })
             finish()
         }
-
     }
 
     /**
@@ -112,7 +112,6 @@ class AddInputAvtivity : BaseActivity() {
                         if (msg.obj != null) {
                             val mWeight = msg.obj as String
                             activity.Add_Input_KG.setText(mWeight)
-                            activity.Add_Input_ZongJia.text = "￥${DecimalFormat("0.00").format(MyApp.mRecycleListBean!!.data[activity.position].price * mWeight.toDouble())}"
                         }
                     }
                 }

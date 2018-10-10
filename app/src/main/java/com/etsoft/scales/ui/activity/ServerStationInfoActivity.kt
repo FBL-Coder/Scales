@@ -83,6 +83,7 @@ class ServerStationInfoActivity : BaseActivity() {
                             }.setPositiveButton("是的") { dialog, which ->
                                 AppSharePreferenceMgr.put(SERVERSTATION_ID, mInfoBean!!.data.id)
                                 AppSharePreferenceMgr.put(SERVERSTATION_NAME, mInfoBean!!.data.name)
+                                ToastUtil.showText("绑定成功")
                                 dialog.dismiss()
                             }.show()
                 } else {
@@ -93,6 +94,7 @@ class ServerStationInfoActivity : BaseActivity() {
                             }.setPositiveButton("是的") { dialog, which ->
                                 AppSharePreferenceMgr.put(SERVERSTATION_ID, mInfoBean!!.data.id)
                                 AppSharePreferenceMgr.put(SERVERSTATION_NAME, mInfoBean!!.data.name)
+                                ToastUtil.showText("绑定成功")
                                 dialog.dismiss()
                             }.show()
                 }

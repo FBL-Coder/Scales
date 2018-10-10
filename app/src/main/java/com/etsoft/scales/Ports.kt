@@ -63,8 +63,8 @@ class Ports {
 
 
         /**
-         * 带ID 为详情
-         * */
+         * 服务站详情
+         */
         var SERVERLISTINFO = port + "webapi/Servicepoint/info"
 
         /**
@@ -76,6 +76,10 @@ class Ports {
          * 用户查询
          * */
         var USERQUERY = port + "webapi/User/getInfoByPhoneApi"
+        /**
+         * 用户查询
+         * */
+        var ADDOUTBACKLIST = port + "webapi/Replenishstockdetails/insertList"
 
 
     }

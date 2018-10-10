@@ -177,37 +177,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@color/black" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_30"
-            android:paddingRight="@dimen/dp_30">
-
-            <TextView
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:gravity="center|right"
-                android:text="总价：" />
-
-
-            <TextView
-                android:id="@+id/Add_Input_ZongJia"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:gravity="center|right"
-                android:text="￥4.56"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_18" />
-
-        </LinearLayout>
 
 
         <LinearLayout
