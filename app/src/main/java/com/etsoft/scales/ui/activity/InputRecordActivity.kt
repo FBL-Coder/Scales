@@ -28,6 +28,7 @@ class InputRecordActivity : BaseActivity() {
     private var mListBean: InputRecordListBean? = null
     private var Maxpage = 1
     private var page = 1
+    private var mInputRecordListViewAdapter: InputRecordListViewAdapter? = null
 
     override fun setView(): Int {
         return R.layout.activity_input_record
@@ -58,12 +59,12 @@ class InputRecordActivity : BaseActivity() {
                     var pages = mListBean!!.count / linit
                     Maxpage = Math.ceil(pages.toDouble()).toInt()
                 } else {
-                    LogUtils.e("获取数据失败:"+"code="+list.code+"  msg="+list.msg)
+                    LogUtils.e("获取数据失败:" + "code=" + list.code + "  msg=" + list.msg)
                 }
                 initListView()
             }
 
-            override fun onFailure( code: Int, message: String?) {
+            override fun onFailure(code: Int, message: String?) {
                 mLoadDialog!!.hide()
                 InputRecord_XRefreshView.stopRefresh()
                 InputRecord_XRefreshView.stopLoadMore()
@@ -105,14 +106,17 @@ class InputRecordActivity : BaseActivity() {
             })
         }
 
-        InputRecord_ListView.adapter = InputRecordListViewAdapter(mListBean!!)
 
-        InputRecord_ListView.setOnItemClickListener { parent, view, position, id ->
-            startActivity(Intent(this, InputInfoActivity::class.java).run {
-                putExtra("content", mListBean!!.data[position])
-                this
-            })
-        }
+        if (mInputRecordListViewAdapter == null) {
+            mInputRecordListViewAdapter = InputRecordListViewAdapter(mListBean!!)
+            InputRecord_ListView.adapter = mInputRecordListViewAdapter
+            InputRecord_ListView.setOnItemClickListener { parent, view, position, id ->
+                startActivity(Intent(this, InputInfoActivity::class.java).run {
+                    putExtra("content", mListBean!!.data[position])
+                    this
+                })
+            }
+        } else mInputRecordListViewAdapter!!.notifyDataSetChanged(mListBean!!)
     }
 
     private fun initView() {

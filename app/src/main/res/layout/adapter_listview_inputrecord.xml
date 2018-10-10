@@ -9,22 +9,11 @@
     <TextView
         android:id="@+id/Input_Record_Time"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_30"
+        android:layout_height="@dimen/dp_20"
         android:background="@color/white__"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_20"
         android:textStyle="bold" />
 
-
-    <TextView
-        android:id="@+id/Input_Record_Staff"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_30"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_20"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dp_16"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,13 +22,12 @@
         android:paddingLeft="@dimen/dp_20">
 
         <TextView
-            android:id="@+id/Input_Record_DanHao"
+            android:id="@+id/Input_Record_Staff"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_30"
-            android:layout_weight="3"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dp_20"
-            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black__"
             android:textSize="@dimen/sp_14" />
 
 
@@ -60,7 +48,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/black__"
+            android:textSize="@dimen/dp_16" />
+
+
+        <TextView
+            android:id="@+id/Input_Record_Weight"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black__"
             android:textSize="@dimen/dp_16" />
 
         <ImageView

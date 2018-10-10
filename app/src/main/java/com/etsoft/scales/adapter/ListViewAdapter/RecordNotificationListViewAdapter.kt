@@ -33,7 +33,6 @@ class RecordNotificationListViewAdapter(bean: RecordNotificationBean) : BaseAdap
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.NotiFication_ID.text = mList[position].uuid.subSequence(mList[position].uuid.length - 4, mList[position].uuid.length)
         mViewHolder.NotiFication_Admin.text = mList[position].admin_alias
         mViewHolder.NotiFication_Title.text = mList[position].title
         mViewHolder.NotiFication_Type.text = when (mList[position].type) {
@@ -61,7 +60,6 @@ class RecordNotificationListViewAdapter(bean: RecordNotificationBean) : BaseAdap
 
 
     class ViewHolder(view: View) {
-        val NotiFication_ID: TextView = view.findViewById(R.id.NotiFication_ID)
         val NotiFication_Admin: TextView = view.findViewById(R.id.NotiFication_Admin)
         val NotiFication_Title: TextView = view.findViewById(R.id.NotiFication_Title)
         val NotiFication_Type: TextView = view.findViewById(R.id.NotiFication_Type)

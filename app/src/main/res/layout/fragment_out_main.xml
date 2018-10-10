@@ -8,7 +8,61 @@
     <com.etsoft.scales.view.TitleBar
         android:id="@+id/Main_Out_TitleBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"/>
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_10"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp_5"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="负责人"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16" />
+
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="状态"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16" />
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="运往点"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16" />
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="重量"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_16" />
+
+    </LinearLayout>
+
+
+
     <com.andview.refreshview.XRefreshView
         android:id="@+id/Out_XRefreshView"
         android:layout_width="match_parent"

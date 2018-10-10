@@ -26,6 +26,7 @@ class RecordNotificationActivity : BaseActivity() {
     private var mListBean: RecordNotificationBean? = null
     private var Maxpage = 1
     private var page = 1
+    private var mRecordNotificationListViewAdapter: RecordNotificationListViewAdapter? = null
 
     override fun setView(): Int {
         return R.layout.activity_record_notification
@@ -103,14 +104,17 @@ class RecordNotificationActivity : BaseActivity() {
             })
         }
 
-        Notification_Record_List.adapter = RecordNotificationListViewAdapter(mListBean!!)
 
-        Notification_Record_List.setOnItemClickListener { parent, view, position, id ->
-            startActivity(Intent(this@RecordNotificationActivity, NotificationInfoActivity::class.java).run {
-                putExtra("id", "${mListBean!!.data[position].id}")
-                this
-            })
-        }
+        if (mRecordNotificationListViewAdapter == null) {
+            mRecordNotificationListViewAdapter = RecordNotificationListViewAdapter(mListBean!!)
+            Notification_Record_List.adapter = mRecordNotificationListViewAdapter
+            Notification_Record_List.setOnItemClickListener { parent, view, position, id ->
+                startActivity(Intent(this@RecordNotificationActivity, NotificationInfoActivity::class.java).run {
+                    putExtra("id", "${mListBean!!.data[position].id}")
+                    this
+                })
+            }
+        }else mRecordNotificationListViewAdapter!!.notifyDataSetChanged(mListBean!!)
     }
 
     private fun initView() {

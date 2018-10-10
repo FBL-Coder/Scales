@@ -1,10 +1,7 @@
 package com.etsoft.scales.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
-import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.bean.OutListBean
 import kotlinx.android.synthetic.main.activity_out_info.*
 
@@ -18,15 +15,24 @@ class OutInfoActivity : BaseActivity() {
     override fun setView(): Int {
         return R.layout.activity_out_info
     }
+
     override fun onCreate() {
         initView()
         initData()
     }
 
     private fun initData() {
-
         var content = intent.getSerializableExtra("content") as OutListBean.DataBean
-        LogUtils.i(MyApp.gson.toJson(content))
+        Type.text = content.recyclingPrice.name
+        Uuid.text = content.recyclingPrice.uuid
+        toPlace.text = content.to_place
+        weight.text = "${content.weight} ${content.recyclingPrice.unit}"
+        status.text = if (content.recyclingPrice.status.toInt() == 1) "上架" else "下架"
+        price.text = content.recyclingPrice.price.toString()
+        inventory.text = content.recyclingPrice.inventory.toString()
+        update.text = content.recyclingPrice.update_time
+        workname.text = content.staff_name
+        Administrator.text = content.admin_alias
     }
 
     private fun initView() {

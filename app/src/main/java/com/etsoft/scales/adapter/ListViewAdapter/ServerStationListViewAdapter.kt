@@ -10,7 +10,7 @@ import com.etsoft.scales.bean.ServerStationBean
 
 /**
  * Author：FBL  Time： 2018/7/23.
- * Mian 服务站点列表Adapter
+ * 服务站点列表Adapter
  *
  */
 class ServerStationListViewAdapter(bean: ServerStationBean) : BaseAdapter() {
@@ -21,7 +21,6 @@ class ServerStationListViewAdapter(bean: ServerStationBean) : BaseAdapter() {
         mList = bean.data as ArrayList<ServerStationBean.DataBean>
         super.notifyDataSetChanged()
     }
-
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
@@ -36,7 +35,6 @@ class ServerStationListViewAdapter(bean: ServerStationBean) : BaseAdapter() {
         mViewHolder.ServerStation_Admin.text = mList[position].admin_alias
         mViewHolder.ServerStation_address.text = mList[position].address
         mViewHolder.ServerStation_Name.text = mList[position].name
-        mViewHolder.NotiFication_Phone.text = mList[position].functionary_phone
         mViewHolder.ServerStation_Time.text = mList[position].create_time
         return view!!
 
@@ -60,7 +58,6 @@ class ServerStationListViewAdapter(bean: ServerStationBean) : BaseAdapter() {
         val ServerStation_Admin: TextView = view.findViewById(R.id.ServerStation_Admin)
         val ServerStation_address: TextView = view.findViewById(R.id.ServerStation_address)
         val ServerStation_Name: TextView = view.findViewById(R.id.ServerStation_Name)
-        val NotiFication_Phone: TextView = view.findViewById(R.id.NotiFication_Phone)
         val ServerStation_Time: TextView = view.findViewById(R.id.ServerStation_Time)
     }
 }

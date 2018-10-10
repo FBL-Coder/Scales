@@ -37,21 +37,12 @@ class Main_Out_ListViewAdapter(context: Context, bean: OutListBean) : BaseAdapte
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.mOutTime.text = mList[position].create_time
-        mViewHolder.mOutDanHao.text = mList[position].recycling_price_id.toString()
+        mViewHolder.mOutTime.text = mList[position].update_time
         mViewHolder.mOutFrom.text = mList[position].staff_name
-        mViewHolder.mOutState.text = mList[position].staff_id.toString()
+        mViewHolder.mOutState.text = if (mList[position].recyclingPrice.status.toInt() == 1) "已出库" else "未出库"
         mViewHolder.mOutTo.text = mList[position].to_place
-        mViewHolder.mOutWeight.text = mList[position].weight.toString()+"Kg"
-        when (mList[position].recycling_price_id) {
-            1.0 -> {
-                mViewHolder.mOutTypeFeiT.background = mContext.getDrawable(R.color.white__)
-            }
-            2.0->{
-                mViewHolder.mOutTypeFeiZ.background = mContext.getDrawable(R.color.white__)
-            }
-
-        }
+        mViewHolder.mOutWeight.text = mList[position].weight.toString() + mList[position].recyclingPrice.unit
+        mViewHolder.mOutType.text = mList[position].recyclingPrice.name
 
         return view!!
 
@@ -73,16 +64,10 @@ class Main_Out_ListViewAdapter(context: Context, bean: OutListBean) : BaseAdapte
 
     class ViewHolder(view: View) {
         val mOutTime: TextView = view.findViewById(R.id.Out_Time)
-        val mOutDanHao: TextView = view.findViewById(R.id.Out_DanHao)
         val mOutFrom: TextView = view.findViewById(R.id.Out_From)
         val mOutState: TextView = view.findViewById(R.id.Out_State)
         val mOutTo: TextView = view.findViewById(R.id.Out_To)
         val mOutWeight: TextView = view.findViewById(R.id.Out_Weight)
-        val mOutTypeFeiBL: TextView = view.findViewById(R.id.Out_Type_FeiBL)
-        val mOutTypeFeiSL: TextView = view.findViewById(R.id.Out_Type_FeiSL)
-        val mOutTypeFeiZ: TextView = view.findViewById(R.id.Out_Type_FeiZ)
-        val mOutTypeFeiT: TextView = view.findViewById(R.id.Out_Type_FeiT)
-        val OutTypeFeiM: TextView = view.findViewById(R.id.Out_Type_FeiM)
-        val OutTypeFeiQT: TextView = view.findViewById(R.id.Out_Type_FeiQT)
+        val mOutType: TextView = view.findViewById(R.id.Out_Type)
     }
 }

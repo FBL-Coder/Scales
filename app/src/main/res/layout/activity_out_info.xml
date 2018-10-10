@@ -2,34 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_"
+    android:background="@color/white__"
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
         android:id="@+id/OutInfo_TitleBar"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_10"
         android:layout_height="@dimen/dp_40" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white_"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10">
 
         <TextView
             android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.6"
+            android:gravity="center_vertical"
             android:text="出库类型:" />
 
         <TextView
             android:id="@+id/Type"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="right"
-            android:text="废铁"
+            android:textSize="@dimen/dp_14"
             android:textColor="@color/black" />
     </LinearLayout>
 
@@ -37,6 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_5"
+        android:padding="@dimen/dp_5"
+        android:background="@color/white_"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10">
 
@@ -52,7 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="right"
-            android:text="709907f3b68b4e214033fca4830cbd79"
             android:textColor="@color/black" />
     </LinearLayout>
 
@@ -60,6 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_5"
+        android:padding="@dimen/dp_5"
+        android:background="@color/white_"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10">
 
@@ -75,13 +85,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="right"
-            android:text="西安"
             android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:padding="@dimen/dp_5"
+        android:background="@color/white_"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10">
@@ -98,14 +110,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="right"
-            android:text="100kg"
             android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5"
         android:orientation="horizontal"
+        android:background="@color/white_"
+        android:layout_marginTop="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10">
 
@@ -121,8 +135,137 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="right"
-            android:text="上架"
             android:textColor="@color/black" />
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white_"
+        android:padding="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="单价:" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white_"
+        android:padding="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="库存量:" />
+
+        <TextView
+            android:id="@+id/inventory"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:background="@color/white_"
+        android:layout_marginTop="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="时间:" />
+
+        <TextView
+            android:id="@+id/update"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:background="@color/white_"
+        android:layout_marginTop="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="员工:" />
+
+        <TextView
+            android:id="@+id/workname"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white_"
+        android:padding="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="管理员:" />
+
+        <TextView
+            android:id="@+id/Administrator"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
 
 </LinearLayout>

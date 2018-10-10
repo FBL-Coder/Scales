@@ -1,7 +1,6 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
@@ -9,14 +8,12 @@ import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.adapter.ListViewAdapter.ServerStationListViewAdapter
 import com.etsoft.scales.app.MyApp
-import com.etsoft.scales.bean.RecordNotificationBean
 import com.etsoft.scales.bean.ServerStationBean
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import kotlinx.android.synthetic.main.activity_server_station.*
-import okhttp3.Call
 import java.util.*
 
 
@@ -28,7 +25,7 @@ class ServerStationActivity : BaseActivity() {
     private var mListBean: ServerStationBean? = null
     private var Maxpage = 1
     private var page = 1
-
+    private var mServerStationListViewAdapter: ServerStationListViewAdapter? = null
 
     override fun setView(): Int {
         return R.layout.activity_server_station
@@ -64,7 +61,7 @@ class ServerStationActivity : BaseActivity() {
                 initListView()
             }
 
-            override fun onFailure( code: Int, message: String?) {
+            override fun onFailure(code: Int, message: String?) {
                 mLoadDialog!!.hide()
                 ServerStation_XRefreshView.stopRefresh()
                 ServerStation_XRefreshView.stopLoadMore()
@@ -105,14 +102,19 @@ class ServerStationActivity : BaseActivity() {
             })
         }
 
-        ServerStation_List.adapter = ServerStationListViewAdapter(mListBean!!)
 
-        ServerStation_List.setOnItemClickListener { parent, view, position, id ->
-            startActivity(Intent(this, ServerStationInfoActivity::class.java).run {
-                putExtra("id", "${mListBean!!.data[position].id}")
-                this
-            })
-        }
+        if (mServerStationListViewAdapter == null) {
+            mServerStationListViewAdapter = ServerStationListViewAdapter(mListBean!!)
+            ServerStation_List.adapter = mServerStationListViewAdapter
+            ServerStation_List.setOnItemClickListener { parent, view, position, id ->
+                startActivity(Intent(this, ServerStationInfoActivity::class.java).run {
+                    putExtra("id", "${mListBean!!.data[position].id}")
+                    this
+                })
+            }
+        } else mServerStationListViewAdapter!!.notifyDataSetChanged(mListBean!!)
+
+
     }
 
     private fun initView() {

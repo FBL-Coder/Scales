@@ -37,6 +37,7 @@ class OutMainFragment : Fragment() {
     private var mOutList: OutListBean? = null
     private var Maxpage = 1
     private var page = 1
+    private var mMain_Out_ListViewAdapter: Main_Out_ListViewAdapter? = null
 
     companion object {
         private var mActivity: BaseActivity? = null
@@ -175,20 +176,25 @@ class OutMainFragment : Fragment() {
             })
         }
 
-        Out_Record_ListView.adapter = Main_Out_ListViewAdapter(mActivity!!, mOutList!!)
-
-        Out_Record_ListView.setOnItemClickListener { parent, view, position, id ->
-            startActivity(Intent(mActivity, OutInfoActivity::class.java).run {
-                putExtra("content", mOutList!!.data[position]);this
-            })
-        }
+        if (mMain_Out_ListViewAdapter == null) {
+            mMain_Out_ListViewAdapter = Main_Out_ListViewAdapter(mActivity!!, mOutList!!)
+            Out_Record_ListView.adapter = mMain_Out_ListViewAdapter
+            Out_Record_ListView.setOnItemClickListener { parent, view, position, id ->
+                startActivity(Intent(mActivity, OutInfoActivity::class.java).run {
+                    putExtra("content", mOutList!!.data[position]);this
+                })
+            }
+        } else mMain_Out_ListViewAdapter!!.notifyDataSetChanged(mOutList!!)
     }
 
     /**
      * 初始化TitleBar
      */
     private fun initView() {
-        Main_Out_TitleBar.back.visibility = View.GONE
+        Main_Out_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+        Main_Out_TitleBar.back.setOnClickListener {
+            startActivity(Intent(mActivity, AddDevActivity::class.java))
+        }
         Main_Out_TitleBar.title.text = "出库记录"
         Main_Out_TitleBar.moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
         Main_Out_TitleBar.moor.setOnClickListener {

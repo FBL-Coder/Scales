@@ -89,11 +89,14 @@ class AddDevActivity : BaseActivity() {
             }
         }
 
-        //检测蓝牙是否连接
-        if (mBluetoothSocket != null && mBluetoothSocket!!.isConnected) showConnectView()
 
         //检测蓝牙是否打开
-        if (BlueUtils.isBlueOpen(this)) startDiscovery()
+        if (BlueUtils.isBlueOpen(this))
+            //检测蓝牙是否连接
+            if (mBluetoothSocket != null && mBluetoothSocket!!.isConnected)
+                showConnectView()
+            else
+                startDiscovery()
 
 
         mBlueBoothReceiver = BlueUtils.registerSeekReceiver(this, mHandler!!)
@@ -133,7 +136,7 @@ class AddDevActivity : BaseActivity() {
      * 配对设备
      */
     private fun PairingBlue() {
-        if (mBluetoothDataIsEnable){
+        if (mBluetoothDataIsEnable) {
             ToastUtil.showText("蓝牙为连接状态,不可配对其他设备")
             return
         }
@@ -162,7 +165,7 @@ class AddDevActivity : BaseActivity() {
                     ToastUtil.showText("请打开蓝牙")
                     return@setOnConnectClick
                 }
-                if (mBluetoothDataIsEnable){
+                if (mBluetoothDataIsEnable) {
                     ToastUtil.showText("蓝牙为连接状态,不可配对其他设备")
                     return@setOnConnectClick
                 }
@@ -223,7 +226,7 @@ class AddDevActivity : BaseActivity() {
                                 }
                             }
                             activity.mBlue_OK_Adapter!!.notifyDataSetChanged(activity.mBlue_Ok_List)
-                        }catch (e:Exception){
+                        } catch (e: Exception) {
                             mBluetoothAdapter!!.startDiscovery()
                         }
                         mBluetoothDataIsEnable = true
