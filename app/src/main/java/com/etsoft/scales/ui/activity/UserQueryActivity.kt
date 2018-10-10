@@ -36,16 +36,22 @@ class UserQueryActivity : BaseActivity() {
         mLoadDialog!!.show(arrayOf("正在查询", "查询超时"), false)
         OkHttpUtils.getAsyn(Ports.USERQUERY, HashMap<String, String>().run { put("phone", phone);this }, object : MyHttpCallback(this) {
             override fun onSuccess(resultDesc: ResultDesc?) {
-                super.onSuccess(resultDesc)
-                val mUserQueryBean = MyApp.gson.fromJson<UserQueryBean>(resultDesc!!.result, UserQueryBean::class.java)
+
                 mLoadDialog!!.hide()
-                Query_Result.visibility = View.VISIBLE
-                Name.text = mUserQueryBean!!.data?.name
-                Time.text = mUserQueryBean!!.data?.create_time
+                if (resultDesc!!.getcode() != 0) {
+                    ToastUtil.showText(resultDesc.result)
+                } else {
+                    val mUserQueryBean = MyApp.gson.fromJson<UserQueryBean>(resultDesc!!.result, UserQueryBean::class.java)
+                    Query_Result.visibility = View.VISIBLE
+                    Name.text = mUserQueryBean!!.data?.name
+                    Time.text = mUserQueryBean!!.data?.create_time
+                }
 
             }
 
             override fun onFailure(code: Int, message: String?) {
+                super.onFailure(code, message)
+
                 mLoadDialog!!.hide()
                 ToastUtil.showText(message)
             }

@@ -28,6 +28,7 @@ import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_main_scales.*
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.math.log
 
 
 /**
@@ -164,26 +165,32 @@ class MainActivity : BaseActivity() {
                     }
                     OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this@MainActivity) {
                         override fun onSuccess(resultDesc: ResultDesc?) {
-                            try {
-                                var StationInfo = MyApp.gson.fromJson<ServerStationInfoBean>(resultDesc!!.result, resultDesc::class.java)
+                            if (resultDesc!!.getcode() != 0) {
+                                LogUtils.e(resultDesc.result)
+                            } else {
+                                try {
+                                    var StationInfo = MyApp.gson.fromJson<ServerStationInfoBean>(resultDesc!!.result, resultDesc::class.java)
 
-                                if (StationInfo.data.id != AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1)) {
-                                    MyDialog(this@MainActivity)
-                                            .setMessage("您上次绑定服务站点与这次定位服务站点不一致\n是否切换到当前定位服务站点?")
-                                            .setNegativeButton("取消") { dialog, which ->
-                                                dialog.dismiss()
-                                            }
-                                            .setPositiveButton("切换") { dialog, which ->
-                                                AppSharePreferenceMgr.put(SaveKey.SERVERSTATION_ID, StationInfo!!.data.id)
-                                                AppSharePreferenceMgr.put(SaveKey.SERVERSTATION_NAME, StationInfo!!.data.name)
-                                            }
+                                    if (StationInfo.data.id != AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1)) {
+                                        MyDialog(this@MainActivity)
+                                                .setMessage("您上次绑定服务站点与这次定位服务站点不一致\n是否切换到当前定位服务站点?")
+                                                .setNegativeButton("取消") { dialog, which ->
+                                                    dialog.dismiss()
+                                                }
+                                                .setPositiveButton("切换") { dialog, which ->
+                                                    AppSharePreferenceMgr.put(SaveKey.SERVERSTATION_ID, StationInfo!!.data.id)
+                                                    AppSharePreferenceMgr.put(SaveKey.SERVERSTATION_NAME, StationInfo!!.data.name)
+                                                }
+                                    }
+                                } catch (e: Exception) {
+                                    LogUtils.e("根据经纬度获取站点错误=$e")
                                 }
-                            } catch (e: Exception) {
-                                LogUtils.e("根据经纬度获取站点错误=$e")
                             }
                         }
 
                         override fun onFailure(code: Int, message: String?) {
+                            super.onFailure(code, message)
+
                             LogUtils.e("根据经纬度获取站点错误,code = $code , msg = $message")
                         }
                     }, "上传定位")

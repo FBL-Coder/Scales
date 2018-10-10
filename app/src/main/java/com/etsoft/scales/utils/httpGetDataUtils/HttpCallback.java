@@ -17,9 +17,7 @@ public abstract class HttpCallback {
      * @Description 请求成功时回调
      */
     public void onSuccess(ResultDesc resultDesc) {
-        if (resultDesc.getcode() != 0) {
-            onFailure(resultDesc.getcode(), resultDesc.getMessage());
-        }
+
     }
 
     /**

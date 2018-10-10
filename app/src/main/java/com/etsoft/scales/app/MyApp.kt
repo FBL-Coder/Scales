@@ -44,6 +44,7 @@ open class MyApp : ClientApplication() {
          */
         var UserInfo: LoginBean? = null
 
+
         /**
          * gson NULL适配器
          */

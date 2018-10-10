@@ -16,25 +16,120 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white__"
-        android:paddingBottom="@dimen/dp_5"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingLeft="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_chevron_right_white_24dp"
+        android:gravity="center_vertical|right"
+        android:paddingBottom="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
-        android:gravity="center_vertical"
+        android:paddingTop="@dimen/dp_5"
         android:text="已添加数据"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/Information_Item_1"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="编号"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/Information_Item_2"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="类型"
+            android:textSize="@dimen/dp_12" />
+
+        <TextView
+            android:id="@+id/Information_Item_3"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="重量"
+            android:textSize="@dimen/dp_12" />
+
+        <TextView
+            android:id="@+id/Information_Item_4"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="单位"
+            android:textSize="@dimen/dp_12" />
+
+        <TextView
+            android:id="@+id/Information_Item_5"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="单价"
+            android:textSize="@dimen/dp_12" />
+
+        <TextView
+            android:id="@+id/Information_Item_6"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="总价"
+            android:textSize="@dimen/dp_12" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/Input_Main_ListView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:layout_weight="2"
-        android:padding="@dimen/dp_10"
         android:divider="@color/white___"
-        android:scrollbarThumbVertical="@color/app_color"
+        android:dividerHeight="@dimen/dp_2"
+        android:padding="@dimen/dp_10"
         android:scrollbarSize="@dimen/dp_3"
-        android:dividerHeight="@dimen/dp_2"/>
+        android:scrollbarThumbVertical="@color/app_color" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/Input_Main_Clear"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_weight="1"
+            android:text="清除记录"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/Input_Main_Add"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_weight="1"
+            android:text="添加记录"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </LinearLayout>

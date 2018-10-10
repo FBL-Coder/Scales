@@ -75,16 +75,16 @@ public class DataAnalysis {
 
             resultDesc = dataRestructuring(code, message, resultData);
         } catch (JSONException e) {
-            resultDesc = dataRestructuring(-1, "数据返回异常", result + "");
+            resultDesc = dataRestructuring(-1, result, result);
         }
 
         return resultDesc;
     }
 
     /**
-     * @param code 返回码
-     * @param message     返回说明
-     * @param result     返回数据
+     * @param code    返回码
+     * @param message 返回说明
+     * @param result  返回数据
      * @Description 数据重组
      */
     private static ResultDesc dataRestructuring(int code, String message, String result) {

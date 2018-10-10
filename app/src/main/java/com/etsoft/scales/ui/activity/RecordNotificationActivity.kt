@@ -49,20 +49,25 @@ class RecordNotificationActivity : BaseActivity() {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
-                Notification_Record_XRefreshView.stopRefresh()
-                Notification_Record_XRefreshView.stopLoadMore()
-                var list = MyApp.gson.fromJson(resultDesc!!.result, RecordNotificationBean::class.java)
-                if (list!!.code == 0) {
-                    if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
-                    var pages = mListBean!!.count / linit
-                    Maxpage = Math.ceil(pages.toDouble()).toInt()
+                if (resultDesc!!.getcode() != 0) {
+                    ToastUtil.showText(resultDesc.result)
                 } else {
-                    LogUtils.e("获取数据失败:" + "code=" + list.code + "  msg=" + list.msg)
+                    Notification_Record_XRefreshView.stopRefresh()
+                    Notification_Record_XRefreshView.stopLoadMore()
+                    var list = MyApp.gson.fromJson(resultDesc!!.result, RecordNotificationBean::class.java)
+                    if (list!!.code == 0) {
+                        if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
+                        var pages = mListBean!!.count / linit
+                        Maxpage = Math.ceil(pages.toDouble()).toInt()
+                    } else {
+                        LogUtils.e("获取数据失败:" + "code=" + list.code + "  msg=" + list.msg)
+                    }
+                    initListView()
                 }
-                initListView()
             }
 
             override fun onFailure(code: Int, message: String?) {
+                super.onFailure(code, message)
                 mLoadDialog!!.hide()
                 Notification_Record_XRefreshView.stopRefresh()
                 Notification_Record_XRefreshView.stopLoadMore()
@@ -114,7 +119,7 @@ class RecordNotificationActivity : BaseActivity() {
                     this
                 })
             }
-        }else mRecordNotificationListViewAdapter!!.notifyDataSetChanged(mListBean!!)
+        } else mRecordNotificationListViewAdapter!!.notifyDataSetChanged(mListBean!!)
     }
 
     private fun initView() {

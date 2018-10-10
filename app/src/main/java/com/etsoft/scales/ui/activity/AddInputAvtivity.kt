@@ -68,12 +68,11 @@ class AddInputAvtivity : BaseActivity() {
 
         Add_Input_Ok.setOnClickListener {
             val weight_tv = Add_Input_KG.text.toString()
-            if (weight_tv == "0.00") {
+            if (weight_tv == "0.00"||weight_tv == "0") {
                 ToastUtil.showText("该物品重量为:0.00kg,不可添加")
                 return@setOnClickListener
             }
             val zongjia_tv = Add_Input_ZongJia.text.toString()
-            ToastUtil.showText("正在添加")
             setResult(101, intent
                     .run {
                         putExtra("data", Input_Main_List_Bean().run {

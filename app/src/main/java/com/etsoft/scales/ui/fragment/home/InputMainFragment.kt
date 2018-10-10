@@ -48,8 +48,8 @@ class InputMainFragment : Fragment() {
     }
 
     private var listid = 0
-    private var typeID = 0
     private var mInputLiat = ArrayList<Input_Main_List_Bean>()
+    private var mMain_Input_ListViewAdapter: Main_Input_ListViewAdapter? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -70,7 +70,9 @@ class InputMainFragment : Fragment() {
      */
     private fun getRecycleData(type: Int) {
         OkHttpUtils.getAsyn(Ports.RECYCLELIST, object : MyHttpCallback(mActivity) {
+
             override fun onSuccess(resultDesc: ResultDesc?) {
+                mActivity!!.mLoadDialog!!.hide()
                 mActivity!!.mLoadDialog!!.hide()
                 mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
                 if (type == 1)
@@ -78,6 +80,7 @@ class InputMainFragment : Fragment() {
             }
 
             override fun onFailure(code: Int, message: String?) {
+                super.onFailure(code, message)
                 ToastUtil.showText(message)
             }
         }, "回收列表")
@@ -85,40 +88,28 @@ class InputMainFragment : Fragment() {
     }
 
     private fun initListView() {
-        var adapter = Main_Input_ListViewAdapter(mInputLiat)
-        Input_Main_ListView.adapter = adapter
-        Input_Main_ListView.setSelection(Input_Main_ListView.bottom)
-        Input_Main_ListView.setOnItemClickListener { parent, view, position, id ->
-            if (position <= mInputLiat.size && position > 0) {
-                ToastUtil.showText("数据点击---$position")
-            } else if (position == 0) {
-            } else {
-                if (mRecycleListBean == null) {
-                    mActivity!!.mLoadDialog!!.show()
-                    getRecycleData(1)
-                    return@setOnItemClickListener
-                } else
-                    showSelectDialog()
+        if (mMain_Input_ListViewAdapter == null) {
+            mMain_Input_ListViewAdapter = Main_Input_ListViewAdapter(mInputLiat)
+            Input_Main_ListView.adapter = mMain_Input_ListViewAdapter
+            Input_Main_ListView.setOnItemLongClickListener { _, _, position, _ ->
+                if (position == 0 || position > mInputLiat.size) false
+                else {
+                    MyDialog(mActivity!!)
+                            .setMessage("是否要删除此条信息？")
+                            .setNegativeButton("取消") { dialog, which ->
+                                dialog.dismiss()
+                            }
+                            .setPositiveButton("删除") { dialog, which ->
+                                mInputLiat.removeAt(position - 1)
+                                initListView()
+                                dialog.dismiss()
+                            }.create().show()
+                    true
+                }
             }
+        } else {
+            mMain_Input_ListViewAdapter!!.notifyDataSetChanged(mInputLiat!!)
         }
-
-        Input_Main_ListView.setOnItemLongClickListener { _, _, position, _ ->
-            if (position == 0 || position > mInputLiat.size) false
-            else {
-                MyDialog(mActivity!!)
-                        .setMessage("是否要删除此条信息？")
-                        .setNegativeButton("取消") { dialog, which ->
-                            dialog.dismiss()
-                        }
-                        .setPositiveButton("删除") { dialog, which ->
-                            mInputLiat.removeAt(position - 1)
-                            initListView()
-                            dialog.dismiss()
-                        }.create().show()
-                true
-            }
-        }
-
     }
 
     private fun initGridView() {
@@ -162,6 +153,21 @@ class InputMainFragment : Fragment() {
             startActivity(Intent(mActivity, InputRecordActivity::class.java))
         }
 
+
+        Input_Main_Clear.setOnClickListener {
+            mInputLiat.clear()
+            initListView()
+
+        }
+
+        Input_Main_Add.setOnClickListener {
+            if (MyApp.mRecycleListBean == null) {
+                mActivity!!.mLoadDialog!!.show()
+                getRecycleData(1)
+            } else {
+                showSelectDialog()
+            }
+        }
     }
 
     /**
@@ -191,35 +197,41 @@ class InputMainFragment : Fragment() {
 
         OkHttpUtils.postAsyn(Ports.ADDINPUTBACK, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
             override fun onSuccess(resultDesc: ResultDesc?) {
-                try {
-                    var Data = ArrayList<Input_Main_List_Bean>()
-                    Data.add(Input_Main_List_Bean().run {
-                        id = "编号"
-                        type = "类型"
-                        weight = "重量"
-                        unit = "单位"
-                        price = "单位"
-                        total = "总价"
-                        this
-                    })
-                    Data.addAll(mInputLiat)
-                    mIzkcService.printerInit()
-                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("--------------------------")
-                    for (i in Data.indices) {
-                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
-                        var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
-                        var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
-                        var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
-                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
-                    }
-                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
+                mActivity!!.mLoadDialog!!.hide()
+                if (resultDesc!!.getcode() != 0) {
+                    ToastUtil.showText(resultDesc.result)
+                } else {
+                    try {
+                        var Data = ArrayList<Input_Main_List_Bean>()
+                        Data.add(Input_Main_List_Bean().run {
+                            id = "编号"
+                            type = "类型"
+                            weight = "重量"
+                            unit = "单位"
+                            price = "单位"
+                            total = "总价"
+                            this
+                        })
+                        Data.addAll(mInputLiat)
+                        mIzkcService.printerInit()
+                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("--------------------------")
+                        for (i in Data.indices) {
+                            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
+                            var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
+                            var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
+                            var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
+                            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
+                        }
+                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
 
-                } catch (e: Exception) {
-                    ToastUtil.showText("打印机发生错误")
+                    } catch (e: Exception) {
+                        ToastUtil.showText("打印机发生错误")
+                    }
                 }
             }
 
             override fun onFailure(code: Int, message: String?) {
+                super.onFailure(code, message)
                 ToastUtil.showText(message)
             }
         }, "新增入库")

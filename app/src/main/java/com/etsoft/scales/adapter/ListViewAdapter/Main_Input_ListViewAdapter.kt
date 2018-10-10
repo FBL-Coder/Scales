@@ -16,61 +16,33 @@ import com.etsoft.scales.bean.Input_Main_List_Bean
  */
 class Main_Input_ListViewAdapter(list: ArrayList<Input_Main_List_Bean>) : BaseAdapter() {
 
-    var mList = ArrayList<Input_Main_List_Bean>()
+    var mList = list
 
-    init {
-        initData(list)
-    }
-
-    private fun initData(list: ArrayList<Input_Main_List_Bean>) {
-        mList.add(Input_Main_List_Bean().run {
-            id = "编号"
-            type = "类型"
-            weight = "重量"
-            unit = "单位"
-            price = "单位"
-            total = "总价"
-            this
-        })
-        mList.addAll(list)
-        mList.add(Input_Main_List_Bean())
-    }
 
     fun notifyDataSetChanged(list: ArrayList<Input_Main_List_Bean>) {
-        mList.clear()
-        initData(list)
+        mList = list
         super.notifyDataSetChanged()
     }
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        if (position <= mList.size - 2) {
-            var view = convertView
-            var mViewHolder: ViewHolder
-            if (view == null || view.tag == null) {
-                view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_inputmain, parent, false)
-                mViewHolder = ViewHolder(view!!)
-                view.tag = mViewHolder
-            } else {
-                mViewHolder = (view.tag as ViewHolder?)!!
-            }
-            mViewHolder.mInformation_Item1.text = mList[position].id
-            mViewHolder.mInformation_Item2.text = mList[position].type
-            mViewHolder.mInformation_Item3.text = mList[position].weight
-            mViewHolder.mInformation_Item4.text = mList[position].unit
-            if (position == 0) {//防止标题带符号
-                mViewHolder.mInformation_Item5.text = mList[position].price
-                mViewHolder.mInformation_Item6.text = mList[position].total
-            } else {
-                mViewHolder.mInformation_Item5.text = "￥${mList[position].price}"
-                mViewHolder.mInformation_Item6.text = "${mList[position].total}"
-                mViewHolder.mInformation_Item6.setTextColor(Color.BLACK)
-            }
-            return view!!
-        } else {//添加尾部添加布局
-            return LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_inputmain_add, parent, false)
+        var view = convertView
+        var mViewHolder: ViewHolder
+        if (view == null || view.tag == null) {
+            view = LayoutInflater.from(parent!!.context).inflate(R.layout.adapter_listview_inputmain, parent, false)
+            mViewHolder = ViewHolder(view!!)
+            view.tag = mViewHolder
+        } else {
+            mViewHolder = (view.tag as ViewHolder?)!!
         }
-
+        mViewHolder.mInformation_Item1.text = mList[position].id
+        mViewHolder.mInformation_Item2.text = mList[position].type
+        mViewHolder.mInformation_Item3.text = mList[position].weight
+        mViewHolder.mInformation_Item4.text = mList[position].unit
+        mViewHolder.mInformation_Item5.text = "￥${mList[position].price}"
+        mViewHolder.mInformation_Item6.text = "${mList[position].total}"
+        mViewHolder.mInformation_Item6.setTextColor(Color.BLACK)
+        return view!!
     }
 
     override fun getItem(position: Int): Any {

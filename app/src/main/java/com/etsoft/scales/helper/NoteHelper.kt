@@ -2,6 +2,7 @@ package com.etsoft.scales.helper
 
 import com.etsoft.scales.ui.activity.BaseActivity
 import com.etsoft.scales.Ports
+import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.HttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
@@ -20,9 +21,16 @@ class NoteHelper {
             params[""] = phone
             OkHttpUtils.postAsyn(Ports.LOGIN, params, object : MyHttpCallback(activity) {
                 override fun onSuccess(resultDesc: ResultDesc?) {
+
+                    if (resultDesc!!.getcode() != 0) {
+                        ToastUtil.showText(resultDesc.result)
+                    } else {
+
+                    }
                 }
 
                 override fun onFailure(code: Int, message: String?) {
+                    super.onFailure(code, message)
                 }
             }, "短信验证")
 

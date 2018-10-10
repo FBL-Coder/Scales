@@ -41,11 +41,16 @@ class NotificationInfoActivity : BaseActivity() {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
+                if (resultDesc!!.getcode() != 0) {
+                    ToastUtil.showText(resultDesc.result)
+                } else {
                     Notification_Info_content.text = resultDesc!!.result
+                }
             }
 
             @SuppressLint("SetTextI18n")
-            override fun onFailure( code: Int, message: String?) {
+            override fun onFailure(code: Int, message: String?) {
+                super.onFailure(code, message)
                 mLoadDialog!!.hide()
                 ToastUtil.showText(message)
                 Notification_Info_content.text = "$code++$message"

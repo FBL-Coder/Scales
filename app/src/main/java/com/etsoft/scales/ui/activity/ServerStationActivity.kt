@@ -51,7 +51,9 @@ class ServerStationActivity : BaseActivity() {
         OkHttpUtils.getAsyn(Ports.SERVERLIST, pram, object : MyHttpCallback(this) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
+
                 mLoadDialog!!.hide()
+
                 ServerStation_XRefreshView.stopRefresh()
                 ServerStation_XRefreshView.stopLoadMore()
                 var list = MyApp.gson.fromJson(resultDesc!!.result, ServerStationBean::class.java)
@@ -66,6 +68,7 @@ class ServerStationActivity : BaseActivity() {
             }
 
             override fun onFailure(code: Int, message: String?) {
+                super.onFailure(code, message)
                 mLoadDialog!!.hide()
                 ServerStation_XRefreshView.stopRefresh()
                 ServerStation_XRefreshView.stopLoadMore()
