@@ -29,6 +29,37 @@
             android:layout_height="@dimen/dp_2"
             android:background="@color/dialog_line" />
 
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_30"
+            android:paddingRight="@dimen/dp_30">
+
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:gravity="center|left"
+                android:text="服务站名称：" />
+
+
+            <TextView
+                android:id="@+id/Input_ServerStation"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|right"
+                android:text="未选择"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_16" />
+
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_30"

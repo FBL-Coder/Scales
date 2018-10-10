@@ -58,9 +58,14 @@ class Ports {
 
         /**
          * 服务站列表
-         * 带ID 为详情
          * */
         var SERVERLIST = port + "webapi/Servicepoint/list"
+
+
+        /**
+         * 带ID 为详情
+         * */
+        var SERVERLISTINFO = port + "webapi/Servicepoint/info"
 
 
     }

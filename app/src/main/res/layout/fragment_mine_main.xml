@@ -179,10 +179,19 @@
                 <TextView
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="match_parent"
-                    android:layout_weight="11"
+                    android:layout_weight="3"
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/dp_20"
                     android:text="服务站点"
+                    android:textSize="@dimen/dp_14" />
+                <TextView
+                    android:id="@+id/ServerStationName"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:gravity="center|right"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/dp_14" />
 
                 <ImageView

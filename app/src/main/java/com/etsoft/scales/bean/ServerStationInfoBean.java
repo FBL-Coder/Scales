@@ -4,11 +4,12 @@ package com.etsoft.scales.bean;
  * Author：FBL  Time： 2018/10/9.
  */
 public class ServerStationInfoBean {
+
     /**
      * code : 0
      * msg : OK
      * count : 1
-     * data : {"id":1,"name":"111","functionary":"张三","functionary_phone":"13774374601","start_work_time":"11:10:00","start_work_second":11,"end_work_time":"11:10:00","end_work_second":11,"address":"XXXXX","companie":"111","admin_alias":"张三","admin_id":1,"create_time":"2018-09-18 10:00:03","update_time":"2018-09-18 11:11:34","deleted":0,"lat":"0.0000000","lng":"0.0000000"}
+     * data : {"id":1,"name":"111","functionary":"5puv0qgd7fgrbrepl3ltdq7n56","functionary_phone":"13774374601","start_work_time":"11:10:00","start_work_second":11,"end_work_time":"11:10:00","end_work_second":11,"address":"13774374601","companie":"111","admin_alias":"张三","admin_id":1,"create_time":"2018-09-18 10:00:03","update_time":"2018-09-18 11:11:34","deleted":0,"lat":"121.4865590","lng":"30.9203900"}
      */
 
     private int code;
@@ -52,21 +53,21 @@ public class ServerStationInfoBean {
         /**
          * id : 1
          * name : 111
-         * functionary : 张三
+         * functionary : 5puv0qgd7fgrbrepl3ltdq7n56
          * functionary_phone : 13774374601
          * start_work_time : 11:10:00
          * start_work_second : 11
          * end_work_time : 11:10:00
          * end_work_second : 11
-         * address : XXXXX
+         * address : 13774374601
          * companie : 111
          * admin_alias : 张三
          * admin_id : 1
          * create_time : 2018-09-18 10:00:03
          * update_time : 2018-09-18 11:11:34
          * deleted : 0
-         * lat : 0.0000000
-         * lng : 0.0000000
+         * lat : 121.4865590
+         * lng : 30.9203900
          */
 
         private int id;

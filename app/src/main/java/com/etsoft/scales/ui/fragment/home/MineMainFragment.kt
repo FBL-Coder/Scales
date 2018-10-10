@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.etsoft.scales.R
+import com.etsoft.scales.SaveKey
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.ui.activity.BaseActivity
 import com.etsoft.scales.ui.activity.MainActivity
 import com.etsoft.scales.ui.activity.RecordNotificationActivity
 import com.etsoft.scales.ui.activity.ServerStationActivity
+import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.fragment_mine_main.*
 
@@ -35,12 +37,17 @@ class MineMainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mine_main, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initData()
         initEvent()
+    }
+    override fun onStart() {
+        super.onStart()
+        if (AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") == "")
+            ServerStationName.text = "未选择"
+        else ServerStationName.text = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") as String
     }
 
     private fun initData() {
@@ -75,7 +82,7 @@ class MineMainFragment : Fragment() {
         }
         Mine_Logout!!.setOnClickListener {
             //退出
-           mActivity!!.finish()
+            mActivity!!.finish()
         }
     }
 

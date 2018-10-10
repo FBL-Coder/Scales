@@ -1,11 +1,12 @@
 package com.etsoft.scales.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Author：FBL  Time： 2018/10/5.
  */
-public class ServerStationBean {
+public class ServerStationBean  implements Serializable{
 
 
     /**
@@ -52,7 +53,7 @@ public class ServerStationBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * id : 2
          * name : 1112

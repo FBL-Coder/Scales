@@ -115,7 +115,7 @@ class OutMainFragment : Fragment() {
     /**
      * 加载出库数据
      */
-    private fun initdata(page: Int = 1, type: String = SortType.CREATETIME, linit: Int = 2) {
+    private fun initdata(page: Int = 1, type: String = SortType.CREATETIME, linit: Int = 5) {
 
         var pram = HashMap<String, String>()
         pram[type] = "ASC"//DESC

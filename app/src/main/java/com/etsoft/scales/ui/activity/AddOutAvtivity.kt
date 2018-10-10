@@ -53,7 +53,7 @@ class AddOutAvtivity : BaseActivity() {
         Add_Input_Ok.setOnClickListener {
             val Weight = Add_Out_Weight.text.toString()
             val ToPlace = Add_Out_ToPlace.text.toString()
-            if (Weight == "0.00") {
+            if (Weight == "0") {
                 ToastUtil.showText("该物品重量为:0.00kg,不可添加")
                 return@setOnClickListener
             }

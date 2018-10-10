@@ -45,11 +45,6 @@ open class MyApp : ClientApplication() {
         var UserInfo: LoginBean? = null
 
         /**
-         * 用户根据定位返回的服务站信息
-         */
-        var ServerStationInfo: ServerStationInfoBean? = null
-
-        /**
          * gson NULL适配器
          */
         var gson = GsonBuilder().registerTypeAdapterFactory(NullStringEmptyTypeAdapterFactory<Any>()).create()
@@ -103,6 +98,8 @@ open class MyApp : ClientApplication() {
          * 蓝牙数据是否可用
          */
         var mBluetoothDataIsEnable: Boolean = false
+
+
 
     }
 

@@ -11,13 +11,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.SaveKey
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
+import com.etsoft.scales.bean.AppInputBean
 import com.etsoft.scales.bean.CareFragment_Bean
 import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.bean.RecycleListBean
 import com.etsoft.scales.ui.activity.*
+import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
@@ -25,7 +28,6 @@ import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
-import okhttp3.Call
 
 
 /**
@@ -44,6 +46,7 @@ class InputMainFragment : Fragment() {
     }
 
     private var listid = 0
+    private var typeID = 0
     private var mInputLiat = ArrayList<Input_Main_List_Bean>()
 
 
@@ -154,12 +157,13 @@ class InputMainFragment : Fragment() {
      * 上传入库数据到服务器
      */
     private fun UpToServer() {
-
-        if (MyApp.ServerStationInfo == null || MyApp.ServerStationInfo!!.data == null) {
+        val ServerStation_Id = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1)
+        if (ServerStation_Id == -1) {
             ToastUtil.showText("请先选择服务站点")
             return
         }
-
+        mIzkcService.printerInit()
+        mActivity!!.mLoadDialog!!.show(arrayOf("正在打印", "打印超时"))
         var Data = ArrayList<Input_Main_List_Bean>()
         Data.add(Input_Main_List_Bean().run {
             id = "编号"
@@ -172,38 +176,37 @@ class InputMainFragment : Fragment() {
         })
         Data.addAll(mInputLiat)
 
-        mIzkcService.printerInit()
-        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("------------------")
-        for (i in Data.indices) {
-            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
-            var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
-            var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
-            var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
-            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
+        var UpBean = AppInputBean()
+        UpBean.phone = ""
+        UpBean.servicePointId = ServerStation_Id.toString()
+        UpBean.staffId = MyApp.UserInfo!!.data.id.toString()
+
+        var lingsBeanList = ArrayList<AppInputBean.RecyclingsBean>()
+        for (i in mInputLiat.indices) {
+            var lingsBean = AppInputBean.RecyclingsBean()
+            lingsBean.recyclingPriceId = mInputLiat[0].typeid
+            lingsBean.weight = mInputLiat[0].weight
+            lingsBeanList.add(lingsBean)
         }
-        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
+        UpBean.recyclings = lingsBeanList
 
-
-        mInputLiat
-        var map = HashMap<String, String>().run {
-            put("userId", "")
-            put("servicePointId", MyApp.ServerStationInfo?.data!!.id.toString())
-            put("staffId", MyApp.UserInfo!!.data.id.toString())
-            put("weight", mInputLiat[0].weight)
-            put("recyclingPriceId", mInputLiat[0].typeid)
-            this
-        }
-
-        OkHttpUtils.postAsyn(Ports.ADDINPUTBACK, MyApp.gson.toJson(map), object : MyHttpCallback(mActivity) {
+        OkHttpUtils.postAsyn(Ports.ADDINPUTBACK, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
             override fun onSuccess(resultDesc: ResultDesc?) {
-
+                com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("--------------------------")
+                for (i in Data.indices) {
+                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
+                    var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
+                    var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
+                    var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
+                    com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
+                }
+                com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
             }
 
             override fun onFailure(code: Int, message: String?) {
-
+                ToastUtil.showText(message)
             }
-        }, "入库")
-
+        }, "新增入库")
     }
 
     /**

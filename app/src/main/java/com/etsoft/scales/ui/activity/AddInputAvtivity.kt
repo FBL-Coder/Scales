@@ -1,17 +1,20 @@
 package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Intent
 import android.os.Handler
 import android.os.Message
-import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.R
+import com.etsoft.scales.SaveKey
 import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.Server.BlueUtils.Companion.isReadData
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.bean.Input_Main_List_Bean
+import com.etsoft.scales.utils.AppSharePreferenceMgr
+import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.ToastUtil
+import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_add_input.*
 import java.lang.ref.WeakReference
 import java.text.DecimalFormat
@@ -43,13 +46,23 @@ class AddInputAvtivity : BaseActivity() {
     private fun initData() {
 
         position = intent.getIntExtra("position", 0)
-
+        Input_ServerStation.text = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "未选择") as String
         Add_Input_Type.text = MyApp.mRecycleListBean!!.data[position].name
-        Add_Input_KG.setText("0.00")
+        Add_Input_KG.setText("0")
         Add_Input_DanWei.text = MyApp.mRecycleListBean!!.data[position].unit
         Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean!!.data[position].price}"
         Add_Input_ZongJia.text = "￥ 0.00"
 
+        Input_ServerStation.setOnClickListener {
+            MyDialog(this).setMessage("是否重新选择服务站?")
+                    .setNegativeButton("取消") { dialog, which ->
+                        dialog.dismiss()
+                    }.setPositiveButton("选择") { dialog, which ->
+                        dialog.dismiss()
+                        startActivity(Intent(this, ServerStationActivity::class.java))
+                        finish()
+                    }.show()
+        }
 
         Add_Input_Cancle.setOnClickListener { finish() }
 
@@ -69,7 +82,7 @@ class AddInputAvtivity : BaseActivity() {
                             price = MyApp.mRecycleListBean!!.data[position].price.toString()
                             unit = MyApp.mRecycleListBean!!.data[position].unit
                             total = zongjia_tv
-                            typeid = position.toString()
+                            typeid = MyApp.mRecycleListBean!!.data[position].id.toString()
                             this
                         })
                         this
@@ -104,7 +117,6 @@ class AddInputAvtivity : BaseActivity() {
                         }
                     }
                 }
-
             }
         }
     }

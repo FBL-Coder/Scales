@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
@@ -8,12 +9,14 @@ import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.adapter.ListViewAdapter.ServerStationListViewAdapter
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.bean.RecordNotificationBean
 import com.etsoft.scales.bean.ServerStationBean
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import kotlinx.android.synthetic.main.activity_server_station.*
+import okhttp3.Call
 import java.util.*
 
 
@@ -26,6 +29,7 @@ class ServerStationActivity : BaseActivity() {
     private var Maxpage = 1
     private var page = 1
     private var mServerStationListViewAdapter: ServerStationListViewAdapter? = null
+
 
     override fun setView(): Int {
         return R.layout.activity_server_station

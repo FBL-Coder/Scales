@@ -1,15 +1,18 @@
 package com.etsoft.scales.ui.activity
 
-import android.annotation.SuppressLint
-import android.os.Bundle
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.SaveKey.Companion.SERVERSTATION_ID
+import com.etsoft.scales.SaveKey.Companion.SERVERSTATION_NAME
+import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.bean.ServerStationInfoBean
+import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
+import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_serverstation_info.*
-import okhttp3.Call
 
 /**
  * Author：FBL  Time： 2018/7/25.
@@ -17,7 +20,8 @@ import okhttp3.Call
  */
 class ServerStationInfoActivity : BaseActivity() {
 
-    var id = "1"
+    private var id = "0"
+    private var mInfoBean: ServerStationInfoBean? = null
 
 
     override fun setView(): Int {
@@ -36,17 +40,20 @@ class ServerStationInfoActivity : BaseActivity() {
         mLoadDialog!!.show()
         id = intent.getStringExtra("id")!!
 
-        OkHttpUtils.getAsyn(Ports.SERVERLIST, HashMap<String, String>().run { put("id", id);this }, object : MyHttpCallback(this) {
-
+        OkHttpUtils.getAsyn(Ports.SERVERLISTINFO, HashMap<String, String>().run { put("id", id);this }, object : MyHttpCallback(this) {
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
-                ServerTation_Info_content.text = resultDesc!!.result
+                mInfoBean = MyApp.gson.fromJson(resultDesc!!.result, ServerStationInfoBean::class.java)
+                Name.text = mInfoBean!!.data.name
+                Admin.text = mInfoBean!!.data.functionary
+                Phone.text = mInfoBean!!.data.functionary_phone
+                companie.text = mInfoBean!!.data.companie
+                Time.text = mInfoBean!!.data.update_time
+                address.text = mInfoBean!!.data.address
             }
 
-            @SuppressLint("SetTextI18n")
             override fun onFailure(code: Int, message: String?) {
                 mLoadDialog!!.hide()
-                ServerTation_Info_content.text = "$code++$message"
                 ToastUtil.showText(message)
             }
         }, "站点详情")
@@ -56,9 +63,33 @@ class ServerStationInfoActivity : BaseActivity() {
         ServerTation_Info_TitleBar.run {
             title.text = "站点详情"
             back.setOnClickListener { finish() }
-            moor.setImageResource(R.mipmap.ic_autorenew_white_24dp)
+            moor.setImageResource(R.drawable.ic_note_add_black_24dp)
             moor.setOnClickListener {
-                initData()
+                if (mInfoBean == null) {
+                    ToastUtil.showText("站点信息加载失败,请稍后再试")
+                    return@setOnClickListener
+                }
+                if (AppSharePreferenceMgr.get(SERVERSTATION_ID, -1) != -1) {
+                    MyDialog(this@ServerStationInfoActivity)
+                            .setMessage("您已选择服务站!\n是否重新选择此服务站?")
+                            .setNegativeButton("取消") { dialog, which ->
+                                dialog.dismiss()
+                            }.setPositiveButton("是的") { dialog, which ->
+                                AppSharePreferenceMgr.put(SERVERSTATION_ID, mInfoBean!!.data.id)
+                                AppSharePreferenceMgr.put(SERVERSTATION_NAME, mInfoBean!!.data.name)
+                                dialog.dismiss()
+                            }.show()
+                } else {
+                    MyDialog(this@ServerStationInfoActivity)
+                            .setMessage("是否选择此服务站为工作服务站?")
+                            .setNegativeButton("取消") { dialog, which ->
+                                dialog.dismiss()
+                            }.setPositiveButton("是的") { dialog, which ->
+                                AppSharePreferenceMgr.put(SERVERSTATION_ID, mInfoBean!!.data.id)
+                                AppSharePreferenceMgr.put(SERVERSTATION_NAME, mInfoBean!!.data.name)
+                                dialog.dismiss()
+                            }.show()
+                }
             }
         }
     }

@@ -2,7 +2,6 @@ package com.etsoft.scales.ui.activity
 
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.KeyEvent
 import android.widget.Toast
@@ -11,21 +10,22 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.SaveKey
 import com.etsoft.scales.app.MyApp
-import com.etsoft.scales.app.MyApp.Companion.ServerStationInfo
 import com.etsoft.scales.app.MyApp.Companion.mLocationInfo
 import com.etsoft.scales.bean.ServerStationInfoBean
 import com.etsoft.scales.netWorkListener.NetBroadcastReceiver
 import com.etsoft.scales.ui.fragment.home.InputMainFragment
 import com.etsoft.scales.ui.fragment.home.MineMainFragment
 import com.etsoft.scales.ui.fragment.home.OutMainFragment
+import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.PermissionsUtli
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
+import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_main_scales.*
-import okhttp3.Call
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -164,14 +164,26 @@ class MainActivity : BaseActivity() {
                     }
                     OkHttpUtils.getAsyn(Ports.LOCATION_SERVER, map, object : MyHttpCallback(this@MainActivity) {
                         override fun onSuccess(resultDesc: ResultDesc?) {
-                                try {
-                                    var StationInfo = MyApp.gson.fromJson<ServerStationInfoBean>(resultDesc!!.result, resultDesc::class.java)
-                                    MyApp.ServerStationInfo = StationInfo
-                                } catch (e: Exception) {
-                                    LogUtils.e("根据经纬度获取站点错误=$e")
+                            try {
+                                var StationInfo = MyApp.gson.fromJson<ServerStationInfoBean>(resultDesc!!.result, resultDesc::class.java)
+
+                                if (StationInfo.data.id != AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1)) {
+                                    MyDialog(this@MainActivity)
+                                            .setMessage("您上次绑定服务站点与这次定位服务站点不一致\n是否切换到当前定位服务站点?")
+                                            .setNegativeButton("取消") { dialog, which ->
+                                                dialog.dismiss()
+                                            }
+                                            .setPositiveButton("切换") { dialog, which ->
+                                                AppSharePreferenceMgr.put(SaveKey.SERVERSTATION_ID, StationInfo!!.data.id)
+                                                AppSharePreferenceMgr.put(SaveKey.SERVERSTATION_NAME, StationInfo!!.data.name)
+                                            }
                                 }
+                            } catch (e: Exception) {
+                                LogUtils.e("根据经纬度获取站点错误=$e")
+                            }
                         }
-                        override fun onFailure( code: Int, message: String?) {
+
+                        override fun onFailure(code: Int, message: String?) {
                             LogUtils.e("根据经纬度获取站点错误,code = $code , msg = $message")
                         }
                     }, "上传定位")

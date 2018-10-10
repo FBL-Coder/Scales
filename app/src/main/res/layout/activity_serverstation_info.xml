@@ -2,16 +2,166 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_"
+    android:background="@color/white__"
     android:orientation="vertical">
 
     <com.etsoft.scales.view.TitleBar
         android:id="@+id/ServerTation_Info_TitleBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"/>
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_10" />
 
-    <TextView
-        android:id="@+id/ServerTation_Info_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white_"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:gravity="center_vertical"
+            android:text="服务站名称:" />
+
+        <TextView
+            android:id="@+id/Name"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white_"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="站点负责人:" />
+
+        <TextView
+            android:id="@+id/Admin"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white_"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="负责人电话:" />
+
+        <TextView
+            android:id="@+id/Phone"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white_"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="所属企业:" />
+
+        <TextView
+            android:id="@+id/companie"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white_"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="更新时间:" />
+
+        <TextView
+            android:id="@+id/Time"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/white_"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="详细地址:" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
 </LinearLayout>
