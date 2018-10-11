@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_140"
         android:layout_centerInParent="true"
         android:paddingBottom="@dimen/dp_20"
         android:paddingTop="@dimen/dp_20"

@@ -16,13 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white__"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_chevron_right_white_24dp"
         android:gravity="center_vertical|right"
         android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
         android:paddingTop="@dimen/dp_5"
-        android:text="已添加数据"
+        android:text="入库记录"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
 

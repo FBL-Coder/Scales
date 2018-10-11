@@ -29,6 +29,8 @@ import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.MyEditText
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -93,20 +95,17 @@ class InputMainFragment : Fragment() {
             mMain_Input_ListViewAdapter = Main_Input_ListViewAdapter(mInputLiat)
             Input_Main_ListView.adapter = mMain_Input_ListViewAdapter
             Input_Main_ListView.setOnItemLongClickListener { _, _, position, _ ->
-                if (position == 0 || position > mInputLiat.size) false
-                else {
-                    MyDialog(mActivity!!)
-                            .setMessage("是否要删除此条信息？")
-                            .setNegativeButton("取消") { dialog, which ->
-                                dialog.dismiss()
-                            }
-                            .setPositiveButton("删除") { dialog, which ->
-                                mInputLiat.removeAt(position - 1)
-                                initListView()
-                                dialog.dismiss()
-                            }.create().show()
-                    true
-                }
+                MyDialog(mActivity!!)
+                        .setMessage("是否要删除此条信息？")
+                        .setNegativeButton("取消") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .setPositiveButton("删除") { dialog, which ->
+                            mInputLiat.removeAt(position - 1)
+                            initListView()
+                            dialog.dismiss()
+                        }.create().show()
+                true
             }
         } else {
             mMain_Input_ListViewAdapter!!.notifyDataSetChanged(mInputLiat!!)
@@ -224,17 +223,8 @@ class InputMainFragment : Fragment() {
                             this
                         })
                         Data.addAll(mInputLiat)
-                        //打印数据
-                        mIzkcService.printerInit()
-                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("--------------------------")
-                        for (i in Data.indices) {
-                            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x33))
-                            var array = arrayOf(Data[i].id, Data[i].type, Data[i].weight, Data[i].price, Data[i].unit, Data[i].total)
-                            var array1 = intArrayOf(0, 2, 1, 1, 1, 2)
-                            var array2 = intArrayOf(1, 1, 1, 1, 1, 1)
-                            com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printColumnsText(array, array1, array2)
-                        }
-                        com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
+
+                        PrintData()
 
                     } catch (e: Exception) {
                         ToastUtil.showText("上传成功,但打印机发生错误,未能正常打印")
@@ -247,6 +237,80 @@ class InputMainFragment : Fragment() {
                 ToastUtil.showText(message)
             }
         }, "新增入库")
+    }
+
+
+    /**
+     * 打印票据
+     */
+    private fun PrintData() {
+        mIzkcService.printerInit()
+        mIzkcService.printTextAlgin("西安百纳回收中心\n\n", 0, 1, 1)
+        var Str = "单号： " + "1234567890\n\n"
+        mIzkcService.printGBKText(Str)
+        var data = "时间： " + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis())) + "\n"
+        mIzkcService.printGBKText(data)
+        mIzkcService.printGBKText("********************************")
+
+        var array = arrayOf(" 类型 ", "  重量", "   单价  ", "总价")
+        var array1 = intArrayOf(0, 1, 2, 2)
+        var array2 = intArrayOf(0, 0, 0, 0)
+        mIzkcService.printColumnsText(array, array1, array2)
+
+        mIzkcService.printGBKText("--------------------------------")
+
+
+        for (i in mInputLiat.indices) {
+            var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight, mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
+
+            var no2 = 0
+            var no3 = 0
+            var no4 = 0
+            var no5 = 0
+            var no6 = 0
+            when (mInputLiat[i].type.length) {//类型
+                2 -> no2 = 2
+                3 -> no2 = 0
+            }
+            when (mInputLiat[i].weight.length) {//重量
+                4 -> no3 = 3
+                5 -> no3 = 2
+                6 -> no3 = 1
+            }
+            when (mInputLiat[i].price.length) {//单价
+                4 -> no5 = 3
+                5 -> no5 = 2
+                6 -> no5 = 1
+                7 -> no5 = 0
+            }
+
+            when (mInputLiat[i].total.length) {//总价
+                4 -> no6 = 3
+                5 -> no6 = 2
+                6 -> no6 = 1
+                7 -> no6 = 0
+            }
+
+            var array3 = intArrayOf(no2, no3, no4, no5, no6)
+            var array4 = intArrayOf(1, 1, 1, 1, 1)
+            mIzkcService.printColumnsText(array, array3, array4)
+            mIzkcService.printGBKText("\n")
+        }
+        mIzkcService.printGBKText("********************************")
+        var WeightAll = 0.000
+        for (i in mInputLiat.indices) {
+            WeightAll += mInputLiat[i].weight.toDouble()
+        }
+        var ZongZhong = "累计重量：" + WeightAll + "kg"
+        mIzkcService.printGBKText(ZongZhong + "\n\n")
+
+        var MeonyAll = 0.000
+        for (i in mInputLiat.indices) {
+            MeonyAll += mInputLiat[i].total.toDouble()
+        }
+        var ZongJia = "累计总额：￥" + MeonyAll
+        mIzkcService.printGBKText(ZongJia + "\n")
+        mIzkcService.printGBKText("\n\n\n\n")
     }
 
     /**

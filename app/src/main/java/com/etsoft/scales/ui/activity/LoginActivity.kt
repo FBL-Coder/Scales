@@ -1,15 +1,10 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.KeyEvent
-import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
-import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.helper.LoginHelper
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.Validator
-import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -44,9 +39,6 @@ class LoginActivity : BaseActivity() {
             startActivity(Intent(this@LoginActivity, ForgetPassActivity::class.java))
         }
 
-        Login_Register.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-        }
     }
 
 }

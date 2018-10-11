@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_40"
-    android:background="#fff"
+    android:clickable="false"
+    android:background="@drawable/top_back"
     android:orientation="horizontal">
     <ImageView
         android:id="@+id/back_titlebar"

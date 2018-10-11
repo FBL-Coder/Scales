@@ -25,8 +25,7 @@
             android:layout_weight="0.8"
             android:gravity="center"
             android:text="站点名称"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
 
         <TextView
@@ -35,8 +34,7 @@
             android:layout_weight="0.5"
             android:gravity="center"
             android:text="站点负责人"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:layout_width="@dimen/dp_0"
@@ -44,8 +42,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="详细地址"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
 
     </LinearLayout>

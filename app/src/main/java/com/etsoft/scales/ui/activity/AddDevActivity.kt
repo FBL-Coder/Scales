@@ -92,7 +92,7 @@ class AddDevActivity : BaseActivity() {
 
         //检测蓝牙是否打开
         if (BlueUtils.isBlueOpen(this))
-            //检测蓝牙是否连接
+        //检测蓝牙是否连接
             if (mBluetoothSocket != null && mBluetoothSocket!!.isConnected)
                 showConnectView()
             else
@@ -146,6 +146,10 @@ class AddDevActivity : BaseActivity() {
                     ToastUtil.showText("请打开蓝牙")
                     return@setOnConnectClick
                 }
+                if (mBluetoothDataIsEnable) {
+                    ToastUtil.showText("蓝牙已经连接,请先断开连接")
+                    return@setOnConnectClick
+                }
                 mLoadDialog!!.show(arrayOf("正在配对", "配对超时"), false)
                 ClsUtils.createBond(mList_SS[position].mDevice.javaClass, mList_SS[position].mDevice)
             }
@@ -166,7 +170,7 @@ class AddDevActivity : BaseActivity() {
                     return@setOnConnectClick
                 }
                 if (mBluetoothDataIsEnable) {
-                    ToastUtil.showText("蓝牙为连接状态,不可配对其他设备")
+                    ToastUtil.showText("蓝牙为连接状态,请先断开连接")
                     return@setOnConnectClick
                 }
                 //创建连接

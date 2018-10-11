@@ -32,7 +32,7 @@ class ServerStationListViewAdapter(bean: ServerStationBean) : BaseAdapter() {
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.ServerStation_Admin.text = mList[position].admin_alias
+        mViewHolder.ServerStation_Admin.text = mList[position].functionary
         mViewHolder.ServerStation_address.text = mList[position].address
         mViewHolder.ServerStation_Name.text = mList[position].name
         mViewHolder.ServerStation_Time.text = mList[position].create_time

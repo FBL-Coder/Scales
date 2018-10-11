@@ -17,34 +17,35 @@
         <TextView
             android:id="@+id/NotiFication_Title"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_30"
+            android:layout_height="@dimen/dp_40"
             android:layout_weight="1"
             android:gravity="center"
+            android:maxLength="6"
             android:text="标题"
             android:textColor="@color/black__"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_16" />
 
 
         <TextView
             android:id="@+id/NotiFication_Admin"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_30"
+            android:layout_height="@dimen/dp_40"
             android:layout_weight="1"
             android:gravity="center"
             android:text="发布人"
             android:textColor="@color/black__"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_16" />
 
 
         <TextView
             android:id="@+id/NotiFication_Type"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_30"
+            android:layout_height="@dimen/dp_40"
             android:layout_weight="1"
             android:gravity="center"
             android:text="类型"
             android:textColor="@color/black__"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_16" />
     </LinearLayout>
 
     <TextView
@@ -54,6 +55,6 @@
         android:paddingRight="@dimen/dp_30"
         android:gravity="right|center_vertical"
         android:text="时间"
-        android:textSize="@dimen/dp_12" />
+        android:textSize="@dimen/sp_12" />
 
 </LinearLayout>

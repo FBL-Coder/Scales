@@ -118,7 +118,7 @@
         android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_5"
-        android:text="已添加数据"
+        android:text="已配对设备"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_14" />
 
@@ -126,7 +126,7 @@
         android:id="@+id/Main_AddDev_Connect"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_weight="0.8"
+        android:layout_weight="0.5"
         android:divider="@color/white__"
         android:dividerHeight="@dimen/dp_2"
         android:padding="@dimen/dp_5" />
@@ -140,7 +140,7 @@
         android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_5"
-        android:text="搜索设备"
+        android:text="未配对设备"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_14" />
 

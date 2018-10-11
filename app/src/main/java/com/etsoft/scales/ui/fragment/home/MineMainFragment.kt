@@ -48,17 +48,17 @@ class MineMainFragment : Fragment() {
     }
 
     private fun initData() {
-        Mine_Input_Statistics.text = "${MyApp.UserInfo!!.data.data.replenishStockTotalPayMoney}kg"
-        Mine_Out_Statistics.text = "${MyApp.UserInfo!!.data.data.outboundTotalWeight}kg"
+        Mine_Input_Statistics.text = "${MyApp.UserInfo?.data?.data?.replenishStockTotalPayMoney}kg"
+        Mine_Out_Statistics.text = "${MyApp.UserInfo?.data?.data?.outboundTotalWeight}kg"
+        Mine_UserName.text = MyApp.UserInfo?.data?.name
     }
 
     private fun initEvent() {
 
-        Mine_Head!!.setOnClickListener {
-            //头像点击
-            ToastUtil.showText("点击头像")
+        Mine_UserSelf!!.setOnClickListener {
+            //个人信息
+            startActivity(Intent(mActivity!!,SelfActivity::class.java))
         }
-        Mine_UserName!!.text = "我是昵称"
 
         Mine_Notification!!.setOnClickListener {
             //历史通知

@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
-import android.text.Editable
-import android.text.TextWatcher
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.Server.BlueUtils
@@ -17,7 +15,6 @@ import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.view.MyDialog
-import io.reactivex.internal.operators.observable.ObservableJoin
 import kotlinx.android.synthetic.main.activity_add_input.*
 import java.lang.ref.WeakReference
 import java.text.DecimalFormat
@@ -50,7 +47,6 @@ class AddInputAvtivity : BaseActivity() {
         position = intent.getIntExtra("position", 0)
         Input_ServerStation.text = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "未选择") as String
         Add_Input_Type.text = MyApp.mRecycleListBean!!.data[position].name
-        Add_Input_KG.setText("0")
         Add_Input_DanWei.text = MyApp.mRecycleListBean!!.data[position].unit
         Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean!!.data[position].price}"
 
@@ -70,8 +66,8 @@ class AddInputAvtivity : BaseActivity() {
 
         Add_Input_Ok.setOnClickListener {
             val weight_tv = Add_Input_KG.text.toString()
-            if (weight_tv == "0.00" || weight_tv == "0") {
-                ToastUtil.showText("该物品重量为:0.00kg,不可添加")
+            if (weight_tv == "0.00" || weight_tv == "0"||weight_tv == "") {
+                ToastUtil.showText("货物重量不能为空")
                 return@setOnClickListener
             }
             setResult(101, intent

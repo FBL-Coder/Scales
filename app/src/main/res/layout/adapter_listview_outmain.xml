@@ -30,6 +30,7 @@
             android:layout_weight="0.8"
             android:gravity="center"
             android:text="回收中心"
+            android:maxLength="6"
             android:textColor="@color/black__"
             android:textSize="@dimen/dp_16"
             android:textStyle="bold" />
@@ -53,6 +54,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="资源利用中心"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="@color/black__"
             android:textSize="@dimen/dp_16"
             android:textStyle="bold" />

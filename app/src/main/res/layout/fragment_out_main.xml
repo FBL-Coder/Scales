@@ -28,8 +28,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="负责人"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
 
         <TextView
@@ -38,8 +37,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="状态"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:layout_width="@dimen/dp_0"
@@ -47,8 +45,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="运往点"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:layout_width="@dimen/dp_0"
@@ -56,8 +53,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="重量"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
     </LinearLayout>
 

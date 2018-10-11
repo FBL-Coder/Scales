@@ -30,7 +30,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="通知标题"
-            android:textColor="@color/black"
             android:textSize="@dimen/dp_16" />
 
         <TextView
@@ -39,8 +38,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="发布人"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:layout_width="@dimen/dp_0"
@@ -48,8 +46,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="通知类型"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_16" />
+            android:textSize="@dimen/sp_14" />
 
 
     </LinearLayout>
