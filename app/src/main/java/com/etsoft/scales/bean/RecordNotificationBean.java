@@ -75,7 +75,7 @@ public class RecordNotificationBean {
         private String admin_alias;
         private double admin_id;
         private double type;
-        private double terminal_type;
+        private int terminal_type;
         private String content;
         private String create_time;
         private String update_time;
@@ -137,11 +137,11 @@ public class RecordNotificationBean {
             this.type = type;
         }
 
-        public double getTerminal_type() {
+        public int getTerminal_type() {
             return terminal_type;
         }
 
-        public void setTerminal_type(double terminal_type) {
+        public void setTerminal_type(int terminal_type) {
             this.terminal_type = terminal_type;
         }
 

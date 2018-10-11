@@ -85,7 +85,7 @@ public class InputRecordListBean implements Serializable {
         private double recycling_price_id;
         private double recycling_price;
         private double pay_money;
-        private double pay_type;
+        private int pay_type;
         private double integral;
         private String create_time;
         private String update_time;
@@ -174,11 +174,11 @@ public class InputRecordListBean implements Serializable {
             this.pay_money = pay_money;
         }
 
-        public double getPay_type() {
+        public int getPay_type() {
             return pay_type;
         }
 
-        public void setPay_type(double pay_type) {
+        public void setPay_type(int pay_type) {
             this.pay_type = pay_type;
         }
 

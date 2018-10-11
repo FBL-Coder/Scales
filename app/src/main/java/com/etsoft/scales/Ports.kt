@@ -8,6 +8,9 @@ package com.etsoft.scales
 class Ports {
     companion object {
 
+        /**
+         * 跟接口
+         */
         var port = "http://garbage.lilinyun.com/"
         /**
          * 登陆接口
@@ -31,22 +34,24 @@ class Ports {
         var INPUTBACKLIST = port + "webapi/Replenishstockdetails/list"
         /**
          * 新增入库
+         * 单个入库
          */
         var ADDINPUTBACK = port + "webapi/Replenishstockdetails/insert"
         /**
          * 新增出库
          */
         var ADDOUTBACK = port + "webapi/Outbound/insert"
+
         /**
          * 通知列表
-         * 带ID为详情
          */
         var NOTIFICATIONLIST = port + "webapi/Notice/list"
 
         /**
-         * 服务站点
+         * 通知详情
          */
-        var SITEINFO = port + "webapi/Servicepoint/list"
+        var NOTIFICATIONLISTINFO = port + "webapi/Notice/info"
+
         /**
          * 回收物列表
          */
@@ -58,7 +63,7 @@ class Ports {
 
         /**
          * 服务站列表
-         * */
+         */
         var SERVERLIST = port + "webapi/Servicepoint/list"
 
 
@@ -69,16 +74,17 @@ class Ports {
 
         /**
          * 客户注册
-         * */
+         */
         var REISTERUSER = port + "webapi/User/insertApi"
 
         /**
          * 用户查询
-         * */
+         */
         var USERQUERY = port + "webapi/User/getInfoByPhoneApi"
         /**
-         * 用户查询
-         * */
+         * 新增入库
+         * 多条入库
+         */
         var ADDOUTBACKLIST = port + "webapi/Replenishstockdetails/insertList"
 
 

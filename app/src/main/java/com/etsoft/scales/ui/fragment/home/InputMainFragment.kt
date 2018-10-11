@@ -17,7 +17,6 @@ import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
 import com.etsoft.scales.bean.AppInputBean
-import com.etsoft.scales.bean.CareFragment_Bean
 import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.bean.RecycleListBean
 import com.etsoft.scales.ui.activity.*
@@ -62,7 +61,6 @@ class InputMainFragment : Fragment() {
         initView()
         getRecycleData(0)
         initListView()
-        initGridView()
     }
 
     /**
@@ -87,6 +85,9 @@ class InputMainFragment : Fragment() {
 
     }
 
+    /**
+     * 刷新/初始化当前本地记录列表
+     */
     private fun initListView() {
         if (mMain_Input_ListViewAdapter == null) {
             mMain_Input_ListViewAdapter = Main_Input_ListViewAdapter(mInputLiat)
@@ -112,19 +113,13 @@ class InputMainFragment : Fragment() {
         }
     }
 
-    private fun initGridView() {
-        var list = ArrayList<CareFragment_Bean>().run {
-            add(CareFragment_Bean(R.mipmap.ic_favorite_white_48dp, "#8ee5ee", "电子秤1"))
-            this
-        }
-    }
-
     private fun initView() {
         Input_Main_TitleBar!!.run {
+            //TitleBar 初始化
             title.text = "入库"
             moor.setImageResource(R.drawable.ic_print_black_24dp)
             moor.setOnClickListener {
-                if (mInputLiat == null || mInputLiat.size == 0){
+                if (mInputLiat == null || mInputLiat.size == 0) {
                     ToastUtil.showText("没有数据,请添加记录")
                     return@setOnClickListener
                 }
@@ -153,18 +148,29 @@ class InputMainFragment : Fragment() {
             }
         }
 
+
         Input_Main_Record!!.setOnClickListener {
+            //跳转入库记录
             startActivity(Intent(mActivity, InputRecordActivity::class.java))
         }
 
-
         Input_Main_Clear.setOnClickListener {
-            mInputLiat.clear()
-            initListView()
-
+            //清楚当前本地记录
+            if (mInputLiat.size == 0) {
+                ToastUtil.showText("请先添加记录")
+            } else
+                MyDialog(mActivity!!).setMessage("是否清理当前记录?")
+                        .setNegativeButton("取消") { dialog, which ->
+                            dialog.dismiss()
+                        }.setPositiveButton("清理") { dialog, which ->
+                            dialog.dismiss()
+                            mInputLiat.clear()
+                            initListView()
+                        }.show()
         }
 
         Input_Main_Add.setOnClickListener {
+            //添加本地记录
             if (MyApp.mRecycleListBean == null) {
                 mActivity!!.mLoadDialog!!.show()
                 getRecycleData(1)
@@ -190,6 +196,7 @@ class InputMainFragment : Fragment() {
         UpBean.servicePointId = ServerStation_Id.toString()
         UpBean.staffId = MyApp.UserInfo!!.data.id.toString()
 
+        //将本地记录转成要上传的JSON数据
         var lingsBeanList = ArrayList<AppInputBean.RecyclingsBean>()
         for (i in mInputLiat.indices) {
             var lingsBean = AppInputBean.RecyclingsBean()
@@ -217,6 +224,7 @@ class InputMainFragment : Fragment() {
                             this
                         })
                         Data.addAll(mInputLiat)
+                        //打印数据
                         mIzkcService.printerInit()
                         com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.printGBKText("--------------------------")
                         for (i in Data.indices) {
@@ -229,7 +237,7 @@ class InputMainFragment : Fragment() {
                         com.smartdevice.aidltestdemo.BaseActivity.mIzkcService.sendRAWData("printer", byteArrayOf(0x0a, 0x0a, 0x1b, 0x69))
 
                     } catch (e: Exception) {
-                        ToastUtil.showText("打印机发生错误")
+                        ToastUtil.showText("上传成功,但打印机发生错误,未能正常打印")
                     }
                 }
             }
@@ -260,6 +268,7 @@ class InputMainFragment : Fragment() {
                     position = which
                 }).setPositiveButton("确定") { dialog, which ->
                     dialog.dismiss()
+                    //跳转到具体添加回收物页面
                     startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
                         putExtra("position", position)
                         this
@@ -271,6 +280,7 @@ class InputMainFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == 101 && data != null) {
+            //回首页页面返回数据
             var bean = data.getSerializableExtra("data") as Input_Main_List_Bean
             bean.id = listid.toString()
             mInputLiat.add(bean)

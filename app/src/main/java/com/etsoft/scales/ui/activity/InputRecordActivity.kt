@@ -43,7 +43,7 @@ class InputRecordActivity : BaseActivity() {
     /**
      * 加载入库数据
      */
-    private fun initdata(page: Int = 1, linit: Int = 5) {
+    private fun initdata(page: Int = 1, linit: Int = 2) {
         var pram = HashMap<String, String>()
         pram["limit"] = "$linit"
         pram["page"] = "$page"

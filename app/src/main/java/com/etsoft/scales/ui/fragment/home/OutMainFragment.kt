@@ -103,7 +103,7 @@ class OutMainFragment : Fragment() {
         for (i in MyApp.mRecycleListBean!!.data.indices) {
             names.add(MyApp.mRecycleListBean!!.data[i].name)
         }
-        MyDialog(mActivity!!)
+        MyDialog(mActivity!!).setTitle("选择出库物")
                 .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
                     position = which
                 }).setPositiveButton("确定") { dialog, which ->

@@ -2,8 +2,11 @@ package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.bean.NotificationInfoBean
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
@@ -37,14 +40,19 @@ class NotificationInfoActivity : BaseActivity() {
 
         id = intent.getStringExtra("id")!!
 
-        OkHttpUtils.getAsyn(Ports.NOTIFICATIONLIST, HashMap<String, String>().run { put("id", id);this }, object : MyHttpCallback(this) {
+        OkHttpUtils.getAsyn(Ports.NOTIFICATIONLISTINFO, HashMap<String, String>().run { put("id", id);this }, object : MyHttpCallback(this) {
 
+            @SuppressLint("SetTextI18n")
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
                 if (resultDesc!!.getcode() != 0) {
                     ToastUtil.showText(resultDesc.result)
                 } else {
-                    Notification_Info_content.text = resultDesc!!.result
+                    val info = MyApp.gson.fromJson<NotificationInfoBean>(resultDesc!!.result, NotificationInfoBean::class.java)
+                    Title.text = info?.data?.title
+                    val type = if (info?.data?.type == 1) "物价调整" else "其他"
+                    date.text = type + "  丨  " + info?.data?.admin_alias + "  丨  " + info?.data?.update_time
+                    content.text = "    " + info?.data?.content
                 }
             }
 
@@ -53,7 +61,6 @@ class NotificationInfoActivity : BaseActivity() {
                 super.onFailure(code, message)
                 mLoadDialog!!.hide()
                 ToastUtil.showText(message)
-                Notification_Info_content.text = "$code++$message"
             }
         }, "通知详情")
     }
@@ -63,9 +70,8 @@ class NotificationInfoActivity : BaseActivity() {
             title.text = "通知详情"
             back.setOnClickListener { finish() }
             moor.setImageResource(R.mipmap.ic_autorenew_white_24dp)
-            moor.setOnClickListener {
-                ToastUtil.showText("刷新")
-            }
+            moor.visibility = View.GONE
+            this
         }
     }
 }

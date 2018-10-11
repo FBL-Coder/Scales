@@ -2,6 +2,7 @@ package com.etsoft.scales.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
@@ -23,6 +24,7 @@ import java.util.*
  * 历史通知
  */
 class RecordNotificationActivity : BaseActivity() {
+    private var mListBeanAll: RecordNotificationBean? = null
     private var mListBean: RecordNotificationBean? = null
     private var Maxpage = 1
     private var page = 1
@@ -48,20 +50,23 @@ class RecordNotificationActivity : BaseActivity() {
         OkHttpUtils.getAsyn(Ports.NOTIFICATIONLIST, pram, object : MyHttpCallback(this) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
-                mLoadDialog!!.hide()
+
                 if (resultDesc!!.getcode() != 0) {
+                    mLoadDialog!!.hide()
                     ToastUtil.showText(resultDesc.result)
                 } else {
                     Notification_Record_XRefreshView.stopRefresh()
                     Notification_Record_XRefreshView.stopLoadMore()
                     var list = MyApp.gson.fromJson(resultDesc!!.result, RecordNotificationBean::class.java)
-                    if (list!!.code == 0) {
-                        if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
-                        var pages = mListBean!!.count / linit
-                        Maxpage = Math.ceil(pages.toDouble()).toInt()
-                    } else {
-                        LogUtils.e("获取数据失败:" + "code=" + list.code + "  msg=" + list.msg)
+                    for (i in list.data.indices) {
+                        //删除并非给App的通知
+                        if (list.data[i].terminal_type == 3)
+                            list.data.removeAt(i)
                     }
+                    if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
+                    var pages = mListBean!!.count / linit
+                    Maxpage = Math.ceil(pages.toDouble()).toInt()
+                    mLoadDialog!!.hide()
                     initListView()
                 }
             }
@@ -126,11 +131,7 @@ class RecordNotificationActivity : BaseActivity() {
         Notification_Record_TitleBar.run {
             back.setOnClickListener { finish() }
             title.text = "历史通知"
-            moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp).run {
-                setOnClickListener {
-                    ToastUtil.showText("点击添加")
-                }
-            }
+            moor.visibility = View.GONE
         }
     }
 }
