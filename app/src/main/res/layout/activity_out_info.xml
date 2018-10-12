@@ -229,36 +229,10 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
-            android:text="员工:" />
+            android:text="操作员:" />
 
         <TextView
             android:id="@+id/workname"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="right"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white_"
-        android:padding="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_5"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:text="管理员:" />
-
-        <TextView
-            android:id="@+id/Administrator"
             android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="2"

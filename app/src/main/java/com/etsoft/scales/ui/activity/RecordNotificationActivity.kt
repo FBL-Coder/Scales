@@ -24,7 +24,6 @@ import java.util.*
  * 历史通知
  */
 class RecordNotificationActivity : BaseActivity() {
-    private var mListBeanAll: RecordNotificationBean? = null
     private var mListBean: RecordNotificationBean? = null
     private var Maxpage = 1
     private var page = 1
@@ -63,7 +62,7 @@ class RecordNotificationActivity : BaseActivity() {
                         if (list.data[i].terminal_type == 3)
                             list.data.removeAt(i)
                     }
-                    if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
+                    if (mListBean == null) mListBean = list else mListBean?.data?.addAll(list.data)
                     var pages = mListBean!!.count / linit
                     Maxpage = Math.ceil(pages.toDouble()).toInt()
                     mLoadDialog!!.hide()

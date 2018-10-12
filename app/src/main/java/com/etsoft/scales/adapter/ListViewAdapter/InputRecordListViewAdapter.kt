@@ -34,12 +34,12 @@ class InputRecordListViewAdapter(bean: InputRecordListBean) : BaseAdapter() {
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.Input_Record_Time.text = mList[position].create_time
-        mViewHolder.Input_Record_Staff.text = mList[position].servicePoint.admin_alias.toString()
-        mViewHolder.Input_Record_State.text = mList[position].recyclingPrice.status.toString()
-        mViewHolder.Input_Record_Money.text = "￥" + mList[position].unit_price.toString()
-        mViewHolder.Input_Record_Weight.text = mList[position].weight.toString() + "kg"
-        mViewHolder.Input_Record_Type.text = mList[position].recyclingPrice.name.toString()
+        mViewHolder.Input_Record_Time.text = mList[position]?.create_time
+        mViewHolder.Input_Record_Staff.text = mList[position]?.service_point.admin_alias.toString()
+        mViewHolder.Input_Record_State.text = mList[position]?.recycling_price.status.toString()
+        mViewHolder.Input_Record_Money.text = "￥" + mList[position]?.unit_price.toString()
+        mViewHolder.Input_Record_Weight.text = mList[position]?.weight.toString() + "kg"
+        mViewHolder.Input_Record_Type.text = mList[position]?.recycling_price.name.toString()
         return view!!
 
     }

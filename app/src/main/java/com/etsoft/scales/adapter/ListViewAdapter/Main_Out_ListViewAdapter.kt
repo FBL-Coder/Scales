@@ -37,12 +37,12 @@ class Main_Out_ListViewAdapter(context: Context, bean: OutListBean) : BaseAdapte
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.mOutTime.text = mList[position].update_time
-        mViewHolder.mOutFrom.text = mList[position].staff_name
-        mViewHolder.mOutState.text = if (mList[position].recyclingPrice.status.toInt() == 1) "已出库" else "未出库"
-        mViewHolder.mOutTo.text = mList[position].to_place
-        mViewHolder.mOutWeight.text = mList[position].weight.toString() + mList[position].recyclingPrice.unit
-        mViewHolder.mOutType.text = mList[position].recyclingPrice.name
+        mViewHolder.mOutTime.text = mList[position]?.update_time
+        mViewHolder.mOutFrom.text = mList[position]?.staff_name
+        mViewHolder.mOutState.text = if (mList[position]?.recyclingPrice?.status?.toInt() == 1) "已出库" else "未出库"
+        mViewHolder.mOutTo.text = mList[position]?.to_place
+        mViewHolder.mOutWeight.text = mList[position]?.weight?.toString() + mList[position]?.recyclingPrice?.unit
+        mViewHolder.mOutType.text = mList[position]?.recyclingPrice?.name
 
         return view!!
 

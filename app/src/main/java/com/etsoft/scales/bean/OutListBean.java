@@ -56,8 +56,6 @@ public class OutListBean implements Serializable{
         /**
          * id : 1
          * to_place : 1dsadas
-         * admin_id : 1
-         * admin_alias : 张三
          * recycling_price_id : 1
          * recycling_price_name : 1,2
          * weight : 10
@@ -72,8 +70,6 @@ public class OutListBean implements Serializable{
 
         private double id;
         private String to_place;
-        private double admin_id;
-        private String admin_alias;
         private double recycling_price_id;
         private String recycling_price_name;
         private double weight;
@@ -83,7 +79,7 @@ public class OutListBean implements Serializable{
         private long delivery_time;
         private double staff_id;
         private String staff_name;
-        private RecyclingPriceBean recyclingPrice;
+        private RecyclingPriceBean recycling_price;
 
         public double getId() {
             return id;
@@ -99,22 +95,6 @@ public class OutListBean implements Serializable{
 
         public void setTo_place(String to_place) {
             this.to_place = to_place;
-        }
-
-        public double getAdmin_id() {
-            return admin_id;
-        }
-
-        public void setAdmin_id(double admin_id) {
-            this.admin_id = admin_id;
-        }
-
-        public String getAdmin_alias() {
-            return admin_alias;
-        }
-
-        public void setAdmin_alias(String admin_alias) {
-            this.admin_alias = admin_alias;
         }
 
         public double getRecycling_price_id() {
@@ -190,11 +170,11 @@ public class OutListBean implements Serializable{
         }
 
         public RecyclingPriceBean getRecyclingPrice() {
-            return recyclingPrice;
+            return recycling_price;
         }
 
         public void setRecyclingPrice(RecyclingPriceBean recyclingPrice) {
-            this.recyclingPrice = recyclingPrice;
+            this.recycling_price = recyclingPrice;
         }
 
         public static class RecyclingPriceBean implements Serializable{

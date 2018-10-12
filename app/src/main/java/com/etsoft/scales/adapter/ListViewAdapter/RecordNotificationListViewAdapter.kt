@@ -33,9 +33,9 @@ class RecordNotificationListViewAdapter(bean: RecordNotificationBean) : BaseAdap
         } else {
             mViewHolder = (view.tag as ViewHolder?)!!
         }
-        mViewHolder.NotiFication_Admin.text = mList[position].admin_alias
-        mViewHolder.NotiFication_Title.text = mList[position].title
-        mViewHolder.NotiFication_Type.text = when (mList[position].type) {
+        mViewHolder.NotiFication_Admin.text = mList[position]?.admin_alias
+        mViewHolder.NotiFication_Title.text = mList[position]?.title
+        mViewHolder.NotiFication_Type.text = when (mList[position]?.type) {
             1.0 -> "物价调整"
             2.0 -> "其他"
             else -> "未知"

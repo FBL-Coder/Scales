@@ -136,7 +136,7 @@ class OutMainFragment : Fragment() {
                     Out_XRefreshView.stopRefresh()
                     Out_XRefreshView.stopLoadMore()
                     var list = MyApp.gson.fromJson(resultDesc!!.result, OutListBean::class.java)
-                    if (mOutList == null) mOutList = list else mOutList!!.data.addAll(list.data)
+                    if (mOutList == null) mOutList = list else mOutList?.data?.addAll(list.data)
                     val pages = list!!.count / linit
                     this@OutMainFragment.Maxpage = Math.ceil(pages.toDouble()).toInt()
                     initListView()

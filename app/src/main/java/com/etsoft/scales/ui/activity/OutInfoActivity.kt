@@ -32,7 +32,6 @@ class OutInfoActivity : BaseActivity() {
         inventory.text = content.recyclingPrice.inventory.toString()
         update.text = content.recyclingPrice.update_time
         workname.text = content.staff_name
-        Administrator.text = content.admin_alias
     }
 
     private fun initView() {

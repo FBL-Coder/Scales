@@ -27,17 +27,17 @@ class InputInfoActivity : BaseActivity() {
         var content = intent.getSerializableExtra("content") as InputRecordListBean.DataBean
 
         if (content != null) {
-            Type.text = content?.recyclingPrice?.name
-            Uuid.text = content?.recyclingPrice?.uuid
-            weight.text = content?.weight.toString() + content?.recyclingPrice?.unit
-            price.text = content?.recyclingPrice?.price.toString()
+            Type.text = content?.recycling_price?.name
+            Uuid.text = content?.recycling_price?.uuid
+            weight.text = content?.weight.toString() + content?.recycling_price?.unit
+            price.text = content?.recycling_price?.price.toString()
             total.text = content?.pay_money.toString()
             pay_type.text = if (content?.pay_type == 1) "现金" else "其他"
             username.text = content?.user_name
             userPhone.text = content?.user_phone
             workname.text = content?.staff_id.toString() + "NULL name"
-            ServerStation.text = content?.servicePoint?.name
-            serverPhone.text = content?.servicePoint?.functionary_phone
+            ServerStation.text = content?.service_point?.name
+            serverPhone.text = content?.service_point?.functionary_phone
             date.text = content?.update_time
         } else ToastUtil.showText("发生错误")
     }

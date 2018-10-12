@@ -46,9 +46,9 @@ class AddInputAvtivity : BaseActivity() {
 
         position = intent.getIntExtra("position", 0)
         Input_ServerStation.text = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "未选择") as String
-        Add_Input_Type.text = MyApp.mRecycleListBean!!.data[position].name
-        Add_Input_DanWei.text = MyApp.mRecycleListBean!!.data[position].unit
-        Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean!!.data[position].price}"
+        Add_Input_Type.text = MyApp.mRecycleListBean?.data!![position]?.name
+        Add_Input_DanWei.text = MyApp.mRecycleListBean?.data!![position]?.unit
+        Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean?.data!![position]?.price}"
 
         Input_ServerStation.setOnClickListener {
             val text = if (AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1) == -1) "是否前往选择服务站?" else "是否重新选择服务站?"
@@ -73,12 +73,12 @@ class AddInputAvtivity : BaseActivity() {
             setResult(101, intent
                     .run {
                         putExtra("data", Input_Main_List_Bean().run {
-                            type = MyApp.mRecycleListBean!!.data[position].name
+                            type = MyApp.mRecycleListBean?.data!![position]?.name
                             weight = weight_tv
-                            price = MyApp.mRecycleListBean!!.data[position].price.toString()
-                            unit = MyApp.mRecycleListBean!!.data[position].unit
+                            price = MyApp.mRecycleListBean?.data!![position]?.price.toString()
+                            unit = MyApp.mRecycleListBean?.data!![position]?.unit
                             total = "￥${DecimalFormat("0.00").format(MyApp.mRecycleListBean!!.data[position].price * weight_tv.toDouble())}"
-                            typeid = MyApp.mRecycleListBean!!.data[position].id.toString()
+                            typeid = MyApp.mRecycleListBean?.data!![position]?.id.toString()
                             this
                         })
                         this

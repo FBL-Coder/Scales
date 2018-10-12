@@ -192,15 +192,15 @@ class InputMainFragment : Fragment() {
 
         var UpBean = AppInputBean()
         UpBean.phone = userphone
-        UpBean.servicePointId = ServerStation_Id.toString()
-        UpBean.staffId = MyApp.UserInfo!!.data.id.toString()
+        UpBean.servicePointId = ServerStation_Id?.toString()
+        UpBean.staffId = MyApp.UserInfo?.data?.id?.toString()
 
         //将本地记录转成要上传的JSON数据
         var lingsBeanList = ArrayList<AppInputBean.RecyclingsBean>()
         for (i in mInputLiat.indices) {
             var lingsBean = AppInputBean.RecyclingsBean()
-            lingsBean.recyclingPriceId = mInputLiat[0].typeid
-            lingsBean.weight = mInputLiat[0].weight
+            lingsBean.recyclingPriceId = mInputLiat[i]?.typeid
+            lingsBean.weight = mInputLiat[i]?.weight
             lingsBeanList.add(lingsBean)
         }
         UpBean.recyclings = lingsBeanList

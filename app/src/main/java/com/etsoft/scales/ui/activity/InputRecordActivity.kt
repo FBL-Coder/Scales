@@ -58,7 +58,7 @@ class InputRecordActivity : BaseActivity() {
                     InputRecord_XRefreshView.stopLoadMore()
                     var list = MyApp.gson.fromJson(resultDesc!!.result, InputRecordListBean::class.java)
                     if (list!!.code == 0) {
-                        if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
+                        if (mListBean == null) mListBean = list else mListBean?.data?.addAll(list.data)
                         var pages = mListBean!!.count / linit
                         Maxpage = Math.ceil(pages.toDouble()).toInt()
                     } else {

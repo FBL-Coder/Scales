@@ -3,9 +3,7 @@ package com.etsoft.scales.utils.httpGetDataUtils;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 
-import com.etsoft.scales.utils.ToastUtil;
-
-import okhttp3.Call;
+import com.apkfuns.logutils.LogUtils;
 
 
 /**
@@ -27,6 +25,7 @@ public class MyHttpCallback extends HttpCallback {
 
     @Override
     public void onFailure(int code, String message) {
+        LogUtils.e("请求错误：code =" + code + "  msg = " + message);
         super.onFailure(code, message);
     }
 
@@ -38,7 +37,6 @@ public class MyHttpCallback extends HttpCallback {
     @Override
     public void onSuccess(ResultDesc resultDesc) {
     }
-
 
 
 }

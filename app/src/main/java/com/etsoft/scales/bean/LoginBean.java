@@ -221,18 +221,17 @@ public class LoginBean {
              * replenishStockTotalPayMoney : 67.2
              */
 
-            private int outboundTotalWeight;
+            private double outboundTotalWeight;
             private double replenishStockTotalWeight;
             private double replenishStockTotalPayMoney;
 
-            public int getOutboundTotalWeight() {
+            public double getOutboundTotalWeight() {
                 return outboundTotalWeight;
             }
 
-            public void setOutboundTotalWeight(int outboundTotalWeight) {
+            public void setOutboundTotalWeight(double outboundTotalWeight) {
                 this.outboundTotalWeight = outboundTotalWeight;
             }
-
             public double getReplenishStockTotalWeight() {
                 return replenishStockTotalWeight;
             }
@@ -240,7 +239,6 @@ public class LoginBean {
             public void setReplenishStockTotalWeight(double replenishStockTotalWeight) {
                 this.replenishStockTotalWeight = replenishStockTotalWeight;
             }
-
             public double getReplenishStockTotalPayMoney() {
                 return replenishStockTotalPayMoney;
             }
