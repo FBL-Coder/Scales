@@ -47,27 +47,6 @@ public class TitleBar extends RelativeLayout {
         back = view.findViewById(R.id.back_titlebar);
         title = view.findViewById(R.id.title_titlebar);
         moor = view.findViewById(R.id.moor_titlebar);
-//        TitleBar_Net = view.findViewById(R.id.TitleBar_Net);
-//        netListener();
-    }
-
-    public void netListener() {
-//        NetBroadcastReceiver.setEvevt(new NetBroadcastReceiver.NetEvevtChangListener() {
-//            @Override
-//            public void onNetChange(int netMobile) {
-//                NetBuild();
-//            }
-//        });
-//        NetBuild();
-    }
-
-    public void NetBuild() {
-        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
-        if (NETWORK == 0) {
-            TitleBar_Net.setVisibility(View.VISIBLE);
-        } else {
-            TitleBar_Net.setVisibility(View.GONE);
-        }
     }
 
     public TextView getTitle() {

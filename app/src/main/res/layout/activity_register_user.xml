@@ -47,6 +47,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="right"
+                    android:maxLength="6"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dp_14" />
             </LinearLayout>
@@ -124,6 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
+                    android:singleLine="true"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -143,7 +145,6 @@
                     android:layout_weight="0.6"
                     android:drawableLeft="@drawable/ic_star_red_500_24dp"
                     android:gravity="center"
-                    android:inputType="phone"
                     android:text="手机号:" />
 
                 <com.etsoft.scales.view.MyEditText
@@ -151,6 +152,8 @@
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:inputType="phone"
+                    android:maxLength="11"
                     android:gravity="right"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -171,6 +174,7 @@
                     android:layout_weight="0.6"
                     android:drawableLeft="@drawable/ic_star_red_500_24dp"
                     android:gravity="center"
+                    android:maxLength="8"
                     android:text="县/区:" />
 
                 <com.etsoft.scales.view.MyEditText
@@ -208,6 +212,7 @@
                     android:layout_weight="2"
                     android:gravity="right"
                     android:lines="1"
+                    android:maxLength="8"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -237,6 +242,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
+                    android:maxLength="10"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -264,6 +270,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
+                    android:maxLength="8"
                     android:lines="1"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -293,6 +300,7 @@
                     android:layout_weight="2"
                     android:gravity="right"
                     android:lines="1"
+                    android:maxLength="8"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -321,6 +329,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
+                    android:maxLength="6"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -349,6 +358,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
+                    android:maxLength="6"
                     android:textColor="@color/black" />
             </LinearLayout>
 

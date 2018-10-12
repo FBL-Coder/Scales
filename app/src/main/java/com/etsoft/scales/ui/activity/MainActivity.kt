@@ -1,7 +1,6 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
-import android.content.IntentFilter
 import android.support.v4.app.Fragment
 import android.view.KeyEvent
 import android.widget.Toast
@@ -14,7 +13,6 @@ import com.etsoft.scales.SaveKey
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mLocationInfo
 import com.etsoft.scales.bean.ServerStationInfoBean
-import com.etsoft.scales.netWorkListener.NetBroadcastReceiver
 import com.etsoft.scales.ui.fragment.home.InputMainFragment
 import com.etsoft.scales.ui.fragment.home.MineMainFragment
 import com.etsoft.scales.ui.fragment.home.OutMainFragment
@@ -28,7 +26,6 @@ import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_main_scales.*
 import java.util.*
 import kotlin.collections.HashMap
-import kotlin.math.log
 
 
 /**
@@ -37,21 +34,11 @@ import kotlin.math.log
  */
 class MainActivity : BaseActivity() {
 
-    private var mBroadcastReceiver: NetBroadcastReceiver? = null
-    private var mIntentFilter: IntentFilter? = null
     private var fragments: ArrayList<Fragment>? = null
     private var fm = supportFragmentManager
     private var mInputMainFragment: InputMainFragment? = null
     private var mOutMainFragment: OutMainFragment? = null
 
-    override fun onResume() {
-        super.onResume()
-        //注册网络状态广播接受器
-        mBroadcastReceiver = NetBroadcastReceiver()
-        mIntentFilter = IntentFilter()
-        mIntentFilter!!.addAction("android.net.conn.CONNECTIVITY_CHANGE")
-        registerReceiver(mBroadcastReceiver, mIntentFilter)
-    }
 
     override fun setView(): Int {
         return R.layout.activity_main_scales
@@ -136,12 +123,6 @@ class MainActivity : BaseActivity() {
             return false
         }
         return false
-    }
-
-    override fun onDestroy() {
-        //注销网络状态广播接收器
-        unregisterReceiver(mBroadcastReceiver!!)
-        super.onDestroy()
     }
 
 
