@@ -48,7 +48,7 @@ class AddInputAvtivity : BaseActivity() {
         Input_ServerStation.text = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "未选择") as String
         Add_Input_Type.text = MyApp.mRecycleListBean?.data!![position]?.name
         Add_Input_DanWei.text = MyApp.mRecycleListBean?.data!![position]?.unit
-        Add_Input_DanJia.text = "￥ ${MyApp.mRecycleListBean?.data!![position]?.price}"
+        Add_Input_DanJia.text = "${MyApp.mRecycleListBean?.data!![position]?.price}"
 
         Input_ServerStation.setOnClickListener {
             val text = if (AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1) == -1) "是否前往选择服务站?" else "是否重新选择服务站?"

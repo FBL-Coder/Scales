@@ -23,6 +23,7 @@ import java.util.*
 
 /**
  * Author：FBL  Time： 2018/10/7.
+ * 蓝牙相关处理工具
  */
 class BlueUtils {
 
@@ -170,7 +171,7 @@ class BlueUtils {
         }
 
         /**
-         * 注册搜索广播
+         * 注册蓝牙相关广播
          */
         fun registerSeekReceiver(activity: BaseActivity, mHandler: Handler): BlueBoothReceiver {
             //注册Bluetooth广播
