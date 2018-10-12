@@ -9,6 +9,7 @@ import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
 import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.adapter.ListViewAdapter.BluetoothListAdapter
+import com.etsoft.scales.app.MyApp.Companion.mBlueBoothReceiver
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothAdapter
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
@@ -54,10 +55,7 @@ class AddDevActivity : BaseActivity() {
      * 已配对设备集合
      */
     private var mBlue_Ok_List = ArrayList<BlueBoothDevicesBean>()
-    /**
-     * 搜索 BluetoothReceiver
-     */
-    private var mBlueBoothReceiver: BlueBoothReceiver? = null
+
 
     override fun setView(): Int? {
         return R.layout.activity_add_dev
@@ -89,7 +87,10 @@ class AddDevActivity : BaseActivity() {
             }
         }
 
-
+        if (BlueUtils.isRegistered) {
+            BlueUtils.unRegisterReceiver(applicationContext, mBlueBoothReceiver!!)
+        }
+        mBlueBoothReceiver = BlueUtils.registerSeekReceiver(applicationContext, mHandler!!)
         //检测蓝牙是否打开
         if (BlueUtils.isBlueOpen(this))
         //检测蓝牙是否连接
@@ -98,8 +99,6 @@ class AddDevActivity : BaseActivity() {
             else
                 startDiscovery()
 
-
-        mBlueBoothReceiver = BlueUtils.registerSeekReceiver(this, mHandler!!)
     }
 
     /**
@@ -182,6 +181,11 @@ class AddDevActivity : BaseActivity() {
             }
     }
 
+    override fun onStart() {
+        LogUtils.i("取消搜索")
+        mBluetoothAdapter?.cancelDiscovery()
+        super.onStart()
+    }
 
     /**
      * Handler 静态内部类，防止内存泄漏
@@ -196,10 +200,6 @@ class AddDevActivity : BaseActivity() {
                 when (msg.what) {
                     BlueBoothState.BULECONNECT_OPEN -> {//蓝牙打开成功
                         activity.startDiscovery()
-                    }
-                    BlueBoothState.BULECONNECT_CLOSE -> {//蓝牙关闭
-                        mBluetoothDataIsEnable = false
-                        mBluetoothSocket = null
                     }
                     BlueBoothState.BLUE_PAIRING_SUCCESS -> {//配对成功
                         activity.mLoadDialog!!.hide()
@@ -233,13 +233,11 @@ class AddDevActivity : BaseActivity() {
                         } catch (e: Exception) {
                             mBluetoothAdapter!!.startDiscovery()
                         }
-                        mBluetoothDataIsEnable = true
                     }
                     BlueBoothState.BLUE_CONNECT_CLOSE -> {//断开连接
                         ToastUtil.showText("蓝牙已断开")
                         activity.mLoadDialog!!.hide()
                         activity.ConnectDevice.visibility = View.GONE
-                        mBluetoothDataIsEnable = false
                     }
                     BlueBoothState.BLUE_CONNECT_CLOSE_ERROR -> {//断开异常
                         //断开连接异常
@@ -296,10 +294,5 @@ class AddDevActivity : BaseActivity() {
                 }
             }
         }
-    }
-
-    public override fun onDestroy() {
-        super.onDestroy()
-        BlueUtils.unRegisterReceiver(this, mBlueBoothReceiver!!)
     }
 }

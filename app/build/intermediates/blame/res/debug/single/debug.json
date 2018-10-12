@@ -772,6 +772,10 @@
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/e7230126e274d6449ac42374cd080463/res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
+        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_settings_bluetooth_blue_a200_24dp.png.flat",
+        "source": "/Users/fubolong/AS-WOEK/Scales/app/build/generated/res/pngs/debug/drawable-hdpi/ic_settings_bluetooth_blue_a200_24dp.png"
+    },
+    {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/e7230126e274d6449ac42374cd080463/res/drawable-xhdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
@@ -2758,6 +2762,10 @@
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ucrop_ic_next.png.flat",
         "source": "/Users/fubolong/.gradle/caches/transforms-1/files-1.1/ucrop-v2.2.0.aar/86ba65d9d2c71aa1dca86a6a3568b7aa/res/drawable-xhdpi-v4/ucrop_ic_next.png"
+    },
+    {
+        "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v21_ic_settings_bluetooth_blue_a200_24dp.xml.flat",
+        "source": "/Users/fubolong/AS-WOEK/Scales/app/build/generated/res/pngs/debug/drawable-hdpi-v21/ic_settings_bluetooth_blue_a200_24dp.xml"
     },
     {
         "merged": "/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_half_black_36dp.png.flat",

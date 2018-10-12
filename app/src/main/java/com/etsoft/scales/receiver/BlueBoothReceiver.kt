@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import com.apkfuns.logutils.LogUtils
+import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
@@ -62,11 +63,13 @@ class BlueBoothReceiver(mHandler: Handler) : BroadcastReceiver() {
                     BluetoothAdapter.STATE_TURNING_ON -> {//正在打开
                     }
                     BluetoothAdapter.STATE_ON -> {//打开
-                      mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_OPEN)
+                        mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_OPEN)
+
                     }
                     BluetoothAdapter.STATE_TURNING_OFF -> {//正在关闭
                     }
                     BluetoothAdapter.STATE_OFF -> {//关闭
+                        mBluetoothSocket = null
                         mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_CLOSE)
                     }
                 }
@@ -98,17 +101,35 @@ class BlueBoothReceiver(mHandler: Handler) : BroadcastReceiver() {
             BluetoothDevice.ACTION_ACL_CONNECTED -> {//连接成功
 //                mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_SUCCESS)
                 LogUtils.i("蓝牙回调   连接成功")
+                mBluetoothDevice = mDevice
+                mBluetoothDataIsEnable = true
+                mOnBlueConnecetChangerlistener_input?.OnBlueChanger(true)
+                mOnBlueConnecetChangerlistener_out?.OnBlueChanger(true)
             }
 
             BluetoothDevice.ACTION_ACL_DISCONNECTED -> {//连接断开
                 LogUtils.i("蓝牙回调   断开连接")
-                if (mBluetoothSocket != null) {
-                    mBluetoothSocket!!.close()
-                    mBluetoothSocket = null
-                    mBluetoothDevice = null
-                }
+                mBluetoothSocket?.close()
+                mBluetoothDevice = null
+                mBluetoothDataIsEnable = false
+                mOnBlueConnecetChangerlistener_input?.OnBlueChanger(false)
+                mOnBlueConnecetChangerlistener_out?.OnBlueChanger(false)
                 mHandler.sendEmptyMessage(BlueBoothState.BLUE_CONNECT_CLOSE)
             }
         }
     }
+
+
+    companion object {
+        var mOnBlueConnecetChangerlistener_input: OnBlueConnecetChangerlistener? = null
+        var mOnBlueConnecetChangerlistener_out: OnBlueConnecetChangerlistener? = null
+    }
+
+    interface OnBlueConnecetChangerlistener {
+        fun OnBlueChanger(isConnect: Boolean)
+    }
+
+
+
+
 }

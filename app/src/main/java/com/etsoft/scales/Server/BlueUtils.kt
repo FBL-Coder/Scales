@@ -3,6 +3,7 @@ package com.etsoft.scales.Server
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
+import android.content.Context
 import android.content.IntentFilter
 import android.os.Handler
 import com.apkfuns.logutils.LogUtils
@@ -30,6 +31,8 @@ class BlueUtils {
     companion object {
         //是否读数据
         var isReadData = false
+        //是否注册
+        var isRegistered = false
 
         /**
          * 连接蓝牙
@@ -44,7 +47,6 @@ class BlueUtils {
 
                     if (btSocket.isConnected) {
                         mBluetoothSocket = btSocket
-                        mBluetoothDevice = mBlueDevList[position].mDevice
                         mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_SUCCESS)
                     } else
                         mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_FAILED)
@@ -173,8 +175,9 @@ class BlueUtils {
         /**
          * 注册蓝牙相关广播
          */
-        fun registerSeekReceiver(activity: BaseActivity, mHandler: Handler): BlueBoothReceiver {
+        fun registerSeekReceiver(context: Context, mHandler: Handler): BlueBoothReceiver {
             //注册Bluetooth广播
+
             var filter = IntentFilter()
             filter.addAction(BluetoothDevice.ACTION_FOUND)
             filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
@@ -185,7 +188,9 @@ class BlueUtils {
             filter.priority = 1000
 
             var seekBlueReceiver = BlueBoothReceiver(mHandler)
-            activity.registerReceiver(seekBlueReceiver, filter)
+            LogUtils.i("注册蓝牙广播接受器")
+            context.registerReceiver(seekBlueReceiver, filter)
+            isRegistered = true
             return seekBlueReceiver
         }
 
@@ -193,10 +198,12 @@ class BlueUtils {
          * 解除注册
          */
 
-        fun unRegisterReceiver(activity: BaseActivity, receiver: BlueBoothReceiver) {
+        fun unRegisterReceiver(context: Context, receiver: BlueBoothReceiver) {
             if (receiver == null)
                 return
-            activity.unregisterReceiver(receiver)
+            LogUtils.i("注销蓝牙广播接受器")
+            context.unregisterReceiver(receiver)
+            isRegistered = false
         }
     }
 }

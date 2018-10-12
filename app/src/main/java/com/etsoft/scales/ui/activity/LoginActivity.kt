@@ -23,6 +23,9 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun initEvent() {
+
+        Versions.text = packageManager.getPackageInfo(packageName, 0).versionName
+
         Login_Enter.setOnClickListener {
             var id = Login_ID.text.toString()
             var pass = Login_Pass.text.toString()
@@ -30,7 +33,7 @@ class LoginActivity : BaseActivity() {
             if (!Validator.isMobile(id) && pass.isEmpty()) {
                 ToastUtil.showText("账号密码不合适")
             }
-            mLoadDialog!!.show(arrayOf("正在登陆","登陆超时"),false)
+            mLoadDialog!!.show(arrayOf("正在登陆", "登陆超时"), false)
             LoginHelper.login(this, id, pass)
 
         }

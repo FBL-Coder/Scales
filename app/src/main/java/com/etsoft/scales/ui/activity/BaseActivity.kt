@@ -15,7 +15,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
+import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.app.MyApp.Companion.mBlueBoothReceiver
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.UtilHelpers
 import com.etsoft.scales.view.MyDialog

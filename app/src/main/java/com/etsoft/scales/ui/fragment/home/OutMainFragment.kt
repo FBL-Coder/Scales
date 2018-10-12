@@ -16,18 +16,21 @@ import com.etsoft.scales.R
 import com.etsoft.scales.SortType
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Out_ListViewAdapter
 import com.etsoft.scales.app.MyApp
-import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.bean.OutListBean
 import com.etsoft.scales.bean.Out_Main_Bean
 import com.etsoft.scales.bean.RecycleListBean
-import com.etsoft.scales.ui.activity.*
+import com.etsoft.scales.receiver.BlueBoothReceiver
+import com.etsoft.scales.ui.activity.AddDevActivity
+import com.etsoft.scales.ui.activity.AddOutAvtivity
+import com.etsoft.scales.ui.activity.MainActivity
+import com.etsoft.scales.ui.activity.OutInfoActivity
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
+import kotlinx.android.synthetic.main.fragment_input_main.*
 import kotlinx.android.synthetic.main.fragment_out_main.*
-import okhttp3.Call
 
 /**
  * Author：FBL  Time： 2018/7/20.
@@ -40,7 +43,7 @@ class OutMainFragment : Fragment() {
     private var mMain_Out_ListViewAdapter: Main_Out_ListViewAdapter? = null
 
     companion object {
-        private var mActivity: BaseActivity? = null
+        private var mActivity: MainActivity? = null
         fun initFragment(activity: MainActivity): OutMainFragment {
             var mOutMainFragment = OutMainFragment()
             mActivity = activity
@@ -54,11 +57,18 @@ class OutMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         mActivity!!.mLoadDialog!!.show()
+        initView()
+        BlueBoothReceiver.mOnBlueConnecetChangerlistener_out = object : BlueBoothReceiver.OnBlueConnecetChangerlistener {
+            override fun OnBlueChanger(isConnect: Boolean) {
+                if (isConnect)
+                    Main_Out_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
+                else
+                    Main_Out_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+            }
+        }
         initdata(page)
     }
-
 
     /**
      * 获取回收物信息
@@ -211,14 +221,21 @@ class OutMainFragment : Fragment() {
      * 初始化TitleBar
      */
     private fun initView() {
-        Main_Out_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
-        Main_Out_TitleBar.back.setOnClickListener {
-            startActivity(Intent(mActivity, AddDevActivity::class.java))
-        }
-        Main_Out_TitleBar.title.text = "出库记录"
-        Main_Out_TitleBar.moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
-        Main_Out_TitleBar.moor.setOnClickListener {
-            showSelectDialog()
+
+        Main_Out_TitleBar.run {
+            if (MyApp.mBluetoothDataIsEnable)
+                back.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
+            else
+                back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+            back.setOnClickListener {
+                startActivity(Intent(mActivity, AddDevActivity::class.java))
+            }
+            title.text = "出库记录"
+            moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
+            moor.setOnClickListener {
+                showSelectDialog()
+            }
+            this
         }
     }
 
@@ -252,5 +269,4 @@ class OutMainFragment : Fragment() {
 
         }
     }
-
 }

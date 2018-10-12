@@ -23,7 +23,12 @@ import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
 import com.etsoft.scales.bean.AppInputBean
 import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.bean.RecycleListBean
-import com.etsoft.scales.ui.activity.*
+import com.etsoft.scales.receiver.BlueBoothReceiver
+import com.etsoft.scales.receiver.BlueBoothReceiver.OnBlueConnecetChangerlistener
+import com.etsoft.scales.ui.activity.AddDevActivity
+import com.etsoft.scales.ui.activity.AddInputAvtivity
+import com.etsoft.scales.ui.activity.InputRecordActivity
+import com.etsoft.scales.ui.activity.MainActivity
 import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
@@ -67,11 +72,20 @@ class InputMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mHandler = MyHandler(mActivity!!)
-        initView()
         getRecycleData(0)
+        initView()
         initListView()
+        BlueBoothReceiver.mOnBlueConnecetChangerlistener_input = object : OnBlueConnecetChangerlistener {
+            override fun OnBlueChanger(isConnect: Boolean) {
+                if (isConnect)
+                    Input_Main_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
+                else
+                    Input_Main_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+            }
+        }
     }
+
+
 
     /**
      * 获取回收物信息
@@ -96,7 +110,6 @@ class InputMainFragment : Fragment() {
                 ToastUtil.showText(message)
             }
         }, "回收列表")
-
     }
 
     /**
@@ -159,8 +172,8 @@ class InputMainFragment : Fragment() {
             back.setOnClickListener {
                 startActivity(Intent(mActivity, AddDevActivity::class.java))
             }
+            this
         }
-
 
         Input_Main_Record!!.setOnClickListener {
             //跳转入库记录

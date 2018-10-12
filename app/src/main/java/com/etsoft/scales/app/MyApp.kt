@@ -10,10 +10,13 @@ import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.apkfuns.logutils.LogUtils
+import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.bean.LoginBean
 import com.etsoft.scales.bean.RecycleListBean
 import com.etsoft.scales.bean.ServerStationBean
 import com.etsoft.scales.bean.ServerStationInfoBean
+import com.etsoft.scales.receiver.BlueBoothReceiver
+import com.etsoft.scales.ui.activity.AddDevActivity
 import com.etsoft.scales.utils.Density
 import com.etsoft.scales.utils.gson.NullStringEmptyTypeAdapterFactory
 import com.etsoft.scales.utils.httpGetDataUtils.LoggerInterceptor
@@ -57,7 +60,7 @@ open class MyApp : ClientApplication() {
         /**
          * OkhttpClirnt
          */
-        var mclient = OkHttpClient().newBuilder().addInterceptor(LoggerInterceptor()).connectTimeout(10000,TimeUnit.SECONDS).build()
+        var mclient = OkHttpClient().newBuilder().addInterceptor(LoggerInterceptor()).connectTimeout(10000, TimeUnit.SECONDS).build()
 
 
         /**
@@ -100,6 +103,11 @@ open class MyApp : ClientApplication() {
          */
         var mBluetoothDataIsEnable: Boolean = false
 
+        /**
+         * 搜索 BluetoothReceiver
+         */
+        var mBlueBoothReceiver: BlueBoothReceiver? = null
+
 
 
     }
@@ -128,6 +136,7 @@ open class MyApp : ClientApplication() {
             }
         }
 
+        //定位相关配置
         var option = AMapLocationClientOption()
                 .setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy)
                 .setOnceLocation(true)
@@ -149,5 +158,13 @@ open class MyApp : ClientApplication() {
         if (activities == null)
             activities = ArrayList()
         activities!!.add(activity)
+    }
+
+
+    override fun onTerminate() {
+        if (mBlueBoothReceiver != null) {
+            BlueUtils.unRegisterReceiver(this, mBlueBoothReceiver!!)
+        }
+        super.onTerminate()
     }
 }

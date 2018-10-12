@@ -21,23 +21,23 @@ public final class R {
         public static final int item_touch_helper_max_drag_scroll_per_frame = 0x7f0600c8;
     }
     public static final class drawable {
-        public static final int xrefresh_ok = 0x7f0700c5;
-        public static final int xrefreshview_arrow = 0x7f0700c6;
+        public static final int xrefresh_ok = 0x7f0700c6;
+        public static final int xrefreshview_arrow = 0x7f0700c7;
     }
     public static final class id {
-        public static final int item_touch_helper_previous_elevation = 0x7f080150;
-        public static final int left_images = 0x7f08015e;
-        public static final int right_text = 0x7f0801ae;
-        public static final int xrefreshview_footer_click_textview = 0x7f08022f;
-        public static final int xrefreshview_footer_content = 0x7f080230;
-        public static final int xrefreshview_footer_hint_textview = 0x7f080231;
-        public static final int xrefreshview_footer_progressbar = 0x7f080232;
-        public static final int xrefreshview_header_arrow = 0x7f080233;
-        public static final int xrefreshview_header_hint_textview = 0x7f080234;
-        public static final int xrefreshview_header_ok = 0x7f080235;
-        public static final int xrefreshview_header_progressbar = 0x7f080236;
-        public static final int xrefreshview_header_text = 0x7f080237;
-        public static final int xrefreshview_header_time = 0x7f080238;
+        public static final int item_touch_helper_previous_elevation = 0x7f080151;
+        public static final int left_images = 0x7f08015f;
+        public static final int right_text = 0x7f0801af;
+        public static final int xrefreshview_footer_click_textview = 0x7f080230;
+        public static final int xrefreshview_footer_content = 0x7f080231;
+        public static final int xrefreshview_footer_hint_textview = 0x7f080232;
+        public static final int xrefreshview_footer_progressbar = 0x7f080233;
+        public static final int xrefreshview_header_arrow = 0x7f080234;
+        public static final int xrefreshview_header_hint_textview = 0x7f080235;
+        public static final int xrefreshview_header_ok = 0x7f080236;
+        public static final int xrefreshview_header_progressbar = 0x7f080237;
+        public static final int xrefreshview_header_text = 0x7f080238;
+        public static final int xrefreshview_header_time = 0x7f080239;
     }
     public static final class layout {
         public static final int xrefreshview_footer = 0x7f0a0080;
