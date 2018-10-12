@@ -7,7 +7,7 @@ import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
-import kotlinx.android.synthetic.main.actiivity_register_user.*
+import kotlinx.android.synthetic.main.activity_register_user.*
 
 /**
  * Author：FBL  Time： 2018/10/10.
@@ -19,7 +19,7 @@ class RegisterUserActivity : BaseActivity() {
 
     override fun setView(): Int? {
 
-        return R.layout.actiivity_register_user
+        return R.layout.activity_register_user
     }
 
     override fun onCreate() {
@@ -88,14 +88,17 @@ class RegisterUserActivity : BaseActivity() {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
-                ToastUtil.showText("注册成功")
-                finish()
+                if (resultDesc!!.getcode() == 0) {
+                    ToastUtil.showText("注册成功")
+                    finish()
+                }else{
+                    ToastUtil.showText("注册失败，${resultDesc!!.result}")
+                }
             }
 
             override fun onFailure(code: Int, message: String?) {
                 super.onFailure(code, message)
                 mLoadDialog!!.hide()
-                ToastUtil.showText(message)
             }
 
         }, "客户注册")

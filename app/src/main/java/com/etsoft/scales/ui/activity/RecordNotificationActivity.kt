@@ -49,24 +49,28 @@ class RecordNotificationActivity : BaseActivity() {
         OkHttpUtils.getAsyn(Ports.NOTIFICATIONLIST, pram, object : MyHttpCallback(this) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
-
-                if (resultDesc!!.getcode() != 0) {
-                    mLoadDialog!!.hide()
-                    ToastUtil.showText(resultDesc.result)
-                } else {
-                    Notification_Record_XRefreshView.stopRefresh()
-                    Notification_Record_XRefreshView.stopLoadMore()
-                    var list = MyApp.gson.fromJson(resultDesc!!.result, RecordNotificationBean::class.java)
-                    for (i in list.data.indices) {
-                        //删除并非给App的通知
-                        if (list.data[i].terminal_type == 3)
-                            list.data.removeAt(i)
+                try {
+                    if (resultDesc!!.getcode() != 0) {
+                        mLoadDialog!!.hide()
+                        ToastUtil.showText(resultDesc.result)
+                    } else {
+                        Notification_Record_XRefreshView.stopRefresh()
+                        Notification_Record_XRefreshView.stopLoadMore()
+                        var list = MyApp.gson.fromJson(resultDesc!!.result, RecordNotificationBean::class.java)
+                        for (i in list.data.indices) {
+                            //删除并非给App的通知
+                            if (list.data[i].terminal_type == 3)
+                                list.data.removeAt(i)
+                        }
+                        if (mListBean == null) mListBean = list else mListBean?.data?.addAll(list.data)
+                        var pages = mListBean!!.count / linit
+                        Maxpage = Math.ceil(pages.toDouble()).toInt()
+                        mLoadDialog!!.hide()
+                        initListView()
                     }
-                    if (mListBean == null) mListBean = list else mListBean?.data?.addAll(list.data)
-                    var pages = mListBean!!.count / linit
-                    Maxpage = Math.ceil(pages.toDouble()).toInt()
-                    mLoadDialog!!.hide()
-                    initListView()
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
                 }
             }
 

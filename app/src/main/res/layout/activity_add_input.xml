@@ -162,12 +162,19 @@
 
 
             <TextView
-                android:id="@+id/Add_Input_DanJia"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center|right"
-                android:text="￥4.56"
+                android:text="￥"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_16" />
+            <TextView
+                android:id="@+id/Add_Input_DanJia"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:text="4.56"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_16" />
 

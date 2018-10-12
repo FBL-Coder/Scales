@@ -51,20 +51,23 @@ class ServerStationActivity : BaseActivity() {
         OkHttpUtils.getAsyn(Ports.SERVERLIST, pram, object : MyHttpCallback(this) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
-
                 mLoadDialog!!.hide()
-
                 ServerStation_XRefreshView.stopRefresh()
                 ServerStation_XRefreshView.stopLoadMore()
-                var list = MyApp.gson.fromJson(resultDesc!!.result, ServerStationBean::class.java)
-                if (list!!.code == 0) {
-                    if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
-                    var pages = mListBean!!.count / linit
-                    Maxpage = Math.ceil(pages.toDouble()).toInt()
-                } else {
-                    LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")
+                try {
+                    var list = MyApp.gson.fromJson(resultDesc!!.result, ServerStationBean::class.java)
+                    if (list!!.code == 0) {
+                        if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
+                        var pages = mListBean!!.count / linit
+                        Maxpage = Math.ceil(pages.toDouble()).toInt()
+                    } else {
+                        LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")
+                    }
+                    initListView()
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
                 }
-                initListView()
             }
 
             override fun onFailure(code: Int, message: String?) {

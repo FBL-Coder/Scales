@@ -43,7 +43,7 @@ class InputRecordActivity : BaseActivity() {
     /**
      * 加载入库数据
      */
-    private fun initdata(page: Int = 1, linit: Int = 2) {
+    private fun initdata(page: Int = 1, linit: Int = 5) {
         var pram = HashMap<String, String>()
         pram["limit"] = "$linit"
         pram["page"] = "$page"
@@ -51,20 +51,25 @@ class InputRecordActivity : BaseActivity() {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
-                if (resultDesc!!.getcode() != 0) {
-                    ToastUtil.showText(resultDesc.result)
-                } else {
-                    InputRecord_XRefreshView.stopRefresh()
-                    InputRecord_XRefreshView.stopLoadMore()
-                    var list = MyApp.gson.fromJson(resultDesc!!.result, InputRecordListBean::class.java)
-                    if (list!!.code == 0) {
-                        if (mListBean == null) mListBean = list else mListBean?.data?.addAll(list.data)
-                        var pages = mListBean!!.count / linit
-                        Maxpage = Math.ceil(pages.toDouble()).toInt()
+                try {
+                    if (resultDesc!!.getcode() != 0) {
+                        ToastUtil.showText(resultDesc.result)
                     } else {
-                        LogUtils.e("获取数据失败:" + "code=" + list.code + "  msg=" + list.msg)
+                        InputRecord_XRefreshView.stopRefresh()
+                        InputRecord_XRefreshView.stopLoadMore()
+                        var list = MyApp.gson.fromJson(resultDesc!!.result, InputRecordListBean::class.java)
+                        if (list!!.code == 0) {
+                            if (mListBean == null) mListBean = list else mListBean?.data?.addAll(list.data)
+                            var pages = mListBean!!.count / linit
+                            Maxpage = Math.ceil(pages.toDouble()).toInt()
+                        } else {
+                            LogUtils.e("获取数据失败:" + "code=" + list.code + "  msg=" + list.msg)
+                        }
+                        initListView()
                     }
-                    initListView()
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
                 }
             }
 

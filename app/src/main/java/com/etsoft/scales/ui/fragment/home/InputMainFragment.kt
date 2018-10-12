@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
@@ -29,6 +30,7 @@ import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.MyEditText
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -73,10 +75,14 @@ class InputMainFragment : Fragment() {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mActivity!!.mLoadDialog!!.hide()
-                mActivity!!.mLoadDialog!!.hide()
-                mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
-                if (type == 1)
-                    showSelectDialog()
+                try {
+                    mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
+                    if (type == 1)
+                        showSelectDialog()
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
+                }
             }
 
             override fun onFailure(code: Int, message: String?) {
@@ -208,27 +214,20 @@ class InputMainFragment : Fragment() {
         OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mActivity!!.mLoadDialog!!.hide()
-                if (resultDesc!!.getcode() != 0) {
-                    ToastUtil.showText(resultDesc.result)
-                } else {
-                    try {
-                        var Data = ArrayList<Input_Main_List_Bean>()
-                        Data.add(Input_Main_List_Bean().run {
-                            id = "编号"
-                            type = "类型"
-                            weight = "重量"
-                            unit = "单位"
-                            price = "单位"
-                            total = "总价"
-                            this
-                        })
-                        Data.addAll(mInputLiat)
-
-                        PrintData()
-
-                    } catch (e: Exception) {
-                        ToastUtil.showText("上传成功,但打印机发生错误,未能正常打印")
+                try {
+                    if (resultDesc!!.getcode() != 0) {
+                        ToastUtil.showText(resultDesc.result)
+                    } else {
+                        try {
+                            PrintData()
+                        } catch (e: Exception) {
+                            LogUtils.e("打印票据异常：$e")
+                            ToastUtil.showText("上传成功,但打印机发生错误,未能正常打印")
+                        }
                     }
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
                 }
             }
 
@@ -301,14 +300,16 @@ class InputMainFragment : Fragment() {
         for (i in mInputLiat.indices) {
             WeightAll += mInputLiat[i].weight.toDouble()
         }
-        var ZongZhong = "累计重量：" + WeightAll + "kg"
+
+
+        var ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
         mIzkcService.printGBKText(ZongZhong + "\n\n")
 
         var MeonyAll = 0.000
         for (i in mInputLiat.indices) {
             MeonyAll += mInputLiat[i].total.toDouble()
         }
-        var ZongJia = "累计总额：￥" + MeonyAll
+        var ZongJia = "累计总额：￥" + DecimalFormat("0.00").format(MeonyAll)
         mIzkcService.printGBKText(ZongJia + "\n")
         mIzkcService.printGBKText("\n\n\n\n")
     }

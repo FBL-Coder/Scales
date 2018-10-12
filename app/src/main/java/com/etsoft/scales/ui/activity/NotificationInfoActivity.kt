@@ -3,6 +3,7 @@ package com.etsoft.scales.ui.activity
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.app.MyApp
@@ -45,14 +46,19 @@ class NotificationInfoActivity : BaseActivity() {
             @SuppressLint("SetTextI18n")
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
-                if (resultDesc!!.getcode() != 0) {
-                    ToastUtil.showText(resultDesc.result)
-                } else {
-                    val info = MyApp.gson.fromJson<NotificationInfoBean>(resultDesc!!.result, NotificationInfoBean::class.java)
-                    Title.text = info?.data?.title
-                    val type = if (info?.data?.type == 1) "物价调整" else "其他"
-                    date.text = type + "  丨  " + info?.data?.admin_alias + "  丨  " + info?.data?.update_time
-                    content.text = "    " + info?.data?.content
+                try {
+                    if (resultDesc!!.getcode() != 0) {
+                        ToastUtil.showText(resultDesc.result)
+                    } else {
+                        val info = MyApp.gson.fromJson<NotificationInfoBean>(resultDesc!!.result, NotificationInfoBean::class.java)
+                        Title.text = info?.data?.title
+                        val type = if (info?.data?.type == 1) "物价调整" else "其他"
+                        date.text = type + "  丨  " + info?.data?.admin_alias + "  丨  " + info?.data?.update_time
+                        content.text = "    " + info?.data?.content
+                    }
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
                 }
             }
 

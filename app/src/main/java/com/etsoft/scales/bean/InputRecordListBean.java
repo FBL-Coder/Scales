@@ -563,8 +563,8 @@ public class InputRecordListBean implements Serializable {
             private String companie;
             private String admin_alias;
             private int admin_id;
-            private double create_time;
-            private double update_time;
+            private String create_time;
+            private String update_time;
             private int deleted;
             private double lat;
             private double lng;
@@ -665,19 +665,19 @@ public class InputRecordListBean implements Serializable {
                 this.admin_id = admin_id;
             }
 
-            public double getCreate_time() {
+            public String getCreate_time() {
                 return create_time;
             }
 
-            public void setCreate_time(double create_time) {
+            public void setCreate_time(String create_time) {
                 this.create_time = create_time;
             }
 
-            public double getUpdate_time() {
+            public String getUpdate_time() {
                 return update_time;
             }
 
-            public void setUpdate_time(double update_time) {
+            public void setUpdate_time(String update_time) {
                 this.update_time = update_time;
             }
 

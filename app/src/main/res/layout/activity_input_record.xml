@@ -18,7 +18,7 @@
         android:background="@color/white"
         android:paddingBottom="@dimen/dp_5"
         android:paddingTop="@dimen/dp_5"
-        android:paddingLeft="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_25"
         android:paddingRight="@dimen/dp_40"
         android:orientation="horizontal">
 
@@ -82,7 +82,7 @@
             android:dividerHeight="@dimen/dp_2"
             android:background="@color/white_"
             android:scrollbarSize="@dimen/dp_3"
-            android:scrollbarThumbVertical="@color/app_color" />
+            android:scrollbarThumbVertical="@color/black_" />
     </com.andview.refreshview.XRefreshView>
 
 

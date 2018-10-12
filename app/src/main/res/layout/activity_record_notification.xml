@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:divider="@color/white___"
             android:background="@color/white_"
-            android:scrollbarThumbVertical="@color/app_color"
+            android:scrollbarThumbVertical="@color/black_"
             android:scrollbarSize="@dimen/dp_3"
             android:dividerHeight="@dimen/dp_2"/>
 

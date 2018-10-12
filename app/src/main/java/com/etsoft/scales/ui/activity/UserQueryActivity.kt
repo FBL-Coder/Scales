@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.view.View
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.app.MyApp
@@ -38,13 +39,18 @@ class UserQueryActivity : BaseActivity() {
             override fun onSuccess(resultDesc: ResultDesc?) {
 
                 mLoadDialog!!.hide()
-                if (resultDesc!!.getcode() != 0) {
-                    ToastUtil.showText(resultDesc.result)
-                } else {
-                    val mUserQueryBean = MyApp.gson.fromJson<UserQueryBean>(resultDesc!!.result, UserQueryBean::class.java)
-                    Query_Result.visibility = View.VISIBLE
-                    Name.text = mUserQueryBean!!.data?.name
-                    Time.text = mUserQueryBean!!.data?.create_time
+                try {
+                    if (resultDesc!!.getcode() != 0) {
+                        ToastUtil.showText(resultDesc.result)
+                    } else {
+                        val mUserQueryBean = MyApp.gson.fromJson<UserQueryBean>(resultDesc!!.result, UserQueryBean::class.java)
+                        Query_Result.visibility = View.VISIBLE
+                        Name.text = mUserQueryBean!!.data?.name
+                        Time.text = mUserQueryBean!!.data?.create_time
+                    }
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
                 }
 
             }

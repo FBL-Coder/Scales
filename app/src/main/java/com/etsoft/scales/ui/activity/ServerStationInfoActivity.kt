@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey.Companion.SERVERSTATION_ID
@@ -43,17 +44,22 @@ class ServerStationInfoActivity : BaseActivity() {
         OkHttpUtils.getAsyn(Ports.SERVERLISTINFO, HashMap<String, String>().run { put("id", id);this }, object : MyHttpCallback(this) {
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mLoadDialog!!.hide()
-                if (resultDesc!!.getcode() != 0) {
-                    ToastUtil.showText(resultDesc.result)
-                } else {
+                try {
+                    if (resultDesc!!.getcode() != 0) {
+                        ToastUtil.showText(resultDesc.result)
+                    } else {
 
-                    mInfoBean = MyApp.gson.fromJson(resultDesc!!.result, ServerStationInfoBean::class.java)
-                    Name.text = mInfoBean!!.data.name
-                    Admin.text = mInfoBean!!.data.functionary
-                    Phone.text = mInfoBean!!.data.functionary_phone
-                    companie.text = mInfoBean!!.data.companie
-                    Time.text = mInfoBean!!.data.update_time
-                    address.text = mInfoBean!!.data.address
+                        mInfoBean = MyApp.gson.fromJson(resultDesc!!.result, ServerStationInfoBean::class.java)
+                        Name.text = mInfoBean!!.data.name
+                        Admin.text = mInfoBean!!.data.functionary
+                        Phone.text = mInfoBean!!.data.functionary_phone
+                        companie.text = mInfoBean!!.data.companie
+                        Time.text = mInfoBean!!.data.update_time
+                        address.text = mInfoBean!!.data.address
+                    }
+                } catch (e: Exception) {
+                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                    ToastUtil.showText("服务器异常")
                 }
             }
 
