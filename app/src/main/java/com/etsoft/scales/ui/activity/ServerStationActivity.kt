@@ -44,7 +44,7 @@ class ServerStationActivity : BaseActivity() {
     /**
      * 加载服务站点列表数据
      */
-    private fun initdata(page: Int = 1, linit: Int = 2) {
+    private fun initdata(page: Int = 1, linit: Int = 5) {
         var pram = HashMap<String, String>()
         pram["limit"] = "$linit"
         pram["page"] = "$page"

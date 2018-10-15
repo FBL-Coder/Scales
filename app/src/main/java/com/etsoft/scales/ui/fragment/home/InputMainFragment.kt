@@ -21,6 +21,7 @@ import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
 import com.etsoft.scales.bean.AppInputBean
+import com.etsoft.scales.bean.InputOkBean
 import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.bean.RecycleListBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
@@ -85,7 +86,6 @@ class InputMainFragment : Fragment() {
             }
         }
     }
-
 
 
     /**
@@ -239,8 +239,10 @@ class InputMainFragment : Fragment() {
                 if (resultDesc!!.getcode() != 0) {
                     ToastUtil.showText(resultDesc.result)
                 } else {
+                    var bean = MyApp.gson.fromJson<InputOkBean>(resultDesc!!.result, InputOkBean::class.java)
+
                     mActivity!!.mLoadDialog!!.show("正在打印")
-                    PrintData()
+                    PrintData(bean.data.company, bean.data.transaction_no)
                 }
             }
 
@@ -254,7 +256,7 @@ class InputMainFragment : Fragment() {
     /**
      * 打印票据
      */
-    private fun PrintData() {
+    private fun PrintData(compiler: String, traceElement: String) {
         Thread(Runnable {
             try {
                 if (mIzkcService == null) {
@@ -262,8 +264,8 @@ class InputMainFragment : Fragment() {
                     return@Runnable
                 }
                 mIzkcService.printerInit()
-                mIzkcService.printTextAlgin("西安百纳回收中心\n\n", 0, 1, 1)
-                var Str = "单号： " + "1234567890\n\n"
+                mIzkcService.printTextAlgin(compiler + "\n\n", 0, 1, 1)
+                var Str = "单号： $traceElement\n"
                 mIzkcService.printGBKText(Str)
                 var data = "时间： " + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis())) + "\n"
                 mIzkcService.printGBKText(data)
@@ -328,17 +330,17 @@ class InputMainFragment : Fragment() {
 
 
                 var ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
-                mIzkcService.printGBKText(ZongZhong + "\n\n")
+                mIzkcService.printGBKText(ZongZhong + "\n")
 
                 var MeonyAll = 0.000
                 for (i in mInputLiat.indices) {
                     MeonyAll += mInputLiat[i].total.toDouble()
                 }
                 var ZongJia = "累计总额：￥" + DecimalFormat("0.00").format(MeonyAll)
-                mIzkcService.printGBKText(ZongJia + "\n\n")
+                mIzkcService.printGBKText(ZongJia + "\n")
 
                 mIzkcService.printGBKText("操作员：" + MyApp.UserInfo!!.data.name + "\n")
-                mIzkcService.printGBKText("\n\n\n\n")
+                mIzkcService.printGBKText("\n\n\n")
                 mHandler!!.sendEmptyMessage(1)
             } catch (e: Exception) {
                 LogUtils.e("打印票据异常：$e")

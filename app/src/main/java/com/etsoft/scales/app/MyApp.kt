@@ -3,9 +3,13 @@ package com.etsoft.scales.app
 //import com.inuker.bluetooth.library.BluetoothClient
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityManager
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
+import android.content.Context
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -17,6 +21,8 @@ import com.etsoft.scales.bean.ServerStationBean
 import com.etsoft.scales.bean.ServerStationInfoBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.ui.activity.AddDevActivity
+import com.etsoft.scales.ui.activity.LoginActivity
+import com.etsoft.scales.ui.activity.MainActivity
 import com.etsoft.scales.utils.Density
 import com.etsoft.scales.utils.gson.NullStringEmptyTypeAdapterFactory
 import com.etsoft.scales.utils.httpGetDataUtils.LoggerInterceptor
@@ -25,6 +31,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.smartdevice.aidltestdemo.ClientApplication
+import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.OkHttpClient
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -109,7 +116,6 @@ open class MyApp : ClientApplication() {
         var mBlueBoothReceiver: BlueBoothReceiver? = null
 
 
-
     }
 
     override fun onCreate() {
@@ -121,6 +127,8 @@ open class MyApp : ClientApplication() {
         Fresco.initialize(this)//图片加载库 初始化
         Density.setDensity(this, 370f)//简单屏幕适配方案 初始化
 
+        //日志上报Bugly
+        CrashReport.initCrashReport(applicationContext, "2e4ab6f76a", false)
         //初始化定位
         mLocationClient = AMapLocationClient(applicationContext)
         //设置定位回调监听
@@ -144,6 +152,23 @@ open class MyApp : ClientApplication() {
         mLocationClient!!.setLocationOption(option)
 
         getLocation()
+
+
+    }
+
+    fun runTimer() {
+        Thread(Runnable {
+            //循环检测是否处于后台
+            while (true) {
+                if (!isAppOnForeground()) {
+                    if (UserInfo != null) {
+                        startActivity(Intent(applicationContext, MainActivity::class.java).run { addFlags(FLAG_ACTIVITY_NEW_TASK) })
+                    } else {
+                        startActivity(Intent(applicationContext, LoginActivity::class.java).run { addFlags(FLAG_ACTIVITY_NEW_TASK) })
+                    }
+                }
+            }
+        }).start()
     }
 
     fun getActivities(): List<Activity> {
@@ -165,5 +190,26 @@ open class MyApp : ClientApplication() {
             BlueUtils.unRegisterReceiver(this, mBlueBoothReceiver!!)
         }
         super.onTerminate()
+    }
+
+
+    /**
+     * 判断程序前后台
+     * true  前台
+     */
+    fun isAppOnForeground(): Boolean {
+        val activityManager = applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val name = applicationContext.packageName
+        val appProcesses = activityManager
+                .runningAppProcesses ?: return false
+
+        for (appProcess in appProcesses) {
+            // The name of the process that this object is associated with.
+            if (appProcess.processName == name && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return true
+            }
+        }
+
+        return false
     }
 }

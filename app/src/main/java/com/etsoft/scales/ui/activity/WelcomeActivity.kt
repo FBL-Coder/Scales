@@ -20,8 +20,6 @@ class WelcomeActivity : BaseActivity() {
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)// 设置全屏
-
-        Thread.sleep(1000)
         startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
         finish()
     }

@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!--蓝牙权限-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -38,7 +39,8 @@
         </activity>
 
         <!--首页-->
-        <activity android:name="com.etsoft.scales.ui.activity.MainActivity" />
+        <activity android:name="com.etsoft.scales.ui.activity.MainActivity"
+            android:launchMode="singleTask"/>
 
         <!--登陆-->
         <activity
@@ -150,6 +152,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+
+
+        <!--自启动-->
+        <receiver android:name=".receiver.ContentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
 
         <!--定位服务-->
         <service android:name="com.amap.api.location.APSService" />

@@ -14,7 +14,6 @@ import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.google.gson.Gson
-import okhttp3.Call
 
 /**
  * Author：FBL  Time： 2018/8/8.
@@ -43,6 +42,7 @@ class LoginHelper {
                                     AppSharePreferenceMgr.put(SaveKey.ACCESS_TOKEN, MyApp.UserInfo!!.data.access_token)
                                     AppSharePreferenceMgr.put(SaveKey.REFRESH_TOKEN, MyApp.UserInfo!!.data.refresh_token)
                                     activity.startActivity(Intent(activity, MainActivity::class.java))
+                                    activity.finish()
                                 }
                             } catch (e: Exception) {
                                 LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")

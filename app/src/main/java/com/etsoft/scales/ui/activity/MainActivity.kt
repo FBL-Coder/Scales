@@ -105,23 +105,7 @@ class MainActivity : BaseActivity() {
 
     }
 
-    private var mTimeExit = 0L
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        try {
-            if (keyCode != KeyEvent.KEYCODE_BACK)
-                return false
-            if (System.currentTimeMillis() - mTimeExit < 1500) {
-                for (i in 0 until MyApp.mApplication!!.activities!!.size) {
-                    MyApp.mApplication?.activities!![i]?.finish()
-                }
-                System.exit(0)
-            } else {
-                ToastUtil.showText("再按一次退出", Toast.LENGTH_SHORT)
-                mTimeExit = System.currentTimeMillis()
-            }
-        } catch (e: Exception) {
-            return false
-        }
         return false
     }
 

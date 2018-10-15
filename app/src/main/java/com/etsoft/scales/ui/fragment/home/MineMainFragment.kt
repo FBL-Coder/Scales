@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.fragment.home
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -81,8 +82,15 @@ class MineMainFragment : Fragment() {
             startActivity(Intent(mActivity, UserQueryActivity::class.java))
         }
         Mine_Logout!!.setOnClickListener {
-            //退出
-            mActivity!!.finish()
+            MyDialog(mActivity!!).setMessage("是否退出登录？")
+                    .setNegativeButton("取消") { dialog, which ->
+                        dialog.dismiss()
+                    }.setPositiveButton("退出") { dialog, which ->
+                        startActivity(Intent(mActivity, LoginActivity::class.java))
+                        //退出
+                        mActivity!!.finish()
+                        dialog.dismiss()
+                    }.show()
         }
     }
 

@@ -6,9 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
-import android.view.Gravity
-import android.view.MotionEvent
-import android.view.ViewGroup
+import android.view.*
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.UtilHelpers
@@ -27,13 +25,13 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
 
     final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        MyApp.mApplication!!.runTimer()
         if (setView() != null && setView() != 0)
             setContentView(setView()!!)
         try {
             initDialog()
             onCreate()
-            OkHttpUtils.initClient(MyApp.mclient,this)
+            OkHttpUtils.initClient(MyApp.mclient, this)
         } catch (e: Exception) {
 //            LogUtils.e("数据异常--->$e")
             e.printStackTrace()
@@ -117,7 +115,6 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
-
 
     override fun onDestroy() {
         mLoadDialog!!.destroyDialog()
