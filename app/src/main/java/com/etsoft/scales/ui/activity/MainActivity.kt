@@ -100,7 +100,7 @@ class MainActivity : BaseActivity() {
                 .addItem(BottomNavigationItem(R.drawable.ic_input_black_24dp, "入库"))
                 .addItem(BottomNavigationItem(R.drawable.ic_zoom_out_map_black_24dp, "出库"))
                 .addItem(BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "我的"))
-                .setActiveColor(R.color.black)
+                .setActiveColor(R.color.app_color)
                 .initialise()
 
     }

@@ -109,7 +109,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_40"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_20"
         android:layout_margin="@dimen/dp_10"
@@ -120,7 +120,9 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_20"
+            android:background="@drawable/butont_clicked"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:text="清除记录"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold" />
@@ -131,8 +133,10 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:text="添加记录"
             android:textSize="@dimen/sp_18"
+            android:background="@drawable/butont_clicked"
             android:textStyle="bold" />
 
     </LinearLayout>

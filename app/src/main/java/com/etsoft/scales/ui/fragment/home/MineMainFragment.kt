@@ -35,12 +35,14 @@ class MineMainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mine_main, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initData()
         initEvent()
     }
+
     override fun onStart() {
         super.onStart()
         if (AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") == "")
@@ -58,7 +60,7 @@ class MineMainFragment : Fragment() {
 
         Mine_UserSelf!!.setOnClickListener {
             //个人信息
-            startActivity(Intent(mActivity!!,SelfActivity::class.java))
+            startActivity(Intent(mActivity!!, SelfActivity::class.java))
         }
 
         Mine_Notification!!.setOnClickListener {
@@ -88,8 +90,8 @@ class MineMainFragment : Fragment() {
         Mine_TitleBar!!.back.visibility = View.INVISIBLE
         Mine_TitleBar!!.title.text = "我的"
         Mine_TitleBar!!.moor.setImageResource(R.drawable.ic_settings_black_24dp)
-        Mine_TitleBar!!.moor.setOnClickListener {
-            MyDialog(mActivity!!).setTitle("设置打印公司")
-        }
+        Mine_TitleBar!!.moor.setOnClickListener {}
+        Mine_TitleBar!!.moor.visibility = View.GONE
+
     }
 }

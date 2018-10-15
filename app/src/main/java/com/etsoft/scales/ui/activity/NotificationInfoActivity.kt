@@ -75,7 +75,6 @@ class NotificationInfoActivity : BaseActivity() {
         Notification_Info_TitleBar.run {
             title.text = "通知详情"
             back.setOnClickListener { finish() }
-            moor.setImageResource(R.mipmap.ic_autorenew_white_24dp)
             moor.visibility = View.GONE
             this
         }

@@ -172,9 +172,8 @@
                 android:background="@drawable/butont_clicked"
                 android:elevation="@dimen/dp_10"
                 android:text="取消"
-                android:textColor="@color/app_color"
-                android:textSize="@dimen/dp_16"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_16" />
 
 
             <android.support.v7.widget.AppCompatButton
@@ -186,7 +185,7 @@
                 android:background="@drawable/butont_clicked"
                 android:elevation="@dimen/dp_10"
                 android:text="添加"
-                android:textColor="@color/app_text_color"
+                android:textColor="@color/white"
                 android:textSize="@dimen/dp_16"
                 android:textStyle="bold" />
 

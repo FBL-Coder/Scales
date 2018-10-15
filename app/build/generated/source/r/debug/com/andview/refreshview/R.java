@@ -21,8 +21,8 @@ public final class R {
         public static final int item_touch_helper_max_drag_scroll_per_frame = 0x7f0600c8;
     }
     public static final class drawable {
-        public static final int xrefresh_ok = 0x7f0700c7;
-        public static final int xrefreshview_arrow = 0x7f0700c8;
+        public static final int xrefresh_ok = 0x7f0700cb;
+        public static final int xrefreshview_arrow = 0x7f0700cc;
     }
     public static final class id {
         public static final int item_touch_helper_previous_elevation = 0x7f080151;
@@ -40,8 +40,8 @@ public final class R {
         public static final int xrefreshview_header_time = 0x7f080239;
     }
     public static final class layout {
-        public static final int xrefreshview_footer = 0x7f0a0080;
-        public static final int xrefreshview_header = 0x7f0a0081;
+        public static final int xrefreshview_footer = 0x7f0a007f;
+        public static final int xrefreshview_header = 0x7f0a0080;
     }
     public static final class string {
         public static final int app_name = 0x7f0e0027;
