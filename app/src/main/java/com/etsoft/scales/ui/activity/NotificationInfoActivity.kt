@@ -1,7 +1,6 @@
 package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
@@ -13,7 +12,6 @@ import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import kotlinx.android.synthetic.main.activity_notification_info.*
-import okhttp3.Call
 
 /**
  * Author：FBL  Time： 2018/7/25.

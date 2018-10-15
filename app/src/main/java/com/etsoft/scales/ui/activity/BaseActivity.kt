@@ -4,42 +4,36 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.provider.Settings
-import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
-import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.R
-import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.app.MyApp
-import com.etsoft.scales.app.MyApp.Companion.mBlueBoothReceiver
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.UtilHelpers
+import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
 
-//import com.githang.statusbar.StatusBarCompat
 
 /**
  * Author：FBL  Time： 2018/7/20.
  */
 abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
-//abstract class BaseActivity : AppCompatActivity() {
+
 
     var mLoadDialog: ProgressBarDialog? = null
 
     final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (setView() != null && setView() != 0)
             setContentView(setView()!!)
         try {
             initDialog()
             onCreate()
+            OkHttpUtils.initClient(MyApp.mclient,this)
         } catch (e: Exception) {
 //            LogUtils.e("数据异常--->$e")
             e.printStackTrace()

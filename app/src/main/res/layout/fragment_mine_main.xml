@@ -41,7 +41,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/dp_20"
                     android:padding="@dimen/dp_4"
-                    android:src="@drawable/ic_account_circle_black_24dp" />
+                    android:src="@drawable/ic_account_box_black_24dp" />
 
                 <TextView
                     android:layout_width="@dimen/dp_0"

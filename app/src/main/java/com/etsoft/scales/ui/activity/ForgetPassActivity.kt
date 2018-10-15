@@ -1,6 +1,5 @@
 package com.etsoft.scales.ui.activity
 
-import android.os.Bundle
 import android.view.View
 import com.etsoft.scales.R
 import kotlinx.android.synthetic.main.activity_forget.*

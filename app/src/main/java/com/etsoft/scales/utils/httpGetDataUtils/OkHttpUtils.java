@@ -3,6 +3,9 @@ package com.etsoft.scales.utils.httpGetDataUtils;
 import android.graphics.Bitmap;
 
 import com.apkfuns.logutils.LogUtils;
+import com.etsoft.scales.app.MyApp;
+import com.etsoft.scales.netWorkListener.AppNetworkMgr;
+import com.etsoft.scales.ui.activity.BaseActivity;
 import com.etsoft.scales.utils.ToastUtil;
 
 import java.io.File;
@@ -22,29 +25,33 @@ public class OkHttpUtils {
     private static OkHttpUtils mInstance;
     private static OkHttpClient mOkHttpClient;
     private static Platform mPlatform;
+    private static BaseActivity mActivity;
 
-    private OkHttpUtils(OkHttpClient okHttpClient) {
+    private OkHttpUtils(OkHttpClient okHttpClient, BaseActivity activity) {
         if (okHttpClient == null) {
             mOkHttpClient = new OkHttpClient();
         } else {
             mOkHttpClient = okHttpClient;
         }
         mPlatform = Platform.get();
+        mActivity = activity;
     }
 
-    public static OkHttpUtils initClient(OkHttpClient okHttpClient) {
+    public static OkHttpUtils initClient(OkHttpClient okHttpClient, BaseActivity activity) {
         if (mInstance == null) {
             synchronized (OkHttpUtils.class) {
                 if (mInstance == null) {
-                    mInstance = new OkHttpUtils(okHttpClient);
+                    mInstance = new OkHttpUtils(okHttpClient, activity);
                 }
             }
+        }else {
+            mActivity = activity;
         }
         return mInstance;
     }
 
     public static OkHttpUtils getInstance() {
-        return initClient(null);
+        return initClient(null, null);
     }
 
     public static OkHttpClient getOkHttpClient() {
@@ -144,6 +151,16 @@ public class OkHttpUtils {
      * @Description GET请求
      */
     public static void getAsyn(String url, HttpCallback callback, String tag) {
+
+        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
+        if (NETWORK == 0) {
+            ToastUtil.showText("请检查网络连接");
+            if (mActivity != null) {
+                mActivity.getMLoadDialog().hide();
+            }
+            return;
+        }
+
         Request request = OkHttpRequest.builderRequest(OkHttpRequest.HttpMethodType.GET, url, null, null, tag);
         if (request == null) {
             return;
@@ -161,6 +178,16 @@ public class OkHttpUtils {
         if (params != null && !params.isEmpty()) {
             url = OkHttpRequest.appendGetParams(url, params);
         }
+
+        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
+        if (NETWORK == 0) {
+            ToastUtil.showText("请检查网络连接");
+            if (mActivity != null) {
+                mActivity.getMLoadDialog().hide();
+            }
+            return;
+        }
+
         Request request = OkHttpRequest.builderRequest(OkHttpRequest.HttpMethodType.GET, url, null, null, tag);
         OkHttpRequest.doEnqueue(request, callback);
     }
@@ -172,6 +199,14 @@ public class OkHttpUtils {
      * @Description POST请求
      */
     public static void postAsyn(String url, Map<String, String> params, HttpCallback callback, String tag) {
+        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
+        if (NETWORK == 0) {
+            ToastUtil.showText("请检查网络连接");
+            if (mActivity != null) {
+                mActivity.getMLoadDialog().hide();
+            }
+            return;
+        }
         Request request = OkHttpRequest.builderRequest(OkHttpRequest.HttpMethodType.POST, url, params, null, tag);
         if (request == null) {
             return;
@@ -185,7 +220,16 @@ public class OkHttpUtils {
      * @param callback 请求回调
      * @Description POST提交JSON数据
      */
-    public static void postAsyn(String url, String json, HttpCallback callback,String tag) {
+    public static void postAsyn(String url, String json, HttpCallback callback, String tag) {
+
+        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
+        if (NETWORK == 0) {
+            ToastUtil.showText("请检查网络连接");
+            if (mActivity != null) {
+                mActivity.getMLoadDialog().destroyDialog();
+            }
+            return;
+        }
         Request request = OkHttpRequest.builderRequest(OkHttpRequest.HttpMethodType.POST, url, null, json, tag);
 
         OkHttpRequest.doEnqueue(request, callback);

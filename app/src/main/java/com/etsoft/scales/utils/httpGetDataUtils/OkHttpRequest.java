@@ -5,7 +5,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 
 import com.etsoft.scales.SaveKey;
+import com.etsoft.scales.app.MyApp;
+import com.etsoft.scales.netWorkListener.AppNetworkMgr;
 import com.etsoft.scales.utils.AppSharePreferenceMgr;
+import com.etsoft.scales.utils.ToastUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -116,11 +119,6 @@ public class OkHttpRequest {
      */
     public static Request builderRequest(HttpMethodType methodType, String url, Map<String, String> params, String json, String tag) {
 
-//        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
-//        if (NETWORK == 0) {
-//            ToastUtil.showText("请检查网络连接");
-//            return null;
-//        }
 
         Request.Builder builder = new Request.Builder()
                 .url(url);
@@ -164,13 +162,20 @@ public class OkHttpRequest {
      * @param callback 请求回调
      * @Description 异步请求
      */
+    static int code = -1;
     public static void doEnqueue(final Request request, final HttpCallback callback) {
         if (request == null) return;
+
+
+        int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
+        if (NETWORK == 0) {
+            code = -100;
+         }
         getOkHttpClient().newCall(request).enqueue(new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                OkHttpUtils.sendFailResultCallback(call, request.url().toString(), -1, e.getMessage(), callback);
+                OkHttpUtils.sendFailResultCallback(call, request.url().toString(), code, e.getMessage(), callback);
             }
 
             @Override

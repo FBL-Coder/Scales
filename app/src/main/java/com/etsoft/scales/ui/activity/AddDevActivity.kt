@@ -15,13 +15,11 @@ import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
 import com.etsoft.scales.bean.BlueBoothDevicesBean
-import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.ClsUtils
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_add_dev.*
 import kotlinx.android.synthetic.main.titlebar_view.*
-import java.lang.Exception
 import java.lang.ref.WeakReference
 import java.util.*
 

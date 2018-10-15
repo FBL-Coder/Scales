@@ -1,7 +1,6 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 import com.etsoft.scales.R
 import com.etsoft.scales.adapter.GridViewAdapter.GridView_CardView_Side_Adapter
 import com.etsoft.scales.bean.CareFragment_Bean

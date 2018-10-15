@@ -115,7 +115,6 @@ open class MyApp : ClientApplication() {
     override fun onCreate() {
         super.onCreate()
         mApplication = this
-        OkHttpUtils.initClient(mclient)
         LogUtils.getLogConfig().configAllowLog(true)//logcat库 初始化
                 .configTagPrefix("Scales-->  ")
                 .configShowBorders(false)

@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 
 import com.apkfuns.logutils.LogUtils;
+import com.etsoft.scales.ui.activity.BaseActivity;
+import com.etsoft.scales.utils.ToastUtil;
 
 
 /**
@@ -12,9 +14,9 @@ import com.apkfuns.logutils.LogUtils;
  */
 public class MyHttpCallback extends HttpCallback {
 
-    private AppCompatActivity mAppCompatActivity;
+    private BaseActivity mAppCompatActivity;
 
-    public MyHttpCallback(AppCompatActivity activity) {
+    public MyHttpCallback(BaseActivity activity) {
         mAppCompatActivity = activity;
     }
 

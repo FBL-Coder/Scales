@@ -1,7 +1,6 @@
 package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Handler
 import android.os.Message
 import com.etsoft.scales.R
