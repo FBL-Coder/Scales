@@ -7,6 +7,7 @@ import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.SortType
 import com.etsoft.scales.adapter.ListViewAdapter.InputRecordListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.bean.InputRecordListBean
@@ -45,6 +46,7 @@ class InputRecordActivity : BaseActivity() {
      */
     private fun initdata(page: Int = 1, linit: Int = 5) {
         var pram = HashMap<String, String>()
+        pram[SortType.CREATETIME] = "DESC"
         pram["limit"] = "$linit"
         pram["page"] = "$page"
         OkHttpUtils.getAsyn(Ports.INPUTBACKLIST, pram, object : MyHttpCallback(this) {
@@ -78,8 +80,7 @@ class InputRecordActivity : BaseActivity() {
                 mLoadDialog!!.hide()
                 InputRecord_XRefreshView.stopRefresh()
                 InputRecord_XRefreshView.stopLoadMore()
-                LogUtils.e("获取数据失败:code=$code  msg=$message")
-                ToastUtil.showText(message)
+                ToastUtil.showText("服务器异常")
             }
         }, "入库列表")
     }

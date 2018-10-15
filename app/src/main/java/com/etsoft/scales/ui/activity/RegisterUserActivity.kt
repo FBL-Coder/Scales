@@ -99,6 +99,7 @@ class RegisterUserActivity : BaseActivity() {
             override fun onFailure(code: Int, message: String?) {
                 super.onFailure(code, message)
                 mLoadDialog!!.hide()
+                ToastUtil.showText("服务器异常")
             }
 
         }, "客户注册")

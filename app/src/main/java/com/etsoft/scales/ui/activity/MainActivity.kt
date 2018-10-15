@@ -171,7 +171,6 @@ class MainActivity : BaseActivity() {
 
                         override fun onFailure(code: Int, message: String?) {
                             super.onFailure(code, message)
-
                             LogUtils.e("根据经纬度获取站点错误,code = $code , msg = $message")
                         }
                     }, "上传定位")

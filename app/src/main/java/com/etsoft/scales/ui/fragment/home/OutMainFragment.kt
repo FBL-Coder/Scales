@@ -94,7 +94,7 @@ class OutMainFragment : Fragment() {
 
             override fun onFailure(code: Int, message: String?) {
                 super.onFailure(code, message)
-                ToastUtil.showText(message)
+                ToastUtil.showText("服务器异常")
             }
         }, "回收列表")
     }
@@ -138,7 +138,7 @@ class OutMainFragment : Fragment() {
     private fun initdata(page: Int = 1, type: String = SortType.CREATETIME, linit: Int = 5) {
 
         var pram = HashMap<String, String>()
-        pram[type] = "ASC"//DESC
+        pram[type] = "DESC"//DESC
         pram["limit"] = "$linit"
         pram["page"] = "$page"
         OkHttpUtils.getAsyn(Ports.OUTBACKLIST, pram, object : MyHttpCallback(mActivity) {
@@ -168,8 +168,7 @@ class OutMainFragment : Fragment() {
                 mActivity!!.mLoadDialog!!.hide()
                 Out_XRefreshView.stopRefresh()
                 Out_XRefreshView.stopLoadMore()
-                LogUtils.e("获取数据失败:code=$code  msg=$message")
-                ToastUtil.showText(message)
+                ToastUtil.showText("服务器异常")
             }
         }, "出库数据")
     }
@@ -262,8 +261,7 @@ class OutMainFragment : Fragment() {
                 override fun onFailure(code: Int, message: String?) {
                     super.onFailure(code, message)
                     mActivity!!.mLoadDialog!!.hide()
-                    LogUtils.e("新增出库失败  code = $code, msg = $message")
-                    ToastUtil.showText(message)
+                    ToastUtil.showText("服务器异常")
                 }
             }, "新增出库")
 

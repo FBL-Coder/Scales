@@ -27,8 +27,9 @@
             android:layout_height="@dimen/dp_30"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/black__"
-            android:textSize="@dimen/sp_14" />
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15" />
 
 
         <TextView

@@ -75,7 +75,7 @@ class ServerStationActivity : BaseActivity() {
                 mLoadDialog!!.hide()
                 ServerStation_XRefreshView.stopRefresh()
                 ServerStation_XRefreshView.stopLoadMore()
-                ToastUtil.showText(message)
+                ToastUtil.showText("服务器异常")
             }
         }, "列表数据")
     }

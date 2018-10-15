@@ -53,7 +53,7 @@ class LoginHelper {
                         override fun onFailure(code: Int, message: String?) {
                             super.onFailure(code, message)
                             activity.mLoadDialog!!.hide()
-                            ToastUtil.showText(message)
+                            ToastUtil.showText("服务器异常")
                         }
                     }, "登陆")
 

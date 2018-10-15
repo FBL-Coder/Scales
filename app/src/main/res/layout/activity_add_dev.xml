@@ -14,7 +14,7 @@
     <RelativeLayout
         android:id="@+id/ConnectDevice"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70"
+        android:layout_height="@dimen/dp_100"
         android:visibility="gone">
 
         <TextView
@@ -32,7 +32,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/dp_60"
             android:layout_below="@+id/ConnectTit"
             android:orientation="horizontal"
             android:padding="@dimen/dp_5">
@@ -97,16 +97,27 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/ConnectClose"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_40"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/ConnectTit"
             android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/top_back"
             android:elevation="@dimen/dp_8"
             android:text="断开连接"
             android:textColor="@color/app_text_color" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="注意：蓝牙连接成功后，不可手动输入重量"
+            android:textSize="@dimen/sp_12"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/red"/>
 
     </RelativeLayout>
 

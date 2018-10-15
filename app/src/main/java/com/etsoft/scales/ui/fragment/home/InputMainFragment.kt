@@ -72,6 +72,7 @@ class InputMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mHandler = MyHandler(mActivity!!)
         getRecycleData(0)
         initView()
         initListView()
@@ -107,7 +108,7 @@ class InputMainFragment : Fragment() {
 
             override fun onFailure(code: Int, message: String?) {
                 super.onFailure(code, message)
-                ToastUtil.showText(message)
+                ToastUtil.showText("服务器异常")
             }
         }, "回收列表")
     }
@@ -245,7 +246,7 @@ class InputMainFragment : Fragment() {
 
             override fun onFailure(code: Int, message: String?) {
                 super.onFailure(code, message)
-                ToastUtil.showText(message)
+                ToastUtil.showText("服务器异常")
             }
         }, "新增入库")
     }

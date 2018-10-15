@@ -7,6 +7,7 @@ import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
+import com.etsoft.scales.SortType
 import com.etsoft.scales.adapter.ListViewAdapter.RecordNotificationListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.bean.RecordNotificationBean
@@ -44,6 +45,7 @@ class RecordNotificationActivity : BaseActivity() {
      */
     private fun initdata(page: Int = 1, linit: Int = 2) {
         var pram = HashMap<String, String>()
+        pram[SortType.CREATETIME] = "DESC"
         pram["limit"] = "$linit"
         pram["page"] = "$page"
         OkHttpUtils.getAsyn(Ports.NOTIFICATIONLIST, pram, object : MyHttpCallback(this) {
@@ -79,8 +81,7 @@ class RecordNotificationActivity : BaseActivity() {
                 mLoadDialog!!.hide()
                 Notification_Record_XRefreshView.stopRefresh()
                 Notification_Record_XRefreshView.stopLoadMore()
-                LogUtils.e("获取数据失败:code=$code  msg=$message")
-                ToastUtil.showText(message)
+                ToastUtil.showText("服务器异常")
             }
         }, "列表数据")
     }

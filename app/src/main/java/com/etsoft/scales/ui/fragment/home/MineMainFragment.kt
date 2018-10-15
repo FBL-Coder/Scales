@@ -12,6 +12,7 @@ import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.ui.activity.*
 import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
+import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.fragment_mine_main.*
 
 
@@ -86,6 +87,9 @@ class MineMainFragment : Fragment() {
     private fun initView() {
         Mine_TitleBar!!.back.visibility = View.INVISIBLE
         Mine_TitleBar!!.title.text = "我的"
-        Mine_TitleBar!!.moor.visibility = View.INVISIBLE
+        Mine_TitleBar!!.moor.setImageResource(R.drawable.ic_settings_black_24dp)
+        Mine_TitleBar!!.moor.setOnClickListener {
+            MyDialog(mActivity!!).setTitle("设置打印公司")
+        }
     }
 }

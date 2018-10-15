@@ -44,10 +44,9 @@ class AddOutAvtivity : BaseActivity() {
         position = intent.getIntExtra("position", 0)
 
         Add_Out_Type.text = MyApp.mRecycleListBean!!.data[position].name
-        Add_Out_Weight
         Add_Out_Uuit.text = MyApp.mRecycleListBean!!.data[position].unit
-        Add_Out_ToPlace
-
+        Add_Out_Weight.isEnabled = !MyApp.mBluetoothDataIsEnable
+        Add_Out_Weight.isFocusable = !MyApp.mBluetoothDataIsEnable
         Add_Input_Cancle.setOnClickListener { finish() }
 
         Add_Input_Ok.setOnClickListener {
