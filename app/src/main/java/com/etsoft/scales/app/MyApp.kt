@@ -10,6 +10,8 @@ import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.os.Build
+import android.view.View
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -17,16 +19,12 @@ import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Server.BlueUtils
 import com.etsoft.scales.bean.LoginBean
 import com.etsoft.scales.bean.RecycleListBean
-import com.etsoft.scales.bean.ServerStationBean
-import com.etsoft.scales.bean.ServerStationInfoBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
-import com.etsoft.scales.ui.activity.AddDevActivity
 import com.etsoft.scales.ui.activity.LoginActivity
 import com.etsoft.scales.ui.activity.MainActivity
 import com.etsoft.scales.utils.Density
 import com.etsoft.scales.utils.gson.NullStringEmptyTypeAdapterFactory
 import com.etsoft.scales.utils.httpGetDataUtils.LoggerInterceptor
-import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -41,7 +39,6 @@ import java.util.concurrent.TimeUnit
  * Author：FBL  Time： 2018/7/20.
  */
 open class MyApp : ClientApplication() {
-//open class MyApp : Application() {
 
     var activities: ArrayList<Activity>? = null
     var gson = Gson()
@@ -160,7 +157,10 @@ open class MyApp : ClientApplication() {
         Thread(Runnable {
             //循环检测是否处于后台
             while (true) {
-                if (!isAppOnForeground()) {
+//                Thread.sleep(5000)
+                var state = isAppOnForeground()
+//                LogUtils.i("程序是否处于==${if (state) "前台" else "后台"}")
+                if (!state) {
                     if (UserInfo != null) {
                         startActivity(Intent(applicationContext, MainActivity::class.java).run { addFlags(FLAG_ACTIVITY_NEW_TASK) })
                     } else {
@@ -202,14 +202,14 @@ open class MyApp : ClientApplication() {
         val name = applicationContext.packageName
         val appProcesses = activityManager
                 .runningAppProcesses ?: return false
-
         for (appProcess in appProcesses) {
             // The name of the process that this object is associated with.
             if (appProcess.processName == name && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
                 return true
             }
         }
-
         return false
     }
+
+
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
+import android.view.View
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.Server.BlueUtils
@@ -61,6 +62,10 @@ class AddInputAvtivity : BaseActivity() {
                         dialog.dismiss()
                         startActivity(Intent(this, ServerStationActivity::class.java))
                         finish()
+                    }.create().run {
+                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        this
                     }.show()
         }
 

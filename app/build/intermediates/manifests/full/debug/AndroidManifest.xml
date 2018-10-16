@@ -170,7 +170,7 @@
 
         <!-- 自启动 -->
         <receiver android:name="com.etsoft.scales.receiver.ContentReceiver" >
-            <intent-filter>
+            <intent-filter android:priority="1000" >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

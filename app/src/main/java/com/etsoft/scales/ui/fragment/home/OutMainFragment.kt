@@ -129,7 +129,12 @@ class OutMainFragment : Fragment() {
                     }, Activity.RESULT_FIRST_USER)
                 }.setNegativeButton("取消") { dialog, which ->
                     dialog.dismiss()
-                }.create().show()
+                }.create().run {
+                    window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    this
+                }.show()
+
     }
 
     /**

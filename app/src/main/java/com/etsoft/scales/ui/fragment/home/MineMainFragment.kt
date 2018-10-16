@@ -90,6 +90,10 @@ class MineMainFragment : Fragment() {
                         //退出
                         mActivity!!.finish()
                         dialog.dismiss()
+                    }.create().run {
+                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        this
                     }.show()
         }
     }

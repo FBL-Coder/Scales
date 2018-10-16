@@ -44,7 +44,6 @@ class MyDialog : AlertDialog.Builder {
         return super.setTitle(title)
     }
 
-
     @SuppressLint("ResourceAsColor", "NewApi")
     private fun initTitleView(context: Context, title: String): View {
         if (tv === null) {
@@ -71,5 +70,6 @@ class MyDialog : AlertDialog.Builder {
         linearLayout.addView(view)
         return linearLayout
     }
+
 
 }

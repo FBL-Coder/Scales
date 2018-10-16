@@ -39,8 +39,9 @@
         </activity>
 
         <!--首页-->
-        <activity android:name="com.etsoft.scales.ui.activity.MainActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name="com.etsoft.scales.ui.activity.MainActivity"
+            android:launchMode="singleTask" />
 
         <!--登陆-->
         <activity
@@ -147,17 +148,17 @@
 
         <!--打印机服务-->
         <service android:name="com.smartdevice.aidl.IZKCService">
-            <intent-filter>
+            <intent-filter >
                 <action android:name="com.zkc.aidl.all" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
-
         <!--自启动-->
         <receiver android:name=".receiver.ContentReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>

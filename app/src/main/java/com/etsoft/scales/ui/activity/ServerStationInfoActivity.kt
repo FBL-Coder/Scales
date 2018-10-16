@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
@@ -91,6 +92,10 @@ class ServerStationInfoActivity : BaseActivity() {
                                 AppSharePreferenceMgr.put(SERVERSTATION_NAME, mInfoBean!!.data.name)
                                 ToastUtil.showText("绑定成功")
                                 dialog.dismiss()
+                            }.create().run {
+                                window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                this
                             }.show()
                 } else {
                     MyDialog(this@ServerStationInfoActivity)
@@ -102,6 +107,10 @@ class ServerStationInfoActivity : BaseActivity() {
                                 AppSharePreferenceMgr.put(SERVERSTATION_NAME, mInfoBean!!.data.name)
                                 ToastUtil.showText("绑定成功")
                                 dialog.dismiss()
+                            }.create().run {
+                                window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                this
                             }.show()
                 }
             }

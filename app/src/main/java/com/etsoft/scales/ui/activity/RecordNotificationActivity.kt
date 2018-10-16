@@ -1,7 +1,6 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
@@ -16,7 +15,6 @@ import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import kotlinx.android.synthetic.main.activity_record_notification.*
-import okhttp3.Call
 import java.util.*
 
 
@@ -43,7 +41,7 @@ class RecordNotificationActivity : BaseActivity() {
     /**
      * 加载通知列表数据
      */
-    private fun initdata(page: Int = 1, linit: Int = 2) {
+    private fun initdata(page: Int = 1, linit: Int = 5) {
         var pram = HashMap<String, String>()
         pram[SortType.CREATETIME] = "DESC"
         pram["limit"] = "$linit"

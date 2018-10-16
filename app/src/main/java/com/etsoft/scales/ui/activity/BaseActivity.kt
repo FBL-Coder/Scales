@@ -6,7 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
-import android.view.*
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.UtilHelpers
@@ -25,13 +28,19 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
 
     final override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MyApp.mApplication!!.runTimer()
+
+        //流氓式霸屏
+//        MyApp.mApplication!!.runTimer()
+
         if (setView() != null && setView() != 0)
             setContentView(setView()!!)
         try {
             initDialog()
             onCreate()
             OkHttpUtils.initClient(MyApp.mclient, this)
+            //设置隐藏底部菜单栏
+            window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_IMMERSIVE
         } catch (e: Exception) {
 //            LogUtils.e("数据异常--->$e")
             e.printStackTrace()
@@ -83,6 +92,10 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
                                 //引导用户手动授权，权限请求失败
                             }.setOnCancelListener {
                                 //引导用户手动授权，权限请求失败
+                            }.create().run {
+                                window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                this
                             }.show().run {
                                 var attr = window.attributes
                                 attr.height = ViewGroup.LayoutParams.WRAP_CONTENT

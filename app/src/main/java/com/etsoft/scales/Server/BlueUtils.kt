@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.IntentFilter
 import android.os.Handler
+import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.BlueBoothState.Companion.BLUE_CONNECT_CLOSE_ERROR
@@ -165,6 +166,10 @@ class BlueUtils {
                             dialog.dismiss()
                             //若没打开则打开蓝牙
                             MyApp.mBluetoothAdapter!!.enable()
+                        }.create().run {
+                            window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            this
                         }.show()
                 return false
             } else {
