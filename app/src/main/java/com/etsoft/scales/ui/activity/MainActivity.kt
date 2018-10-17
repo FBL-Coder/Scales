@@ -97,8 +97,8 @@ class MainActivity : BaseActivity() {
 
     private fun initView() {
         Main_BottomNavigationBar
-                .addItem(BottomNavigationItem(R.drawable.ic_input_black_24dp, "入库"))
-                .addItem(BottomNavigationItem(R.drawable.ic_zoom_out_map_black_24dp, "出库"))
+                .addItem(BottomNavigationItem(R.drawable.ic_system_update_alt_white_24dp, "入库"))
+                .addItem(BottomNavigationItem(R.drawable.ic_present_to_all_white_24dp, "出库"))
                 .addItem(BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "我的"))
                 .setActiveColor(R.color.app_color)
                 .initialise()

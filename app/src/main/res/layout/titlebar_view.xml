@@ -10,9 +10,8 @@
         android:layout_width="@dimen/dp_50"
         android:layout_height="match_parent"
         android:background="@drawable/top_back"
-        android:padding="@dimen/dp_5"
         android:scaleType="center"
-        android:src="@drawable/ic_keyboard_backspace_black_24dp" />
+        android:src="@drawable/ic_chevron_left_white_24dp" />
 
     <TextView
         android:id="@+id/title_titlebar"
@@ -22,8 +21,8 @@
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:text="@string/app_name"
-        android:textColor="@color/app_text_color"
-        android:textSize="@dimen/sp_18"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_20"
         android:textStyle="bold" />
 
     <ImageView
@@ -42,7 +41,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:padding="@dimen/dp_8"
-        android:indeterminateTint="@color/app_text_color"
+        android:indeterminateTint="@color/white"
         android:visibility="gone" />
 
 </RelativeLayout>

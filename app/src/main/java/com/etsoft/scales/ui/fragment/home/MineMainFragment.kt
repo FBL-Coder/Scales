@@ -2,6 +2,7 @@ package com.etsoft.scales.ui.fragment.home
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -32,23 +33,25 @@ class MineMainFragment : Fragment() {
         }
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mine_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         initData()
         initEvent()
     }
 
     override fun onStart() {
         super.onStart()
-        if (AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") == "")
+        if (AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") == "") {
+            ServerStationName.setTextColor(Color.RED)
             ServerStationName.text = "未选择"
-        else ServerStationName.text = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") as String
+        } else {
+            ServerStationName.setTextColor(Color.BLACK)
+            ServerStationName.text = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") as String
+        }
     }
 
     private fun initData() {
@@ -87,6 +90,7 @@ class MineMainFragment : Fragment() {
                         dialog.dismiss()
                     }.setPositiveButton("退出") { dialog, which ->
                         startActivity(Intent(mActivity, LoginActivity::class.java))
+                        AppSharePreferenceMgr.clear(MyApp.mApplication)
                         //退出
                         mActivity!!.finish()
                         dialog.dismiss()
@@ -96,14 +100,5 @@ class MineMainFragment : Fragment() {
                         this
                     }.show()
         }
-    }
-
-    private fun initView() {
-        Mine_TitleBar!!.back.visibility = View.INVISIBLE
-        Mine_TitleBar!!.title.text = "我的"
-        Mine_TitleBar!!.moor.setImageResource(R.drawable.ic_settings_black_24dp)
-        Mine_TitleBar!!.moor.setOnClickListener {}
-        Mine_TitleBar!!.moor.visibility = View.GONE
-
     }
 }

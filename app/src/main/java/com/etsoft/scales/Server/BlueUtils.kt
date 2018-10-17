@@ -8,19 +8,16 @@ import android.content.IntentFilter
 import android.os.Handler
 import android.view.View
 import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.utils.BlueBoothState
-import com.etsoft.scales.utils.BlueBoothState.Companion.BLUE_CONNECT_CLOSE_ERROR
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothAdapter
-import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
 import com.etsoft.scales.bean.BlueBoothDevicesBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.ui.activity.AddDevActivity
-import com.etsoft.scales.ui.activity.BaseActivity
+import com.etsoft.scales.utils.BlueBoothState
+import com.etsoft.scales.utils.BlueBoothState.Companion.BLUE_CONNECT_CLOSE_ERROR
 import com.etsoft.scales.utils.SystemUtils
 import com.etsoft.scales.view.MyDialog
-import java.lang.Error
 import java.util.*
 
 /**
@@ -132,7 +129,6 @@ class BlueUtils {
                     for (i in SecondASCII.indices) {
                         strWeight += SecondASCII[i]
                     }
-
 
                     var Str = strWeight.reversed().removeSuffix("=")
                     Str = (Str.toDouble()).toString()

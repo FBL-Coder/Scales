@@ -8,64 +8,21 @@
     <com.etsoft.scales.view.TitleBar
         android:id="@+id/Notification_Record_TitleBar"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/dp_10"
         android:layout_height="@dimen/dp_40" />
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingBottom="@dimen/dp_5"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="通知标题"
-            android:textSize="@dimen/dp_16" />
-
-        <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="发布人"
-            android:textSize="@dimen/sp_14" />
-
-        <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="通知类型"
-            android:textSize="@dimen/sp_14" />
-
-
-    </LinearLayout>
 
 
     <com.andview.refreshview.XRefreshView
         android:id="@+id/Notification_Record_XRefreshView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ListView
             android:id="@+id/Notification_Record_List"
             android:layout_width="match_parent"
-            android:padding="@dimen/dp_10"
             android:layout_height="match_parent"
-            android:divider="@color/white___"
-            android:background="@color/white_"
-            android:scrollbarThumbVertical="@color/black_"
+            android:divider="@color/white_"
             android:scrollbarSize="@dimen/dp_3"
-            android:dividerHeight="@dimen/dp_2"/>
+            android:scrollbarThumbVertical="@color/green" />
 
     </com.andview.refreshview.XRefreshView>
 

@@ -30,7 +30,7 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
         super.onCreate(savedInstanceState)
 
         //流氓式霸屏
-//        MyApp.mApplication!!.runTimer()
+        //MyApp.mApplication!!.runTimer()
 
         if (setView() != null && setView() != 0)
             setContentView(setView()!!)

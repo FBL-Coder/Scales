@@ -13,8 +13,7 @@
     <ProgressBar
         android:layout_width="@dimen/dp_70"
         android:layout_height="@dimen/dp_70"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/black" />
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/Dialog_TV"
