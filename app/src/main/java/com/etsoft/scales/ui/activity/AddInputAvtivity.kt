@@ -103,7 +103,7 @@ class AddInputAvtivity : BaseActivity() {
 
         Add_Input_Ok.setOnClickListener {
             val weight_tv = Add_Input_KG.text.toString()
-            if (weight_tv == "0.00" || weight_tv == "0" || weight_tv == "") {
+            if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
                 ToastUtil.showText("货物重量不能为空")
                 return@setOnClickListener
             }
@@ -117,21 +117,21 @@ class AddInputAvtivity : BaseActivity() {
                                     price = MyApp.mRecycleListBean_Type_1?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_1?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.00").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * weight_tv.toDouble())
+                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * weight_tv.toDouble())
                                 }
                                 2 -> {
                                     type = MyApp.mRecycleListBean_Type_2?.data!![position]?.name
                                     price = MyApp.mRecycleListBean_Type_2?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_2?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_2?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.00").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * weight_tv.toDouble())
+                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * weight_tv.toDouble())
                                 }
                                 3 -> {
                                     type = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
                                     price = MyApp.mRecycleListBean_Type_3?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_3?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.00").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * weight_tv.toDouble())
+                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * weight_tv.toDouble())
                                 }
                             }
                             weight = weight_tv
@@ -162,8 +162,8 @@ class AddInputAvtivity : BaseActivity() {
                     }
                     BlueBoothState.BLUE_DISPOSEDATA_SUCCESS -> {
                         if (msg.obj != null) {
-                            val mWeight = msg.obj as String
-                            activity.Add_Input_KG.setText(mWeight)
+                            val mWeight = msg.obj as Double
+                            activity.Add_Input_KG.setText(DecimalFormat("0.0").format(mWeight))
                         }
                     }
                 }

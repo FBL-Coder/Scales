@@ -11,7 +11,6 @@ import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothAdapter
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
-import com.etsoft.scales.bean.BlueBoothDevicesBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.ui.activity.AddDevActivity
 import com.etsoft.scales.utils.BlueBoothState
@@ -138,11 +137,10 @@ class BlueUtils {
                     }
 
                     var Str = strWeight.reversed().removeSuffix("=")
-                    Str = (Str.toDouble()).toString()
 //                    LogUtils.w("蓝牙秤重量为==$Str")
                     var msg = mHandler?.obtainMessage()
                     msg.what = BlueBoothState.BLUE_DISPOSEDATA_SUCCESS
-                    msg.obj = Str
+                    msg.obj = Str.toDouble()
                     mHandler?.sendMessage(msg)
                 } catch (e: Exception) {
                     LogUtils.w("蓝牙数据异常---$e")

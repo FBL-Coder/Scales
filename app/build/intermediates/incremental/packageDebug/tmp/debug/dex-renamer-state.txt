@@ -1,4 +1,4 @@
-#Fri Oct 19 12:28:49 CST 2018
+#Fri Oct 19 16:25:22 CST 2018
 base.0=/Users/fubolong/AS-WOEK/Scales/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

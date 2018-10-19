@@ -13,6 +13,7 @@ import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_add_out.*
 import java.lang.ref.WeakReference
+import java.text.DecimalFormat
 
 /**
  * Author：FBL  Time： 2018/9/30.
@@ -118,8 +119,8 @@ class AddOutAvtivity : BaseActivity() {
                     }
                     BlueBoothState.BLUE_DISPOSEDATA_SUCCESS -> {
                         if (msg.obj != null) {
-                            val mWeight = msg.obj as String
-                            activity.Add_Out_Weight.setText(mWeight)
+                            val mWeight = msg.obj as Double
+                            activity.Add_Out_Weight.setText(DecimalFormat("0.0").format(mWeight))
                         }
                     }
                 }

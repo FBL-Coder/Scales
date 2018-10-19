@@ -19,18 +19,19 @@ public class PermissionsUtli {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.ACCESS_NETWORK_STATE
     };
 
     public static void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
         boolean permission_Read = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
+        boolean permission_Write = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         boolean permission_Camera = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA);
         boolean permission_Call = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CALL_PHONE);
         boolean permission_Audio = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAPTURE_AUDIO_OUTPUT);
         boolean permission_Location = ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.LOCATION_HARDWARE);
 
-        if (permission_Read && permission_Camera && permission_Call && permission_Audio && permission_Location) {
+        if (permission_Read && permission_Write && permission_Camera && permission_Call && permission_Audio && permission_Location) {
 
         } else  // We don't have permission so prompt the user
             ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,

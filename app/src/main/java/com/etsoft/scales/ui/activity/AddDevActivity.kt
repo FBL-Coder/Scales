@@ -8,6 +8,7 @@ import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
 import com.etsoft.scales.Server.BlueUtils
+import com.etsoft.scales.Server.BlueUtils.Companion.isRepetitionConnect
 import com.etsoft.scales.adapter.ListViewAdapter.BluetoothListAdapter
 import com.etsoft.scales.app.MyApp.Companion.mBlueBoothReceiver
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothAdapter
@@ -174,6 +175,7 @@ class AddDevActivity : BaseActivity() {
                     return@setOnConnectClick
                 }
                 //创建连接
+                isRepetitionConnect = true
                 mLoadDialog!!.show(arrayOf("正在连接", "连接超时"), false)
                 mBluetoothAdapter!!.cancelDiscovery()
                 BlueUtils.connectBlue(mHandler!!, mBlue_Ok_List[position].mDevice)

@@ -437,18 +437,18 @@ class InputMainFragment : Fragment() {
             when (mType) {
                 1 -> {
                     for (i in mRecycleListBean_Type_1!!.data.indices) {
-                        names.add(mRecycleListBean_Type_1!!.data[i].name)
+                        names.add(mRecycleListBean_Type_1!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
                     }
                 }
                 2 -> {
                     for (i in mRecycleListBean_Type_2!!.data.indices) {
-                        names.add(mRecycleListBean_Type_2!!.data[i].name)
+                        names.add(mRecycleListBean_Type_2!!.data[i].name+ "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
                     }
 
                 }
                 3 -> {
                     for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        names.add(mRecycleListBean_Type_3!!.data[i].name)
+                        names.add(mRecycleListBean_Type_3!!.data[i].name+ "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
                     }
                 }
             }
