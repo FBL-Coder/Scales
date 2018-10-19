@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.support.v4.app.Fragment
 import android.text.InputType
@@ -20,6 +21,9 @@ import com.etsoft.scales.SaveKey
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_1
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_2
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_3
 import com.etsoft.scales.bean.AppInputBean
 import com.etsoft.scales.bean.InputOkBean
 import com.etsoft.scales.bean.Input_Main_List_Bean
@@ -37,12 +41,15 @@ import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.MyEditText
+import com.etsoft.scales.view.ProgressBarDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
 import java.lang.ref.WeakReference
+import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -64,6 +71,12 @@ class InputMainFragment : Fragment() {
     private var mInputLiat = ArrayList<Input_Main_List_Bean>()
     private var mMain_Input_ListViewAdapter: Main_Input_ListViewAdapter? = null
     private var mHandler: MyHandler? = null
+    private var mLoadDialog: ProgressBarDialog? = null
+
+    /**
+     * 首选回收物类型
+     */
+    private var mType = -1
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -73,7 +86,8 @@ class InputMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mHandler = MyHandler(mActivity!!)
+        mLoadDialog = mActivity!!.mLoadDialog!!
+        mHandler = MyHandler(this)
         getRecycleData(0)
         initView()
         initListView()
@@ -87,22 +101,37 @@ class InputMainFragment : Fragment() {
         }
     }
 
-
     /**
      * 获取回收物信息
      */
     private fun getRecycleData(type: Int) {
         OkHttpUtils.getAsyn(Ports.RECYCLELIST, object : MyHttpCallback(mActivity) {
-
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mActivity!!.mLoadDialog!!.hide()
-                try {
-                    mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
-                    if (type == 1)
-                        showSelectDialog()
-                } catch (e: Exception) {
-                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
-                    ToastUtil.showText("服务器异常")
+                if (resultDesc!!.getcode() != 0) {
+                    ToastUtil.showText(resultDesc.result)
+                } else {
+                    try {
+                        mRecycleListBean_Type_1 = RecycleListBean()
+                        mRecycleListBean_Type_1!!.data = ArrayList<RecycleListBean.DataBean>()
+                        mRecycleListBean_Type_2 = RecycleListBean()
+                        mRecycleListBean_Type_2!!.data = ArrayList<RecycleListBean.DataBean>()
+                        mRecycleListBean_Type_3 = RecycleListBean()
+                        mRecycleListBean_Type_3!!.data = ArrayList<RecycleListBean.DataBean>()
+                        mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
+                        for (i in mRecycleListBean!!.data!!.indices) {
+                            when (mRecycleListBean!!.data[i].type) {
+                                1 -> mRecycleListBean_Type_1!!.data.add(mRecycleListBean!!.data[i])
+                                2 -> mRecycleListBean_Type_2!!.data.add(mRecycleListBean!!.data[i])
+                                3 -> mRecycleListBean_Type_3!!.data.add(mRecycleListBean!!.data[i])
+                            }
+                        }
+                        if (type == 1)
+                            showTypeDialog()
+                    } catch (e: Exception) {
+                        LogUtils.e("获取数据异常 ：$e  ,data= ${resultDesc!!.result}")
+                        ToastUtil.showText("服务器异常")
+                    }
                 }
             }
 
@@ -127,7 +156,7 @@ class InputMainFragment : Fragment() {
                             dialog.dismiss()
                         }
                         .setPositiveButton("删除") { dialog, which ->
-                            mInputLiat.removeAt(position - 1)
+                            mInputLiat.removeAt(position)
                             initListView()
                             dialog.dismiss()
                         }.create().show()
@@ -149,25 +178,27 @@ class InputMainFragment : Fragment() {
                     ToastUtil.showText("没有数据,请添加记录")
                     return@setOnClickListener
                 }
-                val edit = MyEditText(mActivity)
-                edit.hint = "请输入手机号"
-                edit.inputType = InputType.TYPE_CLASS_PHONE
-                edit.maxLines = 1
-                MyDialog(mActivity!!)
-                        .setMessage("打印票据需要输入用户手机号!")
-                        .setView(edit, 40, 0, 40, 0)
-                        .setNegativeButton("取消") { dialog, which ->
-                            dialog.dismiss()
-                        }
-                        .setPositiveButton("打印") { dialog, which ->
-                            val phone = edit.text.toString()
-                            if (phone == "") {
-                                ToastUtil.showText("请输入用户手机号")
-                                return@setPositiveButton
-                            }
-                            UpToServer(phone)
-                            dialog.dismiss()
-                        }.create().show()
+                UpToServer("17611110000")
+
+//                val edit = MyEditText(mActivity)
+//                edit.hint = "请输入手机号"
+//                edit.inputType = InputType.TYPE_CLASS_PHONE
+//                edit.maxLines = 1
+//                MyDialog(mActivity!!)
+//                        .setMessage("打印票据需要输入用户手机号!")
+//                        .setView(edit, 40, 0, 40, 0)
+//                        .setNegativeButton("取消") { dialog, which ->
+//                            dialog.dismiss()
+//                        }
+//                        .setPositiveButton("打印") { dialog, which ->
+//                            val phone = edit.text.toString()
+//                            if (phone == "") {
+//                                ToastUtil.showText("请输入用户手机号")
+//                                return@setPositiveButton
+//                            }
+//
+//                            dialog.dismiss()
+//                        }.create().show()
             }
             back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
             back.setOnClickListener {
@@ -180,7 +211,6 @@ class InputMainFragment : Fragment() {
             //跳转入库记录
             startActivity(Intent(mActivity, InputRecordActivity::class.java))
         }
-
         Input_Main_Clear.setOnClickListener {
             //清楚当前本地记录
             if (mInputLiat.size == 0) {
@@ -192,17 +222,20 @@ class InputMainFragment : Fragment() {
                         }.setPositiveButton("清理") { dialog, which ->
                             dialog.dismiss()
                             mInputLiat.clear()
+                            mType = -1
                             initListView()
                         }.show()
         }
 
         Input_Main_Add.setOnClickListener {
             //添加本地记录
-            if (MyApp.mRecycleListBean == null) {
+            if (mRecycleListBean == null) {
                 mActivity!!.mLoadDialog!!.show()
                 getRecycleData(1)
             } else {
-                showSelectDialog()
+                if (mInputLiat.size == 0)
+                    mType = -1
+                showTypeDialog()
             }
         }
     }
@@ -222,6 +255,7 @@ class InputMainFragment : Fragment() {
         UpBean.phone = userphone
         UpBean.servicePointId = ServerStation_Id?.toString()
         UpBean.staffId = MyApp.UserInfo?.data?.id?.toString()
+        UpBean.type = if (mType == 2) "1" else mType.toString()
 
         //将本地记录转成要上传的JSON数据
         var lingsBeanList = ArrayList<AppInputBean.RecyclingsBean>()
@@ -240,7 +274,6 @@ class InputMainFragment : Fragment() {
                     ToastUtil.showText(resultDesc.result)
                 } else {
                     var bean = MyApp.gson.fromJson<InputOkBean>(resultDesc!!.result, InputOkBean::class.java)
-
                     mActivity!!.mLoadDialog!!.show("正在打印")
                     PrintData(bean.data.company, bean.data.transaction_no)
                 }
@@ -265,13 +298,17 @@ class InputMainFragment : Fragment() {
                 }
                 mIzkcService.printerInit()
                 mIzkcService.printTextAlgin(compiler + "\n\n", 0, 1, 1)
-                var Str = "单号： $traceElement\n"
+                var Str = "单  号： $traceElement\n"
                 mIzkcService.printGBKText(Str)
-                var data = "时间： " + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis())) + "\n"
+                var data = "时  间： " + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis())) + "\n"
                 mIzkcService.printGBKText(data)
-                mIzkcService.printGBKText("********************************")
 
-                var array = arrayOf(" 类型 ", "  重量", "   单价  ", "总价")
+                mIzkcService.printGBKText("服务站： " + AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") + "\n")
+                mIzkcService.printGBKText("********************************")
+                var type = ""
+                if (mType == 2) type = "数量" else type = "重量"
+
+                var array = arrayOf(" 类型 ", "  $type", "   单价  ", " 总价")
                 var array1 = intArrayOf(0, 1, 2, 2)
                 var array2 = intArrayOf(0, 0, 0, 0)
                 mIzkcService.printColumnsText(array, array1, array2)
@@ -279,6 +316,10 @@ class InputMainFragment : Fragment() {
                 mIzkcService.printGBKText("--------------------------------")
 
                 for (i in mInputLiat.indices) {
+                    if (mInputLiat[i].type.length > 4) {
+                        mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 4).toString()
+                    }
+
                     var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight, mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
 
                     var no2 = 0
@@ -291,21 +332,25 @@ class InputMainFragment : Fragment() {
                         2 -> no2 = 2
                         3 -> no2 = 0
                     }
-                    when (mInputLiat[i].weight.length) {//重量
-                        1 -> no3 = 6
-                        2 -> no3 = 5
-                        3 -> no3 = 4
-                        4 -> no3 = 3
-                        5 -> no3 = 2
-                        6 -> no3 = 1
+                    if (mType == 2) {
+                        when (mInputLiat[i].weight.length) {//重量
+                            1 -> no3 = 3
+                            2 -> no3 = 2
+                        }
+                    } else {
+                        when (mInputLiat[i].weight.length) {//重量
+                            1 -> no3 = 5
+                            2 -> no3 = 4
+                            3 -> no3 = 3
+                            4 -> no3 = 2
+                            5 -> no3 = 1
+                        }
                     }
                     when (mInputLiat[i].price.length) {//单价
-                        1 -> no5 = 5
-                        2 -> no5 = 4
-                        3 -> no5 = 3
-                        4 -> no5 = 2
-                        5 -> no5 = 1
-                        6 -> no5 = 0
+                        1 -> no5 = 4
+                        2 -> no5 = 3
+                        3 -> no5 = 2
+                        4 -> no5 = 1
                     }
 
                     when (mInputLiat[i].total.length) {//总价
@@ -323,23 +368,34 @@ class InputMainFragment : Fragment() {
                     mIzkcService.printGBKText("\n")
                 }
                 mIzkcService.printGBKText("********************************")
-                var WeightAll = 0.000
-                for (i in mInputLiat.indices) {
-                    WeightAll += mInputLiat[i].weight.toDouble()
+                var ZongZhong = ""
+                if (mType == 2) {
+                    var NumAll = 0
+                    for (i in mInputLiat.indices) {
+                        NumAll += mInputLiat[i].weight.toInt()
+                    }
+                    ZongZhong = "累计数量：" + NumAll + "台"
+                } else {
+                    var WeightAll = 0.000
+                    for (i in mInputLiat.indices) {
+                        WeightAll += mInputLiat[i].weight.toDouble()
+                    }
+                    ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
                 }
-
-
-                var ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
                 mIzkcService.printGBKText(ZongZhong + "\n")
 
                 var MeonyAll = 0.000
                 for (i in mInputLiat.indices) {
                     MeonyAll += mInputLiat[i].total.toDouble()
+                    LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
                 }
-                var ZongJia = "累计总额：￥" + DecimalFormat("0.00").format(MeonyAll)
+
+
+                var ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
+
                 mIzkcService.printGBKText(ZongJia + "\n")
 
-                mIzkcService.printGBKText("操作员：" + MyApp.UserInfo!!.data.name + "\n")
+                mIzkcService.printGBKText("操 作 员：" + MyApp.UserInfo!!.data.name + "\n")
                 mIzkcService.printGBKText("\n\n\n")
                 mHandler!!.sendEmptyMessage(1)
             } catch (e: Exception) {
@@ -350,36 +406,72 @@ class InputMainFragment : Fragment() {
     }
 
     /**
+     * 四舍五入
+     */
+    fun totalMoney(money: Double): String {
+        LogUtils.i("总金额为 = $money")
+        val bigDec = BigDecimal(money)
+        val total = bigDec.setScale(2, java.math.BigDecimal.ROUND_HALF_UP).toDouble()
+        val df = DecimalFormat("0.0")
+        LogUtils.i("四舍五入后总金额为 = ${df.format(total)}")
+        return df.format(total)
+    }
+
+
+    /**
      * 回收物选择框
      */
     private fun showSelectDialog() {
-        var names = ArrayList<String>()
-        var position = 0
+
         if (mRecycleListBean == null) {
-            ToastUtil.showText("数据获取失败,请稍后再试!")
             mActivity!!.mLoadDialog!!.show()
             getRecycleData(1)
+            return
         }
-        for (i in mRecycleListBean!!.data.indices) {
-            names.add(mRecycleListBean!!.data[i].name)
-        }
-        MyDialog(mActivity!!).setTitle("选择回收物")
-                .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
-                    position = which
-                }).setPositiveButton("确定") { dialog, which ->
-                    dialog.dismiss()
-                    //跳转到具体添加回收物页面
-                    startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
-                        putExtra("position", position)
+
+        var names = ArrayList<String>()
+        var position = 0
+        if (mType == -1) {
+            showTypeDialog()
+        } else {
+            when (mType) {
+                1 -> {
+                    for (i in mRecycleListBean_Type_1!!.data.indices) {
+                        names.add(mRecycleListBean_Type_1!!.data[i].name)
+                    }
+                }
+                2 -> {
+                    for (i in mRecycleListBean_Type_2!!.data.indices) {
+                        names.add(mRecycleListBean_Type_2!!.data[i].name)
+                    }
+
+                }
+                3 -> {
+                    for (i in mRecycleListBean_Type_3!!.data.indices) {
+                        names.add(mRecycleListBean_Type_3!!.data[i].name)
+                    }
+                }
+            }
+
+            MyDialog(mActivity!!).setTitle("选择回收物")
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
+                        position = which
+                    }).setPositiveButton("确定") { dialog, which ->
+                        dialog.dismiss()
+                        //跳转到具体添加回收物页面
+                        startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
+                            putExtra("position", position)
+                            putExtra("type", mType)
+                            this
+                        }, Activity.RESULT_FIRST_USER)
+                    }.setNegativeButton("取消") { dialog, which ->
+                        dialog.dismiss()
+                    }.create().run {
+                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         this
-                    }, Activity.RESULT_FIRST_USER)
-                }.setNegativeButton("取消") { dialog, which ->
-                    dialog.dismiss()
-                }.create().run {
-                    window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
-                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    this
-                }.show()
+                    }.show()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -395,22 +487,52 @@ class InputMainFragment : Fragment() {
 
 
     /**
+     * 显示首选回收物类型选择框
+     */
+    private fun showTypeDialog() {
+        if (mType == -1) {
+            MyDialog(mActivity!!).setTitle("选择回收物类型")
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, arrayOf("再生资源", "电子废弃物")), 0, DialogInterface.OnClickListener { dialog, which ->
+                        mType = which + 1
+                    }).setPositiveButton("确定") { dialog, which ->
+                        dialog.dismiss()
+                        if (mType == -1)
+                            mType = 1
+                        showSelectDialog()
+                    }.setNegativeButton("取消") { dialog, which ->
+                        dialog.dismiss()
+                    }.create().run {
+                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        this
+                    }.show()
+        } else
+            showSelectDialog()
+    }
+
+    /**
      * Handler 静态内部类，防止内存泄漏
      */
-    private class MyHandler(activity: MainActivity) : Handler() {
-        private val activityWeakReference: WeakReference<MainActivity> = WeakReference<MainActivity>(activity)
+    private class MyHandler(activity: InputMainFragment) : Handler() {
+        private val activityWeakReference: WeakReference<InputMainFragment> = WeakReference<InputMainFragment>(activity)
         override fun handleMessage(msg: Message) {
             val activity = activityWeakReference.get()
             if (activity != null) {
                 activity.mLoadDialog!!.hide()
                 when (msg.what) {
                     1 -> {
+                        activity.mInputLiat.clear()
+                        activity.initListView()
                         ToastUtil.showText("打印完成")
                     }
                     -1 -> {
+                        activity.mInputLiat.clear()
+                        activity.initListView()
                         ToastUtil.showText("上传成功,但打印机发生错误,未能正常打印")
                     }
                     -2 -> {
+                        activity.mInputLiat.clear()
+                        activity.initListView()
                         ToastUtil.showText("上传成功,但未找到打印机")
                     }
                 }

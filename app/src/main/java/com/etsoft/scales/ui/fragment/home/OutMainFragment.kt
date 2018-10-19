@@ -16,6 +16,10 @@ import com.etsoft.scales.R
 import com.etsoft.scales.SortType
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Out_ListViewAdapter
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_1
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_2
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_3
 import com.etsoft.scales.bean.OutListBean
 import com.etsoft.scales.bean.Out_Main_Bean
 import com.etsoft.scales.bean.RecycleListBean
@@ -40,6 +44,7 @@ class OutMainFragment : Fragment() {
     private var mOutList: OutListBean? = null
     private var Maxpage = 1
     private var page = 1
+    private var mType = -1
     private var mMain_Out_ListViewAdapter: Main_Out_ListViewAdapter? = null
 
     companion object {
@@ -74,21 +79,36 @@ class OutMainFragment : Fragment() {
      * 获取回收物信息
      */
     private fun getRecycleData(type: Int) {
+
+
         OkHttpUtils.getAsyn(Ports.RECYCLELIST, object : MyHttpCallback(mActivity) {
+
             override fun onSuccess(resultDesc: ResultDesc?) {
-                try {
-                    if (resultDesc!!.getcode() != 0) {
-                        ToastUtil.showText(resultDesc.result)
-                    } else {
-                        mActivity!!.mLoadDialog!!.hide()
-                        MyApp.mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
-                        if (MyApp.mRecycleListBean!!.code == 0 && MyApp.mRecycleListBean!!.data != null)
-                            if (type == 1)
-                                showSelectDialog()
+                mActivity!!.mLoadDialog!!.hide()
+                if (resultDesc!!.getcode() != 0) {
+                    ToastUtil.showText(resultDesc.result)
+                } else {
+                    try {
+                        mRecycleListBean_Type_1 = RecycleListBean()
+                        mRecycleListBean_Type_1!!.data = ArrayList<RecycleListBean.DataBean>()
+                        mRecycleListBean_Type_2 = RecycleListBean()
+                        mRecycleListBean_Type_2!!.data = ArrayList<RecycleListBean.DataBean>()
+                        mRecycleListBean_Type_3 = RecycleListBean()
+                        mRecycleListBean_Type_3!!.data = ArrayList<RecycleListBean.DataBean>()
+                        mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
+                        for (i in mRecycleListBean!!.data!!.indices) {
+                            when (mRecycleListBean!!.data[i].type) {
+                                1 -> mRecycleListBean_Type_1!!.data.add(mRecycleListBean!!.data[i])
+                                2 -> mRecycleListBean_Type_2!!.data.add(mRecycleListBean!!.data[i])
+                                3 -> mRecycleListBean_Type_3!!.data.add(mRecycleListBean!!.data[i])
+                            }
+                        }
+                        if (type == 1)
+                            showTypeDialog()
+                    } catch (e: Exception) {
+                        LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
+                        ToastUtil.showText("服务器异常")
                     }
-                } catch (e: Exception) {
-                    LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
-                    ToastUtil.showText("服务器异常")
                 }
             }
 
@@ -104,37 +124,55 @@ class OutMainFragment : Fragment() {
      * 回收物选择框
      */
     private fun showSelectDialog() {
-        var names = ArrayList<String>()
-        var position = 0
-        if (MyApp.mRecycleListBean == null) {
-            ToastUtil.showText("数据获取失败,请稍后再试!")
+        if (mRecycleListBean == null) {
             mActivity!!.mLoadDialog!!.show()
             getRecycleData(1)
-        }
-        if (MyApp.mRecycleListBean!!.code == 0 && MyApp.mRecycleListBean!!.data == null) {
-            ToastUtil.showText("暂无了回收物")
             return
         }
-        for (i in MyApp.mRecycleListBean!!.data.indices) {
-            names.add(MyApp.mRecycleListBean!!.data[i].name)
-        }
-        MyDialog(mActivity!!).setTitle("选择出库物")
-                .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
-                    position = which
-                }).setPositiveButton("确定") { dialog, which ->
-                    dialog.dismiss()
-                    startActivityForResult(Intent(mActivity, AddOutAvtivity::class.java).run {
-                        putExtra("position", position)
-                        this
-                    }, Activity.RESULT_FIRST_USER)
-                }.setNegativeButton("取消") { dialog, which ->
-                    dialog.dismiss()
-                }.create().run {
-                    window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
-                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    this
-                }.show()
 
+        var names = ArrayList<String>()
+        var position = 0
+        if (mType == -1) {
+            showTypeDialog()
+        } else {
+            when (mType) {
+                1 -> {
+                    for (i in mRecycleListBean_Type_1!!.data.indices) {
+                        names.add(mRecycleListBean_Type_1!!.data[i].name)
+                    }
+                }
+                2 -> {
+                    for (i in mRecycleListBean_Type_2!!.data.indices) {
+                        names.add(mRecycleListBean_Type_2!!.data[i].name)
+                    }
+
+                }
+                3 -> {
+                    for (i in mRecycleListBean_Type_3!!.data.indices) {
+                        names.add(mRecycleListBean_Type_3!!.data[i].name)
+                    }
+                }
+            }
+
+            MyDialog(mActivity!!).setTitle("选择回收物")
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
+                        position = which
+                    }).setPositiveButton("确定") { dialog, which ->
+                        dialog.dismiss()
+                        //跳转到具体添加回收物页面
+                        startActivityForResult(Intent(mActivity, AddOutAvtivity::class.java).run {
+                            putExtra("position", position)
+                            putExtra("type", mType)
+                            this
+                        }, Activity.RESULT_FIRST_USER)
+                    }.setNegativeButton("取消") { dialog, which ->
+                        dialog.dismiss()
+                    }.create().run {
+                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        this
+                    }.show()
+        }
     }
 
     /**
@@ -237,10 +275,35 @@ class OutMainFragment : Fragment() {
             title.text = "出库记录"
             moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
             moor.setOnClickListener {
-                showSelectDialog()
+                mType = -1
+                showTypeDialog()
             }
             this
         }
+    }
+
+    /**
+     * 显示首选回收物类型选择框
+     */
+    private fun showTypeDialog() {
+        if (mType == -1) {
+            MyDialog(mActivity!!).setTitle("选择回收物类型")
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, arrayOf("再生资源", "电子废弃物")), 0, DialogInterface.OnClickListener { dialog, which ->
+                        mType = which+1
+                    }).setPositiveButton("确定") { dialog, which ->
+                        dialog.dismiss()
+                        if (mType == -1)
+                            mType = 1
+                        showSelectDialog()
+                    }.setNegativeButton("取消") { dialog, which ->
+                        dialog.dismiss()
+                    }.create().run {
+                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        this
+                    }.show()
+        } else
+            showSelectDialog()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

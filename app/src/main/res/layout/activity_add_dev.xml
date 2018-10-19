@@ -97,7 +97,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/ConnectClose"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_35"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/ConnectTit"
             android:layout_marginBottom="@dimen/dp_5"
@@ -106,7 +106,8 @@
             android:background="@drawable/top_back"
             android:elevation="@dimen/dp_8"
             android:text="断开连接"
-            android:textColor="@color/app_text_color" />
+            android:textStyle="bold"
+            android:textColor="@color/white" />
 
 
         <TextView

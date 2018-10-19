@@ -38,7 +38,7 @@ class InputRecordListViewAdapter(bean: InputRecordListBean) : BaseAdapter() {
         mViewHolder.Input_Record_Staff.text = mList[position]?.service_point.admin_alias.toString()
         mViewHolder.Input_Record_State.text = if (mList[position]?.recycling_price.status == 1) "已入库" else "未入库"
         mViewHolder.Input_Record_Money.text = "￥" + mList[position]?.unit_price.toString()
-        mViewHolder.Input_Record_Weight.text = mList[position]?.weight.toString() + "kg"
+        mViewHolder.Input_Record_Weight.text = mList[position]?.weight.toString() + mList[position]?.recycling_price.unit
         mViewHolder.Input_Record_Type.text = mList[position]?.recycling_price.name.toString()
         return view!!
 

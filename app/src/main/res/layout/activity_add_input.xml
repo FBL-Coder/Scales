@@ -97,6 +97,7 @@
             android:paddingRight="@dimen/dp_30">
 
             <TextView
+                android:id="@+id/Add_Input_Type_Name"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -111,9 +112,9 @@
                 android:background="@color/white_"
                 android:layout_weight="2"
                 android:gravity="center|right"
-                android:hint="0.00"
+                android:hint="0"
                 android:maxLength="8"
-                android:inputType="number"
+                android:inputType="number|numberDecimal"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_16" />
 

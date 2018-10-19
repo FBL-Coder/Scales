@@ -49,7 +49,6 @@ class ServerStationInfoActivity : BaseActivity() {
                     if (resultDesc!!.getcode() != 0) {
                         ToastUtil.showText(resultDesc.result)
                     } else {
-
                         mInfoBean = MyApp.gson.fromJson(resultDesc!!.result, ServerStationInfoBean::class.java)
                         Name.text = mInfoBean!!.data.name
                         Admin.text = mInfoBean!!.data.functionary

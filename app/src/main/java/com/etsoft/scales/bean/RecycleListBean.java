@@ -11,8 +11,8 @@ public class RecycleListBean {
     /**
      * code : 0
      * msg : OK
-     * count : 2
-     * data : [{"id":2,"uuid":"111111","status":1,"name":"废玻璃","price":6,"unit":"KG","integral":0,"create_time":"1970-01-01 08:00:00","update_time":"2018-09-28 11:01:16","deleted":0,"inventory":0,"delivery_time":0,"key":"feiboli"},{"id":1,"uuid":"709907f3b68b4e214033fca4830cbd79","status":1,"name":"废铁","price":1.2,"unit":"kg","integral":1,"create_time":"2018-09-19 10:59:40","update_time":"2018-09-29 11:47:00","deleted":0,"inventory":77,"delivery_time":1538192820,"key":"feitie"}]
+     * count : 11
+     * data : [{"id":6,"uuid":"38d87922d7d38dd5326a292a3b5aa486","status":1,"name":"废木材","price":1.2,"unit":"kg","integral":15,"create_time":"2018-10-10 09:44:33","update_time":"2018-10-16 14:26:03","deleted":0,"inventory":78.35,"delivery_time":1539671163,"type":1,"recycling_classification_id":1,"note":"","before_price":0,"recycling_classification_name":"纸品类","key":"feimucai"}]
      */
 
     private int code;
@@ -54,33 +54,43 @@ public class RecycleListBean {
 
     public static class DataBean {
         /**
-         * id : 2
-         * uuid : 111111
+         * id : 6
+         * uuid : 38d87922d7d38dd5326a292a3b5aa486
          * status : 1
-         * name : 废玻璃
-         * price : 6
-         * unit : KG
-         * integral : 0
-         * create_time : 1970-01-01 08:00:00
-         * update_time : 2018-09-28 11:01:16
+         * name : 废木材
+         * price : 1.2
+         * unit : kg
+         * integral : 15
+         * create_time : 2018-10-10 09:44:33
+         * update_time : 2018-10-16 14:26:03
          * deleted : 0
-         * inventory : 0
-         * delivery_time : 0
-         * key : feiboli
+         * inventory : 78.35
+         * delivery_time : 1539671163
+         * type : 1
+         * recycling_classification_id : 1
+         * note :
+         * before_price : 0
+         * recycling_classification_name : 纸品类
+         * key : feimucai
          */
 
         private int id;
         private String uuid;
-        private double status;
+        private int status;
         private String name;
         private double price;
         private String unit;
-        private double integral;
+        private int integral;
         private String create_time;
         private String update_time;
-        private double deleted;
+        private int deleted;
         private double inventory;
         private long delivery_time;
+        private int type;
+        private int recycling_classification_id;
+        private String note;
+        private double before_price;
+        private String recycling_classification_name;
         private String key;
 
         public int getId() {
@@ -99,11 +109,11 @@ public class RecycleListBean {
             this.uuid = uuid;
         }
 
-        public double getStatus() {
+        public int getStatus() {
             return status;
         }
 
-        public void setStatus(double status) {
+        public void setStatus(int status) {
             this.status = status;
         }
 
@@ -131,11 +141,11 @@ public class RecycleListBean {
             this.unit = unit;
         }
 
-        public double getIntegral() {
+        public int getIntegral() {
             return integral;
         }
 
-        public void setIntegral(double integral) {
+        public void setIntegral(int integral) {
             this.integral = integral;
         }
 
@@ -155,11 +165,11 @@ public class RecycleListBean {
             this.update_time = update_time;
         }
 
-        public double getDeleted() {
+        public int getDeleted() {
             return deleted;
         }
 
-        public void setDeleted(double deleted) {
+        public void setDeleted(int deleted) {
             this.deleted = deleted;
         }
 
@@ -177,6 +187,46 @@ public class RecycleListBean {
 
         public void setDelivery_time(long delivery_time) {
             this.delivery_time = delivery_time;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public int getRecycling_classification_id() {
+            return recycling_classification_id;
+        }
+
+        public void setRecycling_classification_id(int recycling_classification_id) {
+            this.recycling_classification_id = recycling_classification_id;
+        }
+
+        public String getNote() {
+            return note;
+        }
+
+        public void setNote(String note) {
+            this.note = note;
+        }
+
+        public double getBefore_price() {
+            return before_price;
+        }
+
+        public void setBefore_price(double before_price) {
+            this.before_price = before_price;
+        }
+
+        public String getRecycling_classification_name() {
+            return recycling_classification_name;
+        }
+
+        public void setRecycling_classification_name(String recycling_classification_name) {
+            this.recycling_classification_name = recycling_classification_name;
         }
 
         public String getKey() {

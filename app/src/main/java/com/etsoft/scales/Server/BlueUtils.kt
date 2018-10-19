@@ -31,26 +31,33 @@ class BlueUtils {
         var isReadData = false
         //是否注册
         var isRegistered = false
+        //是否重复尝试连接
+        var isRepetitionConnect = true
 
         /**
          * 连接蓝牙
          */
-        fun connectBlue(mHandler: Handler, mBlueDevList: ArrayList<BlueBoothDevicesBean>, position: Int) {
-
+        fun connectBlue(mHandler: Handler, mDevice: BluetoothDevice) {
             Thread(Runnable {
-                var btSocket: BluetoothSocket? = null
-                try {
-                    btSocket = mBlueDevList[position].mDevice!!.createInsecureRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))
-                    btSocket!!.connect()
+                while (isRepetitionConnect) {
+                    LogUtils.e("蓝牙正在连接………………")
+                    var btSocket: BluetoothSocket? = null
+                    try {
+                        btSocket = mDevice!!.createInsecureRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))
+                        btSocket!!.connect()
 
-                    if (btSocket.isConnected) {
-                        mBluetoothSocket = btSocket
-                        mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_SUCCESS)
-                    } else
-                        mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_FAILED)
-                } catch (e: Exception) {
-                    mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_FAILED)
-                    LogUtils.e("蓝牙连接失败$e")
+                        if (btSocket.isConnected) {
+                            mBluetoothSocket = btSocket
+                            mHandler?.sendEmptyMessage(BlueBoothState.BULECONNECT_SUCCESS)
+                            isRepetitionConnect = false
+                            return@Runnable
+                        } else
+                            mHandler?.sendEmptyMessage(BlueBoothState.BULECONNECT_FAILED)
+                    } catch (e: Exception) {
+                        mHandler?.sendEmptyMessage(BlueBoothState.BULECONNECT_FAILED)
+                        LogUtils.e("蓝牙连接失败$e")
+                    }
+                    Thread.sleep(10000)
                 }
             }).start()
         }
@@ -88,14 +95,14 @@ class BlueUtils {
 
                         if (buff.contains(61)) {
 //                            LogUtils.i(buff)
-                            var msg = mHandler.obtainMessage()
+                            var msg = mHandler?.obtainMessage()
                             msg.what = BlueBoothState.BLUE_READDATA_SUCCESS
                             msg.obj = buff
-                            mHandler!!.sendMessage(msg)
+                            mHandler?.sendMessage(msg)
                         }
                     } catch (e: Exception) {
                         LogUtils.w("蓝牙数据异常---$e")
-                        mHandler!!.sendEmptyMessage(BlueBoothState.BLUE_OBTAINDATA_ERROR)
+                        mHandler?.sendEmptyMessage(BlueBoothState.BLUE_OBTAINDATA_ERROR)
                     } catch (ee: Error) {
                         LogUtils.w("蓝牙数据错误---$ee")
                     }
@@ -133,13 +140,13 @@ class BlueUtils {
                     var Str = strWeight.reversed().removeSuffix("=")
                     Str = (Str.toDouble()).toString()
 //                    LogUtils.w("蓝牙秤重量为==$Str")
-                    var msg = mHandler.obtainMessage()
+                    var msg = mHandler?.obtainMessage()
                     msg.what = BlueBoothState.BLUE_DISPOSEDATA_SUCCESS
                     msg.obj = Str
-                    mHandler!!.sendMessage(msg)
+                    mHandler?.sendMessage(msg)
                 } catch (e: Exception) {
                     LogUtils.w("蓝牙数据异常---$e")
-                    mHandler!!.sendEmptyMessage(BlueBoothState.BLUE_OBTAINDATA_ERROR)
+                    mHandler?.sendEmptyMessage(BlueBoothState.BLUE_OBTAINDATA_ERROR)
                 } catch (ee: Error) {
                     LogUtils.w("蓝牙数据错误---$ee")
                 }

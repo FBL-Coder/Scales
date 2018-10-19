@@ -39,16 +39,16 @@
                 <LinearLayout
                     android:id="@+id/Mine_UserSelf"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_90"
+                    android:layout_height="@dimen/dp_100"
                     android:layout_margin="@dimen/dp_10"
                     android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/Mine_Head"
-                        android:layout_width="@dimen/dp_60"
-                        android:layout_height="@dimen/dp_60"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80"
                         android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/head" />
 
                     <TextView
                         android:id="@+id/Mine_UserName"
@@ -57,15 +57,14 @@
                         android:gravity="center"
                         android:text="我是昵称"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/sp_18" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dp_10">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="@dimen/dp_0"

@@ -13,6 +13,7 @@ import com.etsoft.scales.app.MyApp.Companion.mBlueBoothReceiver
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothAdapter
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
+import com.etsoft.scales.app.MyApp.Companion.mBluetoothDeviceED
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
 import com.etsoft.scales.bean.BlueBoothDevicesBean
 import com.etsoft.scales.utils.BlueBoothState
@@ -107,6 +108,8 @@ class AddDevActivity : BaseActivity() {
         DevName.text = mBluetoothDevice!!.name
         DevMAC.text = mBluetoothDevice!!.address
         ConnectClose.setOnClickListener {
+            LogUtils.i("主动断开蓝牙连接")
+            mBluetoothDeviceED = null
             mLoadDialog!!.show(arrayOf("正在断开", "断开超时"), false)
             BlueUtils.disConnect(mHandler!!)
         }
@@ -173,7 +176,7 @@ class AddDevActivity : BaseActivity() {
                 //创建连接
                 mLoadDialog!!.show(arrayOf("正在连接", "连接超时"), false)
                 mBluetoothAdapter!!.cancelDiscovery()
-                BlueUtils.connectBlue(mHandler!!, mBlue_Ok_List, position)
+                BlueUtils.connectBlue(mHandler!!, mBlue_Ok_List[position].mDevice)
                 LogUtils.e("连接蓝牙设备MAC: ${mBlue_Ok_List[position].mDevice.address} \n" +
                         "UUID:${mBlue_Ok_List[position].mDevice.uuids}")
             }
@@ -245,7 +248,7 @@ class AddDevActivity : BaseActivity() {
                     BlueBoothState.BULECONNECT_FAILED -> {//连接失败
                         //连接失败
                         activity.mLoadDialog!!.hide()
-                        ToastUtil.showText("连接失败")
+                        ToastUtil.showText("蓝牙连接失败")
                     }
                     BlueBoothState.BLUE_SEEK_STOP -> {//停止搜索
                         activity.moor_wiating.visibility = View.GONE

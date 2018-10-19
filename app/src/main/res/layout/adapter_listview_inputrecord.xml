@@ -72,7 +72,7 @@
 
     <TextView
         android:id="@+id/Input_Record_Type"
-        android:layout_width="@dimen/dp_50"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_30"
         android:layout_marginLeft="@dimen/dp_20"
         android:gravity="center"

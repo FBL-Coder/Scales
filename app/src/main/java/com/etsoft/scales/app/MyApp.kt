@@ -60,6 +60,9 @@ open class MyApp : ClientApplication() {
          * 回收物列表信息
          */
         var mRecycleListBean: RecycleListBean? = null
+        var mRecycleListBean_Type_1: RecycleListBean? = null
+        var mRecycleListBean_Type_2: RecycleListBean? = null
+        var mRecycleListBean_Type_3: RecycleListBean? = null
 
         /**
          * OkhttpClirnt
@@ -98,9 +101,13 @@ open class MyApp : ClientApplication() {
         var mBluetoothSocket: BluetoothSocket? = null
 
         /**
-         * 蓝牙接受的设备
+         * 蓝牙连接的设备
          */
         var mBluetoothDevice: BluetoothDevice? = null
+        /**
+         * 蓝牙断链之前的设备
+         */
+        var mBluetoothDeviceED: BluetoothDevice? = null
 
         /**
          * 蓝牙数据是否可用

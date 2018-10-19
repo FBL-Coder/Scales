@@ -7,9 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import com.apkfuns.logutils.LogUtils
+import com.etsoft.scales.Server.BlueUtils
+import com.etsoft.scales.Server.BlueUtils.Companion.isRepetitionConnect
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.utils.BlueBoothState
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDevice
+import com.etsoft.scales.app.MyApp.Companion.mBluetoothDeviceED
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothSocket
 import com.etsoft.scales.utils.ClsUtils
 
@@ -102,6 +105,7 @@ class BlueBoothReceiver(mHandler: Handler) : BroadcastReceiver() {
 //                mHandler.sendEmptyMessage(BlueBoothState.BULECONNECT_SUCCESS)
                 LogUtils.i("蓝牙回调   连接成功")
                 mBluetoothDevice = mDevice
+                mBluetoothDeviceED = mDevice
                 mBluetoothDataIsEnable = true
                 mOnBlueConnecetChangerlistener_input?.OnBlueChanger(true)
                 mOnBlueConnecetChangerlistener_out?.OnBlueChanger(true)
@@ -111,6 +115,11 @@ class BlueBoothReceiver(mHandler: Handler) : BroadcastReceiver() {
                 LogUtils.i("蓝牙回调   断开连接")
                 mBluetoothSocket?.close()
                 mBluetoothDevice = null
+                if (mBluetoothDeviceED != null) {
+                    LogUtils.i("蓝牙非主动断开，默认自动连接")
+                    isRepetitionConnect = true
+                    BlueUtils.connectBlue(mHandler, mBluetoothDeviceED!!)
+                }
                 mBluetoothDataIsEnable = false
                 mOnBlueConnecetChangerlistener_input?.OnBlueChanger(false)
                 mOnBlueConnecetChangerlistener_out?.OnBlueChanger(false)
@@ -128,8 +137,6 @@ class BlueBoothReceiver(mHandler: Handler) : BroadcastReceiver() {
     interface OnBlueConnecetChangerlistener {
         fun OnBlueChanger(isConnect: Boolean)
     }
-
-
 
 
 }

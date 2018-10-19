@@ -54,6 +54,7 @@ class NotificationInfoActivity : BaseActivity() {
                         date.text = type + "  丨  " + info?.data?.admin_alias + "  丨  " + info?.data?.update_time
                         content.text = "    " + info?.data?.content
                     }
+                    Notification_Info_View.visibility = View.VISIBLE
                 } catch (e: Exception) {
                     LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
                     ToastUtil.showText("服务器异常")

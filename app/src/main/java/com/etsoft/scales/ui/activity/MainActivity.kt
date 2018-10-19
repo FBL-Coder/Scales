@@ -49,7 +49,7 @@ class MainActivity : BaseActivity() {
         fragments = initFragment()
         ViewEvent()
         PermissionsUtli.verifyStoragePermissions(this)
-        UpLocation()
+//        UpLocation()
     }
 
 
@@ -102,7 +102,6 @@ class MainActivity : BaseActivity() {
                 .addItem(BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "我的"))
                 .setActiveColor(R.color.app_color)
                 .initialise()
-
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

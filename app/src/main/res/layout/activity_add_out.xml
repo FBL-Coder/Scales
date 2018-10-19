@@ -66,6 +66,7 @@
             android:paddingRight="@dimen/dp_30">
 
             <TextView
+                android:id="@+id/Add_Out_Type_Name"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -81,7 +82,7 @@
                 android:background="@color/white_"
                 android:gravity="center|right"
                 android:inputType="number"
-                android:hint="0.00"
+                android:hint="0"
                 android:maxLength="8"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_16" />

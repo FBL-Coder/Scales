@@ -23,6 +23,7 @@ class AddOutAvtivity : BaseActivity() {
 
     private var mHandler: MyHandler? = null
     private var position = 0
+    private var mType = 0
 
     override fun setView(): Int {
         return R.layout.activity_add_out
@@ -30,22 +31,47 @@ class AddOutAvtivity : BaseActivity() {
 
     override fun onCreate() {
         mHandler = MyHandler(this)
-        //启动数据监听
-        if (mBluetoothDataIsEnable) {
-            isReadData = true
-            BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
-        }
+
         initData()
     }
 
     private fun initData() {
 
         position = intent.getIntExtra("position", 0)
+        mType = intent.getIntExtra("type", -1)
 
-        Add_Out_Type.text = MyApp.mRecycleListBean!!.data[position].name
-        Add_Out_Uuit.text = MyApp.mRecycleListBean!!.data[position].unit
-        Add_Out_Weight.isEnabled = !MyApp.mBluetoothDataIsEnable
-        Add_Out_Weight.isFocusable = !MyApp.mBluetoothDataIsEnable
+        //启动数据监听
+        if (mType == 1 || mType == 3)
+            if (mBluetoothDataIsEnable) {
+                isReadData = true
+                BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
+            }
+
+        when (mType) {
+            1 -> {
+                Add_Out_Type_Name.text = "重量"
+                Add_Out_Type.text = MyApp.mRecycleListBean_Type_1!!.data[position].name
+                Add_Out_Uuit.text = MyApp.mRecycleListBean_Type_1!!.data[position].unit
+                Add_Out_Weight.isEnabled = !MyApp.mBluetoothDataIsEnable
+                Add_Out_Weight.isFocusable = !MyApp.mBluetoothDataIsEnable
+            }
+            2 -> {
+                Add_Out_Type_Name.text = "数量"
+                Add_Out_Type.text = MyApp.mRecycleListBean_Type_2!!.data[position].name
+                Add_Out_Uuit.text = MyApp.mRecycleListBean_Type_2!!.data[position].unit
+            }
+            3 -> {
+                Add_Out_Type_Name.text = "重量"
+                Add_Out_Type.text = MyApp.mRecycleListBean_Type_3!!.data[position].name
+                Add_Out_Uuit.text = MyApp.mRecycleListBean_Type_3!!.data[position].unit
+                Add_Out_Weight.isEnabled = !MyApp.mBluetoothDataIsEnable
+                Add_Out_Weight.isFocusable = !MyApp.mBluetoothDataIsEnable
+            }
+        }
+
+
+
+
         Add_Input_Cancle.setOnClickListener { finish() }
 
         Add_Input_Ok.setOnClickListener {
@@ -58,7 +84,11 @@ class AddOutAvtivity : BaseActivity() {
             setResult(100, intent
                     .run {
                         putExtra("data", Out_Main_Bean().run {
-                            recyclingPriceId = MyApp.mRecycleListBean!!.data[position].id.toString()
+                            when (mType) {
+                                1 -> recyclingPriceId = MyApp.mRecycleListBean_Type_1!!.data[position].id.toString()
+                                2 -> recyclingPriceId = MyApp.mRecycleListBean_Type_2!!.data[position].id.toString()
+                                3 -> recyclingPriceId = MyApp.mRecycleListBean_Type_3!!.data[position].id.toString()
+                            }
                             weight = Weight
                             toPlace = ToPlace
                             this
