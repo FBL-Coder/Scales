@@ -35,16 +35,18 @@ class ServerStationActivity : BaseActivity() {
         return R.layout.activity_server_station
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         mLoadDialog!!.show()
         initdata()
     }
 
+
     /**
      * 加载服务站点列表数据
      */
-    private fun initdata(page: Int = 1, linit: Int = 5) {
+    private fun initdata(page: Int = 1, linit: Float = 10.0F) {
         var pram = HashMap<String, String>()
         pram["limit"] = "$linit"
         pram["page"] = "$page"
@@ -58,7 +60,7 @@ class ServerStationActivity : BaseActivity() {
                     var list = MyApp.gson.fromJson(resultDesc!!.result, ServerStationBean::class.java)
                     if (list!!.code == 0) {
                         if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
-                        var pages = mListBean!!.count / linit
+                        var pages= mListBean!!.count / linit
                         Maxpage = Math.ceil(pages.toDouble()).toInt()
                     } else {
                         LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")

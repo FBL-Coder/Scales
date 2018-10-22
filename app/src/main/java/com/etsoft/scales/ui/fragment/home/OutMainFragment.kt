@@ -159,6 +159,10 @@ class OutMainFragment : Fragment() {
                         position = which
                     }).setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
+                        if (names.size == 0){
+                            ToastUtil.showText("该类型没有对应回收物，请重新选择")
+                            return@setPositiveButton
+                        }
                         //跳转到具体添加回收物页面
                         startActivityForResult(Intent(mActivity, AddOutAvtivity::class.java).run {
                             putExtra("position", position)
@@ -178,7 +182,7 @@ class OutMainFragment : Fragment() {
     /**
      * 加载出库数据
      */
-    private fun initdata(page: Int = 1, type: String = SortType.CREATETIME, linit: Int = 5) {
+    private fun initdata(page: Int = 1, type: String = SortType.CREATETIME, linit: Float = 10.0F) {
 
         var pram = HashMap<String, String>()
         pram[type] = "DESC"//DESC

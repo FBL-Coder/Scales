@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
@@ -30,7 +31,8 @@ class ServerStationInfoActivity : BaseActivity() {
         return R.layout.activity_serverstation_info
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         initData()
     }

@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import com.etsoft.scales.R
 import com.etsoft.scales.utils.ToastUtil
@@ -15,9 +16,11 @@ class EditPassActivity : BaseActivity() {
         return R.layout.activity_editpass
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
     }
+
 
     private fun initView() {
         EditPass_Titlebar.run {

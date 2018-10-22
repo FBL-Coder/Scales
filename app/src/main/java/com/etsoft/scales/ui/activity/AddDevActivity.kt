@@ -2,8 +2,10 @@ package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
+import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.os.PersistableBundle
 import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
@@ -61,8 +63,8 @@ class AddDevActivity : BaseActivity() {
         return R.layout.activity_add_dev
     }
 
-    @SuppressLint("NewApi")
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mHandler = MyHandler(this)
         initView()
     }

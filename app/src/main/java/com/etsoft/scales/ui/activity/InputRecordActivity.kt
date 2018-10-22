@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
@@ -33,7 +34,8 @@ class InputRecordActivity : BaseActivity() {
         return R.layout.activity_input_record
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         mLoadDialog!!.show()
         initdata()
@@ -42,7 +44,7 @@ class InputRecordActivity : BaseActivity() {
     /**
      * 加载入库数据
      */
-    private fun initdata(page: Int = 1, linit: Int = 5) {
+    private fun initdata(page: Int = 1, linit: Float = 10.0F) {
         var pram = HashMap<String, String>()
         pram[SortType.CREATETIME] = "DESC"
         pram["limit"] = "$linit"

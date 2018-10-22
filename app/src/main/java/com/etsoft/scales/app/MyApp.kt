@@ -25,6 +25,7 @@ import com.etsoft.scales.ui.activity.MainActivity
 import com.etsoft.scales.utils.Density
 import com.etsoft.scales.utils.gson.NullStringEmptyTypeAdapterFactory
 import com.etsoft.scales.utils.httpGetDataUtils.LoggerInterceptor
+import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -119,7 +120,6 @@ open class MyApp : ClientApplication() {
          */
         var mBlueBoothReceiver: BlueBoothReceiver? = null
 
-
     }
 
     override fun onCreate() {
@@ -130,6 +130,7 @@ open class MyApp : ClientApplication() {
                 .configShowBorders(false)
         Fresco.initialize(this)//图片加载库 初始化
         Density.setDensity(this, 370f)//简单屏幕适配方案 初始化
+
 
         //日志上报Bugly
         CrashReport.initCrashReport(applicationContext, "2e4ab6f76a", false)

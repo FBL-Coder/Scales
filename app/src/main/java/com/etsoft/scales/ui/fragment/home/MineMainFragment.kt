@@ -4,18 +4,25 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.bean.UpInputFailedBean
 import com.etsoft.scales.ui.activity.*
 import com.etsoft.scales.utils.AppSharePreferenceMgr
+import com.etsoft.scales.utils.File_Cache
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.view.MyDialog
+import com.etsoft.scales.view.ProgressBarDialog
 import kotlinx.android.synthetic.main.fragment_mine_main.*
+import java.lang.ref.WeakReference
 
 
 /**
@@ -33,12 +40,18 @@ class MineMainFragment : Fragment() {
         }
     }
 
+    var mLoadDialog: ProgressBarDialog? = null
+    private var mHandler: MyHandler? = null
+    var mUpInputFailedBean: UpInputFailedBean? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mine_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mHandler = MyHandler(this)
+        mLoadDialog = mActivity!!.mLoadDialog!!
         initData()
         initEvent()
     }
@@ -85,20 +98,54 @@ class MineMainFragment : Fragment() {
             startActivity(Intent(mActivity, UserQueryActivity::class.java))
         }
         Mine_Logout!!.setOnClickListener {
-            MyDialog(mActivity!!).setMessage("是否退出登录？")
-                    .setNegativeButton("取消") { dialog, which ->
-                        dialog.dismiss()
-                    }.setPositiveButton("退出") { dialog, which ->
-                        startActivity(Intent(mActivity, LoginActivity::class.java))
-                        AppSharePreferenceMgr.clear(MyApp.mApplication)
-                        //退出
-                        mActivity!!.finish()
-                        dialog.dismiss()
-                    }.create().run {
-                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        this
-                    }.show()
+            mActivity!!.mLoadDialog!!.show()
+            getUpLoadFailed()
+
+        }
+    }
+
+    private fun getUpLoadFailed() {
+        Thread(Runnable {
+            var data = File_Cache.readFile(SaveKey.FILE_DATA_NAME)
+            LogUtils.i("未上传成功json数据 = $data")
+            mUpInputFailedBean = MyApp.gson.fromJson(data, UpInputFailedBean::class.java)
+            mHandler!!.sendEmptyMessage(1)
+        }).start()
+    }
+}
+
+/**
+ * Handler 静态内部类，防止内存泄漏
+ */
+private class MyHandler(activity: MineMainFragment) : Handler() {
+    private val activityWeakReference: WeakReference<MineMainFragment> = WeakReference<MineMainFragment>(activity)
+
+    override fun handleMessage(msg: Message) {
+        val activity = activityWeakReference.get()
+        if (activity != null) {
+            when (msg.what) {
+                1 -> {
+                    activity.mLoadDialog!!.hide()
+                    if (activity.mUpInputFailedBean!!.data.size > 0) {
+                        ToastUtil.showText("用户还有未上传记录，请先上传")
+                        return
+                    }
+                    MyDialog(activity.activity!!).setMessage("是否退出登录")
+                            .setNegativeButton("取消") { dialog, which ->
+                                dialog.dismiss()
+                            }.setPositiveButton("退出") { dialog, which ->
+                                activity.activity!!.startActivity(Intent(activity.activity, LoginActivity::class.java))
+                                AppSharePreferenceMgr.clear(MyApp.mApplication)
+                                //退出
+                                activity.activity!!.finish()
+                                dialog.dismiss()
+                            }.create().run {
+                                window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                this
+                            }.show()
+                }
+            }
         }
     }
 }

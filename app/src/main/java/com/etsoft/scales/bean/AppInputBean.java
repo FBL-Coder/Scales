@@ -17,6 +17,9 @@ public class AppInputBean {
      */
 
     private String phone;
+    private boolean isUse = true;
+    private String dealId;
+    private String time;
     private String type;
     private String servicePointId;
     private String staffId;
@@ -29,6 +32,29 @@ public class AppInputBean {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public boolean isUse() {
+        return isUse;
+    }
+
+    public void setUse(boolean use) {
+        isUse = use;
+    }
+
+    public String getDealId() {
+        return dealId;
+    }
+
+    public void setDealId(String dealId) {
+        this.dealId = dealId;
+    }
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getType() {
@@ -78,6 +104,7 @@ public class AppInputBean {
          */
 
         private String recyclingPriceId;
+        private String typename;
         private String weight;
 
         public String getRecyclingPriceId() {
@@ -86,6 +113,14 @@ public class AppInputBean {
 
         public void setRecyclingPriceId(String recyclingPriceId) {
             this.recyclingPriceId = recyclingPriceId;
+        }
+
+        public String getTypename() {
+            return typename;
+        }
+
+        public void setTypename(String typename) {
+            this.typename = typename;
         }
 
         public String getWeight() {

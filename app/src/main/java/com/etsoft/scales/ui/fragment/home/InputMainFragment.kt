@@ -6,10 +6,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.os.Message
 import android.support.v4.app.Fragment
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +16,7 @@ import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
+import com.etsoft.scales.SaveKey.Companion.FILE_DATA_NAME
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
@@ -25,22 +24,20 @@ import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_1
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_2
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_3
 import com.etsoft.scales.bean.AppInputBean
-import com.etsoft.scales.bean.InputOkBean
 import com.etsoft.scales.bean.Input_Main_List_Bean
 import com.etsoft.scales.bean.RecycleListBean
+import com.etsoft.scales.bean.UpInputFailedBean
+import com.etsoft.scales.netWorkListener.AppNetworkMgr
 import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.receiver.BlueBoothReceiver.OnBlueConnecetChangerlistener
-import com.etsoft.scales.ui.activity.AddDevActivity
-import com.etsoft.scales.ui.activity.AddInputAvtivity
-import com.etsoft.scales.ui.activity.InputRecordActivity
-import com.etsoft.scales.ui.activity.MainActivity
+import com.etsoft.scales.ui.activity.*
 import com.etsoft.scales.utils.AppSharePreferenceMgr
+import com.etsoft.scales.utils.File_Cache
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
-import com.etsoft.scales.view.MyEditText
 import com.etsoft.scales.view.ProgressBarDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import kotlinx.android.synthetic.main.fragment_input_main.*
@@ -50,6 +47,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 /**
@@ -59,6 +57,7 @@ import kotlin.collections.ArrayList
 class InputMainFragment : Fragment() {
 
     companion object {
+        var FileHandData = 111
         var mActivity: MainActivity? = null
         fun initFragment(activity: MainActivity): InputMainFragment {
             var mCareFragment = InputMainFragment()
@@ -68,10 +67,12 @@ class InputMainFragment : Fragment() {
     }
 
     private var listid = 0
+
     private var mInputLiat = ArrayList<Input_Main_List_Bean>()
     private var mMain_Input_ListViewAdapter: Main_Input_ListViewAdapter? = null
     private var mHandler: MyHandler? = null
     private var mLoadDialog: ProgressBarDialog? = null
+    private var mActivity_: MainActivity? = null
 
     /**
      * 首选回收物类型
@@ -87,25 +88,53 @@ class InputMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mLoadDialog = mActivity!!.mLoadDialog!!
+        mActivity_ = mActivity
         mHandler = MyHandler(this)
+        File_Cache.setHandler(mHandler)
         getRecycleData(0)
         initView()
         initListView()
         BlueBoothReceiver.mOnBlueConnecetChangerlistener_input = object : OnBlueConnecetChangerlistener {
             override fun OnBlueChanger(isConnect: Boolean) {
                 if (isConnect)
-                    Input_Main_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
+                    Input_Main_Back.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
                 else
-                    Input_Main_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+                    Input_Main_Back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
             }
         }
+    }
+
+    override fun onStart() {
+        Input_Main_Warn.visibility = View.GONE
+        getFile()
+        super.onStart()
+    }
+
+    /**
+     * 读取本地未上传数据
+     */
+    private fun getFile() {
+        Thread(Runnable {
+            var data = File_Cache.readFile(SaveKey.FILE_DATA_NAME)
+            if (data != "") {
+                var failedBean = MyApp.gson.fromJson(data, UpInputFailedBean::class.java)
+                if (failedBean.data != null) {
+                    if (failedBean.data.size > 0) {
+                        mHandler!!.sendEmptyMessage(FileHandData)
+                    }
+                }
+            }
+        }).start()
     }
 
     /**
      * 获取回收物信息
      */
     private fun getRecycleData(type: Int) {
-        OkHttpUtils.getAsyn(Ports.RECYCLELIST, object : MyHttpCallback(mActivity) {
+
+        var map = HashMap<String, String>()
+        map["limit"] = "1000"
+        OkHttpUtils.getAsyn(Ports.RECYCLELIST, map, object : MyHttpCallback(mActivity) {
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mActivity!!.mLoadDialog!!.hide()
                 if (resultDesc!!.getcode() != 0) {
@@ -169,16 +198,14 @@ class InputMainFragment : Fragment() {
 
     @SuppressLint("RestrictedApi")
     private fun initView() {
-        Input_Main_TitleBar!!.run {
-            //TitleBar 初始化
-            title.text = "入库"
-            moor.setImageResource(R.drawable.ic_print_black_24dp)
-            moor.setOnClickListener {
-                if (mInputLiat == null || mInputLiat.size == 0) {
-                    ToastUtil.showText("没有数据,请添加记录")
-                    return@setOnClickListener
-                }
-                UpToServer("17611110000")
+        Input_Main_Title.text = "入库"
+        Input_Main_Print.setImageResource(R.drawable.ic_print_black_24dp)
+        Input_Main_Print.setOnClickListener {
+            if (mInputLiat == null || mInputLiat.size == 0) {
+                ToastUtil.showText("没有数据,请添加记录")
+                return@setOnClickListener
+            }
+            UpToServer("17611110000")
 
 //                val edit = MyEditText(mActivity)
 //                edit.hint = "请输入手机号"
@@ -199,12 +226,10 @@ class InputMainFragment : Fragment() {
 //
 //                            dialog.dismiss()
 //                        }.create().show()
-            }
-            back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
-            back.setOnClickListener {
-                startActivity(Intent(mActivity, AddDevActivity::class.java))
-            }
-            this
+        }
+        Input_Main_Back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+        Input_Main_Back.setOnClickListener {
+            startActivity(Intent(mActivity, AddDevActivity::class.java))
         }
 
         Input_Main_Record!!.setOnClickListener {
@@ -263,9 +288,25 @@ class InputMainFragment : Fragment() {
             var lingsBean = AppInputBean.RecyclingsBean()
             lingsBean.recyclingPriceId = mInputLiat[i]?.typeid
             lingsBean.weight = mInputLiat[i]?.weight
+            lingsBean.typename = mInputLiat[i]?.type
             lingsBeanList.add(lingsBean)
         }
         UpBean.recyclings = lingsBeanList
+        var time = SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis()))
+        UpBean.time = time
+        var time_id = time.replace("-".toRegex(), "").substring(0, 8)
+        var time_8Char = System.currentTimeMillis().toString()
+        var deal_id = time_id + time_8Char.substring(time_8Char.length - 8)
+        UpBean.dealId = deal_id
+
+        PrintData("两网融合", deal_id)
+
+        val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
+        if (NETWORK == 0) {
+            ToastUtil.showText("网络不可用，可在未长传界面进行上传")
+            writeData(UpBean)
+            return
+        }
 
         OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
             override fun onSuccess(resultDesc: ResultDesc?) {
@@ -273,15 +314,15 @@ class InputMainFragment : Fragment() {
                 if (resultDesc!!.getcode() != 0) {
                     ToastUtil.showText(resultDesc.result)
                 } else {
-                    var bean = MyApp.gson.fromJson<InputOkBean>(resultDesc!!.result, InputOkBean::class.java)
                     mActivity!!.mLoadDialog!!.show("正在打印")
-                    PrintData(bean.data.company, bean.data.transaction_no)
+
                 }
             }
 
             override fun onFailure(code: Int, message: String?) {
                 super.onFailure(code, message)
-                ToastUtil.showText("服务器异常")
+                ToastUtil.showText("上传失败，可在未长传界面进行上传")
+                writeData(UpBean)
             }
         }, "新增入库")
     }
@@ -354,6 +395,7 @@ class InputMainFragment : Fragment() {
                     }
 
                     when (mInputLiat[i].total.length) {//总价
+                        3 -> no6 = 4
                         4 -> no6 = 3
                         5 -> no6 = 2
                         6 -> no6 = 1
@@ -390,7 +432,6 @@ class InputMainFragment : Fragment() {
                     LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
                 }
 
-
                 var ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
 
                 mIzkcService.printGBKText(ZongJia + "\n")
@@ -406,7 +447,7 @@ class InputMainFragment : Fragment() {
     }
 
     /**
-     * 四舍五入
+     * 小5取0，大5取5
      */
     fun totalMoney(money: Double): String {
         LogUtils.i("总金额为 = $money")
@@ -414,7 +455,35 @@ class InputMainFragment : Fragment() {
         val total = bigDec.setScale(2, java.math.BigDecimal.ROUND_HALF_UP).toDouble()
         val df = DecimalFormat("0.0")
         LogUtils.i("四舍五入后总金额为 = ${df.format(total)}")
-        return df.format(total)
+        var zongjia = df.format(total)
+        //小数的整数部分
+        var intPart = zongjia.substring(0, zongjia.indexOf("."))
+        //小数的小数部分
+        var floatPart = zongjia.substring(zongjia.indexOf(".") + 1)
+        floatPart = if (floatPart.toInt() < 5)
+            "0"
+        else
+            "5"
+        zongjia = "$intPart.$floatPart"
+        return zongjia
+    }
+
+    /**
+     * 写入文件
+     */
+    fun writeData(UpBean: AppInputBean) {
+        Thread(Runnable {
+            val data = File_Cache.readFile(FILE_DATA_NAME)
+            var failedBean: UpInputFailedBean? = null
+            if (data == "") {
+                failedBean = UpInputFailedBean()
+                failedBean.data = ArrayList<AppInputBean>()
+            } else {
+                failedBean = MyApp.gson.fromJson<UpInputFailedBean>(data, UpInputFailedBean::class.java)
+            }
+            failedBean!!.data.add(UpBean)
+            File_Cache.writeFileToSD(MyApp.gson.toJson(failedBean), FILE_DATA_NAME)
+        }).start()
     }
 
 
@@ -442,22 +511,27 @@ class InputMainFragment : Fragment() {
                 }
                 2 -> {
                     for (i in mRecycleListBean_Type_2!!.data.indices) {
-                        names.add(mRecycleListBean_Type_2!!.data[i].name+ "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                        names.add(mRecycleListBean_Type_2!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
                     }
 
                 }
                 3 -> {
                     for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        names.add(mRecycleListBean_Type_3!!.data[i].name+ "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                        names.add(mRecycleListBean_Type_3!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
                     }
                 }
             }
+
 
             MyDialog(mActivity!!).setTitle("选择回收物")
                     .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
                         position = which
                     }).setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
+                        if (names.size == 0) {
+                            ToastUtil.showText("该类型没有对应回收物，请重新选择")
+                            return@setPositiveButton
+                        }
                         //跳转到具体添加回收物页面
                         startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
                             putExtra("position", position)
@@ -534,6 +608,18 @@ class InputMainFragment : Fragment() {
                         activity.mInputLiat.clear()
                         activity.initListView()
                         ToastUtil.showText("上传成功,但未找到打印机")
+                    }
+                    File_Cache.WriteOk -> {
+                        activity.Input_Main_Warn.visibility = View.VISIBLE
+                        activity.Input_Main_Warn.setOnClickListener {
+                            activity.mActivity_!!.startActivity(Intent(mActivity, UploadFailedActivity::class.java))
+                        }
+                    }
+                    FileHandData -> {
+                        activity.Input_Main_Warn.visibility = View.VISIBLE
+                        activity.Input_Main_Warn.setOnClickListener {
+                            activity.mActivity_!!.startActivity(Intent(mActivity, UploadFailedActivity::class.java))
+                        }
                     }
                 }
             }

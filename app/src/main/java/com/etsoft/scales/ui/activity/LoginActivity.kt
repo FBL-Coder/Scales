@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
 import com.etsoft.scales.R
 import com.etsoft.scales.helper.LoginHelper
 import com.etsoft.scales.utils.ToastUtil
@@ -17,8 +18,8 @@ class LoginActivity : BaseActivity() {
         return R.layout.activity_login
     }
 
-
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initEvent()
     }
 

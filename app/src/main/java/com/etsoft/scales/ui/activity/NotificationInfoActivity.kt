@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
@@ -26,7 +27,9 @@ class NotificationInfoActivity : BaseActivity() {
         return R.layout.activity_notification_info
     }
 
-    override fun onCreate() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         mLoadDialog!!.show()
         initData()

@@ -7,6 +7,7 @@ import java.io.Serializable;
  * 入库页面数据实体
  */
 public class Input_Main_List_Bean implements Serializable {
+    public String deal_id = "";
     public String id = "";
     public String type = "";
     public String weight = "";

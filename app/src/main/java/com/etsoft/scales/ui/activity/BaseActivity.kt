@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.UtilHelpers
@@ -23,27 +24,23 @@ import com.etsoft.scales.view.ProgressBarDialog
  */
 abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
 
-
     var mLoadDialog: ProgressBarDialog? = null
-
-    final override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //流氓式霸屏
         //MyApp.mApplication!!.runTimer()
-
+        OkHttpUtils.initClient(MyApp.mclient,this)
         if (setView() != null && setView() != 0)
             setContentView(setView()!!)
         try {
             initDialog()
-            onCreate()
-            OkHttpUtils.initClient(MyApp.mclient, this)
             //设置隐藏底部菜单栏
             window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
                     View.SYSTEM_UI_FLAG_IMMERSIVE
         } catch (e: Exception) {
-//            LogUtils.e("数据异常--->$e")
-            e.printStackTrace()
+            LogUtils.e("数据异常--->$e")
+//            e.printStackTrace()
         }
     }
 
@@ -54,8 +51,6 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
 
 
     abstract fun setView(): Int?
-
-    abstract fun onCreate()
 
     fun initDialog() {
         mLoadDialog = ProgressBarDialog(this)
@@ -133,4 +128,5 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
         mLoadDialog!!.destroyDialog()
         super.onDestroy()
     }
+
 }

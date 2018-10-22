@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ll_bg_white"
+    android:clickable="false"
+    android:padding="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Failed_Item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/Failed_Count"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/Failed_Time"
+        android:textSize="@dimen/sp_10"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

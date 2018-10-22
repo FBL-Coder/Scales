@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.os.Bundle
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.app.MyApp
@@ -22,9 +23,11 @@ class RegisterUserActivity : BaseActivity() {
         return R.layout.activity_register_user
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
     }
+
 
     private fun initView() {
         RegisterUser_TitleBar.run {

@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import com.etsoft.scales.R
 import com.etsoft.scales.bean.OutListBean
@@ -16,10 +17,12 @@ class OutInfoActivity : BaseActivity() {
         return R.layout.activity_out_info
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         initData()
     }
+
 
     private fun initData() {
         var content = intent.getSerializableExtra("content") as OutListBean.DataBean

@@ -158,6 +158,10 @@
             android:name="com.etsoft.scales.ui.activity.SelfActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <!-- 入库失败记录 -->
+        <activity
+            android:name="com.etsoft.scales.ui.activity.UploadFailedActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 打印机服务 -->
         <service android:name="com.smartdevice.aidl.IZKCService" >

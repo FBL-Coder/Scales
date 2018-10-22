@@ -3,8 +3,10 @@ package com.etsoft.scales.ui.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.os.PersistableBundle
 import android.view.View
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
@@ -20,6 +22,10 @@ import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_add_input.*
 import java.lang.ref.WeakReference
 import java.text.DecimalFormat
+import com.etsoft.scales.utils.MoneyValueFilter
+import android.text.InputFilter
+
+
 
 /**
  * Author：FBL  Time： 2018/9/30.
@@ -35,9 +41,10 @@ class AddInputAvtivity : BaseActivity() {
         return R.layout.activity_add_input
     }
 
-    override fun onCreate() {
-        mHandler = MyHandler(this)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mHandler = MyHandler(this)
         initData()
     }
 
@@ -51,6 +58,7 @@ class AddInputAvtivity : BaseActivity() {
                 isReadData = true
                 BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
             }
+        Add_Input_KG.filters = arrayOf<InputFilter>(MoneyValueFilter().setDigits(1))
 
 
         when (mType) {

@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
@@ -23,7 +24,8 @@ class UserQueryActivity : BaseActivity() {
         return R.layout.activity_user_query
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
     }
 

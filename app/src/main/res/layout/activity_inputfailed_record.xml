@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_"
+    android:orientation="vertical">
+
+    <com.etsoft.scales.view.TitleBar
+        android:id="@+id/InputFailed_Titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_10" />
+
+    <ListView
+        android:id="@+id/InputFailed_ListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_"
+        android:divider="@color/white___"
+        android:dividerHeight="@dimen/dp_2"
+        android:padding="@dimen/dp_10"
+        android:scrollbarSize="@dimen/dp_3"
+        android:scrollbarThumbVertical="@color/black_" />
+
+</LinearLayout>

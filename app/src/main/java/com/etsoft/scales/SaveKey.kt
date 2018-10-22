@@ -6,6 +6,10 @@ package com.etsoft.scales
  */
 class SaveKey {
     companion object {
+
+        var FILE_DATA_NAME = "scales_file"
+
+
         var USER_NAME = "USER_NAME"
         var USER_PASS = "USER_PASS"
         var ACCESS_TOKEN = "access_token"

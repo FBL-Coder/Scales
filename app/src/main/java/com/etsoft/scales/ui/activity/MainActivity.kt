@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.KeyEvent
 import android.widget.Toast
@@ -44,13 +45,15 @@ class MainActivity : BaseActivity() {
         return R.layout.activity_main_scales
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         fragments = initFragment()
         ViewEvent()
         PermissionsUtli.verifyStoragePermissions(this)
 //        UpLocation()
     }
+
 
 
     private fun initFragment(): ArrayList<Fragment> {

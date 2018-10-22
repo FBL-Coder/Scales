@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import com.etsoft.scales.R
@@ -14,6 +15,10 @@ import com.etsoft.scales.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_add_out.*
 import java.lang.ref.WeakReference
 import java.text.DecimalFormat
+import com.etsoft.scales.utils.MoneyValueFilter
+import android.text.InputFilter
+
+
 
 /**
  * Author：FBL  Time： 2018/9/30.
@@ -30,11 +35,14 @@ class AddOutAvtivity : BaseActivity() {
         return R.layout.activity_add_out
     }
 
-    override fun onCreate() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mHandler = MyHandler(this)
 
         initData()
     }
+
 
     private fun initData() {
 
@@ -47,6 +55,7 @@ class AddOutAvtivity : BaseActivity() {
                 isReadData = true
                 BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
             }
+        Add_Out_Weight.filters = arrayOf<InputFilter>(MoneyValueFilter().setDigits(1))
 
         when (mType) {
             1 -> {

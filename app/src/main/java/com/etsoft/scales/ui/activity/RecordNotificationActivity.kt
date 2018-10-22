@@ -1,6 +1,7 @@
 package com.etsoft.scales.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
@@ -32,16 +33,18 @@ class RecordNotificationActivity : BaseActivity() {
         return R.layout.activity_record_notification
     }
 
-    override fun onCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         mLoadDialog!!.show()
         initdata()
     }
 
+
     /**
      * 加载通知列表数据
      */
-    private fun initdata(page: Int = 1, linit: Int = 5) {
+    private fun initdata(page: Int = 1, linit: Float = 10.0F) {
         var pram = HashMap<String, String>()
         pram[SortType.CREATETIME] = "DESC"
         pram["limit"] = "$linit"
