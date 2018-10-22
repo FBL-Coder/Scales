@@ -64,13 +64,17 @@ class UploadFailedActivity : BaseActivity() {
     /**
      * 初始化ListView数据
      */
-    private fun initListView() {
+    private fun initListView(type:Int = 0) {
         var mUpInputFailedBean_Use = UpInputFailedBean()
         mUpInputFailedBean_Use!!.data = ArrayList<AppInputBean>()
         for (i in mUpInputFailedBean!!.data.indices) {
             if (mUpInputFailedBean!!.data[i].isUse) {
                 mUpInputFailedBean_Use!!.data.add(mUpInputFailedBean!!.data[i])
             }
+        }
+        if (type == 1 && mUpInputFailedBean_Use.data.size == 0){
+            ToastUtil.showText("全部记录已上传完成")
+            finish()
         }
         if (mInputRecordListViewAdapter == null) {
             mInputRecordListViewAdapter = InputFailedRecordListViewAdapter(mUpInputFailedBean_Use!!)
@@ -79,7 +83,7 @@ class UploadFailedActivity : BaseActivity() {
     }
 
     private fun initView() {
-        InputFailed_Titlebar.title.text = "未上传记录"
+        InputFailed_Titlebar.title.text = ""
         InputFailed_Titlebar.moor.setImageResource(R.drawable.ic_cloud_upload_white_24dp)
         InputFailed_Titlebar.moor.setOnClickListener {
             val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
@@ -182,7 +186,7 @@ class UploadFailedActivity : BaseActivity() {
                 when (msg.what) {
                     1 -> {
                         activity.mLoadDialog!!.hide()
-                        activity.initListView()
+                        activity.initListView(1)
                         activity.isUpLoading = false
                     }
                     2 -> {
