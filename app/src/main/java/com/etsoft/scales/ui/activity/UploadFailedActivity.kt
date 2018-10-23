@@ -9,6 +9,7 @@ import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.adapter.ListViewAdapter.InputFailedRecordListViewAdapter
 import com.etsoft.scales.app.MyApp
+import com.etsoft.scales.app.MyApp.Companion.isUpLoading_UI
 import com.etsoft.scales.bean.AppInputBean
 import com.etsoft.scales.bean.UpInputFailedBean
 import com.etsoft.scales.netWorkListener.AppNetworkMgr
@@ -38,14 +39,15 @@ class UploadFailedActivity : BaseActivity() {
     override fun setView(): Int {
         return R.layout.activity_inputfailed_record
     }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        isUpLoading_UI = true
         initView()
         myHandler = MyHandler(this)
-        initdata()
+        if (MyApp.isUpLoading_Thread) {
+            ToastUtil.showText("后台正在自动上传，请稍后操作")
+        } else
+            initdata()
     }
 
     /**
@@ -64,15 +66,15 @@ class UploadFailedActivity : BaseActivity() {
     /**
      * 初始化ListView数据
      */
-    private fun initListView(type:Int = 0) {
+    private fun initListView() {
         var mUpInputFailedBean_Use = UpInputFailedBean()
         mUpInputFailedBean_Use!!.data = ArrayList<AppInputBean>()
         for (i in mUpInputFailedBean!!.data.indices) {
-            if (mUpInputFailedBean!!.data[i].isUse) {
+            if (!mUpInputFailedBean!!.data[i].isUpLoadOK) {
                 mUpInputFailedBean_Use!!.data.add(mUpInputFailedBean!!.data[i])
             }
         }
-        if (type == 1 && mUpInputFailedBean_Use.data.size == 0){
+        if (mUpInputFailedBean_Use.data.size == 0) {
             ToastUtil.showText("全部记录已上传完成")
             finish()
         }
@@ -83,18 +85,24 @@ class UploadFailedActivity : BaseActivity() {
     }
 
     private fun initView() {
-        InputFailed_Titlebar.title.text = ""
+        InputFailed_Titlebar.title.text = "未上传记录"
         InputFailed_Titlebar.moor.setImageResource(R.drawable.ic_cloud_upload_white_24dp)
         InputFailed_Titlebar.moor.setOnClickListener {
+            if (MyApp.isUpLoading_Thread) {
+                ToastUtil.showText("后台正在自动上传，请稍后操作")
+                return@setOnClickListener
+            }
             val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
             if (NETWORK == 0) {
                 ToastUtil.showText("当前网络不可用，请稍后再试")
                 return@setOnClickListener
             }
+
             if (isUpLoading) {
                 ToastUtil.showText("正在上传，请稍后")
                 return@setOnClickListener
             }
+
             UploadData()
         }
         InputFailed_Titlebar.back.setOnClickListener {
@@ -120,6 +128,7 @@ class UploadFailedActivity : BaseActivity() {
                             msg.what = UpLoadFailed
                             myHandler!!.sendMessage(msg)
                             mIsUpOkList!![i] = false
+                            upData.upLoadCount++
                         } else {
                             mIsUpOkList!![i] = true
                             msg.what = UpLoadOK
@@ -130,6 +139,7 @@ class UploadFailedActivity : BaseActivity() {
                     override fun onFailure(code: Int, message: String?) {
                         super.onFailure(code, message)
                         mIsUpOkList!![i] = false
+                        upData.upLoadCount++
                         var msg = myHandler!!.obtainMessage()
                         msg.what = UpLoadFailed
                         msg.arg1 = i + 1
@@ -154,7 +164,7 @@ class UploadFailedActivity : BaseActivity() {
         ToastUtil.showText("上传完成, 成功：$UpOK，失败：$UpNo", 3000)
         for (i in 0..num - 1) {
             if (mIsUpOkList!![i]) {
-                mUpInputFailedBean!!.data[i].isUse = false
+                mUpInputFailedBean!!.data[i].isUpLoadOK = true
             }
         }
         writeData()
@@ -165,7 +175,7 @@ class UploadFailedActivity : BaseActivity() {
             var mUpInputFailedBean_Uped = UpInputFailedBean()
             mUpInputFailedBean_Uped.data = ArrayList<AppInputBean>()
             for (i in mUpInputFailedBean!!.data.indices) {
-                if (mUpInputFailedBean!!.data[i].isUse)
+                if (!mUpInputFailedBean!!.data[i].isUpLoadOK)
                     mUpInputFailedBean_Uped.data.add(mUpInputFailedBean!!.data[i])
             }
             File_Cache.writeFileToSD(MyApp.gson.toJson(mUpInputFailedBean_Uped), SaveKey.FILE_DATA_NAME)
@@ -186,7 +196,7 @@ class UploadFailedActivity : BaseActivity() {
                 when (msg.what) {
                     1 -> {
                         activity.mLoadDialog!!.hide()
-                        activity.initListView(1)
+                        activity.initListView()
                         activity.isUpLoading = false
                     }
                     2 -> {
@@ -197,6 +207,7 @@ class UploadFailedActivity : BaseActivity() {
                         if (msg.arg1 == msg.arg2) {
                             activity.listViewData(msg.arg2)
                             activity.mLoadDialog!!.hide()
+
                         }
                     }
                     activity.UpLoadFailed -> {
@@ -204,10 +215,16 @@ class UploadFailedActivity : BaseActivity() {
                         if (msg.arg1 == msg.arg2) {
                             activity.listViewData(msg.arg2)
                             activity.mLoadDialog!!.hide()
+
                         }
                     }
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        isUpLoading_UI = false
     }
 }

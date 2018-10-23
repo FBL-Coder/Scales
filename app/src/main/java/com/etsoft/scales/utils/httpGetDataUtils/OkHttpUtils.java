@@ -143,6 +143,17 @@ public class OkHttpUtils {
         OkHttpRequest.doExecute(request, callback);
     }
 
+    /**
+     * @param url      请求地址
+     * @param params   请求参数
+     * @param callback 请求回调
+     * @Description POST请求
+     */
+    public static void postSync(String url, String params, HttpCallback callback, String tag) {
+        Request request = OkHttpRequest.builderRequest(OkHttpRequest.HttpMethodType.POST, url, null, params, tag);
+        OkHttpRequest.doExecute(request, callback);
+    }
+
     /**--------------------    异步数据请求    --------------------**/
 
     /**

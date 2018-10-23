@@ -30,7 +30,6 @@ constructor(private val mContext: Context) {
     }
 
     fun show(text: Array<String> = arrayOf("正在加载", "加载失败"), isClickHide: Boolean = true) {
-        val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
         dialog.setCancelable(isClickHide)
         dialog.window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION

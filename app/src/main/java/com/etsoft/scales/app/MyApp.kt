@@ -17,6 +17,7 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Server.BlueUtils
+import com.etsoft.scales.Server.UnUploadRecordTimer
 import com.etsoft.scales.bean.LoginBean
 import com.etsoft.scales.bean.RecycleListBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
@@ -120,6 +121,19 @@ open class MyApp : ClientApplication() {
          */
         var mBlueBoothReceiver: BlueBoothReceiver? = null
 
+
+        /**
+         * 后台线程
+         * 未上传列表是否在自动上传中
+         */
+        var isUpLoading_Thread = false
+
+        /**
+         * 界面线程
+         * 未上传列表是否在自动上传中
+         */
+        var isUpLoading_UI = false
+
     }
 
     override fun onCreate() {
@@ -157,7 +171,6 @@ open class MyApp : ClientApplication() {
         mLocationClient!!.setLocationOption(option)
 
         getLocation()
-
 
     }
 

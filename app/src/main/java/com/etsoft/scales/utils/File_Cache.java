@@ -20,7 +20,8 @@ public class File_Cache {
 
     private static Handler mHandler;
     public static int WriteOk = 1000;
-    public static void setHandler(Handler handler){
+
+    public static void setHandler(Handler handler) {
         mHandler = handler;
     }
 
@@ -29,7 +30,8 @@ public class File_Cache {
      *
      * @param data
      */
-    public static void writeFileToSD(String data, String name) {
+    public static synchronized void writeFileToSD(String data, String name) {
+        LogUtils.i("写入本地数据 = " + data);
         if (name != null && !("".equals(name))) {
             try {
                 FileOutputStream fos = MyApp.Companion.getMApplication().openFileOutput(name + ".txt", Context.MODE_PRIVATE);
@@ -40,7 +42,7 @@ public class File_Cache {
                 LogUtils.i("本地写入失败 = " + e);
                 return;
             }
-            if (mHandler!= null){
+            if (mHandler != null) {
                 mHandler.sendEmptyMessage(WriteOk);
             }
         }
@@ -53,7 +55,7 @@ public class File_Cache {
      * @throws IOException
      */
 
-    public static String readFile(String name) throws IOException {
+    public static synchronized String readFile(String name) throws IOException {
         String data = "";
         if (name != null && !"".equals(name)) {
             try {

@@ -80,7 +80,6 @@ class OutMainFragment : Fragment() {
      */
     private fun getRecycleData(type: Int) {
 
-
         OkHttpUtils.getAsyn(Ports.RECYCLELIST, object : MyHttpCallback(mActivity) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
@@ -143,13 +142,13 @@ class OutMainFragment : Fragment() {
                 }
                 2 -> {
                     for (i in mRecycleListBean_Type_2!!.data.indices) {
-                        names.add(mRecycleListBean_Type_2!!.data[i].name+ "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                        names.add(mRecycleListBean_Type_2!!.data[i].name+ "       ￥" + mRecycleListBean_Type_2!!.data[i].price)
                     }
 
                 }
                 3 -> {
                     for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        names.add(mRecycleListBean_Type_3!!.data[i].name+ "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                        names.add(mRecycleListBean_Type_3!!.data[i].name+ "       ￥" + mRecycleListBean_Type_3!!.data[i].price)
                     }
                 }
             }

@@ -11,6 +11,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
+import com.etsoft.scales.Server.UnUploadRecordTimer
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mLocationInfo
 import com.etsoft.scales.bean.ServerStationInfoBean
@@ -52,6 +53,7 @@ class MainActivity : BaseActivity() {
         ViewEvent()
         PermissionsUtli.verifyStoragePermissions(this)
 //        UpLocation()
+
     }
 
 

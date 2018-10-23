@@ -17,7 +17,8 @@ public class AppInputBean {
      */
 
     private String phone;
-    private boolean isUse = true;
+    private boolean isUpLoadOK = false;
+    private int upLoadCount = 0;
     private String dealId;
     private String time;
     private String type;
@@ -34,12 +35,20 @@ public class AppInputBean {
         this.phone = phone;
     }
 
-    public boolean isUse() {
-        return isUse;
+    public boolean isUpLoadOK() {
+        return isUpLoadOK;
     }
 
-    public void setUse(boolean use) {
-        isUse = use;
+    public void setUpLoadOK(boolean upLoadOK) {
+        isUpLoadOK = upLoadOK;
+    }
+
+    public int getUpLoadCount() {
+        return upLoadCount;
+    }
+
+    public void setUpLoadCount(int upLoadCount) {
+        this.upLoadCount = upLoadCount;
     }
 
     public String getDealId() {
@@ -49,6 +58,7 @@ public class AppInputBean {
     public void setDealId(String dealId) {
         this.dealId = dealId;
     }
+
     public String getTime() {
         return time;
     }

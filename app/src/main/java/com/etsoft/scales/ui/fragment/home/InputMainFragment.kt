@@ -12,11 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.SaveKey.Companion.FILE_DATA_NAME
+import com.etsoft.scales.Server.UnUploadRecordTimer
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
@@ -58,6 +60,7 @@ class InputMainFragment : Fragment() {
 
     companion object {
         var FileHandData = 111
+        var FileNoData = 100
         var mActivity: MainActivity? = null
         fun initFragment(activity: MainActivity): InputMainFragment {
             var mCareFragment = InputMainFragment()
@@ -73,6 +76,9 @@ class InputMainFragment : Fragment() {
     private var mHandler: MyHandler? = null
     private var mLoadDialog: ProgressBarDialog? = null
     private var mActivity_: MainActivity? = null
+    private var ServerStation_Id: Int = -1
+    private var time = ""
+    private var dealid = ""
 
     /**
      * 首选回收物类型
@@ -91,9 +97,13 @@ class InputMainFragment : Fragment() {
         mActivity_ = mActivity
         mHandler = MyHandler(this)
         File_Cache.setHandler(mHandler)
+        //获取回收物列表
         getRecycleData(0)
+
         initView()
         initListView()
+
+        //蓝牙连接状态监听
         BlueBoothReceiver.mOnBlueConnecetChangerlistener_input = object : OnBlueConnecetChangerlistener {
             override fun OnBlueChanger(isConnect: Boolean) {
                 if (isConnect)
@@ -102,10 +112,14 @@ class InputMainFragment : Fragment() {
                     Input_Main_Back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
             }
         }
+
+        //后台线程，查询未上传记录，并且自动上传
+        UnUploadRecordTimer.runTimeronUpload(mHandler!!)
     }
 
     override fun onStart() {
         Input_Main_Warn.visibility = View.GONE
+        //获取本地未上传记录数据
         getFile()
         super.onStart()
     }
@@ -121,6 +135,8 @@ class InputMainFragment : Fragment() {
                 if (failedBean.data != null) {
                     if (failedBean.data.size > 0) {
                         mHandler!!.sendEmptyMessage(FileHandData)
+                    } else {
+                        mHandler!!.sendEmptyMessage(FileNoData)
                     }
                 }
             }
@@ -205,7 +221,19 @@ class InputMainFragment : Fragment() {
                 ToastUtil.showText("没有数据,请添加记录")
                 return@setOnClickListener
             }
-            UpToServer("17611110000")
+
+            time = SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis()))
+            var time_id = time.replace("-".toRegex(), "").substring(0, 8)
+            var time_8Char = System.currentTimeMillis().toString()
+            dealid = time_id + time_8Char.substring(time_8Char.length - 8)
+
+            ServerStation_Id = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1) as Int
+            if (ServerStation_Id == -1) {
+                ToastUtil.showText("请先选择服务站点")
+                return@setOnClickListener
+            }
+            PrintData("两网融合", dealid)
+
 
 //                val edit = MyEditText(mActivity)
 //                edit.hint = "请输入手机号"
@@ -268,16 +296,12 @@ class InputMainFragment : Fragment() {
     /**
      * 上传入库数据到服务器
      */
-    private fun UpToServer(userphone: String) {
-        val ServerStation_Id = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1)
-        if (ServerStation_Id == -1) {
-            ToastUtil.showText("请先选择服务站点")
-            return
-        }
+    private fun UpToServer(time: String, dealid: String) {
+
         mActivity!!.mLoadDialog!!.show(arrayOf("正在打印", "打印超时"))
 
         var UpBean = AppInputBean()
-        UpBean.phone = userphone
+        UpBean.phone = "17611110000"
         UpBean.servicePointId = ServerStation_Id?.toString()
         UpBean.staffId = MyApp.UserInfo?.data?.id?.toString()
         UpBean.type = if (mType == 2) "1" else mType.toString()
@@ -292,39 +316,37 @@ class InputMainFragment : Fragment() {
             lingsBeanList.add(lingsBean)
         }
         UpBean.recyclings = lingsBeanList
-        var time = SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis()))
         UpBean.time = time
-        var time_id = time.replace("-".toRegex(), "").substring(0, 8)
-        var time_8Char = System.currentTimeMillis().toString()
-        var deal_id = time_id + time_8Char.substring(time_8Char.length - 8)
-        UpBean.dealId = deal_id
+        UpBean.dealId = dealid
 
-        PrintData("两网融合", deal_id)
+        mActivity!!.mLoadDialog!!.show("正在打印")
 
         val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
         if (NETWORK == 0) {
-            ToastUtil.showText("网络不可用，可在未长传界面进行上传")
             writeData(UpBean)
-            return
-        }
-
-        OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
-            override fun onSuccess(resultDesc: ResultDesc?) {
-                mActivity!!.mLoadDialog!!.hide()
-                if (resultDesc!!.getcode() != 0) {
-                    ToastUtil.showText(resultDesc.result)
-                } else {
-                    mActivity!!.mLoadDialog!!.show("正在打印")
+            ToastUtil.showText("网络不可用，可在未长传界面进行上传")
+        } else {
+            OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
+                override fun onSuccess(resultDesc: ResultDesc?) {
+                    mActivity!!.mLoadDialog!!.hide()
+                    if (resultDesc!!.getcode() != 0) {
+                        ToastUtil.showText("上传失败，可在未长传界面进行上传")
+                        LogUtils.i(resultDesc.result)
+                        writeData(UpBean)
+                    } else {
+                        ToastUtil.showText("上传成功")
+                    }
 
                 }
-            }
-
-            override fun onFailure(code: Int, message: String?) {
-                super.onFailure(code, message)
-                ToastUtil.showText("上传失败，可在未长传界面进行上传")
-                writeData(UpBean)
-            }
-        }, "新增入库")
+                override fun onFailure(code: Int, message: String?) {
+                    super.onFailure(code, message)
+                    ToastUtil.showText("上传失败，可在未长传界面进行上传")
+                    writeData(UpBean)
+                }
+            }, "新增入库")
+        }
+        mInputLiat.clear()
+        initListView()
     }
 
     /**
@@ -510,14 +532,14 @@ class InputMainFragment : Fragment() {
                     }
                 }
                 2 -> {
-                    for (i in mRecycleListBean_Type_2!!.data.indices) {
-                        names.add(mRecycleListBean_Type_2!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                    for (a in mRecycleListBean_Type_2!!.data.indices) {
+                        names.add(mRecycleListBean_Type_2!!.data[a].name + "       ￥" + mRecycleListBean_Type_2!!.data[a].price)
                     }
 
                 }
                 3 -> {
                     for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        names.add(mRecycleListBean_Type_3!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                        names.add(mRecycleListBean_Type_3!!.data[i].name + "       ￥" + mRecycleListBean_Type_3!!.data[i].price)
                     }
                 }
             }
@@ -595,19 +617,14 @@ class InputMainFragment : Fragment() {
                 activity.mLoadDialog!!.hide()
                 when (msg.what) {
                     1 -> {
-                        activity.mInputLiat.clear()
-                        activity.initListView()
                         ToastUtil.showText("打印完成")
+                        activity.UpToServer(activity.time, activity.dealid)
                     }
                     -1 -> {
-                        activity.mInputLiat.clear()
-                        activity.initListView()
-                        ToastUtil.showText("上传成功,但打印机发生错误,未能正常打印")
+                        ToastUtil.showText("打印机发生错误,未能正常打印")
                     }
                     -2 -> {
-                        activity.mInputLiat.clear()
-                        activity.initListView()
-                        ToastUtil.showText("上传成功,但未找到打印机")
+                        ToastUtil.showText("未找到打印机")
                     }
                     File_Cache.WriteOk -> {
                         activity.Input_Main_Warn.visibility = View.VISIBLE
@@ -620,6 +637,9 @@ class InputMainFragment : Fragment() {
                         activity.Input_Main_Warn.setOnClickListener {
                             activity.mActivity_!!.startActivity(Intent(mActivity, UploadFailedActivity::class.java))
                         }
+                    }
+                    FileNoData -> {
+                        activity.Input_Main_Warn.visibility = View.GONE
                     }
                 }
             }
