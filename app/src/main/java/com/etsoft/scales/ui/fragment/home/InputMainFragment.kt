@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
@@ -65,6 +64,7 @@ class InputMainFragment : Fragment() {
         fun initFragment(activity: MainActivity): InputMainFragment {
             var mCareFragment = InputMainFragment()
             mActivity = activity
+            mIzkcService.printerInit()
             return mCareFragment
         }
     }
@@ -232,6 +232,7 @@ class InputMainFragment : Fragment() {
                 ToastUtil.showText("请先选择服务站点")
                 return@setOnClickListener
             }
+            mActivity_!!.mLoadDialog!!.show("正在打印",false)
             PrintData("两网融合", dealid)
 
 
@@ -298,7 +299,7 @@ class InputMainFragment : Fragment() {
      */
     private fun UpToServer(time: String, dealid: String) {
 
-        mActivity!!.mLoadDialog!!.show(arrayOf("正在打印", "打印超时"))
+        mActivity!!.mLoadDialog!!.show(arrayOf("正在上传", "上传超时"),false)
 
         var UpBean = AppInputBean()
         UpBean.phone = "17611110000"
@@ -319,12 +320,11 @@ class InputMainFragment : Fragment() {
         UpBean.time = time
         UpBean.dealId = dealid
 
-        mActivity!!.mLoadDialog!!.show("正在打印")
-
         val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
         if (NETWORK == 0) {
-            writeData(UpBean)
+            mActivity!!.mLoadDialog!!.hide()
             ToastUtil.showText("网络不可用，可在未长传界面进行上传")
+            writeData(UpBean)
         } else {
             OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
                 override fun onSuccess(resultDesc: ResultDesc?) {
@@ -336,10 +336,11 @@ class InputMainFragment : Fragment() {
                     } else {
                         ToastUtil.showText("上传成功")
                     }
-
                 }
+
                 override fun onFailure(code: Int, message: String?) {
                     super.onFailure(code, message)
+                    mActivity!!.mLoadDialog!!.hide()
                     ToastUtil.showText("上传失败，可在未长传界面进行上传")
                     writeData(UpBean)
                 }
@@ -359,108 +360,112 @@ class InputMainFragment : Fragment() {
                     mHandler!!.sendEmptyMessage(-2)
                     return@Runnable
                 }
-                mIzkcService.printerInit()
-                mIzkcService.printTextAlgin(compiler + "\n\n", 0, 1, 1)
-                var Str = "单  号： $traceElement\n"
-                mIzkcService.printGBKText(Str)
-                var data = "时  间： " + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis())) + "\n"
-                mIzkcService.printGBKText(data)
 
-                mIzkcService.printGBKText("服务站： " + AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") + "\n")
-                mIzkcService.printGBKText("********************************")
-                var type = ""
-                if (mType == 2) type = "数量" else type = "重量"
+                if (mIzkcService.checkPrinterAvailable()) {
+                    mIzkcService.printTextAlgin(compiler + "\n\n", 0, 1, 1)
+                    var Str = "单  号： $traceElement\n"
+                    mIzkcService.printGBKText(Str)
+                    var data = "时  间： " + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis())) + "\n"
+                    mIzkcService.printGBKText(data)
 
-                var array = arrayOf(" 类型 ", "  $type", "   单价  ", " 总价")
-                var array1 = intArrayOf(0, 1, 2, 2)
-                var array2 = intArrayOf(0, 0, 0, 0)
-                mIzkcService.printColumnsText(array, array1, array2)
+                    mIzkcService.printGBKText("服务站： " + AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") + "\n")
+                    mIzkcService.printGBKText("********************************")
+                    var type = ""
+                    if (mType == 2) type = "数量" else type = "重量"
 
-                mIzkcService.printGBKText("--------------------------------")
+                    var array = arrayOf(" 类型 ", "  $type", "   单价  ", " 总价")
+                    var array1 = intArrayOf(0, 1, 2, 2)
+                    var array2 = intArrayOf(0, 0, 0, 0)
+                    mIzkcService.printColumnsText(array, array1, array2)
 
-                for (i in mInputLiat.indices) {
-                    if (mInputLiat[i].type.length > 4) {
-                        mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 4).toString()
+                    mIzkcService.printGBKText("--------------------------------")
+
+                    for (i in mInputLiat.indices) {
+                        if (mInputLiat[i].type.length > 4) {
+                            mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 4).toString()
+                        }
+
+                        var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight, mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
+
+                        var no2 = 0
+                        var no3 = 0
+                        var no4 = 0
+                        var no5 = 0
+                        var no6 = 0
+                        when (mInputLiat[i].type.length) {//类型
+                            1 -> no2 = 3
+                            2 -> no2 = 2
+                            3 -> no2 = 0
+                        }
+                        if (mType == 2) {
+                            when (mInputLiat[i].weight.length) {//重量
+                                1 -> no3 = 3
+                                2 -> no3 = 2
+                            }
+                        } else {
+                            when (mInputLiat[i].weight.length) {//重量
+                                1 -> no3 = 5
+                                2 -> no3 = 4
+                                3 -> no3 = 3
+                                4 -> no3 = 2
+                                5 -> no3 = 1
+                            }
+                        }
+                        when (mInputLiat[i].price.length) {//单价
+                            1 -> no5 = 4
+                            2 -> no5 = 3
+                            3 -> no5 = 2
+                            4 -> no5 = 1
+                        }
+
+                        when (mInputLiat[i].total.length) {//总价
+                            3 -> no6 = 4
+                            4 -> no6 = 3
+                            5 -> no6 = 2
+                            6 -> no6 = 1
+                            7 -> no6 = 0
+                        }
+
+                        //                          0       6       0       4       3
+                        LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 -- $no5 --$no6")
+                        var array3 = intArrayOf(no2, no3, no4, no5, no6)
+                        var array4 = intArrayOf(0, 0, 0, 0, 0)
+                        mIzkcService.printColumnsText(array, array3, array4)
+                        mIzkcService.printGBKText("\n")
                     }
-
-                    var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight, mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
-
-                    var no2 = 0
-                    var no3 = 0
-                    var no4 = 0
-                    var no5 = 0
-                    var no6 = 0
-                    when (mInputLiat[i].type.length) {//类型
-                        1 -> no2 = 3
-                        2 -> no2 = 2
-                        3 -> no2 = 0
-                    }
+                    mIzkcService.printGBKText("********************************")
+                    var ZongZhong = ""
                     if (mType == 2) {
-                        when (mInputLiat[i].weight.length) {//重量
-                            1 -> no3 = 3
-                            2 -> no3 = 2
+                        var NumAll = 0
+                        for (i in mInputLiat.indices) {
+                            NumAll += mInputLiat[i].weight.toInt()
                         }
+                        ZongZhong = "累计数量：" + NumAll + "台"
                     } else {
-                        when (mInputLiat[i].weight.length) {//重量
-                            1 -> no3 = 5
-                            2 -> no3 = 4
-                            3 -> no3 = 3
-                            4 -> no3 = 2
-                            5 -> no3 = 1
+                        var WeightAll = 0.000
+                        for (i in mInputLiat.indices) {
+                            WeightAll += mInputLiat[i].weight.toDouble()
                         }
+                        ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
                     }
-                    when (mInputLiat[i].price.length) {//单价
-                        1 -> no5 = 4
-                        2 -> no5 = 3
-                        3 -> no5 = 2
-                        4 -> no5 = 1
-                    }
+                    mIzkcService.printGBKText(ZongZhong + "\n")
 
-                    when (mInputLiat[i].total.length) {//总价
-                        3 -> no6 = 4
-                        4 -> no6 = 3
-                        5 -> no6 = 2
-                        6 -> no6 = 1
-                        7 -> no6 = 0
-                    }
-
-                    //                          0       6       0       4       3
-                    LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 -- $no5 --$no6")
-                    var array3 = intArrayOf(no2, no3, no4, no5, no6)
-                    var array4 = intArrayOf(0, 0, 0, 0, 0)
-                    mIzkcService.printColumnsText(array, array3, array4)
-                    mIzkcService.printGBKText("\n")
-                }
-                mIzkcService.printGBKText("********************************")
-                var ZongZhong = ""
-                if (mType == 2) {
-                    var NumAll = 0
+                    var MeonyAll = 0.000
                     for (i in mInputLiat.indices) {
-                        NumAll += mInputLiat[i].weight.toInt()
+                        MeonyAll += mInputLiat[i].total.toDouble()
+                        LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
                     }
-                    ZongZhong = "累计数量：" + NumAll + "台"
+
+                    var ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
+
+                    mIzkcService.printGBKText(ZongJia + "\n")
+
+                    mIzkcService.printGBKText("操 作 员：" + MyApp.UserInfo!!.data.name + "\n")
+                    mIzkcService.printGBKText("\n\n\n")
+                    mHandler!!.sendEmptyMessage(1)
                 } else {
-                    var WeightAll = 0.000
-                    for (i in mInputLiat.indices) {
-                        WeightAll += mInputLiat[i].weight.toDouble()
-                    }
-                    ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
+                    mHandler!!.sendEmptyMessage(-3)
                 }
-                mIzkcService.printGBKText(ZongZhong + "\n")
-
-                var MeonyAll = 0.000
-                for (i in mInputLiat.indices) {
-                    MeonyAll += mInputLiat[i].total.toDouble()
-                    LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
-                }
-
-                var ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
-
-                mIzkcService.printGBKText(ZongJia + "\n")
-
-                mIzkcService.printGBKText("操 作 员：" + MyApp.UserInfo!!.data.name + "\n")
-                mIzkcService.printGBKText("\n\n\n")
-                mHandler!!.sendEmptyMessage(1)
             } catch (e: Exception) {
                 LogUtils.e("打印票据异常：$e")
                 mHandler!!.sendEmptyMessage(-1)
@@ -617,14 +622,21 @@ class InputMainFragment : Fragment() {
                 activity.mLoadDialog!!.hide()
                 when (msg.what) {
                     1 -> {
+                        activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印完成")
                         activity.UpToServer(activity.time, activity.dealid)
                     }
                     -1 -> {
+                        activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印机发生错误,未能正常打印")
                     }
                     -2 -> {
+                        activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("未找到打印机")
+                    }
+                    -3 -> {
+                        activity.mActivity_!!.mLoadDialog!!.hide()
+                        ToastUtil.showText("打印机正忙，稍后在试")
                     }
                     File_Cache.WriteOk -> {
                         activity.Input_Main_Warn.visibility = View.VISIBLE

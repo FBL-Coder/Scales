@@ -24,7 +24,7 @@ import java.lang.ref.WeakReference
 import java.text.DecimalFormat
 import com.etsoft.scales.utils.MoneyValueFilter
 import android.text.InputFilter
-
+import java.math.RoundingMode
 
 
 /**
@@ -171,7 +171,10 @@ class AddInputAvtivity : BaseActivity() {
                     BlueBoothState.BLUE_DISPOSEDATA_SUCCESS -> {
                         if (msg.obj != null) {
                             val mWeight = msg.obj as Double
-                            activity.Add_Input_KG.setText(DecimalFormat("0.0").format(mWeight))
+                            activity.Add_Input_KG.setText(DecimalFormat("0.0").run {
+                                roundingMode = RoundingMode.DOWN
+                                this
+                            }.format(mWeight))
                         }
                     }
                 }

@@ -1,6 +1,5 @@
 package com.etsoft.scales.ui.fragment.home
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
