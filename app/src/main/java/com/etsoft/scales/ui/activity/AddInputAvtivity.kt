@@ -24,6 +24,7 @@ import java.lang.ref.WeakReference
 import java.text.DecimalFormat
 import com.etsoft.scales.utils.MoneyValueFilter
 import android.text.InputFilter
+import com.etsoft.scales.ui.fragment.home.InputMainFragment.Companion.ADDITEM_CODE
 import java.math.RoundingMode
 
 
@@ -115,7 +116,7 @@ class AddInputAvtivity : BaseActivity() {
                 ToastUtil.showText("货物重量不能为空")
                 return@setOnClickListener
             }
-            setResult(101, intent
+            setResult(ADDITEM_CODE, intent
                     .run {
                         putExtra("data", Input_Main_List_Bean().run {
 

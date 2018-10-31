@@ -150,6 +150,10 @@
             android:name="com.etsoft.scales.ui.activity.UploadFailedActivity"
             android:screenOrientation="portrait" />
 
+        <!--二维码、条形码-->
+        <activity android:name="io.github.xudaojie.qrcodelib.CaptureActivity"/>
+
+
         <!--打印机服务-->
         <service android:name="com.smartdevice.aidl.IZKCService">
             <intent-filter>

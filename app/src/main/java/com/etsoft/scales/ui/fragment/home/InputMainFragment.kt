@@ -41,6 +41,7 @@ import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
+import io.github.xudaojie.qrcodelib.CaptureActivity
 import kotlinx.android.synthetic.main.fragment_input_main.*
 import java.lang.ref.WeakReference
 import java.math.BigDecimal
@@ -60,6 +61,8 @@ class InputMainFragment : Fragment() {
     companion object {
         var FileHandData = 111
         var FileNoData = 100
+        var CAMERA_CODE = 1010
+        var ADDITEM_CODE = 101
         var mActivity: MainActivity? = null
         fun initFragment(activity: MainActivity): InputMainFragment {
             var mCareFragment = InputMainFragment()
@@ -217,6 +220,10 @@ class InputMainFragment : Fragment() {
         Input_Main_Title.text = "入库"
         Input_Main_Print.setImageResource(R.drawable.ic_print_black_24dp)
         Input_Main_Print.setOnClickListener {
+            val i = Intent(mActivity_, CaptureActivity::class.java)
+            startActivityForResult(i, CAMERA_CODE)
+
+            return@setOnClickListener
             if (mInputLiat == null || mInputLiat.size == 0) {
                 ToastUtil.showText("没有数据,请添加记录")
                 return@setOnClickListener
@@ -232,13 +239,13 @@ class InputMainFragment : Fragment() {
                 ToastUtil.showText("请先选择服务站点")
                 return@setOnClickListener
             }
-            mActivity_!!.mLoadDialog!!.show("正在打印",false)
+            mActivity_!!.mLoadDialog!!.show("正在打印", false)
             PrintData("两网融合", dealid)
 
 
 //                val edit = MyEditText(mActivity)
 //                edit.hint = "请输入手机号"
-//                edit.inputType = InputType.TYPE_CLASS_PHONE
+//                edit.inputType = InputType.TYPE_CLASS_PHONEdoi
 //                edit.maxLines = 1
 //                MyDialog(mActivity!!)
 //                        .setMessage("打印票据需要输入用户手机号!")
@@ -299,7 +306,7 @@ class InputMainFragment : Fragment() {
      */
     private fun UpToServer(time: String, dealid: String) {
 
-        mActivity!!.mLoadDialog!!.show(arrayOf("正在上传", "上传超时"),false)
+        mActivity!!.mLoadDialog!!.show(arrayOf("正在上传", "上传超时"), false)
 
         var UpBean = AppInputBean()
         UpBean.phone = "17611110000"
@@ -350,7 +357,8 @@ class InputMainFragment : Fragment() {
         initListView()
     }
 
-    /**
+    /**  1  37  13
+     * 1  39  44
      * 打印票据
      */
     private fun PrintData(compiler: String, traceElement: String) {
@@ -576,14 +584,23 @@ class InputMainFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == 101 && data != null) {
-            //回首页页面返回数据
-            var bean = data.getSerializableExtra("data") as Input_Main_List_Bean
-            bean.id = listid.toString()
-            mInputLiat.add(bean)
-            initListView()
-            listid++
-        }
+        if (data != null)
+            when (resultCode) {
+                ADDITEM_CODE -> {
+                    //回首页页面返回数据
+                    var bean = data.getSerializableExtra("data") as Input_Main_List_Bean
+                    bean.id = listid.toString()
+                    mInputLiat.add(bean)
+                    initListView()
+                    listid++
+                }
+                CAMERA_CODE -> {
+                    //扫描二维码/条形码返回
+                    var result = data.getStringExtra("result")
+                    LogUtils.i("扫描返回结果是 = $result")
+                }
+            }
+
     }
 
 

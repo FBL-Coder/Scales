@@ -20,6 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "http://repo1.maven.org/maven2" }
         maven { url 'https://jitpack.io' }
     }
 }
