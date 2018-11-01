@@ -61,7 +61,6 @@ class InputMainFragment : Fragment() {
     companion object {
         var FileHandData = 111
         var FileNoData = 100
-        var CAMERA_CODE = 1010
         var ADDITEM_CODE = 101
         var mActivity: MainActivity? = null
         fun initFragment(activity: MainActivity): InputMainFragment {
@@ -221,7 +220,7 @@ class InputMainFragment : Fragment() {
         Input_Main_Print.setImageResource(R.drawable.ic_print_black_24dp)
         Input_Main_Print.setOnClickListener {
             val i = Intent(mActivity_, CaptureActivity::class.java)
-            startActivityForResult(i, CAMERA_CODE)
+            startActivityForResult(i, Activity.RESULT_FIRST_USER)
 
             return@setOnClickListener
             if (mInputLiat == null || mInputLiat.size == 0) {
@@ -594,7 +593,7 @@ class InputMainFragment : Fragment() {
                     initListView()
                     listid++
                 }
-                CAMERA_CODE -> {
+                Activity.RESULT_OK -> {
                     //扫描二维码/条形码返回
                     var result = data.getStringExtra("result")
                     LogUtils.i("扫描返回结果是 = $result")

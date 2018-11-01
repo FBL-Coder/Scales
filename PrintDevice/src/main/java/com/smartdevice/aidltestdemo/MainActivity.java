@@ -1,33 +1,23 @@
 package com.smartdevice.aidltestdemo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
-import android.os.SystemClock;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.smartdevice.aidltestdemo.common.MessageType;
-import com.smartdevice.aidltestdemo.util.ExecutorFactory;
 import com.smartdevice.aidltestdemo.util.SystemUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
@@ -65,12 +55,10 @@ public class MainActivity extends BaseActivity {
 					intent = new Intent(MainActivity.this ,
 							PrinterActivity.class);
 					intent.putExtra(BaseActivity.MODULE_FLAG, 0);
-				}else if("Scanner".equals(idStr)){
+				}else if("Scanner".equals(idStr)) {
 					intent = new Intent(MainActivity.this,
 							ScannerActivity.class);
 					intent.putExtra(BaseActivity.MODULE_FLAG, 4);
-				}else if("camerascanner".equals(idStr)){
-					intent = new Intent(MainActivity.this,CaptureActivity.class);
 				}else if("psam".equals(idStr)){
 					if(DEVICE_MODEL==3502||DEVICE_MODEL == 900){
 						intent = new Intent(MainActivity.this, PSAMActivity.class);
