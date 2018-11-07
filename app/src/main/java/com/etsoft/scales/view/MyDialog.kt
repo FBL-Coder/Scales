@@ -2,17 +2,12 @@ package com.etsoft.scales.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.os.Build
-import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
-
 import com.etsoft.scales.R
 
 /**

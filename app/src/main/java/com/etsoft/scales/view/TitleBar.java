@@ -9,9 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.etsoft.scales.app.MyApp;
-import com.etsoft.scales.netWorkListener.AppNetworkMgr;
-import com.etsoft.scales.netWorkListener.NetBroadcastReceiver;
 import com.etsoft.scales.R;
 
 
