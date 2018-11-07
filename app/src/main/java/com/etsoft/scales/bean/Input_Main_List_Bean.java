@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public class Input_Main_List_Bean implements Serializable {
     public String deal_id = "";
+    public int mType_type = 0;
     public String id = "";
     public String type = "";
     public String weight = "";

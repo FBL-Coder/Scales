@@ -91,7 +91,6 @@ class BlueUtils {
                     try {
                         var inStream = btSocket!!.inputStream
                         inStream!!.read(buff) //读取数据存储在buff数组中
-
                         if (buff.contains(61)) {
 //                            LogUtils.i(buff)
                             var msg = mHandler?.obtainMessage()

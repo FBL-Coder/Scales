@@ -8,9 +8,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:clickable="false"
         android:background="@drawable/top_back"
+        android:clickable="false"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/Input_Main_Back"
             android:layout_width="@dimen/dp_50"
@@ -23,9 +24,9 @@
             android:id="@+id/Input_Main_Title"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_40"
+            android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:layout_centerHorizontal="true"
             android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_20"
@@ -36,10 +37,10 @@
             android:id="@+id/Input_Main_Warn"
             android:layout_width="@dimen/dp_50"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_50"
             android:background="@drawable/top_back"
             android:scaleType="center"
-            android:layout_alignParentRight="true"
             android:src="@drawable/ic_info_black_24dp"
             android:visibility="gone" />
 
@@ -47,9 +48,9 @@
             android:id="@+id/Input_Main_Print"
             android:layout_width="@dimen/dp_50"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
             android:background="@drawable/top_back"
             android:scaleType="center"
-            android:layout_alignParentRight="true"
             android:src="@drawable/ic_list_black_24dp"
             android:visibility="visible" />
     </RelativeLayout>
@@ -58,11 +59,11 @@
         android:id="@+id/Input_Main_Record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_6"
+        android:layout_marginTop="@dimen/dp_6"
         android:background="@color/white__"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_chevron_right_white_24dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center_vertical|right"
         android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
@@ -76,7 +77,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30"
-        android:layout_marginBottom="@dimen/dp_10"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_10"
@@ -151,23 +151,58 @@
 
 
     <LinearLayout
+        android:id="@+id/Main_GiftView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="兑换礼品表"
+            android:textSize="@dimen/sp_18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/black" />
+
+        <ListView
+            android:id="@+id/Main_Input_Gifts"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_weight="2"
+            android:divider="@color/white___"
+            android:dividerHeight="@dimen/dp_2"
+            android:padding="@dimen/dp_10"
+            android:scrollbarSize="@dimen/dp_3"
+            android:scrollbarThumbVertical="@color/black_" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:orientation="horizontal"
         android:layout_margin="@dimen/dp_10"
-        >
+        android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/Input_Main_Gift"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
-            android:background="@drawable/butont_clicked_green"
             android:layout_weight="1"
-            android:textColor="@color/white"
+            android:background="@drawable/butont_clicked_green"
             android:text="兑换礼品"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
 
         <android.support.v7.widget.AppCompatButton
@@ -175,10 +210,10 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_10"
-            android:background="@drawable/butont_clicked"
             android:layout_weight="1"
-            android:textColor="@color/white"
+            android:background="@drawable/butont_clicked_bule"
             android:text="清除记录"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold" />
 
@@ -187,10 +222,10 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="@color/white"
+            android:background="@drawable/butont_clicked_bule"
             android:text="添加记录"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18"
-            android:background="@drawable/butont_clicked"
             android:textStyle="bold" />
 
     </LinearLayout>

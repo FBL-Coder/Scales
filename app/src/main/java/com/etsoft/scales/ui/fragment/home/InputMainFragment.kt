@@ -18,16 +18,14 @@ import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.SaveKey.Companion.FILE_DATA_NAME
 import com.etsoft.scales.Server.UnUploadRecordTimer
+import com.etsoft.scales.adapter.ListViewAdapter.Gift_ListViewAdapter
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_1
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_2
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_3
-import com.etsoft.scales.bean.AppInputBean
-import com.etsoft.scales.bean.Input_Main_List_Bean
-import com.etsoft.scales.bean.RecycleListBean
-import com.etsoft.scales.bean.UpInputFailedBean
+import com.etsoft.scales.bean.*
 import com.etsoft.scales.netWorkListener.AppNetworkMgr
 import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.receiver.BlueBoothReceiver.OnBlueConnecetChangerlistener
@@ -42,6 +40,7 @@ import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import io.github.xudaojie.qrcodelib.CaptureActivity
+import kotlinx.android.synthetic.main.activity_out_info.*
 import kotlinx.android.synthetic.main.fragment_input_main.*
 import java.lang.ref.WeakReference
 import java.math.BigDecimal
@@ -74,12 +73,14 @@ class InputMainFragment : Fragment() {
 
     private var mInputLiat = ArrayList<Input_Main_List_Bean>()
     private var mMain_Input_ListViewAdapter: Main_Input_ListViewAdapter? = null
+    private var mMain_Gifts_ListViewAdapter: Gift_ListViewAdapter? = null
     private var mHandler: MyHandler? = null
     private var mLoadDialog: ProgressBarDialog? = null
     private var mActivity_: MainActivity? = null
     private var ServerStation_Id: Int = -1
     private var time = ""
     private var dealid = ""
+    private var code = ""
 
     /**
      * 首选回收物类型
@@ -188,6 +189,16 @@ class InputMainFragment : Fragment() {
         }, "回收列表")
     }
 
+    private fun initGiftListView(bean: GiftListBean) {
+        if (mMain_Gifts_ListViewAdapter == null) {
+            mMain_Gifts_ListViewAdapter = Gift_ListViewAdapter(bean)
+            Main_Input_Gifts.adapter = mMain_Gifts_ListViewAdapter
+        } else {
+            mMain_Gifts_ListViewAdapter!!.notifyDataSetChanged(bean)
+        }
+        Main_GiftView.visibility = View.VISIBLE
+    }
+
     /**
      * 刷新/初始化当前本地记录列表
      */
@@ -218,48 +229,27 @@ class InputMainFragment : Fragment() {
         Input_Main_Title.text = "入库"
         Input_Main_Print.setImageResource(R.drawable.ic_print_black_24dp)
         Input_Main_Print.setOnClickListener {
-            val i = Intent(mActivity_, CaptureActivity::class.java)
-            startActivityForResult(i, Activity.RESULT_FIRST_USER)
 
-            return@setOnClickListener
             if (mInputLiat == null || mInputLiat.size == 0) {
                 ToastUtil.showText("没有数据,请添加记录")
                 return@setOnClickListener
             }
 
-            time = SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis()))
-            var time_id = time.replace("-".toRegex(), "").substring(0, 8)
-            var time_8Char = System.currentTimeMillis().toString()
-            dealid = time_id + time_8Char.substring(time_8Char.length - 8)
-
-            ServerStation_Id = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1) as Int
-            if (ServerStation_Id == -1) {
-                ToastUtil.showText("请先选择服务站点")
-                return@setOnClickListener
-            }
-            mActivity_!!.mLoadDialog!!.show("正在打印", false)
-            PrintData("两网融合", dealid)
-
-
-//                val edit = MyEditText(mActivity)
-//                edit.hint = "请输入手机号"
-//                edit.inputType = InputType.TYPE_CLASS_PHONEdoi
-//                edit.maxLines = 1
-//                MyDialog(mActivity!!)
-//                        .setMessage("打印票据需要输入用户手机号!")
-//                        .setView(edit, 40, 0, 40, 0)
-//                        .setNegativeButton("取消") { dialog, which ->
-//                            dialog.dismiss()
-//                        }
-//                        .setPositiveButton("打印") { dialog, which ->
-//                            val phone = edit.text.toString()
-//                            if (phone == "") {
-//                                ToastUtil.showText("请输入用户手机号")
-//                                return@setPositiveButton
-//                            }
-//
-//                            dialog.dismiss()
-//                        }.create().show()
+            MyDialog(mActivity_!!)
+                    .setMessage("是否先扫描二维码？")
+                    .setNeutralButton("取消打印") { dialog, which ->
+                        dialog.dismiss()
+                        return@setNeutralButton
+                    }
+                    .setPositiveButton("扫描后打印") { dialog, which ->
+                        dialog.dismiss()
+                        val i = Intent(mActivity_, CaptureActivity::class.java)
+                        startActivityForResult(i, Activity.RESULT_FIRST_USER)
+                    }
+                    .setNegativeButton("跳过扫描") { dialog, which ->
+                        dialog.dismiss()
+                        printEvent()
+                    }.show()
         }
         Input_Main_Back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
         Input_Main_Back.setOnClickListener {
@@ -282,8 +272,31 @@ class InputMainFragment : Fragment() {
                             dialog.dismiss()
                             mInputLiat.clear()
                             mType = -1
+                            Input_Main_Gift.visibility = View.GONE
+                            Main_GiftView.visibility = View.GONE
                             initListView()
                         }.show()
+        }
+
+        Input_Main_Gift.setOnClickListener {
+            mLoadDialog!!.show()
+            OkHttpUtils.getAsyn(Ports.GIFTLIST, HashMap<String, String>().run {
+                put("limit", "100")
+                this
+            }, object : MyHttpCallback(mActivity) {
+
+                override fun onSuccess(resultDesc: ResultDesc?) {
+                    super.onSuccess(resultDesc)
+                    mLoadDialog!!.hide()
+                    initGiftListView(MyApp.gson.fromJson(resultDesc!!.result, GiftListBean::class.java))
+                }
+
+                override fun onFailure(code: Int, message: String?) {
+                    super.onFailure(code, message)
+                    mLoadDialog!!.hide()
+                }
+
+            }, "礼品列表")
         }
 
         Input_Main_Add.setOnClickListener {
@@ -299,6 +312,22 @@ class InputMainFragment : Fragment() {
         }
     }
 
+    private fun printEvent() {
+
+        time = SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis()))
+        var time_id = time.replace("-".toRegex(), "").substring(0, 8)
+        var time_8Char = System.currentTimeMillis().toString()
+        dealid = time_id + time_8Char.substring(time_8Char.length - 8)
+
+        ServerStation_Id = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_ID, -1) as Int
+        if (ServerStation_Id == -1) {
+            ToastUtil.showText("请先选择服务站点")
+            return
+        }
+        mActivity_!!.mLoadDialog!!.show("正在打印", false)
+        PrintData("两网融合", dealid, mType)
+    }
+
     /**
      * 上传入库数据到服务器
      */
@@ -311,7 +340,9 @@ class InputMainFragment : Fragment() {
         UpBean.servicePointId = ServerStation_Id?.toString()
         UpBean.staffId = MyApp.UserInfo?.data?.id?.toString()
         UpBean.type = if (mType == 2) "1" else mType.toString()
-
+        if (code != "") {
+            UpBean.greenId = code
+        }
         //将本地记录转成要上传的JSON数据
         var lingsBeanList = ArrayList<AppInputBean.RecyclingsBean>()
         for (i in mInputLiat.indices) {
@@ -321,6 +352,21 @@ class InputMainFragment : Fragment() {
             lingsBean.typename = mInputLiat[i]?.type
             lingsBeanList.add(lingsBean)
         }
+
+        if (mType == 3) {
+            var listgifts = ArrayList<AppInputBean.GiftsBean>()
+            var mGiftBean = mMain_Gifts_ListViewAdapter!!.getGiftNum()
+            for (i in mGiftBean.data.indices) {
+                if (mGiftBean.data[i].condition > 0) {
+                    var giftBean = AppInputBean.GiftsBean()
+                    giftBean.giftId = mGiftBean.data[i].id.toString()
+                    giftBean.number = mGiftBean.data[i].condition.toString()
+                    listgifts.add(giftBean)
+                }
+            }
+            UpBean.gifts = listgifts
+        }
+
         UpBean.recyclings = lingsBeanList
         UpBean.time = time
         UpBean.dealId = dealid
@@ -352,6 +398,7 @@ class InputMainFragment : Fragment() {
             }, "新增入库")
         }
         mInputLiat.clear()
+        Main_GiftView.visibility = View.GONE
         initListView()
     }
 
@@ -359,7 +406,7 @@ class InputMainFragment : Fragment() {
      * 1  39  44
      * 打印票据
      */
-    private fun PrintData(compiler: String, traceElement: String) {
+    private fun PrintData(compiler: String, traceElement: String, UpType: Int) {
         Thread(Runnable {
             try {
                 if (mIzkcService == null) {
@@ -437,6 +484,23 @@ class InputMainFragment : Fragment() {
                         mIzkcService.printColumnsText(array, array3, array4)
                         mIzkcService.printGBKText("\n")
                     }
+
+                    if (UpType == 3) {
+                        mIzkcService.printGBKText("\n")
+                        mIzkcService.printGBKText("回馈礼品：\n")
+                        mIzkcService.printGBKText("--------------------------------")
+
+                        for (i in mMain_Gifts_ListViewAdapter!!.getGiftNum().data.indices) {
+                            if (mMain_Gifts_ListViewAdapter!!.getGiftNum().data[i].condition > 0) {
+                                var array = arrayOf("${mMain_Gifts_ListViewAdapter!!.getGiftNum().data[i].name}", "${mMain_Gifts_ListViewAdapter!!.getGiftNum().data[i].condition}", "个")
+                                var array1 = intArrayOf(2, 2, 2)
+                                var array2 = intArrayOf(1, 1, 1)
+                                mIzkcService.printColumnsText(array, array1, array2)
+                            }
+                        }
+                    }
+
+
                     mIzkcService.printGBKText("********************************")
                     var ZongZhong = ""
                     if (mType == 2) {
@@ -454,18 +518,22 @@ class InputMainFragment : Fragment() {
                     }
                     mIzkcService.printGBKText(ZongZhong + "\n")
 
-                    var MeonyAll = 0.000
-                    for (i in mInputLiat.indices) {
-                        MeonyAll += mInputLiat[i].total.toDouble()
-                        LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
+                    var ZongJia = ""
+                    if (UpType == 3) {
+                        ZongJia = "累计总额：￥-/-"
+                    } else {
+                        var MeonyAll = 0.000
+                        for (i in mInputLiat.indices) {
+                            MeonyAll += mInputLiat[i].total.toDouble()
+                            LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
+                        }
+                        ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
                     }
-
-                    var ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
-
                     mIzkcService.printGBKText(ZongJia + "\n")
 
                     mIzkcService.printGBKText("操 作 员：" + MyApp.UserInfo!!.data.name + "\n")
                     mIzkcService.printGBKText("\n\n\n")
+
                     mHandler!!.sendEmptyMessage(1)
                 } else {
                     mHandler!!.sendEmptyMessage(-3)
@@ -589,14 +657,19 @@ class InputMainFragment : Fragment() {
                     mInputLiat.add(bean)
                     initListView()
                     listid++
+                    if (bean.mType_type == 3) {
+                        Input_Main_Gift.visibility = View.VISIBLE
+                    } else {
+                        Input_Main_Gift.visibility = View.GONE
+                    }
                 }
                 Activity.RESULT_OK -> {
                     //扫描二维码/条形码返回
-                    var result = data.getStringExtra("result")
-                    LogUtils.i("扫描返回结果是 = $result")
+                    code = data.getStringExtra("result")
+                    LogUtils.i("扫描返回结果是 = $code")
+                    printEvent()
                 }
             }
-
     }
 
 
@@ -618,6 +691,7 @@ class InputMainFragment : Fragment() {
                         if (mType == -1)
                             mType = 1
                         showSelectDialog()
+
                     }.setNegativeButton("取消") { dialog, which ->
                         dialog.dismiss()
                     }.create().run {

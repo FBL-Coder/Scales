@@ -44,7 +44,7 @@
         android:elevation="@dimen/dp_8"
         android:gravity="center"
         android:textColor="@color/white"
-        android:background="@drawable/butont_clicked"
+        android:background="@drawable/butont_clicked_bule"
         android:layout_height="match_parent" />
 
 </LinearLayout>

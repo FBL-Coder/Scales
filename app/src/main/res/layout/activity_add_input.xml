@@ -209,7 +209,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_20"
                 android:layout_weight="1"
-                android:background="@drawable/butont_clicked"
+                android:background="@drawable/butont_clicked_bule"
                 android:elevation="@dimen/dp_10"
                 android:text="取消"
                 android:textColor="@color/white"
@@ -222,7 +222,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_weight="1"
-                android:background="@drawable/butont_clicked"
+                android:background="@drawable/butont_clicked_bule"
                 android:elevation="@dimen/dp_10"
                 android:text="添加"
                 android:textColor="@color/white"
@@ -233,6 +233,5 @@
 
 
     </LinearLayout>
-
 
 </RelativeLayout>

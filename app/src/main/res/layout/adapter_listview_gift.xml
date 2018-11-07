@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_40"
+    android:layout_gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/GiftItemName"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:textSize="@dimen/sp_16"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:text="钢丝球" />
+
+
+    <TextView
+        android:id="@+id/GiftItemReduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/butont_clicked_white_"
+        android:gravity="center"
+        android:padding="@dimen/dp_6"
+        android:text="－"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/GiftItemNum"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:padding="@dimen/dp_8"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/GiftItemAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/butont_clicked_white_"
+        android:gravity="center"
+        android:padding="@dimen/dp_6"
+        android:text="＋"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

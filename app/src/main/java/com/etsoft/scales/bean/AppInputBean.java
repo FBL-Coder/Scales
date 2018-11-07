@@ -22,6 +22,7 @@ public class AppInputBean {
     private String dealId;
     private String time;
     private String type;
+    private String greenId;
     private String servicePointId;
     private String staffId;
     private List<RecyclingsBean> recyclings;
@@ -73,6 +74,14 @@ public class AppInputBean {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setGreenId(String greenId) {
+        this.greenId = greenId;
+    }
+
+    public String getGreenId() {
+        return greenId;
     }
 
     public String getServicePointId() {

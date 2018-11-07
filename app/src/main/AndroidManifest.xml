@@ -151,7 +151,9 @@
             android:screenOrientation="portrait" />
 
         <!--二维码、条形码-->
-        <activity android:name="io.github.xudaojie.qrcodelib.CaptureActivity"/>
+        <activity
+            android:name="io.github.xudaojie.qrcodelib.CaptureActivity"
+            android:screenOrientation="portrait" />
 
 
         <!--打印机服务-->

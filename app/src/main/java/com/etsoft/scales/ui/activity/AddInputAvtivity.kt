@@ -123,6 +123,7 @@ class AddInputAvtivity : BaseActivity() {
 
                             when (mType) {
                                 1 -> {
+
                                     type = MyApp.mRecycleListBean_Type_1?.data!![position]?.name
                                     price = MyApp.mRecycleListBean_Type_1?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
@@ -138,12 +139,13 @@ class AddInputAvtivity : BaseActivity() {
                                 }
                                 3 -> {
                                     type = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
-                                    price = "- -"
+                                    price = "-/-"
                                     unit = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_3?.data!![position]?.id.toString()
-                                    total = "- -"
+                                    total = "-/-"
                                 }
                             }
+                            mType_type = mType
                             weight = weight_tv
                             this
                         })

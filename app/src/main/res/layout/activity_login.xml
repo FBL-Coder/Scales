@@ -103,7 +103,7 @@
                 android:layout_marginLeft="@dimen/dp_30"
                 android:layout_marginRight="@dimen/dp_30"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/butont_clicked"
+                android:background="@drawable/butont_clicked_bule"
                 android:text="登陆"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_20"
