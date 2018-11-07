@@ -154,15 +154,27 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_20"
         android:layout_margin="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_20">
+        >
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/Input_Main_Gift"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/butont_clicked_green"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="兑换礼品"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/Input_Main_Clear"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/butont_clicked"
             android:layout_weight="1"
             android:textColor="@color/white"
@@ -174,7 +186,6 @@
             android:id="@+id/Input_Main_Add"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_20"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:text="添加记录"

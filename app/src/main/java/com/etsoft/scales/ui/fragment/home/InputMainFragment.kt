@@ -66,7 +66,6 @@ class InputMainFragment : Fragment() {
         fun initFragment(activity: MainActivity): InputMainFragment {
             var mCareFragment = InputMainFragment()
             mActivity = activity
-            mIzkcService.printerInit()
             return mCareFragment
         }
     }
@@ -364,10 +363,8 @@ class InputMainFragment : Fragment() {
         Thread(Runnable {
             try {
                 if (mIzkcService == null) {
-                    mHandler!!.sendEmptyMessage(-2)
-                    return@Runnable
+                    mIzkcService.printerInit()
                 }
-
                 if (mIzkcService.checkPrinterAvailable()) {
                     mIzkcService.printTextAlgin(compiler + "\n\n", 0, 1, 1)
                     var Str = "单  号： $traceElement\n"
@@ -608,8 +605,13 @@ class InputMainFragment : Fragment() {
      */
     private fun showTypeDialog() {
         if (mType == -1) {
+            var name = ArrayList<String>()
+            if (mRecycleListBean_Type_1!!.data.size > 0) name.add("再生资源")
+            if (mRecycleListBean_Type_2!!.data.size > 0) name.add("电子废弃物")
+            if (mRecycleListBean_Type_3!!.data.size > 0) name.add("低价回收物")
+
             MyDialog(mActivity!!).setTitle("选择回收物类型")
-                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, arrayOf("再生资源", "电子废弃物")), 0, DialogInterface.OnClickListener { dialog, which ->
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, name), 0, DialogInterface.OnClickListener { dialog, which ->
                         mType = which + 1
                     }).setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()

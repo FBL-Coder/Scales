@@ -88,6 +88,11 @@ class Ports {
          */
         var ADDOUTBACKLIST = port + "webapi/Replenishstockdetails/insertList"
 
+        /**
+         * 礼品接口
+         */
+        var GIFTLIST = port + "webapi/Gift/list"
+
 
     }
 }

@@ -82,6 +82,7 @@ class AddInputAvtivity : BaseActivity() {
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
+                Input_DanJia.visibility = View.GONE
                 Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
                 Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
             }
@@ -137,10 +138,10 @@ class AddInputAvtivity : BaseActivity() {
                                 }
                                 3 -> {
                                     type = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
-                                    price = MyApp.mRecycleListBean_Type_3?.data!![position]?.price.toString()
+                                    price = "- -"
                                     unit = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_3?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * weight_tv.toDouble())
+                                    total = "- -"
                                 }
                             }
                             weight = weight_tv
