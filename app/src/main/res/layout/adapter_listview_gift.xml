@@ -21,12 +21,12 @@
 
     <TextView
         android:id="@+id/GiftItemReduce"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_30"
         android:layout_height="wrap_content"
         android:background="@drawable/butont_clicked_white_"
         android:gravity="center"
         android:padding="@dimen/dp_6"
-        android:text="－"
+        android:text="ㄧ"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
@@ -41,12 +41,13 @@
 
     <TextView
         android:id="@+id/GiftItemAdd"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_30"
         android:layout_height="wrap_content"
         android:background="@drawable/butont_clicked_white_"
         android:gravity="center"
         android:padding="@dimen/dp_6"
         android:text="＋"
+        android:textSize="@dimen/sp_18"
         android:textColor="@color/black"
         android:textStyle="bold" />
 

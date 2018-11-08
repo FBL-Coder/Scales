@@ -236,7 +236,7 @@ class InputMainFragment : Fragment() {
             }
 
             MyDialog(mActivity_!!)
-                    .setMessage("是否先扫描二维码？")
+                    .setMessage("是否先扫描二维码？(持有绿卡用户)")
                     .setNeutralButton("取消打印") { dialog, which ->
                         dialog.dismiss()
                         return@setNeutralButton
