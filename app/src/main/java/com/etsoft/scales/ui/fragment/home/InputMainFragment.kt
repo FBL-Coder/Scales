@@ -340,9 +340,8 @@ class InputMainFragment : Fragment() {
         UpBean.servicePointId = ServerStation_Id?.toString()
         UpBean.staffId = MyApp.UserInfo?.data?.id?.toString()
         UpBean.type = if (mType == 2) "1" else mType.toString()
-        if (code != "") {
-            UpBean.greenId = code
-        }
+        UpBean.greenId = code
+
         //将本地记录转成要上传的JSON数据
         var lingsBeanList = ArrayList<AppInputBean.RecyclingsBean>()
         for (i in mInputLiat.indices) {
@@ -353,7 +352,7 @@ class InputMainFragment : Fragment() {
             lingsBeanList.add(lingsBean)
         }
 
-        if (mType == 3) {
+        if (mType == 3 && mMain_Gifts_ListViewAdapter != null && mMain_Gifts_ListViewAdapter!!.getGiftNum() != null) {
             var listgifts = ArrayList<AppInputBean.GiftsBean>()
             var mGiftBean = mMain_Gifts_ListViewAdapter!!.getGiftNum()
             for (i in mGiftBean.data.indices) {
@@ -366,7 +365,6 @@ class InputMainFragment : Fragment() {
             }
             UpBean.gifts = listgifts
         }
-
         UpBean.recyclings = lingsBeanList
         UpBean.time = time
         UpBean.dealId = dealid
@@ -398,6 +396,7 @@ class InputMainFragment : Fragment() {
             }, "新增入库")
         }
         mInputLiat.clear()
+        Input_Main_Gift.visibility = View.GONE
         Main_GiftView.visibility = View.GONE
         initListView()
     }
@@ -485,7 +484,7 @@ class InputMainFragment : Fragment() {
                         mIzkcService.printGBKText("\n")
                     }
 
-                    if (UpType == 3) {
+                    if (UpType == 3 && mMain_Gifts_ListViewAdapter != null && mMain_Gifts_ListViewAdapter!!.getGiftNum().data != null) {
                         mIzkcService.printGBKText("\n")
                         mIzkcService.printGBKText("回馈礼品：\n")
                         mIzkcService.printGBKText("--------------------------------")
