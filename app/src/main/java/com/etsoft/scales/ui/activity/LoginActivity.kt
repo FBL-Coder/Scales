@@ -4,9 +4,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import com.etsoft.scales.R
-import com.etsoft.scales.SaveKey
 import com.etsoft.scales.helper.LoginHelper
-import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.Validator
 import kotlinx.android.synthetic.main.activity_login.*

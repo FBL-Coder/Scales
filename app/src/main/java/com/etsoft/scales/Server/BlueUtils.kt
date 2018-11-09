@@ -88,11 +88,13 @@ class BlueUtils {
                     }
                     //定义一个存储空间buff
                     var buff = ByteArray(20)//原始十进制数组
+
                     try {
                         var inStream = btSocket!!.inputStream
                         inStream!!.read(buff) //读取数据存储在buff数组中
+                        LogUtils.i(buff)
                         if (buff.contains(61)) {
-//                            LogUtils.i(buff)
+                            LogUtils.i(buff)
                             var msg = mHandler?.obtainMessage()
                             msg.what = BlueBoothState.BLUE_READDATA_SUCCESS
                             msg.obj = buff
@@ -136,7 +138,7 @@ class BlueUtils {
                     }
 
                     var Str = strWeight.reversed().removeSuffix("=")
-//                    LogUtils.w("蓝牙秤重量为==$Str")
+                    LogUtils.w("蓝牙秤重量为==$Str")
                     var msg = mHandler?.obtainMessage()
                     msg.what = BlueBoothState.BLUE_DISPOSEDATA_SUCCESS
                     msg.obj = Str.toDouble()
