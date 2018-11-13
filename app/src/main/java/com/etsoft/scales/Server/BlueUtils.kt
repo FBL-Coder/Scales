@@ -68,8 +68,7 @@ class BlueUtils {
             if (mBluetoothSocket != null && mBluetoothSocket!!.isConnected) {
                 try {
                     mBluetoothSocket!!.close()
-                    handler.sendEmptyMessage(BlueBoothState.BLUE_CONNECT_CLOSE)
-                    LogUtils.w("蓝牙断开成功")
+                    LogUtils.w("蓝牙断开")
                 } catch (e: Exception) {
                     LogUtils.e("蓝牙断开失败:$e")
                     handler.sendEmptyMessage(BLUE_CONNECT_CLOSE_ERROR)

@@ -234,22 +234,23 @@ class InputMainFragment : Fragment() {
                 ToastUtil.showText("没有数据,请添加记录")
                 return@setOnClickListener
             }
+            printEvent()
 
-            MyDialog(mActivity_!!)
-                    .setMessage("是否先扫描二维码？(持有绿卡用户)")
-                    .setNeutralButton("取消打印") { dialog, which ->
-                        dialog.dismiss()
-                        return@setNeutralButton
-                    }
-                    .setPositiveButton("扫描后打印") { dialog, which ->
-                        dialog.dismiss()
-                        val i = Intent(mActivity_, CaptureActivity::class.java)
-                        startActivityForResult(i, Activity.RESULT_FIRST_USER)
-                    }
-                    .setNegativeButton("跳过扫描") { dialog, which ->
-                        dialog.dismiss()
-                        printEvent()
-                    }.show()
+//            MyDialog(mActivity_!!)
+//                    .setMessage("是否先扫描二维码？(持有绿卡用户)")
+//                    .setNeutralButton("取消打印") { dialog, which ->
+//                        dialog.dismiss()
+//                        return@setNeutralButton
+//                    }
+//                    .setPositiveButton("扫描后打印") { dialog, which ->
+//                        dialog.dismiss()
+//                        val i = Intent(mActivity_, CaptureActivity::class.java)
+//                        startActivityForResult(i, Activity.RESULT_FIRST_USER)
+//                    }
+//                    .setNegativeButton("跳过扫描") { dialog, which ->
+//                        dialog.dismiss()
+//
+//                    }.show()
         }
         Input_Main_Back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
         Input_Main_Back.setOnClickListener {
@@ -312,6 +313,9 @@ class InputMainFragment : Fragment() {
         }
     }
 
+    /**
+     * 打印逻辑
+     */
     private fun printEvent() {
 
         time = SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis()))

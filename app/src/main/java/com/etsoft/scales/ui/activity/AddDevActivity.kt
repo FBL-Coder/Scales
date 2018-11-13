@@ -107,20 +107,26 @@ class AddDevActivity : BaseActivity() {
      * 显示已连接的设备
      */
     private fun showConnectView() {
-        ConnectDevice.visibility = View.VISIBLE
-        DevName.text = mBluetoothDevice!!.name
-        DevMAC.text = mBluetoothDevice!!.address
-        ConnectClose.setOnClickListener {
-            LogUtils.i("主动断开蓝牙连接")
-            mBluetoothDeviceED = null
-            mLoadDialog!!.show(arrayOf("正在断开", "断开超时"), false)
-            BlueUtils.disConnect(mHandler!!)
+        try {
+            ConnectDevice.visibility = View.VISIBLE
+            DevName.text = mBluetoothDevice!!.name
+            DevMAC.text = mBluetoothDevice!!.address
+            ConnectClose.setOnClickListener {
+                LogUtils.i("主动断开蓝牙连接")
+                mBluetoothDeviceED = null
+                mLoadDialog!!.show(arrayOf("正在断开", "断开超时"), false)
+                BlueUtils.disConnect(mHandler!!)
+            }
+        }catch (e:Exception){
+            ToastUtil.showText("蓝牙连接异常")
         }
     }
 
 
     /**
      * 开始搜索设备
+     * 17317390767
+        123456
      */
     private fun startDiscovery() {
         moor_wiating.visibility = View.VISIBLE
