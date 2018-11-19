@@ -116,27 +116,27 @@ class MineMainFragment : Fragment() {
 /**
  * Handler 静态内部类，防止内存泄漏
  */
-private class MyHandler(activity: MineMainFragment) : Handler() {
-    private val activityWeakReference: WeakReference<MineMainFragment> = WeakReference<MineMainFragment>(activity)
+private class MyHandler(fragment: MineMainFragment) : Handler() {
+    private val activityWeakReference: WeakReference<MineMainFragment> = WeakReference<MineMainFragment>(fragment)
 
     override fun handleMessage(msg: Message) {
-        val activity = activityWeakReference.get()
-        if (activity != null) {
+        val fragment = activityWeakReference.get()
+        if (fragment != null) {
             when (msg.what) {
                 1 -> {
-                    activity.mLoadDialog!!.hide()
-                    if (activity.mUpInputFailedBean!!.data.size > 0) {
+                    fragment.mLoadDialog!!.hide()
+                    if (fragment.mUpInputFailedBean != null && fragment.mUpInputFailedBean!!.data.size > 0) {
                         ToastUtil.showText("用户还有未上传记录，请先上传")
                         return
                     }
-                    MyDialog(activity.activity!!).setMessage("是否退出登录")
+                    MyDialog(fragment.activity!!).setMessage("是否退出登录")
                             .setNegativeButton("取消") { dialog, which ->
                                 dialog.dismiss()
                             }.setPositiveButton("退出") { dialog, which ->
-                                activity.activity!!.startActivity(Intent(activity.activity, LoginActivity::class.java))
+                                fragment.activity!!.startActivity(Intent(fragment.activity, LoginActivity::class.java))
                                 AppSharePreferenceMgr.clear(MyApp.mApplication)
                                 //退出
-                                activity.activity!!.finish()
+                                fragment.activity!!.finish()
                                 dialog.dismiss()
                             }.create().run {
                                 window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or

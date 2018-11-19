@@ -155,6 +155,12 @@
             android:name="io.github.xudaojie.qrcodelib.CaptureActivity"
             android:screenOrientation="portrait" />
 
+        <!--自动更新界面-->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
 
         <!--打印机服务-->
         <service android:name="com.smartdevice.aidl.IZKCService">

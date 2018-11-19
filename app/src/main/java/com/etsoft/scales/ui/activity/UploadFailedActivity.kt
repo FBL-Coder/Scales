@@ -3,6 +3,7 @@ package com.etsoft.scales.ui.activity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.widget.Toast
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
@@ -18,6 +19,7 @@ import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
+import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_inputfailed_record.*
 import java.lang.ref.WeakReference
 
@@ -39,6 +41,7 @@ class UploadFailedActivity : BaseActivity() {
     override fun setView(): Int {
         return R.layout.activity_inputfailed_record
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isUpLoading_UI = true
@@ -82,6 +85,16 @@ class UploadFailedActivity : BaseActivity() {
             mInputRecordListViewAdapter = InputFailedRecordListViewAdapter(mUpInputFailedBean_Use!!)
             InputFailed_ListView.adapter = mInputRecordListViewAdapter
         } else mInputRecordListViewAdapter!!.notifyDataSetChanged(mUpInputFailedBean_Use!!)
+
+        InputFailed_ListView.setOnItemClickListener { parent, view, position, id ->
+            MyDialog(this@UploadFailedActivity)
+                    .setTitle("未上传数据")
+                    .setMessage(MyApp.gson.toJson(mUpInputFailedBean!!.data[position]))
+                    .setNegativeButton("关闭") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
+        }
     }
 
     private fun initView() {
@@ -125,9 +138,11 @@ class UploadFailedActivity : BaseActivity() {
                         msg.arg1 = i + 1
                         msg.arg2 = num
                         if (resultDesc!!.getcode() != 0) {
+                            msg.obj = resultDesc.result
                             msg.what = UpLoadFailed
                             myHandler!!.sendMessage(msg)
                             mIsUpOkList!![i] = false
+                            upData.failureInfo = "返回数据Code != 0，返回数据 = ${resultDesc.result} "
                             upData.upLoadCount++
                         } else {
                             mIsUpOkList!![i] = true
@@ -139,8 +154,10 @@ class UploadFailedActivity : BaseActivity() {
                     override fun onFailure(code: Int, message: String?) {
                         super.onFailure(code, message)
                         mIsUpOkList!![i] = false
+                        upData.failureInfo = "onFailure方法，服务器异常、Timeout $message"
                         upData.upLoadCount++
                         var msg = myHandler!!.obtainMessage()
+                        msg.obj = message
                         msg.what = UpLoadFailed
                         msg.arg1 = i + 1
                         msg.arg2 = num
@@ -189,6 +206,7 @@ class UploadFailedActivity : BaseActivity() {
      */
     private class MyHandler(activity: UploadFailedActivity) : Handler() {
         private val activityWeakReference: WeakReference<UploadFailedActivity> = WeakReference<UploadFailedActivity>(activity)
+        private var str_msg = ""
 
         override fun handleMessage(msg: Message) {
             val activity = activityWeakReference.get()
@@ -207,14 +225,18 @@ class UploadFailedActivity : BaseActivity() {
                         if (msg.arg1 == msg.arg2) {
                             activity.listViewData(msg.arg2)
                             activity.mLoadDialog!!.hide()
-
                         }
                     }
                     activity.UpLoadFailed -> {
                         activity.mLoadDialog!!.setMessage("正在上传:" + msg.arg1 + "/" + msg.arg2)
+                        if (msg.obj != null && msg.obj as String != "") str_msg += msg.obj as String + "\n"
                         if (msg.arg1 == msg.arg2) {
+                            var msg_str = msg.obj as String
                             activity.listViewData(msg.arg2)
                             activity.mLoadDialog!!.hide()
+                            if (str_msg != "") {
+                                ToastUtil.showText(str_msg, Toast.LENGTH_LONG)
+                            }
 
                         }
                     }

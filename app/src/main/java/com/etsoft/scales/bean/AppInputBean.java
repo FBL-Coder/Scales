@@ -27,6 +27,7 @@ public class AppInputBean {
     private String staffId;
     private List<RecyclingsBean> recyclings;
     private List<GiftsBean> gifts;
+    private String FailureInfo = "";
 
     public String getPhone() {
         return phone;
@@ -175,5 +176,13 @@ public class AppInputBean {
         public void setNumber(String number) {
             this.number = number;
         }
+    }
+
+    public String getFailureInfo() {
+        return FailureInfo;
+    }
+
+    public void setFailureInfo(String failureInfo) {
+        FailureInfo = failureInfo;
     }
 }

@@ -377,12 +377,14 @@ class InputMainFragment : Fragment() {
         if (NETWORK == 0) {
             mActivity!!.mLoadDialog!!.hide()
             ToastUtil.showText("网络不可用，可在未长传界面进行上传")
+            UpBean.failureInfo = "网络不可用，无法上传"
             writeData(UpBean)
         } else {
             OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
                 override fun onSuccess(resultDesc: ResultDesc?) {
                     mActivity!!.mLoadDialog!!.hide()
                     if (resultDesc!!.getcode() != 0) {
+                        UpBean.failureInfo = "返回数据Code != 0，返回结果：$resultDesc"
                         ToastUtil.showText("上传失败，可在未长传界面进行上传")
                         LogUtils.i(resultDesc.result)
                         writeData(UpBean)
@@ -395,6 +397,7 @@ class InputMainFragment : Fragment() {
                     super.onFailure(code, message)
                     mActivity!!.mLoadDialog!!.hide()
                     ToastUtil.showText("上传失败，可在未长传界面进行上传")
+                    UpBean.failureInfo = "onFailure方法，服务器或连接异常，返回结果：$message"
                     writeData(UpBean)
                 }
             }, "新增入库")

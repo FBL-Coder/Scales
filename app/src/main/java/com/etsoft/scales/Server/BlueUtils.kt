@@ -86,7 +86,7 @@ class BlueUtils {
                         return@Runnable
                     }
                     //定义一个存储空间buff
-                    var buff = ByteArray(20)//原始十进制数组
+                    var buff = ByteArray(50)//原始十进制数组
 
                     try {
                         var inStream = btSocket!!.inputStream
