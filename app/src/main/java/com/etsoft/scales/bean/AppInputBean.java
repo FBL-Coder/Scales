@@ -1,11 +1,12 @@
 package com.etsoft.scales.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Author：FBL  Time： 2018/10/10.
  */
-public class AppInputBean {
+public class AppInputBean implements Serializable {
 
     /**
      * phone : 17611110000
@@ -117,7 +118,7 @@ public class AppInputBean {
         this.gifts = gifts;
     }
 
-    public static class RecyclingsBean {
+    public static class RecyclingsBean implements Serializable{
         /**
          * recyclingPriceId : 6
          * weight : 1
@@ -152,7 +153,7 @@ public class AppInputBean {
         }
     }
 
-    public static class GiftsBean {
+    public static class GiftsBean implements Serializable{
         /**
          * giftId : 1
          * number : 10

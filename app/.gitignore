@@ -1,5 +1,6 @@
 /build
 /src/androidTest
 /src/test
+/release
 /*.iml
 

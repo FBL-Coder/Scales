@@ -32,6 +32,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.smartdevice.aidltestdemo.ClientApplication
 import com.tencent.bugly.Bugly
+import com.tencent.bugly.beta.Beta
 import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.OkHttpClient
 import java.util.*
@@ -147,7 +148,10 @@ open class MyApp : ClientApplication() {
         Density.setDensity(this, 370f)//简单屏幕适配方案 初始化
 
         //日志上报Bugly& 应用升级
-        Bugly.init(applicationContext, "2e4ab6f76a", false);
+        Beta.autoInit = true
+        Beta.autoCheckUpgrade = true
+        Beta.upgradeCheckPeriod = 5 * 60 * 1000
+        Bugly.init(applicationContext, "2e4ab6f76a", false)
         //初始化定位
         mLocationClient = AMapLocationClient(applicationContext)
         //设置定位回调监听

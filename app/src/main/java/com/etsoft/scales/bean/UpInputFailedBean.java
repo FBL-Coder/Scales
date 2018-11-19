@@ -1,11 +1,12 @@
 package com.etsoft.scales.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Author：FBL  Time： 2018/10/22.
  */
-public class UpInputFailedBean {
+public class UpInputFailedBean implements Serializable{
 
     private List<AppInputBean> data;
 

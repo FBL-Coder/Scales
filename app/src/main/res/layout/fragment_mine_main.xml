@@ -308,6 +308,56 @@
 
 
             <LinearLayout
+                android:id="@+id/User_Version_ref"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:background="@drawable/ll_bg_white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_4"
+                    android:src="@drawable/ic_phonelink_setup_white_24dp" />
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="11"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="当前版本"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_14" />
+
+                <TextView
+                    android:id="@+id/User_Version"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center"
+                    android:text="1.0.1"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_3"
+                    android:layout_weight="2"
+                    android:src="@drawable/ic_refresh_white_24dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/white_" />
+
+
+            <LinearLayout
                 android:id="@+id/Mine_Logout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"

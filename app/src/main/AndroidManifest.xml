@@ -161,6 +161,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
 
+        <!--上传失败详情-->
+        <activity
+            android:name="com.etsoft.scales.ui.activity.FailedInfoActivity"
+            android:screenOrientation="portrait" />
+
 
         <!--打印机服务-->
         <service android:name="com.smartdevice.aidl.IZKCService">

@@ -4,7 +4,9 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import com.etsoft.scales.R
+import com.etsoft.scales.SaveKey
 import com.etsoft.scales.helper.LoginHelper
+import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.Validator
 import kotlinx.android.synthetic.main.activity_login.*
@@ -21,6 +23,14 @@ class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val UserID = AppSharePreferenceMgr.get(SaveKey.USER_NAME, "") as String
+        val UserPASS = AppSharePreferenceMgr.get(SaveKey.USER_PASS, "") as String
+        if (UserID != "" && UserPASS != "") {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+//            mLoadDialog!!.show("正在登陆",false)
+//            LoginHelper.login(this, UserID, UserPASS)
+        }
         initEvent()
     }
 

@@ -1,5 +1,7 @@
 package com.etsoft.scales.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -37,6 +39,7 @@ class UploadFailedActivity : BaseActivity() {
     private val UpLoadOK = 100
     private val UpLoadFailed = -11
     private var isUpLoading = false
+    private var delPosition = -1
 
     override fun setView(): Int {
         return R.layout.activity_inputfailed_record
@@ -77,23 +80,22 @@ class UploadFailedActivity : BaseActivity() {
                 mUpInputFailedBean_Use!!.data.add(mUpInputFailedBean!!.data[i])
             }
         }
-        if (mUpInputFailedBean_Use.data.size == 0) {
-            ToastUtil.showText("全部记录已上传完成")
-            finish()
-        }
+
         if (mInputRecordListViewAdapter == null) {
             mInputRecordListViewAdapter = InputFailedRecordListViewAdapter(mUpInputFailedBean_Use!!)
             InputFailed_ListView.adapter = mInputRecordListViewAdapter
         } else mInputRecordListViewAdapter!!.notifyDataSetChanged(mUpInputFailedBean_Use!!)
 
+        if (mUpInputFailedBean_Use.data.size == 0) {
+            ToastUtil.showText("已无未上传数据")
+            finish()
+        }
         InputFailed_ListView.setOnItemClickListener { parent, view, position, id ->
-            MyDialog(this@UploadFailedActivity)
-                    .setTitle("未上传数据")
-                    .setMessage(MyApp.gson.toJson(mUpInputFailedBean!!.data[position]))
-                    .setNegativeButton("关闭") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    .show()
+            startActivityForResult(Intent(this, FailedInfoActivity::class.java).run {
+                putExtra("data", mUpInputFailedBean!!.data[position])
+                this
+            }, Activity.RESULT_FIRST_USER)
+            delPosition = position
         }
     }
 
@@ -198,6 +200,19 @@ class UploadFailedActivity : BaseActivity() {
             File_Cache.writeFileToSD(MyApp.gson.toJson(mUpInputFailedBean_Uped), SaveKey.FILE_DATA_NAME)
             myHandler!!.sendEmptyMessage(2)
         }).start()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            var isDel = data.getBooleanExtra("isDel", false)
+            if (isDel && delPosition != -1) {
+                mUpInputFailedBean!!.data.removeAt(delPosition)
+                delPosition = -1
+                mLoadDialog!!.show()
+                writeData()
+            }
+        }
     }
 
 

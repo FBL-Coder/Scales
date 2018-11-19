@@ -20,6 +20,7 @@ import com.etsoft.scales.utils.File_Cache
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
+import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.fragment_mine_main.*
 import java.lang.ref.WeakReference
 
@@ -70,6 +71,7 @@ class MineMainFragment : Fragment() {
         Mine_Input_Statistics.text = "${MyApp.UserInfo?.data?.data?.replenishStockTotalPayMoney}kg"
         Mine_Out_Statistics.text = "${MyApp.UserInfo?.data?.data?.outboundTotalWeight}kg"
         Mine_UserName.text = MyApp.UserInfo?.data?.name
+        User_Version.text = mActivity!!.packageManager.getPackageInfo(mActivity!!.packageName, 0).versionName
     }
 
     private fun initEvent() {
@@ -96,7 +98,13 @@ class MineMainFragment : Fragment() {
             //客户查询
             startActivity(Intent(mActivity, UserQueryActivity::class.java))
         }
+
+        User_Version_ref.setOnClickListener {
+            //检查更新
+            Beta.checkUpgrade()
+        }
         Mine_Logout!!.setOnClickListener {
+            //退出登录
             mActivity!!.mLoadDialog!!.show()
             getUpLoadFailed()
 

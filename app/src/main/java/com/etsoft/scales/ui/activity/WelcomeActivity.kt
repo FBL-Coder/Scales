@@ -24,15 +24,7 @@ class WelcomeActivity : BaseActivity() {
 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)// 设置全屏
-
-        val UserID = AppSharePreferenceMgr.get(SaveKey.USER_NAME, "") as String
-        val UserPASS = AppSharePreferenceMgr.get(SaveKey.USER_PASS, "") as String
-        if (UserID != "" && UserPASS != "") {
-            startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
-            LoginHelper.login(this, UserID, UserPASS)
-        } else{
-            startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
-        }
+        startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
         finish()
     }
 }
