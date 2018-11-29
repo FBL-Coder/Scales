@@ -33,7 +33,7 @@ import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import com.etsoft.scales.view.MyDialog
-import kotlinx.android.synthetic.main.fragment_input_main.*
+import com.etsoft.scales.view.TitleBar
 import kotlinx.android.synthetic.main.fragment_out_main.*
 
 /**
@@ -46,6 +46,7 @@ class OutMainFragment : Fragment() {
     private var page = 1
     private var mType = -1
     private var mMain_Out_ListViewAdapter: Main_Out_ListViewAdapter? = null
+    private var Main_Out_TitleBar: TitleBar? = null
 
     companion object {
         private var mActivity: MainActivity? = null
@@ -63,13 +64,13 @@ class OutMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mActivity!!.mLoadDialog!!.show()
-        initView()
+        initView(view)
         BlueBoothReceiver.mOnBlueConnecetChangerlistener_out = object : BlueBoothReceiver.OnBlueConnecetChangerlistener {
             override fun OnBlueChanger(isConnect: Boolean) {
                 if (isConnect)
-                    Main_Out_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
+                    Main_Out_TitleBar?.back?.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
                 else
-                    Main_Out_TitleBar.back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
+                    Main_Out_TitleBar?.back?.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
             }
         }
         initdata(page)
@@ -137,18 +138,18 @@ class OutMainFragment : Fragment() {
             when (mType) {
                 1 -> {
                     for (i in mRecycleListBean_Type_1!!.data.indices) {
-                        names.add(mRecycleListBean_Type_1!!.data[i].name+ "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                        names.add(mRecycleListBean_Type_1!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
                     }
                 }
                 2 -> {
                     for (i in mRecycleListBean_Type_2!!.data.indices) {
-                        names.add(mRecycleListBean_Type_2!!.data[i].name+ "       ￥" + mRecycleListBean_Type_2!!.data[i].price)
+                        names.add(mRecycleListBean_Type_2!!.data[i].name + "       ￥" + mRecycleListBean_Type_2!!.data[i].price)
                     }
 
                 }
                 3 -> {
                     for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        names.add(mRecycleListBean_Type_3!!.data[i].name+ "       ￥" + mRecycleListBean_Type_3!!.data[i].price)
+                        names.add(mRecycleListBean_Type_3!!.data[i].name + "       ￥" + mRecycleListBean_Type_3!!.data[i].price)
                     }
                 }
             }
@@ -158,7 +159,7 @@ class OutMainFragment : Fragment() {
                         position = which
                     }).setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
-                        if (names.size == 0){
+                        if (names.size == 0) {
                             ToastUtil.showText("该类型没有对应回收物，请重新选择")
                             return@setPositiveButton
                         }
@@ -265,9 +266,10 @@ class OutMainFragment : Fragment() {
     /**
      * 初始化TitleBar
      */
-    private fun initView() {
+    private fun initView(view: View) {
 
-        Main_Out_TitleBar.run {
+        Main_Out_TitleBar = view.findViewById(R.id.Main_Out_TitleBar) as TitleBar
+        Main_Out_TitleBar?.run {
             if (MyApp.mBluetoothDataIsEnable)
                 back.setImageResource(R.drawable.ic_settings_bluetooth_blue_a200_24dp)
             else
@@ -292,7 +294,7 @@ class OutMainFragment : Fragment() {
         if (mType == -1) {
             MyDialog(mActivity!!).setTitle("选择回收物类型")
                     .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, arrayOf("再生资源", "电子废弃物")), 0, DialogInterface.OnClickListener { dialog, which ->
-                        mType = which+1
+                        mType = which + 1
                     }).setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
                         if (mType == -1)

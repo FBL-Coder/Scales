@@ -11,8 +11,8 @@ android {
         applicationId "com.etsoft.scales"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 7
+        versionName "1.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,27 +33,27 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
     api 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
     //底部菜单栏
-    api 'com.facebook.fresco:fresco:1.8.1'
+    implementation 'com.facebook.fresco:fresco:1.8.1'
     //facebook图片加载库
-    api 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
     //json解析
-    api 'com.squareup.okhttp3:okhttp:3.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.5.0'
     //log工具
-    api 'com.apkfuns.logutils:library:1.6.0'
+    implementation 'com.apkfuns.logutils:library:1.6.0'
     //上拉下拉
-    api 'com.huxq17.xrefreshview:xrefreshview:3.6.7'
+    implementation 'com.huxq17.xrefreshview:xrefreshview:3.6.7'
     //多媒体筛选器
-    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
     //高德定位
-    api 'com.amap.api:location:latest.integration'
+    implementation 'com.amap.api:location:latest.integration'
     //异常上报以及应用升级
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
-    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
-    api 'com.tencent.bugly:nativecrashreport:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
 
     //扫描二维码
-    api 'com.github.XuDaojie:QRCode-Android:v0.4.2'
+    implementation 'com.github.XuDaojie:QRCode-Android:v0.4.2'
 
     //打印机标准库
     implementation project(':PrinterDevice')
