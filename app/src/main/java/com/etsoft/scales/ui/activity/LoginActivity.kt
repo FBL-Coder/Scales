@@ -26,8 +26,6 @@ class LoginActivity : BaseActivity() {
         val UserID = AppSharePreferenceMgr.get(SaveKey.USER_NAME, "") as String
         val UserPASS = AppSharePreferenceMgr.get(SaveKey.USER_PASS, "") as String
         if (UserID != "" && UserPASS != "") {
-//            startActivity(Intent(this, MainActivity::class.java))
-//            finish()
             mLoadDialog!!.show("正在登陆",false)
             LoginHelper.login(this, UserID, UserPASS)
         }

@@ -6,8 +6,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.os.PersistableBundle
 import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.View
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
@@ -16,20 +17,16 @@ import com.etsoft.scales.Server.BlueUtils.Companion.isReadData
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.bean.Input_Main_List_Bean
+import com.etsoft.scales.ui.fragment.home.InputMainFragment.Companion.ADDITEM_CODE
 import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.BlueBoothState
+import com.etsoft.scales.utils.MoneyValueFilter
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_add_input.*
 import java.lang.ref.WeakReference
-import java.text.DecimalFormat
-import com.etsoft.scales.utils.MoneyValueFilter
-import android.text.InputFilter
-import android.text.TextWatcher
-import com.apkfuns.logutils.LogUtils
-import com.etsoft.scales.ui.fragment.home.InputMainFragment.Companion.ADDITEM_CODE
-import io.reactivex.internal.operators.observable.ObservableSwitchIfEmpty
 import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 /**
@@ -85,7 +82,10 @@ class AddInputAvtivity : BaseActivity() {
         Add_Input_KG.filters = arrayOf<InputFilter>(MoneyValueFilter().setDigits(1))
 
         Add_Input_RadioGroup.setOnCheckedChangeListener { group, checkedId ->
-            if (!mBluetoothDataIsEnable && Add_Input_KG.text.toString().isEmpty()) {
+            if (Add_Input_KG.text.toString().isEmpty()) {
+                Add_Input_5.isChecked = false
+                Add_Input_10.isChecked = false
+                Add_Input_20.isChecked = false
                 ToastUtil.showText("称台重量为空，不可除杂")
                 return@setOnCheckedChangeListener
             }
@@ -100,7 +100,7 @@ class AddInputAvtivity : BaseActivity() {
                     mChushiNum = 20
                 }
             }
-            if (!mBluetoothDataIsEnable && !Add_Input_KG.text.toString().isEmpty()) {
+            if (!Add_Input_KG.text.toString().isEmpty()) {
                 var mWeight = Add_Input_KG.text.toString().toDouble()
                 mWeight = mWeight - mWeight * mChushiNum / 100
 
