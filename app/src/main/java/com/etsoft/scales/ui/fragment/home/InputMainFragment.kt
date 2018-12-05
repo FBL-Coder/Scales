@@ -44,9 +44,11 @@ import kotlinx.android.synthetic.main.activity_out_info.*
 import kotlinx.android.synthetic.main.fragment_input_main.*
 import java.lang.ref.WeakReference
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -234,7 +236,6 @@ class InputMainFragment : Fragment() {
                 ToastUtil.showText("没有数据,请添加记录")
                 return@setOnClickListener
             }
-//            printEvent()
 
             MyDialog(mActivity_!!)
                     .setMessage("是否先扫描二维码？(持有绿卡用户)")
@@ -249,7 +250,7 @@ class InputMainFragment : Fragment() {
                     }
                     .setNegativeButton("跳过扫描") { dialog, which ->
                         dialog.dismiss()
-
+                        printEvent()
                     }.show()
         }
         Input_Main_Back.setImageResource(R.drawable.ic_settings_bluetooth_black_24dp)
@@ -423,74 +424,161 @@ class InputMainFragment : Fragment() {
                     var Str = "单  号： $traceElement\n"
                     mIzkcService.printGBKText(Str)
                     var data = "时  间： " + SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date(System.currentTimeMillis())) + "\n"
+
                     mIzkcService.printGBKText(data)
 
                     mIzkcService.printGBKText("服务站： " + AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") + "\n")
                     mIzkcService.printGBKText("********************************")
+
+
                     var type = ""
-                    if (mType == 2) type = "数量" else type = "重量"
+                    mIzkcService.setTypeface(1)
+                    mIzkcService.setFontSize(1)
+                    if (mType == 2) {
 
-                    var array = arrayOf(" 类型 ", "  $type", "   单价  ", " 总价")
-                    var array1 = intArrayOf(0, 1, 2, 2)
-                    var array2 = intArrayOf(0, 0, 0, 0)
-                    mIzkcService.printColumnsText(array, array1, array2)
+                        var array = arrayOf("  类 型 ", "  数 量", "  单 价  ", " 总 价  ")
+                        var array1 = intArrayOf(2, 6, 6, 2)
+                        var array2 = intArrayOf(1, 1, 1, 1)
+                        mIzkcService.printColumnsText(array, array1, array2)
 
-                    mIzkcService.printGBKText("--------------------------------")
+                        mIzkcService.printGBKText("------------------------------------------------")
 
-                    for (i in mInputLiat.indices) {
-                        if (mInputLiat[i].type.length > 4) {
-                            mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 4).toString()
-                        }
-
-                        var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight, mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
-
-                        var no2 = 0
-                        var no3 = 0
-                        var no4 = 0
-                        var no5 = 0
-                        var no6 = 0
-                        when (mInputLiat[i].type.length) {//类型
-                            1 -> no2 = 3
-                            2 -> no2 = 2
-                            3 -> no2 = 0
-                        }
-                        if (mType == 2) {
-                            when (mInputLiat[i].weight.length) {//重量
-                                1 -> no3 = 3
-                                2 -> no3 = 2
+                        for (i in mInputLiat.indices) {
+                            var name_type = getSize(mInputLiat[i].type)
+                            if (name_type > 8) {
+                                mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 8).toString()
                             }
-                        } else {
-                            when (mInputLiat[i].weight.length) {//重量
+                            var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight, mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
+                            var no2 = 0
+                            var no3 = 0
+                            var no4 = 0
+                            var no5 = 0
+                            var no6 = 0
+                            when (name_type) {//类型
+                                1F -> no2 = 14
+                                1.5F -> no2 = 13
+                                2F -> no2 = 12
+                                2.5F -> no2 = 11
+                                3F -> no2 = 10
+                                3.5F -> no2 = 9
+                                4F -> no2 = 8
+                                4.5F -> no2 = 7
+                                5F -> no2 = 6
+                                5.5F -> no2 = 5
+                                6F -> no2 = 4
+                                6.5F -> no2 = 3
+                                7F -> no2 = 2
+                                7.5F -> no2 = 1
+                                8F -> no2 = 0
+                            }
+                            when (mInputLiat[i].weight.length) {//数量
                                 1 -> no3 = 5
                                 2 -> no3 = 4
                                 3 -> no3 = 3
                                 4 -> no3 = 2
                                 5 -> no3 = 1
                             }
-                        }
-                        when (mInputLiat[i].price.length) {//单价
-                            1 -> no5 = 4
-                            2 -> no5 = 3
-                            3 -> no5 = 2
-                            4 -> no5 = 1
+
+                            when (mInputLiat[i].price.length) {//单价
+                                1 -> no5 = 7
+                                2 -> no5 = 6
+                                3 -> no5 = 5
+                                4 -> no5 = 4
+                            }
+
+                            when (mInputLiat[i].total.length) {//总价
+                                3 -> no6 = 7
+                                4 -> no6 = 6
+                                5 -> no6 = 5
+                                6 -> no6 = 4
+                                7 -> no6 = 3
+                            }
+
+                            //                          0       6       0       4       3
+                            LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 -- $no5 --$no6")
+                            var array3 = intArrayOf(no2, no3, no4, no5, no6)
+                            var array4 = intArrayOf(1, 1, 1, 1, 1)
+                            mIzkcService.printColumnsText(array, array3, array4)
+                            mIzkcService.printGBKText("\n")
                         }
 
-                        when (mInputLiat[i].total.length) {//总价
-                            3 -> no6 = 4
-                            4 -> no6 = 3
-                            5 -> no6 = 2
-                            6 -> no6 = 1
-                            7 -> no6 = 0
-                        }
+                    } else {
 
-                        //                          0       6       0       4       3
-                        LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 -- $no5 --$no6")
-                        var array3 = intArrayOf(no2, no3, no4, no5, no6)
-                        var array4 = intArrayOf(0, 0, 0, 0, 0)
-                        mIzkcService.printColumnsText(array, array3, array4)
-                        mIzkcService.printGBKText("\n")
+                        var array = arrayOf(" 类型 ", "  有效重量 ", " 除杂重量", "单价 ", "  总价  ")
+                        var array1 = intArrayOf(1, 2, 2, 2, 2)
+                        var array2 = intArrayOf(0, 0, 0, 0, 0)
+                        mIzkcService.printColumnsText(array, array1, array2)
+
+                        mIzkcService.printGBKText("------------------------------------------------")
+
+                        for (i in mInputLiat.indices) {
+
+                            var name_type = getSize(mInputLiat[i].type)
+                            if (name_type > 5) {
+                                mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 5).toString()
+                            }
+                            var Chuzanum = mInputLiat[i].weight_all.toDouble() - mInputLiat[i].weight.toDouble()
+                            var Chuzi = DecimalFormat("0.0").run {
+                                roundingMode = RoundingMode.DOWN
+                                this
+                            }.format(Chuzanum)
+
+                            var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight + " " + mInputLiat[i].unit, Chuzi + " " + mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
+                            var no2 = 0
+                            var no3 = 0
+                            var no4 = 0
+                            var no6 = 0
+                            var no7 = 0
+                            when (name_type) {//类型
+                                1F -> no2 = 8
+                                1.5F -> no2 = 7
+                                2F -> no2 = 6
+                                2.5F -> no2 = 5
+                                3F -> no2 = 4
+                                3.5F -> no2 = 3
+                                4F -> no2 = 2
+                                4.5F -> no2 = 1
+                                5F -> no2 = 0
+                            }
+                            when (mInputLiat[i].weight.length) {//有效重量
+                                1 -> no3 = 5
+                                2 -> no3 = 4
+                                3 -> no3 = 3
+                                4 -> no3 = 2
+                                5 -> no3 = 1
+                            }
+                            when (mInputLiat[i].weight.length) {//除杂重量
+                                1 -> no4 = 6
+                                2 -> no4 = 5
+                                3 -> no4 = 4
+                                4 -> no4 = 3
+                            }
+                            when (mInputLiat[i].price.length) {//单价
+                                1 -> no6 = 4
+                                2 -> no6 = 3
+                                3 -> no6 = 2
+                                4 -> no6 = 1
+                            }
+
+                            when (mInputLiat[i].total.length) {//总价
+                                3 -> no7 = 5
+                                4 -> no7 = 4
+                                5 -> no7 = 3
+                                6 -> no7 = 2
+                                7 -> no7 = 1
+                            }
+
+                            //                          0       6       0       4       3
+                            LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 --  --$no6")
+                            var array3 = intArrayOf(no2, no3, no4, no6, no7)
+                            var array4 = intArrayOf(1, 1, 1, 1, 1)
+                            mIzkcService.printColumnsText(array, array3, array4)
+                            mIzkcService.printGBKText("\n")
+                        }
                     }
 
+                    mIzkcService.setTypeface(0)
+                    mIzkcService.setFontSize(0)
                     if (UpType == 3 && mMain_Gifts_ListViewAdapter != null && mMain_Gifts_ListViewAdapter!!.getGiftNum().data != null) {
                         mIzkcService.printGBKText("\n")
                         mIzkcService.printGBKText("回馈礼品：\n")
@@ -505,6 +593,7 @@ class InputMainFragment : Fragment() {
                             }
                         }
                     }
+
 
 
                     mIzkcService.printGBKText("********************************")
@@ -550,6 +639,26 @@ class InputMainFragment : Fragment() {
             }
         }).start()
     }
+
+
+    /**
+     * 获取类型长度
+     */
+    fun getSize(Str: String): Float {
+        val p = Pattern.compile("[\u4e00-\u9fa5]")
+        var Size = 0F
+        var chars = Str.toCharArray()
+        for (i in chars.indices) {
+            val m = p.matcher(chars[i].toString())
+            if (m.find()) {
+                Size++
+            } else {
+                Size += 0.5F
+            }
+        }
+        return Size
+    }
+
 
     /**
      * 小5取0，大5取5

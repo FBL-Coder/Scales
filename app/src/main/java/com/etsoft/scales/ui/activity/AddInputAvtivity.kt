@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.os.PersistableBundle
+import android.text.Editable
 import android.view.View
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
@@ -24,7 +25,10 @@ import java.lang.ref.WeakReference
 import java.text.DecimalFormat
 import com.etsoft.scales.utils.MoneyValueFilter
 import android.text.InputFilter
+import android.text.TextWatcher
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.ui.fragment.home.InputMainFragment.Companion.ADDITEM_CODE
+import io.reactivex.internal.operators.observable.ObservableSwitchIfEmpty
 import java.math.RoundingMode
 
 
@@ -37,6 +41,7 @@ class AddInputAvtivity : BaseActivity() {
     private var mHandler: MyHandler? = null
     private var position = 0
     private var mType = -1
+    private var mChushiNum = -1
 
     override fun setView(): Int {
         return R.layout.activity_add_input
@@ -54,17 +59,63 @@ class AddInputAvtivity : BaseActivity() {
         position = intent.getIntExtra("position", 0)
         mType = intent.getIntExtra("type", -1)
         //启动数据监听
-        if (mType == 1 || mType == 3)
+        if (mType == 1 || mType == 3) {
+            Input_ChuShi.visibility = View.VISIBLE
             if (mBluetoothDataIsEnable) {
                 isReadData = true
                 BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
+            } else {
+                Add_Input_KG.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        Add_Input_5.isChecked = false
+                        Add_Input_10.isChecked = false
+                        Add_Input_20.isChecked = false
+                        mChushiNum = -1
+                        Add_Input_KG_OK.text = s
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+
+                    }
+                })
             }
+        }
         Add_Input_KG.filters = arrayOf<InputFilter>(MoneyValueFilter().setDigits(1))
+
+        Add_Input_RadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            if (!mBluetoothDataIsEnable && Add_Input_KG.text.toString().isEmpty()) {
+                ToastUtil.showText("称台重量为空，不可除杂")
+                return@setOnCheckedChangeListener
+            }
+            when (checkedId) {
+                R.id.Add_Input_5 -> {
+                    mChushiNum = 5
+                }
+                R.id.Add_Input_10 -> {
+                    mChushiNum = 10
+                }
+                R.id.Add_Input_20 -> {
+                    mChushiNum = 20
+                }
+            }
+            if (!mBluetoothDataIsEnable && !Add_Input_KG.text.toString().isEmpty()) {
+                var mWeight = Add_Input_KG.text.toString().toDouble()
+                mWeight = mWeight - mWeight * mChushiNum / 100
+
+                Add_Input_KG_OK.text = DecimalFormat("0.0").run {
+                    roundingMode = RoundingMode.DOWN
+                    this
+                }.format(mWeight)
+            }
+        }
+
 
 
         when (mType) {
             1 -> {
-                Add_Input_Type_Name.text = "重量"
+                Add_Input_Type_Name.text = "秤台重量"
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_1?.data!![position]?.price}"
@@ -78,7 +129,7 @@ class AddInputAvtivity : BaseActivity() {
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_2?.data!![position]?.price}"
             }
             3 -> {
-                Add_Input_Type_Name.text = "重量"
+                Add_Input_Type_Name.text = "秤台重量"
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
@@ -112,11 +163,21 @@ class AddInputAvtivity : BaseActivity() {
         Add_Input_Cancle.setOnClickListener { finish() }
 
         Add_Input_Ok.setOnClickListener {
-            val weight_tv = Add_Input_KG.text.toString()
-            if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
-                ToastUtil.showText("货物重量不能为空")
-                return@setOnClickListener
+            var weight_tv: String
+            if (mType == 2) {
+                weight_tv = Add_Input_KG.text.toString()
+                if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
+                    ToastUtil.showText("货物数量不能为空")
+                    return@setOnClickListener
+                }
+            } else {
+                weight_tv = Add_Input_KG_OK.text.toString()
+                if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
+                    ToastUtil.showText("货物重量不能为空")
+                    return@setOnClickListener
+                }
             }
+
             setResult(ADDITEM_CODE, intent
                     .run {
                         putExtra("data", Input_Main_List_Bean().run {
@@ -147,6 +208,7 @@ class AddInputAvtivity : BaseActivity() {
                             }
                             mType_type = mType
                             weight = weight_tv
+                            weight_all = Add_Input_KG.text.toString()
                             this
                         })
                         this
@@ -154,6 +216,7 @@ class AddInputAvtivity : BaseActivity() {
             finish()
         }
     }
+
 
     /**
      * Handler 静态内部类，防止内存泄漏
@@ -174,11 +237,21 @@ class AddInputAvtivity : BaseActivity() {
                     }
                     BlueBoothState.BLUE_DISPOSEDATA_SUCCESS -> {
                         if (msg.obj != null) {
-                            val mWeight = msg.obj as Double
+                            var mWeight = msg.obj as Double
+                            var mWeight_Ok = mWeight
+
+                            if (activity.mChushiNum > 0) {
+                                mWeight_Ok = mWeight - mWeight * activity.mChushiNum / 100
+                            }
+
                             activity.Add_Input_KG.setText(DecimalFormat("0.0").run {
                                 roundingMode = RoundingMode.DOWN
                                 this
                             }.format(mWeight))
+                            activity.Add_Input_KG_OK.text = DecimalFormat("0.0").run {
+                                roundingMode = RoundingMode.DOWN
+                                this
+                            }.format(mWeight_Ok)
                         }
                     }
                 }

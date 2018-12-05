@@ -2,16 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/null__8"
-    >
+    android:background="@color/null__8">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#eee"
         android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/dp_40"
         android:layout_marginRight="@dimen/dp_40"
+        android:background="#eee"
         android:orientation="vertical">
 
 
@@ -28,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_2"
             android:background="@color/dialog_line" />
-
 
 
         <LinearLayout
@@ -102,19 +100,19 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="重量：" />
+                android:text="秤台重量：" />
 
 
             <com.etsoft.scales.view.MyEditText
                 android:id="@+id/Add_Input_KG"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
-                android:background="@color/white_"
                 android:layout_weight="2"
+                android:background="@color/white_"
                 android:gravity="center|right"
                 android:hint="0"
-                android:maxLength="8"
                 android:inputType="number|numberDecimal"
+                android:maxLength="8"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_16" />
 
@@ -173,6 +171,7 @@
                 android:text="￥"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_16" />
+
             <TextView
                 android:id="@+id/Add_Input_DanJia"
                 android:layout_width="wrap_content"
@@ -185,6 +184,105 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:id="@+id/Input_ChuShi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_20"
+                >
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="除杂：" />
+
+
+                <RadioGroup
+                    android:id="@+id/Add_Input_RadioGroup"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/Add_Input_5"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="5%"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dp_16" />
+
+                    <RadioButton
+                        android:id="@+id/Add_Input_10"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="10%"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dp_16" />
+
+                    <RadioButton
+                        android:id="@+id/Add_Input_20"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="20%"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dp_16" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30">
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="有效重量：" />
+
+
+                <TextView
+                    android:id="@+id/Add_Input_KG_OK"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@color/white_"
+                    android:gravity="center|right"
+                    android:hint="0"
+                    android:inputType="number|numberDecimal"
+                    android:maxLength="8"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_16" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
@@ -192,16 +290,14 @@
             android:background="@color/black" />
 
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/dp_15"
             android:paddingLeft="@dimen/dp_30"
+            android:paddingTop="@dimen/dp_15"
             android:paddingRight="@dimen/dp_30"
-            android:paddingTop="@dimen/dp_15">
+            android:paddingBottom="@dimen/dp_15">
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/Add_Input_Cancle"
@@ -213,7 +309,7 @@
                 android:elevation="@dimen/dp_10"
                 android:text="取消"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dp_16"/>
+                android:textSize="@dimen/dp_16" />
 
 
             <android.support.v7.widget.AppCompatButton

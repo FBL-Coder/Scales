@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.KeyEvent
-import android.widget.Toast
 import com.apkfuns.logutils.LogUtils
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
-import com.etsoft.scales.Server.UnUploadRecordTimer
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mLocationInfo
 import com.etsoft.scales.bean.ServerStationInfoBean
@@ -20,7 +18,6 @@ import com.etsoft.scales.ui.fragment.home.MineMainFragment
 import com.etsoft.scales.ui.fragment.home.OutMainFragment
 import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.PermissionsUtli
-import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
@@ -52,7 +49,6 @@ class MainActivity : BaseActivity() {
         fragments = initFragment()
         ViewEvent()
         PermissionsUtli.verifyStoragePermissions(this)
-//        UpLocation()
 
     }
 
@@ -115,8 +111,8 @@ class MainActivity : BaseActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        mInputMainFragment!!.onActivityResult(requestCode, resultCode, data)
-        mOutMainFragment!!.onActivityResult(requestCode, resultCode, data)
+        mInputMainFragment?.onActivityResult(requestCode, resultCode, data)
+        mOutMainFragment?.onActivityResult(requestCode, resultCode, data)
     }
 
 
