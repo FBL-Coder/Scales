@@ -81,24 +81,38 @@ class BlueUtils {
          */
         fun readBlueData(mHandler: Handler, btSocket: BluetoothSocket) {
             Thread(Runnable {
+
+                var data_arr = ByteArray(8)//存储有效数据数组
+                var count = 0
+                var isRead = false
                 while (btSocket != null && btSocket.isConnected) {
                     if (!isReadData) {
                         return@Runnable
                     }
                     //定义一个存储空间buff
-                    var buff = ByteArray(50)//原始十进制数组
+                    var buff = ByteArray(1)//原始十进制数组
+
 
                     try {
                         var inStream = btSocket!!.inputStream
                         inStream!!.read(buff) //读取数据存储在buff数组中
-                        LogUtils.i(buff)
-                        if (buff.contains(61)) {
-                            LogUtils.i(buff)
-                            var msg = mHandler?.obtainMessage()
-                            msg.what = BlueBoothState.BLUE_READDATA_SUCCESS
-                            msg.obj = buff
-                            mHandler?.sendMessage(msg)
+//                        LogUtils.i(buff)
+                        if (count == 0) {
+                            isRead = buff.contains(61)
                         }
+                        if (isRead) {
+                            data_arr[count] = buff[0]
+                            if (count == 7) {
+//                                LogUtils.i(data_arr)
+                                var msg = mHandler?.obtainMessage()
+                                msg.what = BlueBoothState.BLUE_READDATA_SUCCESS
+                                msg.obj = data_arr
+                                mHandler?.sendMessage(msg)
+                                count = 0
+                            } else
+                                count++
+                        }
+
                     } catch (e: Exception) {
                         LogUtils.w("蓝牙数据异常---$e")
                         mHandler?.sendEmptyMessage(BlueBoothState.BLUE_OBTAINDATA_ERROR)
@@ -112,16 +126,11 @@ class BlueUtils {
 
         fun disposeData(mHandler: Handler, buff: ByteArray) {
             Thread(Runnable {
-                var Secondbyte = ByteArray(8)//处理过的二进制数组
+                var Secondbyte = buff//处理过的二进制数组
                 var Second0xff = Array(8, init = { "" })//处理过的十六进制数组
                 var SecondASCII = Array(8, init = { "" })//处理过的ASCII数组
                 try {
-                    val key: Byte = 61
-                    for (i in buff.indices) {
-                        if (buff[i] == key && buff.size - i >= 8) {
-                            System.arraycopy(buff, i, Secondbyte, 0, 8)
-                        }
-                    }
+
                     if (Secondbyte.contains(0)) return@Runnable
                     for (i in Secondbyte.indices) {
                         Second0xff[i] = Integer.toHexString(Secondbyte[i].toInt())

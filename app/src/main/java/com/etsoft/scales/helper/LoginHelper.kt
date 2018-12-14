@@ -21,7 +21,6 @@ import com.google.gson.Gson
  */
 class LoginHelper {
     companion object {
-
         fun login(activity: BaseActivity, userid: String, pass: String) {
             var params = HashMap<String, String>()
             params["phone"] = userid
