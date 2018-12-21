@@ -62,10 +62,13 @@ class UploadFailedActivity : BaseActivity() {
     private fun initdata() {
         mLoadDialog!!.show()
         Thread(Runnable {
+
             var data = File_Cache.readFile(SaveKey.FILE_DATA_NAME)
-            LogUtils.i("未上传成功json数据 = $data")
-            mUpInputFailedBean = MyApp.gson.fromJson(data, UpInputFailedBean::class.java)
-            myHandler!!.sendEmptyMessage(1)
+            if (data != null && data != "") {
+                LogUtils.i("未上传成功json数据 = $data")
+                mUpInputFailedBean = MyApp.gson.fromJson(data, UpInputFailedBean::class.java)
+                myHandler!!.sendEmptyMessage(1)
+            }
         }).start()
     }
 
@@ -126,6 +129,9 @@ class UploadFailedActivity : BaseActivity() {
     }
 
     private fun UploadData() {
+        if (mUpInputFailedBean == null || mUpInputFailedBean!!.data?.size!! == 0) {
+            return
+        }
         isUpLoading = true
         mLoadDialog!!.show("正在上传:" + "0/" + mUpInputFailedBean!!.data.size, false, 15)
         val num = mUpInputFailedBean!!.data.size
@@ -155,8 +161,10 @@ class UploadFailedActivity : BaseActivity() {
 
                     override fun onFailure(code: Int, message: String?) {
                         super.onFailure(code, message)
+                        LogUtils.d(message)
+                        var mes = if (message?.length!! > 200) message?.substring(0, 200) else message
                         mIsUpOkList!![i] = false
-                        upData.failureInfo = "onFailure方法，服务器异常、Timeout $message"
+                        upData.failureInfo = "onFailure方法，服务器异常、Timeout $mes"
                         upData.upLoadCount++
                         var msg = myHandler!!.obtainMessage()
                         msg.obj = message

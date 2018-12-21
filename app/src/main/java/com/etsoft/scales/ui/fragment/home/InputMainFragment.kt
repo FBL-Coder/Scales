@@ -118,7 +118,7 @@ class InputMainFragment : Fragment() {
         }
 
         //后台线程，查询未上传记录，并且自动上传
-        UnUploadRecordTimer.runTimeronUpload(mHandler!!)
+//        UnUploadRecordTimer.runTimeronUpload(mHandler!!)
     }
 
     override fun onStart() {
@@ -396,9 +396,10 @@ class InputMainFragment : Fragment() {
 
                 override fun onFailure(code: Int, message: String?) {
                     super.onFailure(code, message)
+                    var mes = if (message?.length!! > 200) message?.substring(0, 200) else message
                     mActivity!!.mLoadDialog!!.hide()
                     ToastUtil.showText("上传失败，可在未长传界面进行上传")
-                    UpBean.failureInfo = "onFailure方法，服务器或连接异常，返回结果：$message"
+                    UpBean.failureInfo = "onFailure方法，服务器或连接异常，返回结果：$mes"
                     writeData(UpBean)
                 }
             }, "新增入库")

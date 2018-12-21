@@ -27,6 +27,8 @@ class UnUploadRecordTimer {
 
         var mIsUpOkList: Array<Boolean>? = null
 
+
+        //同步线程上传，待优化
         fun runTimeronUpload(handler: Handler) {
             Thread(Runnable {
                 while (true) {
@@ -35,9 +37,9 @@ class UnUploadRecordTimer {
                         if (!MyApp.isUpLoading_UI) {
                             val NETWORK = AppNetworkMgr.getNetworkState(MyApp.mApplication!!.applicationContext)
                             if (NETWORK != 0) {
-                                var data = File_Cache.readFile(SaveKey.FILE_DATA_NAME)
-                                if (data != "") {
-                                    var mFailedBean = MyApp.gson.fromJson(data, UpInputFailedBean::class.java)
+                                var datajson = File_Cache.readFile(SaveKey.FILE_DATA_NAME)
+                                if (datajson != "") {
+                                    var mFailedBean = MyApp.gson.fromJson(datajson, UpInputFailedBean::class.java)
                                     if (mFailedBean!!.data.size > 0) {
                                         LogUtils.i("后台线程查询存在未上传记录，条数为= " + mFailedBean!!.data.size)
                                         isUpLoading_Thread = true
@@ -95,7 +97,7 @@ class UnUploadRecordTimer {
                                         }
                                     } else {
                                         LogUtils.i("后台线程查询没有未上传记录，进入进入睡眠")
-                                        Thread.sleep(600000)
+                                        Thread.sleep(1800000)
                                     }
                                 } else {
                                     LogUtils.i("后台线程返回“”，进入进入睡眠")

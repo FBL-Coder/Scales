@@ -68,6 +68,7 @@ class FailedInfoActivity : BaseActivity() {
         dealId.text = mBean?.dealId
         time.text = mBean?.time
         servicePointId.text = mBean?.servicePointId
+        UpNum.text = "${mBean?.upLoadCount}"
 
         var list = ArrayList<HashMap<String, String>>()
         for (i in mBean!!.recyclings.indices) {

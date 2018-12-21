@@ -11,8 +11,8 @@ android {
         applicationId "com.etsoft.scales"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 9
-        versionName "1.0.8"
+        versionCode 10
+        versionName "1.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -51,11 +51,9 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
-
     //扫描二维码
     implementation 'com.github.XuDaojie:QRCode-Android:v0.4.2'
-
     //打印机标准库
     implementation project(':PrinterDevice')
-
+    implementation 'com.alibaba:fastjson:1.2.54'
 }
