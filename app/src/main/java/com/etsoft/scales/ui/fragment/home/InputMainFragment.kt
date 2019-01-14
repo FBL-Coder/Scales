@@ -671,15 +671,15 @@ class InputMainFragment : Fragment() {
         val df = DecimalFormat("0.0")
         LogUtils.i("四舍五入后总金额为 = ${df.format(total)}")
         var zongjia = df.format(total)
-        //小数的整数部分
-        var intPart = zongjia.substring(0, zongjia.indexOf("."))
-        //小数的小数部分
-        var floatPart = zongjia.substring(zongjia.indexOf(".") + 1)
-        floatPart = if (floatPart.toInt() < 5)
-            "0"
-        else
-            "5"
-        zongjia = "$intPart.$floatPart"
+//        //小数的整数部分
+//        var intPart = zongjia.substring(0, zongjia.indexOf("."))
+//        //小数的小数部分
+//        var floatPart = zongjia.substring(zongjia.indexOf(".") + 1)
+//        floatPart = if (floatPart.toInt() < 5)
+//            "0"
+//        else
+//            "5"
+//        zongjia = "$intPart.$floatPart"
         return zongjia
     }
 

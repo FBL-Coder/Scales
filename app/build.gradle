@@ -55,5 +55,4 @@ dependencies {
     implementation 'com.github.XuDaojie:QRCode-Android:v0.4.2'
     //打印机标准库
     implementation project(':PrinterDevice')
-    implementation 'com.alibaba:fastjson:1.2.54'
 }
