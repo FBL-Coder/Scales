@@ -833,6 +833,13 @@ class InputMainFragment : Fragment() {
                         activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印完成")
                         activity.UpToServer(activity.time, activity.dealid)
+
+                        Thread{
+                            while (true){
+                                Thread.sleep(300000)
+                                activity.getRecycleData(100)
+                            }
+                        }.start()
                     }
                     -1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()

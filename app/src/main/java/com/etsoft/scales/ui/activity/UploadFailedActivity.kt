@@ -21,7 +21,6 @@ import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
-import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_inputfailed_record.*
 import java.lang.ref.WeakReference
 

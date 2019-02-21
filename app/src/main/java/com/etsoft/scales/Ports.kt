@@ -12,7 +12,7 @@ class Ports {
          * 跟接口
          */
 //        var port = "http://garbage.lilinyun.com/"
-        var port = "http://testgarbage.lilinyun.com/"
+         var port = "http://testgarbage.lilinyun.com/"
         /**
          * 登陆接口
          */
