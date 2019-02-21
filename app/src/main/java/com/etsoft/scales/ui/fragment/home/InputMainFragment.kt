@@ -119,6 +119,15 @@ class InputMainFragment : Fragment() {
 
         //后台线程，查询未上传记录，并且自动上传
 //        UnUploadRecordTimer.runTimeronUpload(mHandler!!)
+
+
+        //定时获取回收物列表
+        Thread{
+            while (true){
+                Thread.sleep(300000)
+                getRecycleData(100)
+            }
+        }.start()
     }
 
     override fun onStart() {
@@ -833,13 +842,6 @@ class InputMainFragment : Fragment() {
                         activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印完成")
                         activity.UpToServer(activity.time, activity.dealid)
-
-                        Thread{
-                            while (true){
-                                Thread.sleep(300000)
-                                activity.getRecycleData(100)
-                            }
-                        }.start()
                     }
                     -1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()
