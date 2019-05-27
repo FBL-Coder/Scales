@@ -7,7 +7,6 @@ package com.etsoft.scales
  */
 class Ports {
     companion object {
-
         /**
          * 跟接口
          */

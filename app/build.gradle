@@ -45,12 +45,12 @@ dependencies {
     //多媒体筛选器
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
     //高德定位
-    implementation 'com.amap.api:location:latest.integration'
+    implementation 'com.amap.api:location:4.6.0'
     //异常上报以及应用升级
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
-    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.4.0'
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
-    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
     //扫描二维码
     implementation 'com.github.XuDaojie:QRCode-Android:v0.4.2'
     //打印机标准库

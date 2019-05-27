@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_"
@@ -8,66 +9,215 @@
     <com.etsoft.scales.view.TitleBar
         android:id="@+id/ServerStation_TitleBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_marginBottom="@dimen/dp_10" />
+        android:layout_height="@dimen/dp_40" />
+
 
     <LinearLayout
+        android:id="@+id/Search_View"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingBottom="@dimen/dp_5"
-        android:background="@color/white"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/dp_40"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/shape_search_bg"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/Search"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_40"
+            android:layout_weight="6"
+            android:background="@null"
+            android:focusable="true"
+            android:visibility="visible"
+            app:queryHint="请输入关键字" />
 
         <TextView
+            android:id="@+id/SearchView_Cancle"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:gravity="center"
-            android:text="站点名称"
-            android:textSize="@dimen/sp_14" />
-
-
-        <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:text="站点负责人"
-            android:textSize="@dimen/sp_14" />
-
-        <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"
-            android:text="详细地址"
-            android:textSize="@dimen/sp_14" />
+            android:text="取消"
+            android:textColor="@color/app_color_dan"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
 
-    <View
+    <LinearLayout
+        android:id="@+id/ServerStation_DataView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10"
-        android:background="@color/white_"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
-    <com.andview.refreshview.XRefreshView
-        android:id="@+id/ServerStation_XRefreshView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/ServerStation_List"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/dp_10"
-            android:divider="@color/white___"
-            android:dividerHeight="@dimen/dp_2"
-            android:scrollbarSize="@dimen/dp_3"
-            android:scrollbarThumbVertical="@color/black_" />
+            android:layout_height="@dimen/dp_40"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dp_5">
 
-    </com.andview.refreshview.XRefreshView>
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                android:text="站点名称"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/sp_14" />
 
+
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="站点负责人"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="详细地址"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/sp_14" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/app_color" />
+
+
+        <com.andview.refreshview.XRefreshView
+            android:id="@+id/ServerStation_XRefreshView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/ServerStation_List"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/white___"
+                android:dividerHeight="@dimen/dp_2"
+                android:padding="@dimen/dp_10"
+                android:scrollbarSize="@dimen/dp_3"
+                android:scrollbarThumbVertical="@color/black_" />
+
+        </com.andview.refreshview.XRefreshView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ServerStation_SelectView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/ServerStation_Type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/ServerStation_type1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2"
+                android:background="@color/white"
+                android:button="@null"
+                android:drawableRight="@drawable/selector_check_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="定点回收"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/ServerStation_type2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2"
+                android:background="@color/white"
+                android:button="@null"
+                android:drawableRight="@drawable/selector_check_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="上门回收点"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/ServerStation_type3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2"
+                android:background="@color/white"
+                android:button="@null"
+                android:drawableRight="@drawable/selector_check_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="机关事业单位"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/ServerStation_type4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2"
+                android:background="@color/white"
+                android:button="@null"
+                android:drawableRight="@drawable/selector_check_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="企业"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+            <RadioButton
+                android:id="@+id/ServerStation_type5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2"
+                android:background="@color/white"
+                android:button="@null"
+                android:drawableRight="@drawable/selector_check_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="街道"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/ServerStation_OK"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_50"
+            android:layout_marginTop="@dimen/sp_20"
+            android:background="@drawable/selector_button_login_bg"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </LinearLayout>

@@ -106,7 +106,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="重量/数量"
+            android:text="重量/kg"
             android:textSize="@dimen/dp_12" />
 
         <TextView
@@ -115,7 +115,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="单位"
+            android:text="数量"
             android:textSize="@dimen/dp_12" />
 
         <TextView

@@ -115,7 +115,7 @@ class AddInputAvtivity : BaseActivity() {
 
         when (mType) {
             1 -> {
-                Add_Input_Type_Name.text = "秤台重量"
+                Add_Input_Num.isFocusable = false
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_1?.data!![position]?.price}"
@@ -123,13 +123,15 @@ class AddInputAvtivity : BaseActivity() {
                 Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
             }
             2 -> {
-                Add_Input_Type_Name.text = "数量"
+                Add_Input_Num.hint = "0"
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_2?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_2?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_2?.data!![position]?.price}"
+                Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
+                Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
             }
             3 -> {
-                Add_Input_Type_Name.text = "秤台重量"
+                Add_Input_Num.isFocusable = false
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
@@ -184,7 +186,6 @@ class AddInputAvtivity : BaseActivity() {
 
                             when (mType) {
                                 1 -> {
-
                                     type = MyApp.mRecycleListBean_Type_1?.data!![position]?.name
                                     price = MyApp.mRecycleListBean_Type_1?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
@@ -208,6 +209,7 @@ class AddInputAvtivity : BaseActivity() {
                             }
                             mType_type = mType
                             weight = weight_tv
+                            number = Add_Input_Num.text.toString()
                             weight_all = Add_Input_KG.text.toString()
                             this
                         })

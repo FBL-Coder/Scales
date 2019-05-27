@@ -127,6 +127,7 @@ public class AppInputBean implements Serializable {
         private String recyclingPriceId;
         private String typename;
         private String weight;
+        private String number;
 
         public String getRecyclingPriceId() {
             return recyclingPriceId;
@@ -150,6 +151,14 @@ public class AppInputBean implements Serializable {
 
         public void setWeight(String weight) {
             this.weight = weight;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
         }
     }
 

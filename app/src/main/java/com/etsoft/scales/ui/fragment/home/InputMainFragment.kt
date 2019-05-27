@@ -122,8 +122,8 @@ class InputMainFragment : Fragment() {
 
 
         //定时获取回收物列表
-        Thread{
-            while (true){
+        Thread {
+            while (true) {
                 Thread.sleep(300000)
                 getRecycleData(100)
             }
@@ -362,6 +362,7 @@ class InputMainFragment : Fragment() {
             var lingsBean = AppInputBean.RecyclingsBean()
             lingsBean.recyclingPriceId = mInputLiat[i]?.typeid
             lingsBean.weight = mInputLiat[i]?.weight
+            lingsBean.number = mInputLiat[i]?.number
             lingsBean.typename = mInputLiat[i]?.type
             lingsBeanList.add(lingsBean)
         }
@@ -390,7 +391,9 @@ class InputMainFragment : Fragment() {
             UpBean.failureInfo = "网络不可用，无法上传"
             writeData(UpBean)
         } else {
-            OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(UpBean), object : MyHttpCallback(mActivity) {
+            var str = MyApp.gson.toJson(UpBean)
+            LogUtils.i(str)
+            OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, str, object : MyHttpCallback(mActivity) {
                 override fun onSuccess(resultDesc: ResultDesc?) {
                     mActivity!!.mLoadDialog!!.hide()
                     if (resultDesc!!.getcode() != 0) {
@@ -748,9 +751,9 @@ class InputMainFragment : Fragment() {
 
 
             MyDialog(mActivity!!).setTitle("选择回收物")
-                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0) { dialog, which ->
                         position = which
-                    }).setPositiveButton("确定") { dialog, which ->
+                    }.setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
                         if (names.size == 0) {
                             ToastUtil.showText("该类型没有对应回收物，请重新选择")
@@ -846,6 +849,7 @@ class InputMainFragment : Fragment() {
                     -1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印机发生错误,未能正常打印")
+                        activity.UpToServer(activity.time, activity.dealid)
                     }
                     -2 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()

@@ -1,5 +1,6 @@
 package com.etsoft.scales.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -17,6 +18,7 @@ import com.etsoft.scales.utils.UtilHelpers
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
+import java.lang.ref.WeakReference
 
 
 /**
@@ -30,7 +32,7 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
 
         //流氓式霸屏
         //MyApp.mApplication!!.runTimer()
-        OkHttpUtils.initClient(MyApp.mclient,this)
+        OkHttpUtils.initClient(MyApp.mclient, this)
         if (setView() != null && setView() != 0)
             setContentView(setView()!!)
         try {
@@ -46,7 +48,8 @@ abstract class BaseActivity : com.smartdevice.aidltestdemo.BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        MyApp.mApplication!!.setActivities(this)
+//        var w = WeakReference<Activity>(this)
+//        MyApp.mApplication!!.setActivities(w.get() as Activity)
     }
 
 

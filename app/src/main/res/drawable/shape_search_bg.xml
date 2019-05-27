@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" /> <!-- 填充 -->
+    <!-- stroke中:
+            android:dashWidth表示'-'这样一个横线的宽度
+            android:dashGap表示之间隔开的距离 -->
+    <corners android:radius="@dimen/dp_15"/>
+</shape>

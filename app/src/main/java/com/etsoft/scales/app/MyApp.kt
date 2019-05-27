@@ -235,6 +235,4 @@ open class MyApp : ClientApplication() {
         }
         return false
     }
-
-
 }

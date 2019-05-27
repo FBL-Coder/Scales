@@ -2,7 +2,9 @@ package com.etsoft.scales.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.SearchView
 import android.view.View
+import android.view.animation.AnimationUtils
 import com.andview.refreshview.XRefreshView
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
@@ -16,7 +18,6 @@ import com.etsoft.scales.utils.httpGetDataUtils.MyHttpCallback
 import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.etsoft.scales.utils.httpGetDataUtils.ResultDesc
 import kotlinx.android.synthetic.main.activity_server_station.*
-import okhttp3.Call
 import java.util.*
 
 
@@ -28,6 +29,7 @@ class ServerStationActivity : BaseActivity() {
     private var mListBean: ServerStationBean? = null
     private var Maxpage = 1
     private var page = 1
+    private var mType = 0
     private var mServerStationListViewAdapter: ServerStationListViewAdapter? = null
 
 
@@ -38,18 +40,16 @@ class ServerStationActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        mLoadDialog!!.show()
-        initdata()
     }
-
 
     /**
      * 加载服务站点列表数据
      */
-    private fun initdata(page: Int = 1, linit: Float = 10.0F) {
+    private fun initdata(key: String = "", linit: Float = 10.0F) {
         var pram = HashMap<String, String>()
         pram["limit"] = "$linit"
         pram["page"] = "$page"
+        pram["type"] = "$mType"
         OkHttpUtils.getAsyn(Ports.SERVERLIST, pram, object : MyHttpCallback(this) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
@@ -60,7 +60,7 @@ class ServerStationActivity : BaseActivity() {
                     var list = MyApp.gson.fromJson(resultDesc!!.result, ServerStationBean::class.java)
                     if (list!!.code == 0) {
                         if (mListBean == null) mListBean = list else mListBean!!.data.addAll(list.data)
-                        var pages= mListBean!!.count / linit
+                        var pages = mListBean!!.count / linit
                         Maxpage = Math.ceil(pages.toDouble()).toInt()
                     } else {
                         LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")
@@ -105,7 +105,7 @@ class ServerStationActivity : BaseActivity() {
                     if (page < Maxpage) {
                         page++
                         ServerStation_XRefreshView.mPullLoading = true
-                        initdata(page)
+                        initdata()
                     } else {
                         ServerStation_XRefreshView.setLoadComplete(true)
                         ToastUtil.showText("没有数据了")
@@ -113,7 +113,6 @@ class ServerStationActivity : BaseActivity() {
                 }
             })
         }
-
 
         if (mServerStationListViewAdapter == null) {
             mServerStationListViewAdapter = ServerStationListViewAdapter(mListBean!!)
@@ -126,14 +125,61 @@ class ServerStationActivity : BaseActivity() {
             }
         } else mServerStationListViewAdapter!!.notifyDataSetChanged(mListBean!!)
 
-
     }
 
     private fun initView() {
         ServerStation_TitleBar.run {
             back.setOnClickListener { finish() }
             title.text = "服务站点列表"
-            moor.visibility = View.INVISIBLE
+            moor.setImageResource(R.drawable.ic_search_black_24dp)
+            moor.setOnClickListener {
+                if (Search_View.visibility == View.VISIBLE) {
+                    Search_View.visibility = View.GONE
+                } else {
+                    Search_View.visibility = View.VISIBLE
+                    Search.setIconifiedByDefault(false)
+                    Search.isSubmitButtonEnabled = true
+                    Search.onActionViewExpanded()
+                    SearchView_Cancle.setOnClickListener {
+                        Search.setQuery("", false)
+                        Search_View.visibility = View.GONE
+                    }
+                }
+            }
         }
+
+        ServerStation_Type.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.ServerStation_type1 -> mType = 1
+                R.id.ServerStation_type2 -> mType = 2
+                R.id.ServerStation_type3 -> mType = 3
+                R.id.ServerStation_type4 -> mType = 4
+                R.id.ServerStation_type5 -> mType = 5
+            }
+        }
+
+        ServerStation_OK.setOnClickListener {
+            ServerStation_SelectView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.abc_popup_exit))
+            ServerStation_SelectView.visibility = View.GONE
+            ServerStation_DataView.visibility = View.VISIBLE
+            mLoadDialog?.show()
+            initdata()
+        }
+
+        Search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(queryText: String): Boolean {
+                LogUtils.d("搜索提交数据 = $queryText")
+                if (queryText.isEmpty()) {
+                    ToastUtil.showText("请输入关键字")
+                    return false
+                }
+                initdata()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
     }
 }
