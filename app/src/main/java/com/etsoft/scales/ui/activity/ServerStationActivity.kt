@@ -50,6 +50,7 @@ class ServerStationActivity : BaseActivity() {
         pram["limit"] = "$linit"
         pram["page"] = "$page"
         pram["type"] = "$mType"
+        pram["name"] = "$key"
         OkHttpUtils.getAsyn(Ports.SERVERLIST, pram, object : MyHttpCallback(this) {
 
             override fun onSuccess(resultDesc: ResultDesc?) {
@@ -64,6 +65,11 @@ class ServerStationActivity : BaseActivity() {
                         Maxpage = Math.ceil(pages.toDouble()).toInt()
                     } else {
                         LogUtils.e("获取数据失败:code=${list.code}  msg=${list.msg}")
+                    }
+                    if (ServerStation_DataView.visibility == View.GONE) {
+                        ServerStation_SelectView.startAnimation(AnimationUtils.loadAnimation(this@ServerStationActivity, R.anim.abc_popup_exit))
+                        ServerStation_SelectView.visibility = View.GONE
+                        ServerStation_DataView.visibility = View.VISIBLE
                     }
                     initListView()
                 } catch (e: Exception) {
@@ -159,9 +165,6 @@ class ServerStationActivity : BaseActivity() {
         }
 
         ServerStation_OK.setOnClickListener {
-            ServerStation_SelectView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.abc_popup_exit))
-            ServerStation_SelectView.visibility = View.GONE
-            ServerStation_DataView.visibility = View.VISIBLE
             mLoadDialog?.show()
             initdata()
         }
@@ -173,7 +176,8 @@ class ServerStationActivity : BaseActivity() {
                     ToastUtil.showText("请输入关键字")
                     return false
                 }
-                initdata()
+                mListBean = null
+                initdata(queryText)
                 return true
             }
 

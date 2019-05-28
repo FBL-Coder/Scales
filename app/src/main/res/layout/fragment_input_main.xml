@@ -143,8 +143,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:layout_weight="2"
-        android:divider="@color/white___"
-        android:dividerHeight="@dimen/dp_2"
+        android:divider="@color/app_color"
+        android:dividerHeight="@dimen/dp_1"
         android:padding="@dimen/dp_10"
         android:scrollbarSize="@dimen/dp_3"
         android:scrollbarThumbVertical="@color/black_" />

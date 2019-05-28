@@ -37,6 +37,7 @@ class AddInputAvtivity : BaseActivity() {
 
     private var mHandler: MyHandler? = null
     private var position = 0
+    private var id = 0
     private var mType = -1
     private var mChushiNum = -1
 
@@ -53,8 +54,33 @@ class AddInputAvtivity : BaseActivity() {
 
     private fun initData() {
 
-        position = intent.getIntExtra("position", 0)
+        id = intent.getIntExtra("id", 0)
         mType = intent.getIntExtra("type", -1)
+
+        when (mType) {
+            1 -> {
+                for (i in MyApp.mRecycleListBean_Type_1?.data!!.indices) {
+                    if (MyApp.mRecycleListBean_Type_1?.data!![i].id == id) {
+                        position = i
+                    }
+                }
+            }
+            2 -> {
+                for (i in MyApp.mRecycleListBean_Type_2?.data!!.indices) {
+                    if (MyApp.mRecycleListBean_Type_2?.data!![i].id == id) {
+                        position = i
+                    }
+                }
+            }
+            3 -> {
+                for (i in MyApp.mRecycleListBean_Type_3?.data!!.indices) {
+                    if (MyApp.mRecycleListBean_Type_3?.data!![i].id == id) {
+                        position = i
+                    }
+                }
+            }
+        }
+
         //启动数据监听
         if (mType == 1 || mType == 3) {
             Input_ChuShi.visibility = View.VISIBLE

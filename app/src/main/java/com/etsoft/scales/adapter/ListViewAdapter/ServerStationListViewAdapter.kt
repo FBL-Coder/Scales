@@ -19,7 +19,7 @@ class ServerStationListViewAdapter(bean: ServerStationBean) : BaseAdapter() {
 
     fun notifyDataSetChanged(bean: ServerStationBean) {
         mList = bean.data as ArrayList<ServerStationBean.DataBean>
-        super.notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {

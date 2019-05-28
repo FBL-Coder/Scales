@@ -1,11 +1,12 @@
 package com.etsoft.scales.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Author：FBL  Time： 2018/9/30.
  */
-public class RecycleListBean {
+public class RecycleListBean implements Serializable {
 
 
     /**
@@ -52,7 +53,7 @@ public class RecycleListBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * id : 6
          * uuid : 38d87922d7d38dd5326a292a3b5aa486

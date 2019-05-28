@@ -78,9 +78,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/dp_10"
-            android:divider="@color/white___"
+            android:divider="@color/app_color"
             android:dividerHeight="@dimen/dp_2"
-            android:background="@color/white_"
+            android:background="@color/transparent"
             android:scrollbarSize="@dimen/dp_3"
             android:scrollbarThumbVertical="@color/black_" />
     </com.andview.refreshview.XRefreshView>

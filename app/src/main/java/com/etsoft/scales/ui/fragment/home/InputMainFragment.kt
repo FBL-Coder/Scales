@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v4.app.Fragment
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.TextView
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Ports
 import com.etsoft.scales.R
@@ -20,6 +23,7 @@ import com.etsoft.scales.SaveKey.Companion.FILE_DATA_NAME
 import com.etsoft.scales.Server.UnUploadRecordTimer
 import com.etsoft.scales.adapter.ListViewAdapter.Gift_ListViewAdapter
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
+import com.etsoft.scales.adapter.ListViewAdapter.SelectDialogListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_1
@@ -41,6 +45,7 @@ import com.etsoft.scales.view.ProgressBarDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import io.github.xudaojie.qrcodelib.CaptureActivity
 import kotlinx.android.synthetic.main.activity_out_info.*
+import kotlinx.android.synthetic.main.activity_server_station.*
 import kotlinx.android.synthetic.main.fragment_input_main.*
 import java.lang.ref.WeakReference
 import java.math.BigDecimal
@@ -725,44 +730,69 @@ class InputMainFragment : Fragment() {
             return
         }
 
-        var names = ArrayList<String>()
-        var position = 0
+        var mSelects = ArrayList<RecycleListBean.DataBean>()
+        var names_search = ArrayList<RecycleListBean.DataBean>()
+        var mPosition = 0
         if (mType == -1) {
             showTypeDialog()
         } else {
             when (mType) {
                 1 -> {
                     for (i in mRecycleListBean_Type_1!!.data.indices) {
-                        names.add(mRecycleListBean_Type_1!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
+                        mSelects.add(mRecycleListBean_Type_1!!.data[i])
                     }
                 }
                 2 -> {
                     for (a in mRecycleListBean_Type_2!!.data.indices) {
-                        names.add(mRecycleListBean_Type_2!!.data[a].name + "       ￥" + mRecycleListBean_Type_2!!.data[a].price)
+                        mSelects.add(mRecycleListBean_Type_2!!.data[a])
                     }
 
                 }
                 3 -> {
                     for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        names.add(mRecycleListBean_Type_3!!.data[i].name + "       ￥" + mRecycleListBean_Type_3!!.data[i].price)
+                        mSelects.add(mRecycleListBean_Type_3!!.data[i])
                     }
                 }
             }
 
+            names_search.addAll(mSelects)
 
-            MyDialog(mActivity!!).setTitle("选择回收物")
-                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0) { dialog, which ->
-                        position = which
-                    }.setPositiveButton("确定") { dialog, which ->
+//            MyDialog(mActivity!!).setTitle("选择回收物")
+//                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0) { dialog, which ->
+//                        position = which
+//                    }.setPositiveButton("确定") { dialog, which ->
+//                        dialog.dismiss()
+//                        if (names.size == 0) {
+//                            ToastUtil.showText("该类型没有对应回收物，请重新选择")
+//                            return@setPositiveButton
+//                        }
+//                        //跳转到具体添加回收物页面
+//                        startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
+//                            putExtra("position", position)
+//                            putExtra("type", mType)
+//                            this
+//                        }, Activity.RESULT_FIRST_USER)
+//                    }.setNegativeButton("取消") { dialog, which ->
+//                        dialog.dismiss()
+//                    }.create().run {
+//                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+//                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                        this
+//                    }.show()
+
+            var dialog = MyDialog(mActivity!!).setTitle("选择回收物")
+                    .setView(R.layout.dialog_inpiut_key)
+                    .setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
-                        if (names.size == 0) {
+                        if (mSelects.size == 0) {
                             ToastUtil.showText("该类型没有对应回收物，请重新选择")
                             return@setPositiveButton
                         }
                         //跳转到具体添加回收物页面
                         startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
-                            putExtra("position", position)
+//                            putExtra("position", mPosition)
                             putExtra("type", mType)
+                            putExtra("id",names_search[mPosition].id)
                             this
                         }, Activity.RESULT_FIRST_USER)
                     }.setNegativeButton("取消") { dialog, which ->
@@ -771,7 +801,51 @@ class InputMainFragment : Fragment() {
                         window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
                                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         this
-                    }.show()
+                    }
+            dialog.show()
+
+            var sSelectAdapter = SelectDialogListViewAdapter(names_search)
+            var Search = dialog.findViewById<SearchView>(R.id.Search)
+            var AllList = dialog.findViewById<TextView>(R.id.AllList)
+            var ListView = dialog.findViewById<ListView>(R.id.ListView)
+            var ListViewnull = dialog.findViewById<TextView>(R.id.ListView_null)
+            ListView?.setOnItemClickListener { parent, view, position, id ->
+                mPosition = position
+                sSelectAdapter.notifyDataSetChanged(position, names_search)
+            }
+            ListView?.emptyView = ListViewnull
+            ListView?.adapter = sSelectAdapter
+            Search?.setIconifiedByDefault(false)
+            Search?.isSubmitButtonEnabled = true
+            Search?.clearFocus()
+            Search?.onActionViewExpanded()
+            AllList?.setOnClickListener {
+                Search?.setQuery("", false)
+                names_search.addAll(mSelects)
+                sSelectAdapter = SelectDialogListViewAdapter(names_search)
+                ListView?.adapter = sSelectAdapter
+            }
+            Search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(queryText: String): Boolean {
+                    LogUtils.d("搜索提交数据 = $queryText")
+                    if (queryText.isEmpty()) {
+                        ToastUtil.showText("请输入关键字")
+                        return false
+                    }
+                    names_search.clear()
+                    for (i in mSelects.indices) {
+                        if (mSelects[i].name.contains(queryText))
+                            names_search.add(mSelects[i])
+                    }
+                    sSelectAdapter = SelectDialogListViewAdapter(names_search)
+                    ListView?.adapter = sSelectAdapter
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String): Boolean {
+                    return false
+                }
+            })
         }
     }
 
@@ -812,9 +886,9 @@ class InputMainFragment : Fragment() {
             if (mRecycleListBean_Type_3!!.data.size > 0) name.add("低价回收物")
 
             MyDialog(mActivity!!).setTitle("选择回收物类型")
-                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, name), 0, DialogInterface.OnClickListener { dialog, which ->
-                        mType = which + 1
-                    }).setPositiveButton("确定") { dialog, which ->
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, name), 0) { dialog, which ->
+                        this.mType = which + 1
+                    }.setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
                         if (mType == -1)
                             mType = 1
@@ -849,7 +923,6 @@ class InputMainFragment : Fragment() {
                     -1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印机发生错误,未能正常打印")
-                        activity.UpToServer(activity.time, activity.dealid)
                     }
                     -2 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()

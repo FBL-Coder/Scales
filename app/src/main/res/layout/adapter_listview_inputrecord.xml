@@ -10,7 +10,7 @@
         android:id="@+id/Input_Record_Time"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_20"
-        android:background="@color/white__"
+        android:background="@color/white_"
         android:gravity="center_vertical"
         android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/dp_5"
             android:layout_weight="0.5"
-            android:background="@color/white___"
+            android:background="@color/app_color"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_12" />
