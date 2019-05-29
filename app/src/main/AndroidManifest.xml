@@ -42,6 +42,7 @@
         <activity
             android:name="com.etsoft.scales.ui.activity.MainActivity"
             android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
 
         <!--登陆-->

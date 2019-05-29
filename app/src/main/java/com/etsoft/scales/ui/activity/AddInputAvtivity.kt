@@ -81,29 +81,26 @@ class AddInputAvtivity : BaseActivity() {
             }
         }
 
-        //启动数据监听
-        if (mType == 1 || mType == 3) {
-            Input_ChuShi.visibility = View.VISIBLE
-            if (mBluetoothDataIsEnable) {
-                isReadData = true
-                BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
-            } else {
-                Add_Input_KG.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        Input_ChuShi.visibility = View.VISIBLE
+        if (mBluetoothDataIsEnable) {
+            isReadData = true
+            BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
+        } else {
+            Add_Input_KG.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        Add_Input_5.isChecked = false
-                        Add_Input_10.isChecked = false
-                        Add_Input_20.isChecked = false
-                        mChushiNum = -1
-                        Add_Input_KG_OK.text = s
-                    }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    Add_Input_5.isChecked = false
+                    Add_Input_10.isChecked = false
+                    Add_Input_20.isChecked = false
+                    mChushiNum = -1
+                    Add_Input_KG_OK.text = s
+                }
 
-                    override fun afterTextChanged(s: Editable?) {
+                override fun afterTextChanged(s: Editable?) {
 
-                    }
-                })
-            }
+                }
+            })
         }
         Add_Input_KG.filters = arrayOf<InputFilter>(MoneyValueFilter().setDigits(1))
 
@@ -191,15 +188,19 @@ class AddInputAvtivity : BaseActivity() {
         Add_Input_Cancle.setOnClickListener { finish() }
 
         Add_Input_Ok.setOnClickListener {
-            var weight_tv: String
+            var weight_tv = Add_Input_KG.text.toString()
+            var num = Add_Input_Num.text.toString()
+
             if (mType == 2) {
-                weight_tv = Add_Input_KG.text.toString()
                 if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
+                    ToastUtil.showText("货物重量不能为空")
+                    return@setOnClickListener
+                }
+                if (num == "0" || num == "") {
                     ToastUtil.showText("货物数量不能为空")
                     return@setOnClickListener
                 }
             } else {
-                weight_tv = Add_Input_KG_OK.text.toString()
                 if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
                     ToastUtil.showText("货物重量不能为空")
                     return@setOnClickListener
@@ -223,7 +224,7 @@ class AddInputAvtivity : BaseActivity() {
                                     price = MyApp.mRecycleListBean_Type_2?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_2?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_2?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * weight_tv.toDouble())
+                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * num.toDouble())
                                 }
                                 3 -> {
                                     type = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
@@ -235,7 +236,7 @@ class AddInputAvtivity : BaseActivity() {
                             }
                             mType_type = mType
                             weight = weight_tv
-                            number = Add_Input_Num.text.toString()
+                            number = num
                             weight_all = Add_Input_KG.text.toString()
                             this
                         })

@@ -4,6 +4,7 @@
     android:layout_height="@dimen/dp_50"
     android:paddingLeft="@dimen/dp_10"
     android:background="@color/white"
+    android:foreground="?android:attr/selectableItemBackground"
     android:paddingRight="@dimen/dp_10"
     android:orientation="horizontal">
 

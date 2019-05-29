@@ -2,6 +2,8 @@ package com.etsoft.scales.ui.fragment.home
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +14,8 @@ import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
@@ -452,147 +456,78 @@ class InputMainFragment : Fragment() {
                     var type = ""
                     mIzkcService.setTypeface(1)
                     mIzkcService.setFontSize(1)
-                    if (mType == 2) {
 
-                        var array = arrayOf("  类 型 ", "  数 量", "  单 价  ", " 总 价  ")
-                        var array1 = intArrayOf(2, 6, 6, 2)
-                        var array2 = intArrayOf(1, 1, 1, 1)
-                        mIzkcService.printColumnsText(array, array1, array2)
+                    var array = arrayOf(" 类型 ", "  有效重量 ", " 除杂重量", "单价 ", "  总价  ")
+                    var array1 = intArrayOf(1, 2, 2, 2, 2)
+                    var array2 = intArrayOf(0, 0, 0, 0, 0)
+                    mIzkcService.printColumnsText(array, array1, array2)
 
-                        mIzkcService.printGBKText("------------------------------------------------")
+                    mIzkcService.printGBKText("------------------------------------------------")
 
-                        for (i in mInputLiat.indices) {
-                            var name_type = getSize(mInputLiat[i].type)
-                            if (name_type > 8) {
-                                mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 8).toString()
-                            }
-                            var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight, mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
-                            var no2 = 0
-                            var no3 = 0
-                            var no4 = 0
-                            var no5 = 0
-                            var no6 = 0
-                            when (name_type) {//类型
-                                1F -> no2 = 14
-                                1.5F -> no2 = 13
-                                2F -> no2 = 12
-                                2.5F -> no2 = 11
-                                3F -> no2 = 10
-                                3.5F -> no2 = 9
-                                4F -> no2 = 8
-                                4.5F -> no2 = 7
-                                5F -> no2 = 6
-                                5.5F -> no2 = 5
-                                6F -> no2 = 4
-                                6.5F -> no2 = 3
-                                7F -> no2 = 2
-                                7.5F -> no2 = 1
-                                8F -> no2 = 0
-                            }
-                            when (mInputLiat[i].weight.length) {//数量
-                                1 -> no3 = 5
-                                2 -> no3 = 4
-                                3 -> no3 = 3
-                                4 -> no3 = 2
-                                5 -> no3 = 1
-                            }
+                    for (i in mInputLiat.indices) {
 
-                            when (mInputLiat[i].price.length) {//单价
-                                1 -> no5 = 7
-                                2 -> no5 = 6
-                                3 -> no5 = 5
-                                4 -> no5 = 4
-                            }
+                        var name_type = getSize(mInputLiat[i].type)
+                        if (name_type >= 4) {
+                            mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 5).toString()
+                        }
+                        var Chuzanum = mInputLiat[i].weight_all.toDouble() - mInputLiat[i].weight.toDouble()
+                        var Chuzi = DecimalFormat("0.0").run {
+                            roundingMode = RoundingMode.DOWN
+                            this
+                        }.format(Chuzanum)
 
-                            when (mInputLiat[i].total.length) {//总价
-                                3 -> no6 = 7
-                                4 -> no6 = 6
-                                5 -> no6 = 5
-                                6 -> no6 = 4
-                                7 -> no6 = 3
-                            }
-
-                            //                          0       6       0       4       3
-                            LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 -- $no5 --$no6")
-                            var array3 = intArrayOf(no2, no3, no4, no5, no6)
-                            var array4 = intArrayOf(1, 1, 1, 1, 1)
-                            mIzkcService.printColumnsText(array, array3, array4)
-                            mIzkcService.printGBKText("\n")
+//                        var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight + " " + mInputLiat[i].unit, Chuzi + " " + mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
+                        var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight + " kg", "$Chuzi kg", "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
+                        var no2 = 0
+                        var no3 = 0
+                        var no4 = 0
+                        var no6 = 0
+                        var no7 = 0
+                        when (name_type) {//类型
+                            1F -> no2 = 8
+                            1.5F -> no2 = 7
+                            2F -> no2 = 6
+                            2.5F -> no2 = 5
+                            3F -> no2 = 4
+                            3.5F -> no2 = 3
+                            4F -> no2 = 2
+                            4.5F -> no2 = 1
+                            5F -> no2 = 0
+                        }
+                        when (mInputLiat[i].weight.length) {//有效重量
+                            1 -> no3 = 5
+                            2 -> no3 = 4
+                            3 -> no3 = 3
+                            4 -> no3 = 2
+                            5 -> no3 = 1
+                        }
+                        when (mInputLiat[i].weight.length) {//除杂重量
+                            1 -> no4 = 6
+                            2 -> no4 = 5
+                            3 -> no4 = 4
+                            4 -> no4 = 3
+                        }
+                        when (mInputLiat[i].price.length) {//单价
+                            1 -> no6 = 4
+                            2 -> no6 = 3
+                            3 -> no6 = 2
+                            4 -> no6 = 1
                         }
 
-                    } else {
-
-                        var array = arrayOf(" 类型 ", "  有效重量 ", " 除杂重量", "单价 ", "  总价  ")
-                        var array1 = intArrayOf(1, 2, 2, 2, 2)
-                        var array2 = intArrayOf(0, 0, 0, 0, 0)
-                        mIzkcService.printColumnsText(array, array1, array2)
-
-                        mIzkcService.printGBKText("------------------------------------------------")
-
-                        for (i in mInputLiat.indices) {
-
-                            var name_type = getSize(mInputLiat[i].type)
-                            if (name_type > 5) {
-                                mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 5).toString()
-                            }
-                            var Chuzanum = mInputLiat[i].weight_all.toDouble() - mInputLiat[i].weight.toDouble()
-                            var Chuzi = DecimalFormat("0.0").run {
-                                roundingMode = RoundingMode.DOWN
-                                this
-                            }.format(Chuzanum)
-
-                            var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight + " " + mInputLiat[i].unit, Chuzi + " " + mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
-                            var no2 = 0
-                            var no3 = 0
-                            var no4 = 0
-                            var no6 = 0
-                            var no7 = 0
-                            when (name_type) {//类型
-                                1F -> no2 = 8
-                                1.5F -> no2 = 7
-                                2F -> no2 = 6
-                                2.5F -> no2 = 5
-                                3F -> no2 = 4
-                                3.5F -> no2 = 3
-                                4F -> no2 = 2
-                                4.5F -> no2 = 1
-                                5F -> no2 = 0
-                            }
-                            when (mInputLiat[i].weight.length) {//有效重量
-                                1 -> no3 = 5
-                                2 -> no3 = 4
-                                3 -> no3 = 3
-                                4 -> no3 = 2
-                                5 -> no3 = 1
-                            }
-                            when (mInputLiat[i].weight.length) {//除杂重量
-                                1 -> no4 = 6
-                                2 -> no4 = 5
-                                3 -> no4 = 4
-                                4 -> no4 = 3
-                            }
-                            when (mInputLiat[i].price.length) {//单价
-                                1 -> no6 = 4
-                                2 -> no6 = 3
-                                3 -> no6 = 2
-                                4 -> no6 = 1
-                            }
-
-                            when (mInputLiat[i].total.length) {//总价
-                                3 -> no7 = 5
-                                4 -> no7 = 4
-                                5 -> no7 = 3
-                                6 -> no7 = 2
-                                7 -> no7 = 1
-                            }
-
-                            //                          0       6       0       4       3
-                            LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 --  --$no6")
-                            var array3 = intArrayOf(no2, no3, no4, no6, no7)
-                            var array4 = intArrayOf(1, 1, 1, 1, 1)
-                            mIzkcService.printColumnsText(array, array3, array4)
-                            mIzkcService.printGBKText("\n")
+                        when (mInputLiat[i].total.length) {//总价
+                            3 -> no7 = 5
+                            4 -> no7 = 4
+                            5 -> no7 = 3
+                            6 -> no7 = 2
+                            7 -> no7 = 1
                         }
+
+                        //                          0       6       0       4       3
+                        LogUtils.i("打印间距 = $no2 -- $no3 -- $no4 --  --$no6")
+                        var array3 = intArrayOf(no2, no3, no4, no6, no7)
+                        var array4 = intArrayOf(1, 1, 1, 1, 1)
+                        mIzkcService.printColumnsText(array, array3, array4)
+                        mIzkcService.printGBKText("\n")
                     }
 
                     mIzkcService.setTypeface(0)
@@ -616,19 +551,20 @@ class InputMainFragment : Fragment() {
 
                     mIzkcService.printGBKText("********************************")
                     var ZongZhong = ""
-                    if (mType == 2) {
-                        var NumAll = 0
-                        for (i in mInputLiat.indices) {
-                            NumAll += mInputLiat[i].weight.toInt()
-                        }
-                        ZongZhong = "累计数量：" + NumAll + "台"
-                    } else {
-                        var WeightAll = 0.000
-                        for (i in mInputLiat.indices) {
-                            WeightAll += mInputLiat[i].weight.toDouble()
-                        }
-                        ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
+                    var Num = 0
+
+                    for (i in mInputLiat.indices) {
+                        Num += mInputLiat[i].number.toInt()
                     }
+
+                    mIzkcService.printGBKText("累计数量：$Num\n")
+
+                    var WeightAll = 0.000
+                    for (i in mInputLiat.indices) {
+                        WeightAll += mInputLiat[i].weight.toDouble()
+                    }
+                    ZongZhong = "累计重量：" + DecimalFormat("0.00").format(WeightAll) + "kg"
+
                     mIzkcService.printGBKText(ZongZhong + "\n")
 
                     var ZongJia = ""
@@ -790,9 +726,9 @@ class InputMainFragment : Fragment() {
                         }
                         //跳转到具体添加回收物页面
                         startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
-//                            putExtra("position", mPosition)
+                            //                            putExtra("position", mPosition)
                             putExtra("type", mType)
-                            putExtra("id",names_search[mPosition].id)
+                            putExtra("id", names_search[mPosition].id)
                             this
                         }, Activity.RESULT_FIRST_USER)
                     }.setNegativeButton("取消") { dialog, which ->
@@ -804,6 +740,7 @@ class InputMainFragment : Fragment() {
                     }
             dialog.show()
 
+            (mActivity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(mActivity?.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
             var sSelectAdapter = SelectDialogListViewAdapter(names_search)
             var Search = dialog.findViewById<SearchView>(R.id.Search)
             var AllList = dialog.findViewById<TextView>(R.id.AllList)
@@ -818,13 +755,13 @@ class InputMainFragment : Fragment() {
             Search?.setIconifiedByDefault(false)
             Search?.isSubmitButtonEnabled = true
             Search?.clearFocus()
-            Search?.onActionViewExpanded()
             AllList?.setOnClickListener {
                 Search?.setQuery("", false)
                 names_search.addAll(mSelects)
                 sSelectAdapter = SelectDialogListViewAdapter(names_search)
                 ListView?.adapter = sSelectAdapter
             }
+            HideKeyboard(Search!!)
             Search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(queryText: String): Boolean {
                     LogUtils.d("搜索提交数据 = $queryText")
@@ -951,4 +888,10 @@ class InputMainFragment : Fragment() {
             }
         }
     }
+
+    fun HideKeyboard(v: View) {
+        var imm = v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0)
+    }
+
 }
