@@ -92,6 +92,5 @@ class Ports {
          */
         var GIFTLIST = port + "webapi/Gift/list"
 
-
     }
 }

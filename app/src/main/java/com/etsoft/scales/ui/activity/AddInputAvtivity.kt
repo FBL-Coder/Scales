@@ -189,6 +189,7 @@ class AddInputAvtivity : BaseActivity() {
 
         Add_Input_Ok.setOnClickListener {
             var weight_tv = Add_Input_KG.text.toString()
+            var weight_tv_ok = Add_Input_KG_OK.text.toString()
             var num = Add_Input_Num.text.toString()
 
             if (mType == 2) {
@@ -217,7 +218,7 @@ class AddInputAvtivity : BaseActivity() {
                                     price = MyApp.mRecycleListBean_Type_1?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_1?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * weight_tv.toDouble())
+                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * weight_tv_ok.toDouble())
                                 }
                                 2 -> {
                                     type = MyApp.mRecycleListBean_Type_2?.data!![position]?.name
@@ -235,9 +236,9 @@ class AddInputAvtivity : BaseActivity() {
                                 }
                             }
                             mType_type = mType
-                            weight = weight_tv
+                            weight = weight_tv_ok
                             number = num
-                            weight_all = Add_Input_KG.text.toString()
+                            weight_all = weight_tv
                             this
                         })
                         this

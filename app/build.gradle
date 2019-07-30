@@ -11,8 +11,8 @@ android {
         applicationId "com.etsoft.scales"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 14
-        versionName "1.1.4"
+        versionCode 16
+        versionName "1.1.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

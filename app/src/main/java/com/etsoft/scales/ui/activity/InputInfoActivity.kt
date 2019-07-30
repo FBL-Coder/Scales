@@ -20,7 +20,6 @@ class InputInfoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-
         initData()
     }
 
@@ -31,13 +30,14 @@ class InputInfoActivity : BaseActivity() {
         if (content != null) {
             Type.text = content?.recycling_price?.name
             Uuid.text = content?.recycling_price?.uuid
-            weight.text = content?.weight.toString() + content?.recycling_price?.unit
+            weight.text = content?.weight.toString() + "kg"
+            num.text = content?.number.toString()
             price.text = content?.recycling_price?.price.toString()
             total.text = content?.pay_money.toString()
             pay_type.text = if (content?.pay_type == 1) "现金" else "其他"
             username.text = content?.user_name
             userPhone.text = content?.user_phone
-            workname.text = content?.staff_id.toString() + "NULL name"
+            workname.text = content?.staff_id.toString()
             ServerStation.text = content?.service_point?.name
             serverPhone.text = content?.service_point?.functionary_phone
             date.text = content?.update_time

@@ -467,8 +467,8 @@ class InputMainFragment : Fragment() {
                     for (i in mInputLiat.indices) {
 
                         var name_type = getSize(mInputLiat[i].type)
-                        if (name_type >= 4) {
-                            mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 5).toString()
+                        if (name_type > 4) {
+                            mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 4).toString()
                         }
                         var Chuzanum = mInputLiat[i].weight_all.toDouble() - mInputLiat[i].weight.toDouble()
                         var Chuzi = DecimalFormat("0.0").run {
@@ -891,7 +891,7 @@ class InputMainFragment : Fragment() {
 
     fun HideKeyboard(v: View) {
         var imm = v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0)
+        imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0)
     }
 
 }

@@ -1,6 +1,7 @@
 package com.etsoft.scales.utils.httpGetDataUtils;
 
 import android.graphics.Bitmap;
+import android.os.Looper;
 
 import com.apkfuns.logutils.LogUtils;
 import com.etsoft.scales.app.MyApp;
@@ -192,7 +193,9 @@ public class OkHttpUtils {
 
         int NETWORK = AppNetworkMgr.getNetworkState(MyApp.Companion.getMApplication().getApplicationContext());
         if (NETWORK == 0) {
+            Looper.prepare();
             ToastUtil.showText("请检查网络连接");
+            Looper.loop();
             if (mActivity != null) {
                 mActivity.getMLoadDialog().hide();
             }

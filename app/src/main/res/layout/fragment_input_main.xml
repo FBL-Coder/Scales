@@ -24,8 +24,8 @@
             android:id="@+id/Input_Main_Title"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_40"
-            android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/white"
@@ -59,16 +59,16 @@
         android:id="@+id/Input_Main_Record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_6"
         android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginBottom="@dimen/dp_6"
         android:background="@color/white__"
         android:drawableRight="@mipmap/ic_chevron_right_white_24dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center_vertical|right"
-        android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
         android:paddingTop="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_5"
         android:text="入库记录"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
@@ -86,19 +86,20 @@
             android:id="@+id/Information_Item_1"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="1.5"
             android:gravity="center"
-            android:text="编号"
-            android:textSize="@dimen/sp_12" />
+            android:text="类型"
+            android:textSize="@dimen/dp_12" />
 
         <TextView
             android:id="@+id/Information_Item_2"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="类型"
+            android:text="总重量"
             android:textSize="@dimen/dp_12" />
+
 
         <TextView
             android:id="@+id/Information_Item_3"
@@ -106,8 +107,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="重量/kg"
+            android:text="有效重量"
             android:textSize="@dimen/dp_12" />
+
 
         <TextView
             android:id="@+id/Information_Item_4"
