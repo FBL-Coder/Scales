@@ -6,13 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
 
+    //jks pass = longlong
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.etsoft.scales"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 16
-        versionName "1.1.6"
+        versionCode 17
+        versionName "1.1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -79,6 +79,13 @@ class AddInputAvtivity : BaseActivity() {
                     }
                 }
             }
+            4 -> {
+                for (i in MyApp.mRecycleListBean_Type_4?.data!!.indices) {
+                    if (MyApp.mRecycleListBean_Type_4?.data!![i].id == id) {
+                        position = i
+                    }
+                }
+            }
         }
 
         Input_ChuShi.visibility = View.VISIBLE
@@ -162,6 +169,14 @@ class AddInputAvtivity : BaseActivity() {
                 Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
                 Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
             }
+            4 -> {
+                Add_Input_Num.isFocusable = false
+                Add_Input_Type.text = MyApp.mRecycleListBean_Type_4?.data!![position]?.name
+                Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_4?.data!![position]?.unit
+                Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_4?.data!![position]?.price}"
+                Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
+                Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
+            }
         }
         var serverName = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "未选择") as String
         Input_ServerStation.text = serverName
@@ -233,6 +248,13 @@ class AddInputAvtivity : BaseActivity() {
                                     unit = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_3?.data!![position]?.id.toString()
                                     total = "-/-"
+                                }
+                                4 -> {
+                                    type = MyApp.mRecycleListBean_Type_4?.data!![position]?.name
+                                    price = MyApp.mRecycleListBean_Type_4?.data!![position]?.price.toString()
+                                    unit = MyApp.mRecycleListBean_Type_4?.data!![position]?.unit
+                                    typeid = MyApp.mRecycleListBean_Type_4?.data!![position]?.id.toString()
+                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_4!!.data[position].price * weight_tv_ok.toDouble())
                                 }
                             }
                             mType_type = mType

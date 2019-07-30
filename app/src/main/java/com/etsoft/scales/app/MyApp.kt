@@ -67,6 +67,7 @@ open class MyApp : ClientApplication() {
         var mRecycleListBean_Type_1: RecycleListBean? = null
         var mRecycleListBean_Type_2: RecycleListBean? = null
         var mRecycleListBean_Type_3: RecycleListBean? = null
+        var mRecycleListBean_Type_4: RecycleListBean? = null
 
         /**
          * OkhttpClirnt

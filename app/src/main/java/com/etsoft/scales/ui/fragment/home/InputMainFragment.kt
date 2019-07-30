@@ -33,6 +33,7 @@ import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_1
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_2
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_3
+import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_4
 import com.etsoft.scales.bean.*
 import com.etsoft.scales.netWorkListener.AppNetworkMgr
 import com.etsoft.scales.receiver.BlueBoothReceiver
@@ -185,12 +186,15 @@ class InputMainFragment : Fragment() {
                         mRecycleListBean_Type_2!!.data = ArrayList<RecycleListBean.DataBean>()
                         mRecycleListBean_Type_3 = RecycleListBean()
                         mRecycleListBean_Type_3!!.data = ArrayList<RecycleListBean.DataBean>()
+                        mRecycleListBean_Type_4 = RecycleListBean()
+                        mRecycleListBean_Type_4!!.data = ArrayList<RecycleListBean.DataBean>()
                         mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
                         for (i in mRecycleListBean!!.data!!.indices) {
                             when (mRecycleListBean!!.data[i].type) {
                                 1 -> mRecycleListBean_Type_1!!.data.add(mRecycleListBean!!.data[i])
                                 2 -> mRecycleListBean_Type_2!!.data.add(mRecycleListBean!!.data[i])
                                 3 -> mRecycleListBean_Type_3!!.data.add(mRecycleListBean!!.data[i])
+                                4 -> mRecycleListBean_Type_4!!.data.add(mRecycleListBean!!.data[i])
                             }
                         }
                         if (type == 1)
@@ -689,6 +693,11 @@ class InputMainFragment : Fragment() {
                         mSelects.add(mRecycleListBean_Type_3!!.data[i])
                     }
                 }
+                4 -> {
+                    for (i in mRecycleListBean_Type_4!!.data.indices) {
+                        mSelects.add(mRecycleListBean_Type_4!!.data[i])
+                    }
+                }
             }
 
             names_search.addAll(mSelects)
@@ -821,6 +830,7 @@ class InputMainFragment : Fragment() {
             if (mRecycleListBean_Type_1!!.data.size > 0) name.add("再生资源")
             if (mRecycleListBean_Type_2!!.data.size > 0) name.add("电子废弃物")
             if (mRecycleListBean_Type_3!!.data.size > 0) name.add("低价回收物")
+            if (mRecycleListBean_Type_4!!.data.size > 0) name.add("有毒有害物")
 
             MyDialog(mActivity!!).setTitle("选择回收物类型")
                     .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, name), 0) { dialog, which ->
