@@ -572,16 +572,14 @@ class InputMainFragment : Fragment() {
                     mIzkcService.printGBKText(ZongZhong + "\n")
 
                     var ZongJia = ""
-                    if (UpType == 3) {
-                        ZongJia = "累计总额：￥-/-"
-                    } else {
-                        var MeonyAll = 0.000
-                        for (i in mInputLiat.indices) {
-                            MeonyAll += mInputLiat[i].total.toDouble()
-                            LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
-                        }
-                        ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
+
+                    var MeonyAll = 0.000
+                    for (i in mInputLiat.indices) {
+                        MeonyAll += mInputLiat[i].total.toDouble()
+                        LogUtils.i("每个类型总价=" + mInputLiat[i].total.toDouble())
                     }
+                    ZongJia = "累计总额：￥" + totalMoney(MeonyAll)
+
                     mIzkcService.printGBKText(ZongJia + "\n")
 
                     mIzkcService.printGBKText("操 作 员：" + MyApp.UserInfo!!.data.name + "\n")
@@ -679,23 +677,27 @@ class InputMainFragment : Fragment() {
             when (mType) {
                 1 -> {
                     for (i in mRecycleListBean_Type_1!!.data.indices) {
-                        mSelects.add(mRecycleListBean_Type_1!!.data[i])
+                        if (mRecycleListBean_Type_1!!.data[i].status == 1)
+                            mSelects.add(mRecycleListBean_Type_1!!.data[i])
                     }
                 }
                 2 -> {
                     for (a in mRecycleListBean_Type_2!!.data.indices) {
-                        mSelects.add(mRecycleListBean_Type_2!!.data[a])
+                        if (mRecycleListBean_Type_2!!.data[a].status == 1)
+                            mSelects.add(mRecycleListBean_Type_2!!.data[a])
                     }
 
                 }
                 3 -> {
                     for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        mSelects.add(mRecycleListBean_Type_3!!.data[i])
+                        if (mRecycleListBean_Type_3!!.data[i].status == 1)
+                            mSelects.add(mRecycleListBean_Type_3!!.data[i])
                     }
                 }
                 4 -> {
                     for (i in mRecycleListBean_Type_4!!.data.indices) {
-                        mSelects.add(mRecycleListBean_Type_4!!.data[i])
+                        if (mRecycleListBean_Type_4!!.data[i].status == 1)
+                            mSelects.add(mRecycleListBean_Type_4!!.data[i])
                     }
                 }
             }
@@ -840,7 +842,6 @@ class InputMainFragment : Fragment() {
                         if (mType == -1)
                             mType = 1
                         showSelectDialog()
-
                     }.setNegativeButton("取消") { dialog, which ->
                         dialog.dismiss()
                     }.create().run {

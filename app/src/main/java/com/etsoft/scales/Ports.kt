@@ -31,12 +31,13 @@ class Ports {
         /**
          * 入库列表
          */
-        var INPUTBACKLIST = port + "webapi/Replenishstockdetails/list"
+        var INPUTBACKLIST = port + "webapi/Replenishstockdetails/listV2"
         /**
          * 新增入库
          * 单个入库
          */
         var ADDINPUTBACK = port + "webapi/Replenishstockdetails/insert"
+
         /**
          * 新增出库
          */
@@ -66,7 +67,6 @@ class Ports {
          */
         var SERVERLIST = port + "webapi/Servicepoint/list"
 
-
         /**
          * 服务站详情
          */
@@ -91,6 +91,5 @@ class Ports {
          * 礼品接口
          */
         var GIFTLIST = port + "webapi/Gift/list"
-
     }
 }

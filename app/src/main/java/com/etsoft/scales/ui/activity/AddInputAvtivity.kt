@@ -244,10 +244,10 @@ class AddInputAvtivity : BaseActivity() {
                                 }
                                 3 -> {
                                     type = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
-                                    price = "-/-"
+                                    price = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
                                     unit = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_3?.data!![position]?.id.toString()
-                                    total = "-/-"
+                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * weight_tv_ok.toDouble())
                                 }
                                 4 -> {
                                     type = MyApp.mRecycleListBean_Type_4?.data!![position]?.name
