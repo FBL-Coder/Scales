@@ -145,7 +145,6 @@ class AddInputAvtivity : BaseActivity() {
 
         when (mType) {
             1 -> {
-                Add_Input_Num.isFocusable = false
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_1?.data!![position]?.price}"
@@ -161,7 +160,6 @@ class AddInputAvtivity : BaseActivity() {
                 Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
             }
             3 -> {
-                Add_Input_Num.isFocusable = false
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
@@ -170,7 +168,6 @@ class AddInputAvtivity : BaseActivity() {
                 Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
             }
             4 -> {
-                Add_Input_Num.isFocusable = false
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_4?.data!![position]?.name
                 Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_4?.data!![position]?.unit
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_4?.data!![position]?.price}"
@@ -206,19 +203,13 @@ class AddInputAvtivity : BaseActivity() {
             var weight_tv = Add_Input_KG.text.toString()
             var weight_tv_ok = Add_Input_KG_OK.text.toString()
             var num = Add_Input_Num.text.toString()
-
+            if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
+                ToastUtil.showText("货物重量不能为空")
+                return@setOnClickListener
+            }
             if (mType == 2) {
-                if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
-                    ToastUtil.showText("货物重量不能为空")
-                    return@setOnClickListener
-                }
                 if (num == "0" || num == "") {
                     ToastUtil.showText("货物数量不能为空")
-                    return@setOnClickListener
-                }
-            } else {
-                if (weight_tv == "0.0" || weight_tv == "0" || weight_tv == "") {
-                    ToastUtil.showText("货物重量不能为空")
                     return@setOnClickListener
                 }
             }
@@ -233,34 +224,51 @@ class AddInputAvtivity : BaseActivity() {
                                     price = MyApp.mRecycleListBean_Type_1?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_1?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * weight_tv_ok.toDouble())
+                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * weight_tv_ok.toDouble())
+                                    } else {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * num.toDouble())
+                                    }
                                 }
                                 2 -> {
                                     type = MyApp.mRecycleListBean_Type_2?.data!![position]?.name
                                     price = MyApp.mRecycleListBean_Type_2?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_2?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_2?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * num.toDouble())
+                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * weight_tv_ok.toDouble())
+                                    } else {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * num.toDouble())
+                                    }
                                 }
                                 3 -> {
                                     type = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
                                     price = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
                                     unit = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_3?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * weight_tv_ok.toDouble())
+                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * weight_tv_ok.toDouble())
+                                    } else {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * num.toDouble())
+                                    }
                                 }
                                 4 -> {
                                     type = MyApp.mRecycleListBean_Type_4?.data!![position]?.name
                                     price = MyApp.mRecycleListBean_Type_4?.data!![position]?.price.toString()
                                     unit = MyApp.mRecycleListBean_Type_4?.data!![position]?.unit
                                     typeid = MyApp.mRecycleListBean_Type_4?.data!![position]?.id.toString()
-                                    total = DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_4!!.data[position].price * weight_tv_ok.toDouble())
+                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_4!!.data[position].price * weight_tv_ok.toDouble())
+                                    } else {
+                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_4!!.data[position].price * num.toDouble())
+                                    }
                                 }
                             }
                             mType_type = mType
                             weight = weight_tv_ok
                             number = num
                             weight_all = weight_tv
+
                             this
                         })
                         this

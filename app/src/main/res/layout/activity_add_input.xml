@@ -52,6 +52,8 @@
                 android:layout_weight="2"
                 android:gravity="center|right"
                 android:text="未选择"
+                android:lines="1"
+                android:ellipsize="end"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_16" />
 
