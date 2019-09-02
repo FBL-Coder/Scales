@@ -10,6 +10,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
+import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.Server.BlueUtils
@@ -24,6 +25,7 @@ import com.etsoft.scales.utils.MoneyValueFilter
 import com.etsoft.scales.utils.ToastUtil
 import com.etsoft.scales.view.MyDialog
 import kotlinx.android.synthetic.main.activity_add_input.*
+import java.lang.Exception
 import java.lang.ref.WeakReference
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -56,6 +58,7 @@ class AddInputAvtivity : BaseActivity() {
 
         id = intent.getIntExtra("id", 0)
         mType = intent.getIntExtra("type", -1)
+        LogUtils.i("回收物ID--" + id)
 
         when (mType) {
             1 -> {
@@ -89,7 +92,7 @@ class AddInputAvtivity : BaseActivity() {
         }
 
         Input_ChuShi.visibility = View.VISIBLE
-        if (mBluetoothDataIsEnable) {
+        if (mBluetoothDataIsEnable && id != 70 && id != 71) {
             isReadData = true
             BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
         } else {
@@ -158,6 +161,28 @@ class AddInputAvtivity : BaseActivity() {
                 Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_2?.data!![position]?.price}"
                 Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
                 Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
+                if (id == 70 || id == 71) {
+                    Add_Input_KG.setText("0.1")
+                    Add_Input_Num.addTextChangedListener(object : TextWatcher {
+                        override fun afterTextChanged(s: Editable?) {
+                            try {
+                                LogUtils.i("输入数量---$s")
+                                var wg = 0.1 * s.toString().toInt()
+                                LogUtils.i("输入数量转INt---${s.toString().toInt()}")
+                                LogUtils.i("总质量INt---$wg")
+                                Add_Input_KG.setText(wg.toFloat().toString())
+                            } catch (e: Exception) {
+                                Add_Input_KG.setText("0.1")
+                            }
+                        }
+                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        }
+
+                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        }
+
+                    })
+                }
             }
             3 -> {
                 Add_Input_Type.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
@@ -268,7 +293,6 @@ class AddInputAvtivity : BaseActivity() {
                             weight = weight_tv_ok
                             number = num
                             weight_all = weight_tv
-
                             this
                         })
                         this

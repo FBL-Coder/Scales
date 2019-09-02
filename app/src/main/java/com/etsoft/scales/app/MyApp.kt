@@ -72,7 +72,7 @@ open class MyApp : ClientApplication() {
         /**
          * OkhttpClirnt
          */
-        var mclient = OkHttpClient().newBuilder().addInterceptor(LoggerInterceptor()).connectTimeout(10000, TimeUnit.SECONDS).build()
+        var mclient = OkHttpClient().newBuilder().addInterceptor(LoggerInterceptor()).connectTimeout(30000, TimeUnit.SECONDS).build()
 
 
         /**

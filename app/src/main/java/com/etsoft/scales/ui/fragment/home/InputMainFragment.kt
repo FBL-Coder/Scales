@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -15,7 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
@@ -24,7 +22,6 @@ import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.SaveKey.Companion.FILE_DATA_NAME
-import com.etsoft.scales.Server.UnUploadRecordTimer
 import com.etsoft.scales.adapter.ListViewAdapter.Gift_ListViewAdapter
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.adapter.ListViewAdapter.SelectDialogListViewAdapter
@@ -49,8 +46,6 @@ import com.etsoft.scales.view.MyDialog
 import com.etsoft.scales.view.ProgressBarDialog
 import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import io.github.xudaojie.qrcodelib.CaptureActivity
-import kotlinx.android.synthetic.main.activity_out_info.*
-import kotlinx.android.synthetic.main.activity_server_station.*
 import kotlinx.android.synthetic.main.fragment_input_main.*
 import java.lang.ref.WeakReference
 import java.math.BigDecimal
@@ -617,15 +612,13 @@ class InputMainFragment : Fragment() {
 
 
     /**
-     * 小5取0，大5取5
+     * 四舍五入
      */
     fun totalMoney(money: Double): String {
         LogUtils.i("总金额为 = $money")
-        val bigDec = BigDecimal(money)
-        val total = bigDec.setScale(2, java.math.BigDecimal.ROUND_HALF_UP).toDouble()
         val df = DecimalFormat("0.0")
-        LogUtils.i("四舍五入后总金额为 = ${df.format(total)}")
-        var zongjia = df.format(total)
+        LogUtils.i("取小数后两位总金额为 = ${df.format(money)}")
+        var zongjia = df.format(money)
 //        //小数的整数部分
 //        var intPart = zongjia.substring(0, zongjia.indexOf("."))
 //        //小数的小数部分
