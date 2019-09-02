@@ -761,6 +761,7 @@ class InputMainFragment : Fragment() {
             Search?.clearFocus()
             AllList?.setOnClickListener {
                 Search?.setQuery("", false)
+                names_search.clear()
                 names_search.addAll(mSelects)
                 sSelectAdapter = SelectDialogListViewAdapter(names_search)
                 ListView?.adapter = sSelectAdapter
