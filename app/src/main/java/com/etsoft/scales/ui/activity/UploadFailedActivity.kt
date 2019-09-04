@@ -132,7 +132,7 @@ class UploadFailedActivity : BaseActivity() {
             return
         }
         isUpLoading = true
-        mLoadDialog!!.show("正在上传:" + "0/" + mUpInputFailedBean!!.data.size, false, 15)
+        mLoadDialog!!.show("正在上传", false, 40)
         val num = mUpInputFailedBean!!.data.size
         mIsUpOkList = Array(num) { _ -> false }
         Thread(Runnable {
@@ -141,6 +141,7 @@ class UploadFailedActivity : BaseActivity() {
                 var upData = mUpInputFailedBean!!.data[i]
                 OkHttpUtils.postAsyn(Ports.ADDOUTBACKLIST, MyApp.gson.toJson(upData), object : MyHttpCallback(this) {
                     override fun onSuccess(resultDesc: ResultDesc?) {
+                        LogUtils.i("返回数据--" + resultDesc.toString())
                         var msg = myHandler!!.obtainMessage()
                         msg.arg1 = i + 1
                         msg.arg2 = num
@@ -160,7 +161,7 @@ class UploadFailedActivity : BaseActivity() {
 
                     override fun onFailure(code: Int, message: String?) {
                         super.onFailure(code, message)
-                        LogUtils.d(message)
+                        LogUtils.e(message)
                         var mes = if (message?.length!! > 200) message?.substring(0, 200) else message
                         mIsUpOkList!![i] = false
                         upData.failureInfo = "onFailure方法，服务器异常、Timeout $mes"
@@ -243,14 +244,12 @@ class UploadFailedActivity : BaseActivity() {
                         activity.initdata()
                     }
                     activity.UpLoadOK -> {
-                        activity.mLoadDialog!!.setMessage("正在上传:" + msg.arg1 + "/" + msg.arg2)
                         if (msg.arg1 == msg.arg2) {
                             activity.listViewData(msg.arg2)
                             activity.mLoadDialog!!.hide()
                         }
                     }
                     activity.UpLoadFailed -> {
-                        activity.mLoadDialog!!.setMessage("正在上传:" + msg.arg1 + "/" + msg.arg2)
                         if (msg.obj != null && msg.obj as String != "") str_msg += msg.obj as String + "\n"
                         if (msg.arg1 == msg.arg2) {
                             var msg_str = msg.obj as String
@@ -259,7 +258,6 @@ class UploadFailedActivity : BaseActivity() {
                             if (str_msg != "") {
                                 ToastUtil.showText(str_msg, Toast.LENGTH_LONG)
                             }
-
                         }
                     }
                 }

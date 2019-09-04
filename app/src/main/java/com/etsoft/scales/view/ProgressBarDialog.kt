@@ -40,7 +40,7 @@ constructor(private val mContext: Context) {
         dialogTimer(text[1])
     }
 
-    private fun dialogTimer(text: String, pageMax: Int = 8) {
+    private fun dialogTimer(text: String, pageMax: Int = 20) {
         var page1 = 0
         Timer().schedule(object : TimerTask() {
             override fun run() {
@@ -64,7 +64,7 @@ constructor(private val mContext: Context) {
         }, 0, 1000)
     }
 
-    fun setMessage(text: String = "加载数据..."){
+    fun setMessage(text: String = "加载数据...") {
         val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
         textView.text = text
         dialog.show()
@@ -73,7 +73,7 @@ constructor(private val mContext: Context) {
 
     fun show(text: String = "加载数据...") {
         dialog.window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
-        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         dialog.show()
         isShow = true
         val textView = dialog.findViewById<TextView>(R.id.Dialog_TV)
@@ -81,7 +81,7 @@ constructor(private val mContext: Context) {
         dialogTimer("加载失败")
     }
 
-    fun show(text: String = "加载数据...", isClickHide: Boolean = true, pageMax: Int = 8) {
+    fun show(text: String = "加载数据...", isClickHide: Boolean = true, pageMax: Int = 20) {
         dialog.window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         dialog.setCancelable(isClickHide)
