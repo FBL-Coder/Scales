@@ -18,6 +18,7 @@ import com.etsoft.scales.Server.BlueUtils.Companion.isReadData
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mBluetoothDataIsEnable
 import com.etsoft.scales.bean.Input_Main_List_Bean
+import com.etsoft.scales.bean.RecycleListBean
 import com.etsoft.scales.ui.fragment.home.InputMainFragment.Companion.ADDITEM_CODE
 import com.etsoft.scales.utils.AppSharePreferenceMgr
 import com.etsoft.scales.utils.BlueBoothState
@@ -38,8 +39,7 @@ import java.text.DecimalFormat
 class AddInputAvtivity : BaseActivity() {
 
     private var mHandler: MyHandler? = null
-    private var position = 0
-    private var id = 0
+    private var mData: RecycleListBean.DataBean? = null
     private var mType = -1
     private var mChushiNum = -1
 
@@ -56,43 +56,13 @@ class AddInputAvtivity : BaseActivity() {
 
     private fun initData() {
 
-        id = intent.getIntExtra("id", 0)
+        mData = intent.getSerializableExtra("data") as RecycleListBean.DataBean?
         mType = intent.getIntExtra("type", -1)
-        LogUtils.i("回收物ID--" + id)
+        LogUtils.i("回收物ID--${mData?.id}")
 
-        when (mType) {
-            1 -> {
-                for (i in MyApp.mRecycleListBean_Type_1?.data!!.indices) {
-                    if (MyApp.mRecycleListBean_Type_1?.data!![i].id == id) {
-                        position = i
-                    }
-                }
-            }
-            2 -> {
-                for (i in MyApp.mRecycleListBean_Type_2?.data!!.indices) {
-                    if (MyApp.mRecycleListBean_Type_2?.data!![i].id == id) {
-                        position = i
-                    }
-                }
-            }
-            3 -> {
-                for (i in MyApp.mRecycleListBean_Type_3?.data!!.indices) {
-                    if (MyApp.mRecycleListBean_Type_3?.data!![i].id == id) {
-                        position = i
-                    }
-                }
-            }
-            4 -> {
-                for (i in MyApp.mRecycleListBean_Type_4?.data!!.indices) {
-                    if (MyApp.mRecycleListBean_Type_4?.data!![i].id == id) {
-                        position = i
-                    }
-                }
-            }
-        }
 
         Input_ChuShi.visibility = View.VISIBLE
-        if (mBluetoothDataIsEnable && id != 70 && id != 71) {
+        if (mBluetoothDataIsEnable && mData?.id != 70 && mData?.id != 71) {
             isReadData = true
             BlueUtils.readBlueData(mHandler!!, MyApp.mBluetoothSocket!!)
         } else {
@@ -135,7 +105,7 @@ class AddInputAvtivity : BaseActivity() {
             }
             if (!Add_Input_KG.text.toString().isEmpty()) {
                 var mWeight = Add_Input_KG.text.toString().toDouble()
-                mWeight = mWeight - mWeight * mChushiNum / 100
+                mWeight -= mWeight * mChushiNum / 100
 
                 Add_Input_KG_OK.text = DecimalFormat("0.0").run {
                     roundingMode = RoundingMode.DOWN
@@ -147,21 +117,14 @@ class AddInputAvtivity : BaseActivity() {
 
 
         when (mType) {
-            1 -> {
-                Add_Input_Type.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.name
-                Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
-                Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_1?.data!![position]?.price}"
-                Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
-                Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
-            }
             2 -> {
                 Add_Input_Num.hint = "0"
-                Add_Input_Type.text = MyApp.mRecycleListBean_Type_2?.data!![position]?.name
-                Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_2?.data!![position]?.unit
-                Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_2?.data!![position]?.price}"
-                Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
-                Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
-                if (id == 70 || id == 71) {
+                Add_Input_Type.text = mData?.name
+                Add_Input_DanWei.text = mData?.unit
+                Add_Input_DanJia.text = mData?.price.toString()
+                Add_Input_KG.isEnabled = !mBluetoothDataIsEnable
+                Add_Input_KG.isFocusable = !mBluetoothDataIsEnable
+                if (mData?.id == 70 || mData?.id == 71) {
                     Add_Input_KG.setText("0.1")
                     Add_Input_Num.addTextChangedListener(object : TextWatcher {
                         override fun afterTextChanged(s: Editable?) {
@@ -175,6 +138,7 @@ class AddInputAvtivity : BaseActivity() {
                                 Add_Input_KG.setText("0.1")
                             }
                         }
+
                         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                         }
 
@@ -184,20 +148,12 @@ class AddInputAvtivity : BaseActivity() {
                     })
                 }
             }
-            3 -> {
-                Add_Input_Type.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
-                Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
-                Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
-                Input_DanJia.visibility = View.GONE
-                Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
-                Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
-            }
-            4 -> {
-                Add_Input_Type.text = MyApp.mRecycleListBean_Type_4?.data!![position]?.name
-                Add_Input_DanWei.text = MyApp.mRecycleListBean_Type_4?.data!![position]?.unit
-                Add_Input_DanJia.text = "${MyApp.mRecycleListBean_Type_4?.data!![position]?.price}"
-                Add_Input_KG.isEnabled = !MyApp.mBluetoothDataIsEnable
-                Add_Input_KG.isFocusable = !MyApp.mBluetoothDataIsEnable
+            else -> {
+                Add_Input_Type.text = mData?.name
+                Add_Input_DanWei.text = mData?.unit
+                Add_Input_DanJia.text = mData?.price.toString()
+                Add_Input_KG.isEnabled = !mBluetoothDataIsEnable
+                Add_Input_KG.isFocusable = !mBluetoothDataIsEnable
             }
         }
         var serverName = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "未选择") as String
@@ -241,58 +197,20 @@ class AddInputAvtivity : BaseActivity() {
 
             setResult(ADDITEM_CODE, intent
                     .run {
-                        putExtra("data", Input_Main_List_Bean().run {
-
-                            when (mType) {
-                                1 -> {
-                                    type = MyApp.mRecycleListBean_Type_1?.data!![position]?.name
-                                    price = MyApp.mRecycleListBean_Type_1?.data!![position]?.price.toString()
-                                    unit = MyApp.mRecycleListBean_Type_1?.data!![position]?.unit
-                                    typeid = MyApp.mRecycleListBean_Type_1?.data!![position]?.id.toString()
-                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * weight_tv_ok.toDouble())
-                                    } else {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_1!!.data[position].price * num.toDouble())
-                                    }
-                                }
-                                2 -> {
-                                    type = MyApp.mRecycleListBean_Type_2?.data!![position]?.name
-                                    price = MyApp.mRecycleListBean_Type_2?.data!![position]?.price.toString()
-                                    unit = MyApp.mRecycleListBean_Type_2?.data!![position]?.unit
-                                    typeid = MyApp.mRecycleListBean_Type_2?.data!![position]?.id.toString()
-                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * weight_tv_ok.toDouble())
-                                    } else {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_2!!.data[position].price * num.toDouble())
-                                    }
-                                }
-                                3 -> {
-                                    type = MyApp.mRecycleListBean_Type_3?.data!![position]?.name
-                                    price = "${MyApp.mRecycleListBean_Type_3?.data!![position]?.price}"
-                                    unit = MyApp.mRecycleListBean_Type_3?.data!![position]?.unit
-                                    typeid = MyApp.mRecycleListBean_Type_3?.data!![position]?.id.toString()
-                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * weight_tv_ok.toDouble())
-                                    } else {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_3!!.data[position].price * num.toDouble())
-                                    }
-                                }
-                                4 -> {
-                                    type = MyApp.mRecycleListBean_Type_4?.data!![position]?.name
-                                    price = MyApp.mRecycleListBean_Type_4?.data!![position]?.price.toString()
-                                    unit = MyApp.mRecycleListBean_Type_4?.data!![position]?.unit
-                                    typeid = MyApp.mRecycleListBean_Type_4?.data!![position]?.id.toString()
-                                    total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_4!!.data[position].price * weight_tv_ok.toDouble())
-                                    } else {
-                                        DecimalFormat("0.0").format(MyApp.mRecycleListBean_Type_4!!.data[position].price * num.toDouble())
-                                    }
-                                }
+                        putExtra("ResultData", Input_Main_List_Bean().run {
+                            type = mData?.name
+                            price = mData?.price.toString()
+                            unit = mData?.unit
+                            typeid = mData?.id.toString()
+                            total = if (unit == "KG" || unit == "kg" || unit == "Kg" || unit == "kG") {
+                                DecimalFormat("0.0").format(mData!!.price * weight_tv_ok.toDouble())
+                            } else {
+                                DecimalFormat("0.0").format(mData!!.price * num.toDouble())
                             }
                             mType_type = mType
-                            weight = weight_tv_ok
+                            weightValid = weight_tv_ok.toFloat().toString()
                             number = num
-                            weight_all = weight_tv
+                            weightTotal = weight_tv.toFloat().toString()
                             this
                         })
                         this

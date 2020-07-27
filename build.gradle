@@ -3,10 +3,10 @@
 buildscript {
     ext.kotlin_version = '1.2.71'
     repositories {
-        maven { url "http://repo1.maven.org/maven2" }
-        maven { url 'https://jitpack.io' }
+        maven { url "https://www.repo1.maven.org/maven2" }
+        maven { url 'https://www.jitpack.io' }
         jcenter {
-            url "http://jcenter.bintray.com/"
+            url "https://jcenter.bintray.com/"
         }
         google()
     }
@@ -22,12 +22,12 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "http://repo1.maven.org/maven2" }
+        google()
+        maven { url "https://repo1.maven.org/maven2" }
         maven { url 'https://jitpack.io' }
         jcenter {
-            url "http://jcenter.bintray.com/"
+            url "https://jcenter.bintray.com/"
         }
-        google()
     }
 }
 

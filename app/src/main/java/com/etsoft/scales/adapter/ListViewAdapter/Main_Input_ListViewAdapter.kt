@@ -36,8 +36,8 @@ class Main_Input_ListViewAdapter(list: ArrayList<Input_Main_List_Bean>) : BaseAd
             mViewHolder = (view.tag as ViewHolder?)!!
         }
         mViewHolder.mInformation_Item1.text = mList[position].type
-        mViewHolder.mInformation_Item2.text = mList[position].weight_all
-        mViewHolder.mInformation_Item3.text = mList[position].weight
+        mViewHolder.mInformation_Item2.text = mList[position].weightTotal
+        mViewHolder.mInformation_Item3.text = mList[position].weightValid
         mViewHolder.mInformation_Item4.text = mList[position].number
         mViewHolder.mInformation_Item5.text = "￥${mList[position].price}"
         mViewHolder.mInformation_Item6.text = "${mList[position].total}"

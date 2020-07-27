@@ -16,7 +16,7 @@ import com.etsoft.scales.bean.ServerStationBean
 class SelectDialogListViewAdapter(list: List<RecycleListBean.DataBean>) : BaseAdapter() {
 
     var mList = list
-    var clickPosition = -1
+    var clickPosition = 0
 
     fun notifyDataSetChanged(selectposition: Int, list: List<RecycleListBean.DataBean>) {
         mList = list

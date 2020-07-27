@@ -17,9 +17,6 @@ import com.etsoft.scales.SortType
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Out_ListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
-import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_1
-import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_2
-import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean_Type_3
 import com.etsoft.scales.bean.OutListBean
 import com.etsoft.scales.bean.Out_Main_Bean
 import com.etsoft.scales.bean.RecycleListBean
@@ -47,6 +44,9 @@ class OutMainFragment : Fragment() {
     private var mType = -1
     private var mMain_Out_ListViewAdapter: Main_Out_ListViewAdapter? = null
     private var Main_Out_TitleBar: TitleBar? = null
+    private var mSelectBean = ArrayList<RecycleListBean.DataBean>()
+    private var mSelectName: ArrayList<String>? = null
+
 
     companion object {
         private var mActivity: MainActivity? = null
@@ -79,32 +79,16 @@ class OutMainFragment : Fragment() {
     /**
      * 获取回收物信息
      */
-    private fun getRecycleData(type: Int) {
-
+    private fun getRecycleData() {
         OkHttpUtils.getAsyn(Ports.RECYCLELIST, object : MyHttpCallback(mActivity) {
-
             override fun onSuccess(resultDesc: ResultDesc?) {
                 mActivity!!.mLoadDialog!!.hide()
                 if (resultDesc!!.getcode() != 0) {
                     ToastUtil.showText(resultDesc.result)
                 } else {
                     try {
-                        mRecycleListBean_Type_1 = RecycleListBean()
-                        mRecycleListBean_Type_1!!.data = ArrayList<RecycleListBean.DataBean>()
-                        mRecycleListBean_Type_2 = RecycleListBean()
-                        mRecycleListBean_Type_2!!.data = ArrayList<RecycleListBean.DataBean>()
-                        mRecycleListBean_Type_3 = RecycleListBean()
-                        mRecycleListBean_Type_3!!.data = ArrayList<RecycleListBean.DataBean>()
                         mRecycleListBean = MyApp.gson.fromJson(resultDesc!!.result, RecycleListBean::class.java)
-                        for (i in mRecycleListBean!!.data!!.indices) {
-                            when (mRecycleListBean!!.data[i].type) {
-                                1 -> mRecycleListBean_Type_1!!.data.add(mRecycleListBean!!.data[i])
-                                2 -> mRecycleListBean_Type_2!!.data.add(mRecycleListBean!!.data[i])
-                                3 -> mRecycleListBean_Type_3!!.data.add(mRecycleListBean!!.data[i])
-                            }
-                        }
-                        if (type == 1)
-                            showTypeDialog()
+                        showTypeDialog()
                     } catch (e: Exception) {
                         LogUtils.e("获取数据异常 ：data= ${resultDesc!!.result}")
                         ToastUtil.showText("服务器异常")
@@ -126,46 +110,33 @@ class OutMainFragment : Fragment() {
     private fun showSelectDialog() {
         if (mRecycleListBean == null) {
             mActivity!!.mLoadDialog!!.show()
-            getRecycleData(1)
+            getRecycleData()
             return
         }
-
-        var names = ArrayList<String>()
         var position = 0
         if (mType == -1) {
             showTypeDialog()
         } else {
-            when (mType) {
-                1 -> {
-                    for (i in mRecycleListBean_Type_1!!.data.indices) {
-                        names.add(mRecycleListBean_Type_1!!.data[i].name + "       ￥" + mRecycleListBean_Type_1!!.data[i].price)
-                    }
-                }
-                2 -> {
-                    for (i in mRecycleListBean_Type_2!!.data.indices) {
-                        names.add(mRecycleListBean_Type_2!!.data[i].name + "       ￥" + mRecycleListBean_Type_2!!.data[i].price)
-                    }
-
-                }
-                3 -> {
-                    for (i in mRecycleListBean_Type_3!!.data.indices) {
-                        names.add(mRecycleListBean_Type_3!!.data[i].name + "       ￥" + mRecycleListBean_Type_3!!.data[i].price)
-                    }
+            mSelectName = ArrayList()
+            for (i in mRecycleListBean!!.data) {
+                if (i.type == mType) {
+                    mSelectBean.add(i)
+                    mSelectName!!.add(i.name + "     ￥" + i.price)
                 }
             }
 
             MyDialog(mActivity!!).setTitle("选择回收物")
-                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, names), 0, DialogInterface.OnClickListener { dialog, which ->
+                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, mSelectName), 0, DialogInterface.OnClickListener { dialog, which ->
                         position = which
                     }).setPositiveButton("确定") { dialog, which ->
                         dialog.dismiss()
-                        if (names.size == 0) {
+                        if (mSelectName?.size == 0) {
                             ToastUtil.showText("该类型没有对应回收物，请重新选择")
                             return@setPositiveButton
                         }
                         //跳转到具体添加回收物页面
                         startActivityForResult(Intent(mActivity, AddOutAvtivity::class.java).run {
-                            putExtra("position", position)
+                            putExtra("data", mSelectBean[position])
                             putExtra("type", mType)
                             this
                         }, Activity.RESULT_FIRST_USER)
@@ -281,6 +252,8 @@ class OutMainFragment : Fragment() {
             moor.setImageResource(R.drawable.ic_add_circle_outline_black_24dp)
             moor.setOnClickListener {
                 mType = -1
+                mSelectBean.clear()
+                mSelectName = null
                 showTypeDialog()
             }
             this

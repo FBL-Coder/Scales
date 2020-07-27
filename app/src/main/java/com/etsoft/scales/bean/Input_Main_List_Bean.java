@@ -11,12 +11,12 @@ public class Input_Main_List_Bean implements Serializable {
     public int mType_type = 0;
     public String id = "";
     public String type = "";
-    public String weight = "";
+    public String weightValid = "";
     public String unit = "";
     public String price = "";
     public String number = "";
     public String total = "";
-    public String weight_all = "";
+    public String weightTotal = "";
     public String typeid = "";
 
 }

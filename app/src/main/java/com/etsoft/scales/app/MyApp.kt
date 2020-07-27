@@ -10,14 +10,11 @@ import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.os.Build
-import android.view.View
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.apkfuns.logutils.LogUtils
 import com.etsoft.scales.Server.BlueUtils
-import com.etsoft.scales.Server.UnUploadRecordTimer
 import com.etsoft.scales.bean.LoginBean
 import com.etsoft.scales.bean.RecycleListBean
 import com.etsoft.scales.receiver.BlueBoothReceiver
@@ -26,14 +23,12 @@ import com.etsoft.scales.ui.activity.MainActivity
 import com.etsoft.scales.utils.Density
 import com.etsoft.scales.utils.gson.NullStringEmptyTypeAdapterFactory
 import com.etsoft.scales.utils.httpGetDataUtils.LoggerInterceptor
-import com.etsoft.scales.utils.httpGetDataUtils.OkHttpUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.smartdevice.aidltestdemo.ClientApplication
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.OkHttpClient
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -50,6 +45,7 @@ open class MyApp : ClientApplication() {
 
     companion object {
         var mApplication: MyApp? = null
+
         /**
          * 用户登录信息
          */
@@ -60,14 +56,11 @@ open class MyApp : ClientApplication() {
          * gson NULL适配器
          */
         var gson = GsonBuilder().registerTypeAdapterFactory(NullStringEmptyTypeAdapterFactory<Any>()).create()
+
         /**
          * 回收物列表信息
          */
         var mRecycleListBean: RecycleListBean? = null
-        var mRecycleListBean_Type_1: RecycleListBean? = null
-        var mRecycleListBean_Type_2: RecycleListBean? = null
-        var mRecycleListBean_Type_3: RecycleListBean? = null
-        var mRecycleListBean_Type_4: RecycleListBean? = null
 
         /**
          * OkhttpClirnt
@@ -109,6 +102,7 @@ open class MyApp : ClientApplication() {
          * 蓝牙连接的设备
          */
         var mBluetoothDevice: BluetoothDevice? = null
+
         /**
          * 蓝牙断链之前的设备
          */

@@ -9,5 +9,6 @@ public class Out_Main_Bean implements Serializable{
 
     public String toPlace = "";
     public String weight = "";
+    public String num = "";
     public String recyclingPriceId = "";
 }

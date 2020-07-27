@@ -17,6 +17,7 @@ import java.lang.ref.WeakReference
 import java.text.DecimalFormat
 import com.etsoft.scales.utils.MoneyValueFilter
 import android.text.InputFilter
+import com.etsoft.scales.bean.RecycleListBean
 import java.math.RoundingMode
 
 
@@ -28,7 +29,7 @@ class AddOutAvtivity : BaseActivity() {
 
 
     private var mHandler: MyHandler? = null
-    private var position = 0
+    private var mData: RecycleListBean.DataBean? = null
     private var mType = 0
 
     override fun setView(): Int {
@@ -46,7 +47,7 @@ class AddOutAvtivity : BaseActivity() {
 
     private fun initData() {
 
-        position = intent.getIntExtra("position", 0)
+        mData = intent.getSerializableExtra("data") as RecycleListBean.DataBean?
         mType = intent.getIntExtra("type", -1)
 
         //启动数据监听
@@ -57,30 +58,19 @@ class AddOutAvtivity : BaseActivity() {
             }
         Add_Out_Weight.filters = arrayOf<InputFilter>(MoneyValueFilter().setDigits(1))
 
-        when (mType) {
-            1 -> {
-                Add_Out_Type_Name.text = "重量"
-                Add_Out_Type.text = MyApp.mRecycleListBean_Type_1!!.data[position].name
-                Add_Out_Uuit.text = MyApp.mRecycleListBean_Type_1!!.data[position].unit
-                Add_Out_Weight.isEnabled = !MyApp.mBluetoothDataIsEnable
-                Add_Out_Weight.isFocusable = !MyApp.mBluetoothDataIsEnable
-            }
-            2 -> {
-                Add_Out_Type_Name.text = "数量"
-                Add_Out_Type.text = MyApp.mRecycleListBean_Type_2!!.data[position].name
-                Add_Out_Uuit.text = MyApp.mRecycleListBean_Type_2!!.data[position].unit
-            }
-            3 -> {
-                Add_Out_Type_Name.text = "重量"
-                Add_Out_Type.text = MyApp.mRecycleListBean_Type_3!!.data[position].name
-                Add_Out_Uuit.text = MyApp.mRecycleListBean_Type_3!!.data[position].unit
-                Add_Out_Weight.isEnabled = !MyApp.mBluetoothDataIsEnable
-                Add_Out_Weight.isFocusable = !MyApp.mBluetoothDataIsEnable
-            }
+
+        if (mData?.unit == "KG" || mData?.unit == "kg" || mData?.unit == "Kg" || mData?.unit == "kG") {
+            Add_Out_Type_Name.text = "重量"
+            Add_Out_Type.text = mData?.name
+            Add_Out_Uuit.text = mData?.unit
+            Add_Out_Weight.isEnabled = !MyApp.mBluetoothDataIsEnable
+            Add_Out_Weight.isFocusable = !MyApp.mBluetoothDataIsEnable
+        } else {
+            Add_Out_Type_Name.text = "数量"
+            Add_Out_Type.text = mData?.name
+            Add_Out_Uuit.text = mData?.unit
+
         }
-
-
-
 
         Add_Input_Cancle.setOnClickListener { finish() }
 
@@ -94,11 +84,7 @@ class AddOutAvtivity : BaseActivity() {
             setResult(100, intent
                     .run {
                         putExtra("data", Out_Main_Bean().run {
-                            when (mType) {
-                                1 -> recyclingPriceId = MyApp.mRecycleListBean_Type_1!!.data[position].id.toString()
-                                2 -> recyclingPriceId = MyApp.mRecycleListBean_Type_2!!.data[position].id.toString()
-                                3 -> recyclingPriceId = MyApp.mRecycleListBean_Type_3!!.data[position].id.toString()
-                            }
+                            recyclingPriceId = mData?.id.toString()
                             weight = Weight
                             toPlace = ToPlace
                             this
