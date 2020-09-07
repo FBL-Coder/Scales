@@ -40,7 +40,6 @@ class AddInputAvtivity : BaseActivity() {
 
     private var mHandler: MyHandler? = null
     private var mData: RecycleListBean.DataBean? = null
-    private var mType = -1
     private var mChushiNum = -1
 
     override fun setView(): Int {
@@ -57,7 +56,6 @@ class AddInputAvtivity : BaseActivity() {
     private fun initData() {
 
         mData = intent.getSerializableExtra("data") as RecycleListBean.DataBean?
-        mType = intent.getIntExtra("type", -1)
         LogUtils.i("回收物ID--${mData?.id}")
 
 
@@ -114,48 +112,13 @@ class AddInputAvtivity : BaseActivity() {
             }
         }
 
+        Add_Input_Type.text = mData?.name
+        Add_Input_DanWei.text = mData?.unit
+        Add_Input_DanJia.text = mData?.price.toString()
+        Add_Input_KG.isEnabled = !mBluetoothDataIsEnable
+        Add_Input_KG.isFocusable = !mBluetoothDataIsEnable
 
 
-        when (mType) {
-            2 -> {
-                Add_Input_Num.hint = "0"
-                Add_Input_Type.text = mData?.name
-                Add_Input_DanWei.text = mData?.unit
-                Add_Input_DanJia.text = mData?.price.toString()
-                Add_Input_KG.isEnabled = !mBluetoothDataIsEnable
-                Add_Input_KG.isFocusable = !mBluetoothDataIsEnable
-                if (mData?.id == 70 || mData?.id == 71) {
-                    Add_Input_KG.setText("0.1")
-                    Add_Input_Num.addTextChangedListener(object : TextWatcher {
-                        override fun afterTextChanged(s: Editable?) {
-                            try {
-                                LogUtils.i("输入数量---$s")
-                                var wg = 0.1 * s.toString().toInt()
-                                LogUtils.i("输入数量转INt---${s.toString().toInt()}")
-                                LogUtils.i("总质量INt---$wg")
-                                Add_Input_KG.setText(wg.toFloat().toString())
-                            } catch (e: Exception) {
-                                Add_Input_KG.setText("0.1")
-                            }
-                        }
-
-                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        }
-
-                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        }
-
-                    })
-                }
-            }
-            else -> {
-                Add_Input_Type.text = mData?.name
-                Add_Input_DanWei.text = mData?.unit
-                Add_Input_DanJia.text = mData?.price.toString()
-                Add_Input_KG.isEnabled = !mBluetoothDataIsEnable
-                Add_Input_KG.isFocusable = !mBluetoothDataIsEnable
-            }
-        }
         var serverName = AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "未选择") as String
         Input_ServerStation.text = serverName
         if (serverName == "未选择") {
@@ -188,11 +151,9 @@ class AddInputAvtivity : BaseActivity() {
                 ToastUtil.showText("货物重量不能为空")
                 return@setOnClickListener
             }
-            if (mType == 2) {
-                if (num == "0" || num == "") {
-                    ToastUtil.showText("货物数量不能为空")
-                    return@setOnClickListener
-                }
+            if (num == "0" || num == "") {
+                ToastUtil.showText("货物数量不能为空")
+                return@setOnClickListener
             }
 
             setResult(ADDITEM_CODE, intent
@@ -207,7 +168,6 @@ class AddInputAvtivity : BaseActivity() {
                             } else {
                                 DecimalFormat("0.0").format(mData!!.price * num.toDouble())
                             }
-                            mType_type = mType
                             weightValid = weight_tv_ok.toFloat().toString()
                             number = num
                             weightTotal = weight_tv.toFloat().toString()

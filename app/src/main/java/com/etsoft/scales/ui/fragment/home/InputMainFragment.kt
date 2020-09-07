@@ -22,12 +22,14 @@ import com.etsoft.scales.Ports
 import com.etsoft.scales.R
 import com.etsoft.scales.SaveKey
 import com.etsoft.scales.SaveKey.Companion.FILE_DATA_NAME
-import com.etsoft.scales.adapter.ListViewAdapter.Gift_ListViewAdapter
 import com.etsoft.scales.adapter.ListViewAdapter.Main_Input_ListViewAdapter
 import com.etsoft.scales.adapter.ListViewAdapter.SelectDialogListViewAdapter
 import com.etsoft.scales.app.MyApp
 import com.etsoft.scales.app.MyApp.Companion.mRecycleListBean
-import com.etsoft.scales.bean.*
+import com.etsoft.scales.bean.AppInputBean
+import com.etsoft.scales.bean.Input_Main_List_Bean
+import com.etsoft.scales.bean.RecycleListBean
+import com.etsoft.scales.bean.UpInputFailedBean
 import com.etsoft.scales.netWorkListener.AppNetworkMgr
 import com.etsoft.scales.receiver.BlueBoothReceiver
 import com.etsoft.scales.receiver.BlueBoothReceiver.OnBlueConnecetChangerlistener
@@ -44,7 +46,6 @@ import com.smartdevice.aidltestdemo.BaseActivity.mIzkcService
 import io.github.xudaojie.qrcodelib.CaptureActivity
 import kotlinx.android.synthetic.main.fragment_input_main.*
 import java.lang.ref.WeakReference
-import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -78,7 +79,7 @@ class InputMainFragment : Fragment() {
 
 
     //选择Dialog 后的列表
-    private var mName_Select: ArrayList<RecycleListBean.DataBean>? = null
+    private var mName_Select = ArrayList<RecycleListBean.DataBean>()
 
     //选择Dialog名称
     private var mName_Search = ArrayList<RecycleListBean.DataBean>()
@@ -86,7 +87,6 @@ class InputMainFragment : Fragment() {
     //添加完成后的记录列表
     private var mInputLiat = ArrayList<Input_Main_List_Bean>()
     private var mMain_Input_ListViewAdapter: Main_Input_ListViewAdapter? = null
-    private var mMain_Gifts_ListViewAdapter: Gift_ListViewAdapter? = null
     private var mHandler: MyHandler? = null
     private var mLoadDialog: ProgressBarDialog? = null
     private var mActivity_: MainActivity? = null
@@ -95,11 +95,7 @@ class InputMainFragment : Fragment() {
     private var dealid = ""
     private var code = ""
 
-    /**
-     * 首选回收物类型
-     */
-    private var mType = -1
-
+    private var mPosition_Select = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_input_main, container, false)
@@ -196,15 +192,6 @@ class InputMainFragment : Fragment() {
         }, "回收列表")
     }
 
-    private fun initGiftListView(bean: GiftListBean) {
-        if (mMain_Gifts_ListViewAdapter == null) {
-            mMain_Gifts_ListViewAdapter = Gift_ListViewAdapter(bean)
-            Main_Input_Gifts.adapter = mMain_Gifts_ListViewAdapter
-        } else {
-            mMain_Gifts_ListViewAdapter!!.notifyDataSetChanged(bean)
-        }
-        Main_GiftView.visibility = View.VISIBLE
-    }
 
     /**
      * 刷新/初始化当前本地记录列表
@@ -279,35 +266,11 @@ class InputMainFragment : Fragment() {
                         }.setPositiveButton("清理") { dialog, which ->
                             dialog.dismiss()
                             mInputLiat.clear()
-                            mType = -1
-                            Input_Main_Gift.visibility = View.GONE
-                            Main_GiftView.visibility = View.GONE
                             initListView()
                         }.show()
         }
 
 
-        //获取礼物
-        Input_Main_Gift.setOnClickListener {
-            mLoadDialog!!.show()
-            OkHttpUtils.getAsyn(Ports.GIFTLIST, HashMap<String, String>().run {
-                put("limit", "100")
-                this
-            }, object : MyHttpCallback(mActivity) {
-
-                override fun onSuccess(resultDesc: ResultDesc?) {
-                    super.onSuccess(resultDesc)
-                    mLoadDialog!!.hide()
-                    initGiftListView(MyApp.gson.fromJson(resultDesc!!.result, GiftListBean::class.java))
-                }
-
-                override fun onFailure(code: Int, message: String?) {
-                    super.onFailure(code, message)
-                    mLoadDialog!!.hide()
-                }
-
-            }, "礼品列表")
-        }
 
 
 
@@ -318,9 +281,7 @@ class InputMainFragment : Fragment() {
                 getRecycleData()
             } else {
                 if (mInputLiat.size == 0) {
-                    mType = -1
                     mName_Search.clear()
-                    mName_Select = null
                 }
                 showTypeDialog()
             }
@@ -343,7 +304,7 @@ class InputMainFragment : Fragment() {
             return
         }
         mActivity_!!.mLoadDialog!!.show("正在打印", false)
-        PrintData("两网融合", dealid, mType)
+        PrintData("两网融合", dealid)
     }
 
     /**
@@ -357,7 +318,7 @@ class InputMainFragment : Fragment() {
         UpBean.phone = "17611110000"
         UpBean.servicePointId = ServerStation_Id?.toString()
         UpBean.staffId = MyApp.UserInfo?.data?.id?.toString()
-        UpBean.type = if (mType == 2) "1" else mType.toString()
+//        UpBean.type = if (mType == 2) "1" else mType.toString()
         UpBean.greenId = code
 
         //将本地记录转成要上传的JSON数据
@@ -371,19 +332,6 @@ class InputMainFragment : Fragment() {
             lingsBeanList.add(lingsBean)
         }
 
-        if (mType == 3 && mMain_Gifts_ListViewAdapter != null && mMain_Gifts_ListViewAdapter!!.getGiftNum() != null) {
-            var listgifts = ArrayList<AppInputBean.GiftsBean>()
-            var mGiftBean = mMain_Gifts_ListViewAdapter!!.getGiftNum()
-            for (i in mGiftBean.data.indices) {
-                if (mGiftBean.data[i].condition > 0) {
-                    var giftBean = AppInputBean.GiftsBean()
-                    giftBean.giftId = mGiftBean.data[i].id.toString()
-                    giftBean.number = mGiftBean.data[i].condition.toString()
-                    listgifts.add(giftBean)
-                }
-            }
-            UpBean.gifts = listgifts
-        }
         UpBean.recyclings = lingsBeanList
         UpBean.time = time
         UpBean.dealId = dealid
@@ -421,8 +369,6 @@ class InputMainFragment : Fragment() {
             }, "新增入库")
         }
         mInputLiat.clear()
-        Input_Main_Gift.visibility = View.GONE
-        Main_GiftView.visibility = View.GONE
         initListView()
     }
 
@@ -430,7 +376,7 @@ class InputMainFragment : Fragment() {
      * 1  39  44
      * 打印票据
      */
-    private fun PrintData(compiler: String, traceElement: String, UpType: Int) {
+    private fun PrintData(compiler: String, traceElement: String) {
         Thread(Runnable {
             try {
                 if (mIzkcService == null) {
@@ -532,21 +478,7 @@ class InputMainFragment : Fragment() {
                         mIzkcService.printColumnsText(content_title, content_spac, content_style)
                         mIzkcService.printGBKText("\n")
                     }
-                    if (UpType == 3 && mMain_Gifts_ListViewAdapter != null && mMain_Gifts_ListViewAdapter!!.getGiftNum().data != null) {
-                        mIzkcService.printGBKText("\n")
-                        mIzkcService.printGBKText("回馈礼品：\n")
-                        mIzkcService.printGBKText("------------------------------------------------")
 
-                        for (i in mMain_Gifts_ListViewAdapter!!.getGiftNum().data.indices) {
-                            if (mMain_Gifts_ListViewAdapter!!.getGiftNum().data[i].condition > 0) {
-                                var array = arrayOf("${mMain_Gifts_ListViewAdapter!!.getGiftNum().data[i].name}", "${mMain_Gifts_ListViewAdapter!!.getGiftNum().data[i].condition}", "个")
-                                var array1 = intArrayOf(2, 2, 2)
-                                var array2 = intArrayOf(1, 1, 1)
-                                mIzkcService.printColumnsText(array, array1, array2)
-                            }
-                        }
-
-                    }
                     mIzkcService.printGBKText("\n")
                     mIzkcService.setTypeface(0)
                     mIzkcService.setFontSize(0)
@@ -656,117 +588,108 @@ class InputMainFragment : Fragment() {
      * 显示首选回收物类型选择框
      */
     private fun showTypeDialog() {
-        if (mType == -1) {
-            MyDialog(mActivity!!).setTitle("选择回收物类型")
-                    .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, Type_Name), 0) { dialog, which ->
-                        this.mType = which + 1
-                    }.setPositiveButton("确定") { dialog, which ->
-                        dialog.dismiss()
-                        if (mType == -1) {
-                            mType = 1
-                        }
-                        showSelectDialog()
-                    }.setNegativeButton("取消") { dialog, which ->
-                        dialog.dismiss()
-                    }.create().run {
-                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        this
-                    }.show()
-        } else
-            showSelectDialog()
+        MyDialog(mActivity!!).setTitle("选择回收物类型")
+                .setSingleChoiceItems(ArrayAdapter(mActivity, android.R.layout.simple_list_item_single_choice, Type_Name), 0) { dialog, which ->
+                    mPosition_Select = which + 1
+                }.setPositiveButton("确定") { dialog, _ ->
+                    dialog.dismiss()
+                    showSelectDialog(mPosition_Select)
+                }.setNegativeButton("取消") { dialog, _ ->
+                    dialog.dismiss()
+                }.create().run {
+                    window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    this
+                }.show()
     }
 
 
     /**
      * 回收物选择框
      */
-    private fun showSelectDialog() {
+    private fun showSelectDialog(position: Int) {
 
         var mPosition = 0
-        if (mType == -1) {
-            showTypeDialog()
-        } else {
-            if (mName_Select == null) {
-                mName_Select = ArrayList()
-                for (i in mRecycleListBean!!.data) {
-                    if (i.type == mType)
-                        mName_Select!!.add(i)
-                }
-                if (mName_Select!!.size == 0) {
-                    ToastUtil.showText("该类型没有对应回收物，请重新选择")
-                    return
-                }
-                mName_Search.addAll(mName_Select!!)
-            }
+        mName_Select.clear()
+        mName_Search.clear()
 
-            var dialog = MyDialog(mActivity!!).setTitle("选择回收物")
-                    .setView(R.layout.dialog_inpiut_key)
-                    .setPositiveButton("确定") { dialog, which ->
-                        dialog.dismiss()
-                        //跳转到具体添加回收物页面
-                        startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
-                            //                            putExtra("position", mPosition)
-                            putExtra("type", mType)
-                            putExtra("data", mName_Search[mPosition])
-                            this
-                        }, Activity.RESULT_FIRST_USER)
-                    }.setNegativeButton("取消") { dialog, which ->
-                        dialog.dismiss()
-                    }.create().run {
-                        window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        for (data in mRecycleListBean!!.data) {
+            if (data.type == position)
+                mName_Select!!.add(data)
+        }
+        if (mName_Select!!.size == 0) {
+            ToastUtil.showText("该类型没有对应回收物，请重新选择")
+            return
+        }
+        mName_Search.addAll(mName_Select!!)
+
+        var dialog = MyDialog(mActivity!!).setTitle("选择回收物")
+                .setView(R.layout.dialog_inpiut_key)
+                .setPositiveButton("确定") { dialog, which ->
+                    dialog.dismiss()
+                    //跳转到具体添加回收物页面
+                    startActivityForResult(Intent(mActivity, AddInputAvtivity::class.java).run {
+                        //                            putExtra("position", mPosition)
+                        putExtra("type", position)
+                        putExtra("data", mName_Search[mPosition])
                         this
-                    }
-            dialog.show()
-
-            (mActivity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
-                    .hideSoftInputFromWindow(mActivity?.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-
-            var sSelectAdapter = SelectDialogListViewAdapter(mName_Search)
-            var Search = dialog.findViewById<SearchView>(R.id.Search)
-            var AllList = dialog.findViewById<TextView>(R.id.AllList)
-            var ListView = dialog.findViewById<ListView>(R.id.ListView)
-            var ListViewnull = dialog.findViewById<TextView>(R.id.ListView_null)
-            ListView?.setOnItemClickListener { parent, view, position, id ->
-                mPosition = position
-                sSelectAdapter.notifyDataSetChanged(position, mName_Search)
-            }
-            ListView?.emptyView = ListViewnull
-            ListView?.adapter = sSelectAdapter
-            Search?.setIconifiedByDefault(false)
-            Search?.isSubmitButtonEnabled = true
-            Search?.clearFocus()
-            AllList?.setOnClickListener {
-                Search?.setQuery("", false)
-                mName_Search.clear()
-                mName_Search.addAll(mName_Select!!)
-                sSelectAdapter = SelectDialogListViewAdapter(mName_Search)
-                ListView?.adapter = sSelectAdapter
-            }
-            HideKeyboard(Search!!)
-            Search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(queryText: String): Boolean {
-                    LogUtils.d("搜索提交数据 = $queryText")
-                    if (queryText.isEmpty()) {
-                        ToastUtil.showText("请输入关键字")
-                        return false
-                    }
-                    mName_Search.clear()
-                    for (i in mName_Select!!.indices) {
-                        if (mName_Select!![i].name.contains(queryText))
-                            mName_Search.add(mName_Select!![i])
-                    }
-                    sSelectAdapter = SelectDialogListViewAdapter(mName_Search)
-                    ListView?.adapter = sSelectAdapter
-                    return true
+                    }, Activity.RESULT_FIRST_USER)
+                }.setNegativeButton("取消") { dialog, which ->
+                    dialog.dismiss()
+                }.create().run {
+                    window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    this
                 }
+        dialog.show()
 
-                override fun onQueryTextChange(newText: String): Boolean {
+        (mActivity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
+                .hideSoftInputFromWindow(mActivity?.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
+        var sSelectAdapter = SelectDialogListViewAdapter(mName_Search)
+        var Search = dialog.findViewById<SearchView>(R.id.Search)
+        var AllList = dialog.findViewById<TextView>(R.id.AllList)
+        var ListView = dialog.findViewById<ListView>(R.id.ListView)
+        var ListViewnull = dialog.findViewById<TextView>(R.id.ListView_null)
+        ListView?.setOnItemClickListener { parent, view, position, id ->
+            mPosition = position
+            sSelectAdapter.notifyDataSetChanged(position, mName_Search)
+        }
+        ListView?.emptyView = ListViewnull
+        ListView?.adapter = sSelectAdapter
+        Search?.setIconifiedByDefault(false)
+        Search?.isSubmitButtonEnabled = true
+        Search?.clearFocus()
+        AllList?.setOnClickListener {
+            Search?.setQuery("", false)
+            mName_Search.clear()
+            mName_Search.addAll(mName_Select!!)
+            sSelectAdapter = SelectDialogListViewAdapter(mName_Search)
+            ListView?.adapter = sSelectAdapter
+        }
+        HideKeyboard(Search!!)
+        Search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(queryText: String): Boolean {
+                LogUtils.d("搜索提交数据 = $queryText")
+                if (queryText.isEmpty()) {
+                    ToastUtil.showText("请输入关键字")
                     return false
                 }
-            })
-        }
+                mName_Search.clear()
+                for (i in mName_Select!!.indices) {
+                    if (mName_Select!![i].name.contains(queryText))
+                        mName_Search.add(mName_Select!![i])
+                }
+                sSelectAdapter = SelectDialogListViewAdapter(mName_Search)
+                ListView?.adapter = sSelectAdapter
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -779,11 +702,6 @@ class InputMainFragment : Fragment() {
                     mInputLiat.add(bean)
                     initListView()
                     listid++
-                    if (bean.mType_type == 3) {
-                        Input_Main_Gift.visibility = View.VISIBLE
-                    } else {
-                        Input_Main_Gift.visibility = View.GONE
-                    }
                 }
                 Activity.RESULT_OK -> {
                     //扫描二维码/条形码返回
