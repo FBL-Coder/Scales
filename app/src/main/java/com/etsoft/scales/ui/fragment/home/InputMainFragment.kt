@@ -52,6 +52,7 @@ import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.math.sign
 
 
 /**
@@ -318,7 +319,7 @@ class InputMainFragment : Fragment() {
         UpBean.phone = "17611110000"
         UpBean.servicePointId = ServerStation_Id?.toString()
         UpBean.staffId = MyApp.UserInfo?.data?.id?.toString()
-//        UpBean.type = if (mType == 2) "1" else mType.toString()
+        UpBean.type = mPosition_Select.toString()
         UpBean.greenId = code
 
         //将本地记录转成要上传的JSON数据
@@ -391,98 +392,81 @@ class InputMainFragment : Fragment() {
                     mIzkcService.printGBKText(data)
 
                     mIzkcService.printGBKText("服务站： " + AppSharePreferenceMgr.get(SaveKey.SERVERSTATION_NAME, "") + "\n")
-                    mIzkcService.printGBKText("********************************\n")
-
+                    mIzkcService.printGBKText("********************************")
                     mIzkcService.setTypeface(1)
                     mIzkcService.setFontSize(1)
-
-                    var array_name = arrayOf("类型", "总重", "有效", "数量", "单价", "总价  ")
-                    var array_spac = intArrayOf(2, 6, 4, 3, 3, 4)
-                    var array_style = intArrayOf(0, 0, 0, 0, 0, 0)
-
-                    mIzkcService.printColumnsText(array_name, array_spac, array_style)
-
-                    mIzkcService.printGBKText("------------------------------------------------")
-
-                    mIzkcService.setTypeface(1)
-                    mIzkcService.setFontSize(0)
-
+                    mIzkcService.printGBKText("    类型     重量     数量     单价     总价\n")
+                    mIzkcService.printGBKText("------------------------------------------------\n")
 
 
                     for (i in mInputLiat.indices) {
+                        var name = ""
+                        var wight = ""
+                        var count = ""
+                        var price = ""
+                        var total = ""
                         var name_type = getSize(mInputLiat[i].type)
-                        if (name_type > 4) {
-                            mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 4).toString()
+                        if (name_type > 12) {
+                            mInputLiat[i].type = mInputLiat[i].type.subSequence(0, 6).toString()
+                            name_type = 12
                         }
-
-//                        var array = arrayOf(mInputLiat[i].type, mInputLiat[i].weight + " " + mInputLiat[i].unit, Chuzi + " " + mInputLiat[i].unit, "￥" + mInputLiat[i].price, "￥" + mInputLiat[i].total)
-                        var content_title = arrayOf(mInputLiat[i].type, mInputLiat[i].weightTotal, mInputLiat[i].weightValid, mInputLiat[i].number, mInputLiat[i].price, mInputLiat[i].total)
-                        var spacing1 = 0
-                        var spacing2 = 0
-                        var spacing3 = 0
-                        var spacing4 = 0
-                        var spacing5 = 0
-                        var spacing6 = 0
-                        when (name_type) {//类型
-                            1F -> spacing1 = 6
-                            1.5F -> spacing1 = 5
-                            2F -> spacing1 = 4
-                            2.5F -> spacing1 = 3
-                            3F -> spacing1 = 2
-                            3.5F -> spacing1 = 1
-                            4F -> spacing1 = 0
+                        when (name_type) {
+                            2 -> name = " ${mInputLiat[i].type}         "
+                            3 -> name = " ${mInputLiat[i].type}        "
+                            4 -> name = " ${mInputLiat[i].type}       "
+                            5 -> name = " ${mInputLiat[i].type}      "
+                            6 -> name = " ${mInputLiat[i].type}     "
+                            7 -> name = " ${mInputLiat[i].type}    "
+                            8 -> name = " ${mInputLiat[i].type}   "
+                            9 -> name = " ${mInputLiat[i].type}  "
+                            10 -> name = " ${mInputLiat[i].type} "
+                            11 -> name = " ${mInputLiat[i].type}"
+                            12 -> name = "${mInputLiat[i].type}"
                         }
-                        when (mInputLiat[i].weightTotal.length) {//总重量
-                            1 -> spacing2 = 7
-                            2 -> spacing2 = 6
-                            3 -> spacing2 = 5
-                            4 -> spacing2 = 4
-                            5 -> spacing2 = 3
-                            6 -> spacing2 = 2
+                        when (mInputLiat[i].weightValid.length) {
+                            2 -> wight = " ${mInputLiat[i].weightValid}      "
+                            3 -> wight = " ${mInputLiat[i].weightValid}     "
+                            4 -> wight = " ${mInputLiat[i].weightValid}    "
+                            5 -> wight = " ${mInputLiat[i].weightValid}   "
+                            6 -> wight = " ${mInputLiat[i].weightValid}  "
+                            7 -> wight = " ${mInputLiat[i].weightValid} "
+                            8 -> wight = " ${mInputLiat[i].weightValid}"
                         }
-                        when (mInputLiat[i].weightValid.length) {//有效重量
-                            1 -> spacing3 = 7
-                            2 -> spacing3 = 6
-                            3 -> spacing3 = 5
-                            4 -> spacing3 = 4
-                            5 -> spacing3 = 3
-                            6 -> spacing3 = 2
-
+                        when (mInputLiat[i].number.length) {
+                            1 -> count = " ${mInputLiat[i].number}       "
+                            2 -> count = " ${mInputLiat[i].number}      "
+                            3 -> count = " ${mInputLiat[i].number}     "
+                            4 -> count = " ${mInputLiat[i].number}    "
+                            5 -> count = " ${mInputLiat[i].number}   "
+                            6 -> count = " ${mInputLiat[i].number}  "
+                            7 -> count = " ${mInputLiat[i].number} "
+                            8 -> count = " ${mInputLiat[i].number}"
                         }
-                        when (mInputLiat[i].number.length) {//数量
-                            1 -> spacing4 = 5
-                            2 -> spacing4 = 4
-                            3 -> spacing4 = 3
-                            4 -> spacing4 = 2
+                        when (mInputLiat[i].price.length) {
+                            1 -> price = " ${mInputLiat[i].price}       "
+                            2 -> price = " ${mInputLiat[i].price}      "
+                            3 -> price = " ${mInputLiat[i].price}     "
+                            4 -> price = " ${mInputLiat[i].price}    "
+                            5 -> price = " ${mInputLiat[i].price}   "
+                            6 -> price = " ${mInputLiat[i].price}  "
+                            7 -> price = " ${mInputLiat[i].price} "
+                            8 -> price = " ${mInputLiat[i].price}"
                         }
-                        when (mInputLiat[i].price.length) {//单价
-                            1 -> spacing5 = 7
-                            2 -> spacing5 = 6
-                            3 -> spacing5 = 5
-                            4 -> spacing5 = 4
-                            5 -> spacing5 = 3
+                        when (mInputLiat[i].total.length) {
+                            1 -> total = " ${mInputLiat[i].total}       "
+                            2 -> total = " ${mInputLiat[i].total}      "
+                            3 -> total = " ${mInputLiat[i].total}     "
+                            4 -> total = " ${mInputLiat[i].total}    "
+                            5 -> total = " ${mInputLiat[i].total}   "
+                            6 -> total = " ${mInputLiat[i].total}  "
+                            7 -> total = " ${mInputLiat[i].total} "
+                            8 -> total = " ${mInputLiat[i].total}"
                         }
-
-                        when (mInputLiat[i].total.length) {//总价
-                            3 -> spacing6 = 6
-                            4 -> spacing6 = 5
-                            5 -> spacing6 = 4
-                            6 -> spacing6 = 3
-                            7 -> spacing6 = 2
-                        }
-
-                        //                          0               6             0           4             3         6
-                        LogUtils.i("打印间距 = $spacing1 -- $spacing2 -- $spacing3 -- $spacing4 --$spacing5--$spacing6")
-                        var content_spac = intArrayOf(spacing1, spacing2, spacing3, spacing4, spacing5, spacing6)
-                        var content_style = intArrayOf(0, 1, 1, 1, 1, 2)
-                        mIzkcService.printColumnsText(content_title, content_spac, content_style)
-                        mIzkcService.printGBKText("\n")
+                        mIzkcService.printGBKText("${name + wight + count + price + total}\n")
                     }
 
-                    mIzkcService.printGBKText("\n")
                     mIzkcService.setTypeface(0)
                     mIzkcService.setFontSize(0)
-
 
                     var ZongZhong = ""
                     var Num = 0
@@ -530,16 +514,16 @@ class InputMainFragment : Fragment() {
     /**
      * 获取类型长度
      */
-    fun getSize(Str: String): Float {
+    fun getSize(Str: String): Int {
         val p = Pattern.compile("[\u4e00-\u9fa5]")
-        var Size = 0F
+        var Size = 0
         var chars = Str.toCharArray()
         for (i in chars.indices) {
             val m = p.matcher(chars[i].toString())
             if (m.find()) {
-                Size++
+                Size += 2
             } else {
-                Size += 0.5f
+                Size += 1
             }
         }
         return Size
@@ -596,6 +580,7 @@ class InputMainFragment : Fragment() {
                     showSelectDialog(mPosition_Select)
                 }.setNegativeButton("取消") { dialog, _ ->
                     dialog.dismiss()
+                    mPosition_Select = 1
                 }.create().run {
                     window.attributes.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
                             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -726,7 +711,7 @@ class InputMainFragment : Fragment() {
                     1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印完成")
-                        activity.UpToServer(activity.time, activity.dealid)
+//                        activity.UpToServer(activity.time, activity.dealid)
                     }
                     -1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()
