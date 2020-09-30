@@ -711,7 +711,7 @@ class InputMainFragment : Fragment() {
                     1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()
                         ToastUtil.showText("打印完成")
-//                        activity.UpToServer(activity.time, activity.dealid)
+                        activity.UpToServer(activity.time, activity.dealid)
                     }
                     -1 -> {
                         activity.mActivity_!!.mLoadDialog!!.hide()
