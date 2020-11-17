@@ -41,12 +41,16 @@ class InputFailedRecordListViewAdapter(bean: UpInputFailedBean) : BaseAdapter() 
         mViewHolder.Input_Record_Time.text = "打印时间： " + mList[position]?.time
         mViewHolder.Input_Record_Count.text = "回收条数： " + mList[position]?.recyclings.size.toString() + " 个"
 
-        var type = ""
-        for (i in mList[position]?.recyclings.indices) {
-            type += mList[position]?.recyclings[i].typename + "、"
+        try {
+            var type = ""
+            for (i in mList[position]?.recyclings.indices) {
+                type += mList[position]?.recyclings[i].typename + "、"
+            }
+            type = type.substring(0, type.lastIndexOf("、"))
+            mViewHolder.Input_Record_Item.text = "回  收  物： $type"
+        } catch (e: Exception) {
+            mViewHolder.Input_Record_Item.text = "回  收  物： 提取错误"
         }
-        type = type.substring(0,type.lastIndexOf("、"))
-        mViewHolder.Input_Record_Item.text = "回  收  物： $type"
         return view!!
     }
 
